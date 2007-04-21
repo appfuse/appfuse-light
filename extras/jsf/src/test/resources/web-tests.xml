@@ -1,0 +1,46 @@
+<!DOCTYPE project [
+    <!ENTITY config SYSTEM "config.xml">
+]>
+<project basedir="." default="run-all-tests"> 
+    <!-- Include messages.properties so we can test against 
+         keys, rather than values -->
+    <property file="${resources.dir}/messages.properties"/>
+    <property name="host" value="localhost"/>
+    <property name="port" value="8080"/>
+
+    <!-- runs all targets -->
+    <target name="run-all-tests" depends="UserTests"
+        description="Call and executes all test cases (targets)">
+        <echo>All UserTests passed!</echo>
+    </target>
+    
+    <!-- Verify adding a user, viewing and deleting a user works -->
+    <target name="UserTests" description="Tests User CRUD">
+        <webtest name="userTests">
+            &config;
+            <steps>
+                <!-- View add screen -->
+                <invoke url="/users.html"/>
+                <clickbutton label="Add User"/>
+                
+                <verifytitle text="${userForm.title}"/>
+                
+                <!-- Enter data and save -->
+                <setinputfield name="userForm:firstName" value="Test"/>
+                <setinputfield name="userForm:lastName" value="Name"/>
+                <clickbutton label="Save"/>
+                
+                <!-- View user list -->
+                <verifytitle text="${userList.title}"/>
+                
+                <!-- Delete first user in table -->
+                <invoke url="/users.html"/>
+                
+                <clicklink htmlId="editUser:users:0:_id6"/>
+                <verifytitle description="view user form" text="${userForm.title}"/>
+                <clickbutton label="Delete"/>
+                <verifytitle description="view user list" text="${userList.title}"/>
+            </steps>
+        </webtest>
+    </target>
+</project>

@@ -1,0 +1,59 @@
+<!-- This file is designed to install Ajax into AppFuse Light w/ Spring MVC -->
+<project name="spring-ajax" basedir="." default="help">
+
+    <!-- common installation targets -->
+    <property name="app.name" value="appfuse-light-ajax"/>
+    <import file="../common-build.xml"/>
+
+    <!-- =================================================================== -->
+    <!-- Install Ajax-enhanced pages                                         -->
+    <!-- =================================================================== -->
+    <target name="install" description="Installs AjaxAnywhere into AppFuse Light">
+        <echo level="info">Modifying pom.xml</echo>
+
+        <!-- Add Freemarker and URL Rewrite Filter to the list of dependencies -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[    <dependencies>]]></replacetoken>
+      <replacevalue><![CDATA[    <dependencies>
+        <dependency>
+            <groupId>org.ajaxanywhere</groupId>
+            <artifactId>ajaxanywhere</artifactId>
+            <version>1.2-rc2</version>
+        </dependency>
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>2.7.0</version>
+        </dependency>]]></replacevalue>
+        </replace>
+        
+        <echo level="info">Configuring web.xml for AjaxAnywhere</echo>
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<param-value>messages</param-value>
+    </context-param>]]></replacetoken>
+            <replacevalue><![CDATA[<param-value>messages</param-value>
+    </context-param>
+    
+    <filter>
+        <filter-name>ajaxAnywhere</filter-name>
+        <filter-class>org.ajaxanywhere.AAFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ajaxAnywhere</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>]]></replacevalue>
+        </replace>
+        
+        <echo level="info">Installing Ajax-enabled files</echo>
+        <copy todir="../.." overwrite="true">
+            <fileset dir="${basedir}">
+                <include name="**"/>
+                <exclude name="build.xml"/>
+                <exclude name="README.txt"/>
+            </fileset>
+        </copy>
+        
+        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
+    </target>
+</project>

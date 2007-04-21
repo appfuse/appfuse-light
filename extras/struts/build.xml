@@ -1,0 +1,72 @@
+<!-- This file is designed to install Struts into AppFuse Light -->
+<project name="struts" basedir="." default="help">
+
+    <!-- common installation targets -->
+    <import file="../common-build.xml"/>
+
+    <!-- =================================================================== -->
+    <!-- Replace Spring MVC with Struts                                      -->
+    <!-- =================================================================== -->
+    <target name="install" description="Installs Struts into AppFuse Light">
+        <echo level="info">Modifying pom.xml</echo>
+      
+        <!-- Replace Commons Validator for Spring with Struts in dependencies file -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<dependency>
+            <groupId>org.springmodules</groupId>
+            <artifactId>spring-modules-validation</artifactId>
+            <version>0.8</version>
+        </dependency>]]></replacetoken>
+        <replacevalue><![CDATA[<dependency>
+            <groupId>struts</groupId>
+            <artifactId>struts</artifactId>
+            <version>1.2.9</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>struts</groupId>
+            <artifactId>struts-el</artifactId>
+            <version>1.2.9</version>
+        </dependency>
+        <dependency>
+            <groupId>strutstestcase</groupId>
+            <artifactId>strutstestcase</artifactId>
+            <version>2.1.2-1.1-2.3</version>
+            <scope>test</scope>
+        </dependency>]]></replacevalue>
+        </replace>
+        
+        <echo level="info">Removing Spring MVC-specific files</echo>
+        <delete>
+            <fileset dir="../..">
+                <include name="**/UserController*.java"/>
+                <include name="**/UserFormController*.java"/>
+                <include name="**/action-servlet.xml"/>
+                <include name="**/*validation.xml"/>
+                <exclude name="extras/**"/>
+            </fileset>
+        </delete>
+        
+        <!-- Change DispatcherServlet to ActionServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken>org.springframework.web.servlet.DispatcherServlet</replacetoken>
+            <replacevalue>org.apache.struts.action.ActionServlet</replacevalue>
+        </replace>
+
+        <echo level="info">Installing Struts JARs and .java files</echo>
+        <copy todir="../.." overwrite="true">
+            <fileset dir="${basedir}">
+                <include name="**"/>
+                <exclude name="build.xml"/>
+                <exclude name="README.txt"/>
+            </fileset>
+        </copy>
+        
+        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
+    </target>
+</project>

@@ -1,0 +1,150 @@
+<!-- This file is designed to install Struts 2 into AppFuse Light -->
+<project name="struts2" basedir="." default="help">
+
+    <!-- common installation targets -->
+    <import file="../common-build.xml"/>
+
+    <!-- =================================================================== -->
+    <!-- Replace Spring MVC with Struts                                     -->
+    <!-- =================================================================== -->
+    <target name="install" description="Installs Struts into AppFuse Light">
+        <echo level="info">Modifying pom.xml</echo>
+      
+        <!-- Replace Commons Validator for Spring with Struts in dependencies file -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<dependency>
+            <groupId>org.springmodules</groupId>
+            <artifactId>spring-modules-validation</artifactId>
+            <version>0.8</version>
+        </dependency>]]></replacetoken>
+        <replacevalue><![CDATA[<dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-core</artifactId>
+            <version>2.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-spring-plugin</artifactId>
+            <version>2.0.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>]]></replacevalue>
+        </replace>
+
+        <echo level="info">Removing Spring MVC-specific files</echo>
+        <delete>
+            <fileset dir="../..">
+                <include name="**/UserController*.java"/>
+                <include name="**/UserFormController*.java"/>
+                <include name="**/action-servlet.xml"/>
+                <include name="**/*validation.xml"/>
+                <include name="**/validator*"/>
+                <exclude name="extras/**"/>
+            </fileset>
+        </delete>
+        
+        <echo level="info">Configuring web.xml for Struts</echo>
+        <!-- Add action-servlet.xml as a context files -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<param-value>/WEB-INF/applicationContext*.xml</param-value>]]></replacetoken>
+            <replacevalue><![CDATA[<param-value>
+            /WEB-INF/applicationContext*.xml
+            /WEB-INF/action-servlet.xml
+        </param-value>]]></replacevalue>
+        </replace>
+        <!-- Add Struts Filter -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+    </filter>]]></replacetoken>
+            <replacevalue><![CDATA[<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>struts-cleanup</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
+    </filter>
+    <filter>
+        <filter-name>struts</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+    </filter>]]></replacevalue>
+        </replace>
+        
+        <!-- Add mapping for Struts Filter -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>exportFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>]]></replacetoken>
+            <replacevalue><![CDATA[<filter-mapping>
+        <filter-name>exportFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>struts-cleanup</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>struts</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>]]></replacevalue>
+        </replace>
+
+        <!-- Remove DispatcherServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[
+
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>]]></replacetoken>
+        </replace>
+
+        <!-- Remove mapping for DispatcherServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[
+
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>]]></replacetoken>
+        </replace>
+        
+        <echo level="info">Installing Struts JARs and .java files</echo>
+        <copy todir="../.." overwrite="true">
+            <fileset dir="${basedir}">
+                <include name="**"/>
+                <exclude name="build.xml"/>
+                <exclude name="README.txt"/>
+            </fileset>
+        </copy>
+        
+        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
+    </target>
+</project>

@@ -1,0 +1,183 @@
+<project name="java-net" basedir="." default="create-distros" xmlns:artifact="urn:maven-artifact-ant">
+
+    <import file="build.xml"/>
+    <property name="project.name" value="${webapp.name}"/>
+    <property name="distribution.dir" value="../appfuse-light-dist"/>
+
+    <!-- Check that javanettasks.jar is in $ANT_HOME/lib -->
+    <available classname="org.kohsuke.jnt.FileStatus" property="jar.present"/>
+    <fail unless="jar.present"
+          message="Please download javanettasks.jar (and its dependencies) into ${env.ANT_HOME}/lib"/>
+
+    <taskdef resource="org/kohsuke/javanettasks.properties"/>
+    <artifact:dependencies pathId="tasks.classpath">
+        <dependency groupId="ant-contrib" artifactId="ant-contrib" version="20020829"/>
+        <dependency groupId="org.tigris.antelope" artifactId="antelopetasks" version="3.2.10"/>
+    </artifact:dependencies>
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="tasks.classpath"/>
+    <taskdef name="stringutil" classname="ise.antelope.tasks.StringUtilTask" classpathref="tasks.classpath"/>
+        
+    <target name="delete" description="Deletes distribution directory">
+        <delete dir="${distribution.dir}"/>
+    </target>
+
+    <target name="create-distros" description="Create the distributions available from AppFuse Light">
+        <mkdir dir="${distribution.dir}"/>
+        <mkdir dir="${distribution.dir}/distribution"/>
+        <ant antfile="build.xml" target="dist"/>
+        <copy file="${dist.dir}/${webapp.name}-${webapp.version}.zip" 
+            tofile="${distribution.dir}/distribution/${webapp.name}-all-${webapp.version}.zip"/>
+        <parallel>
+            <createzip web="spring" persistence="hibernate"/>
+            <createzip web="spring" persistence="ibatis"/>
+            <createzip web="spring" persistence="jdo"/>
+            <createzip web="spring" persistence="ojb"/>
+            <createzip web="spring" persistence="spring-jdbc"/>
+    
+            <createzip web="spring-ajax" persistence="hibernate"/>
+            <createzip web="spring-ajax" persistence="ibatis"/>
+            <createzip web="spring-ajax" persistence="jdo"/>
+            <createzip web="spring-ajax" persistence="ojb"/>
+            <createzip web="spring-ajax" persistence="spring-jdbc"/>
+            
+            <createzip web="spring-freemarker" persistence="hibernate"/>
+            <createzip web="spring-freemarker" persistence="ibatis"/>
+            <createzip web="spring-freemarker" persistence="jdo"/>
+            <createzip web="spring-freemarker" persistence="ojb"/>
+            <createzip web="spring-freemarker" persistence="spring-jdbc"/>
+            
+            <createzip web="security" persistence="hibernate"/>
+            <createzip web="security" persistence="ibatis"/>
+            <createzip web="security" persistence="jdo"/>
+            <createzip web="security" persistence="ojb"/>
+            <createzip web="security" persistence="spring-jdbc"/>
+    
+            <createzip web="spring-velocity" persistence="hibernate"/>
+            <createzip web="spring-velocity" persistence="ibatis"/>
+            <createzip web="spring-velocity" persistence="jdo"/>
+            <createzip web="spring-velocity" persistence="ojb"/>
+            <createzip web="spring-velocity" persistence="spring-jdbc"/>
+    
+            <createzip web="jsf" persistence="hibernate"/>
+            <createzip web="jsf" persistence="ibatis"/>
+            <createzip web="jsf" persistence="jdo"/>
+            <createzip web="jsf" persistence="ojb"/>
+            <createzip web="jsf" persistence="spring-jdbc"/>
+    
+            <createzip web="struts" persistence="hibernate"/>
+            <createzip web="struts" persistence="ibatis"/>
+            <createzip web="struts" persistence="jdo"/>
+            <createzip web="struts" persistence="ojb"/>
+            <createzip web="struts" persistence="spring-jdbc"/>
+            
+            <createzip web="struts2" persistence="hibernate"/>
+            <createzip web="struts2" persistence="ibatis"/>
+            <createzip web="struts2" persistence="jdo"/>
+            <createzip web="struts2" persistence="ojb"/>
+            <createzip web="struts2" persistence="spring-jdbc"/>
+    
+            <createzip web="tapestry" persistence="hibernate"/>
+            <createzip web="tapestry" persistence="ibatis"/>
+            <createzip web="tapestry" persistence="jdo"/>
+            <createzip web="tapestry" persistence="ojb"/>
+            <createzip web="tapestry" persistence="spring-jdbc"/>
+    
+            <createzip web="webwork" persistence="hibernate"/>
+            <createzip web="webwork" persistence="ibatis"/>
+            <createzip web="webwork" persistence="jdo"/>
+            <createzip web="webwork" persistence="ojb"/>
+            <createzip web="webwork" persistence="spring-jdbc"/>
+        </parallel>
+    </target>
+
+    <macrodef name="createzip">
+        <attribute name="persistence"/>
+        <attribute name="web"/>
+        <sequential>
+            <property name="release.dir" value="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
+            <mkdir dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
+            <copy todir="${distribution.dir}/appfuse-light-@{web}-@{persistence}">
+                <fileset dir="${basedir}">
+                    <exclude name="www/**"/>
+                    <exclude name="release.*"/>
+                    <exclude name="test-*"/>
+                </fileset>
+            </copy>
+            <if>
+                <equals arg1="@{web}" arg2="spring"/>
+                <else>
+                    <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras/@{web}" target="install"/>
+                </else>
+            </if>
+            <if>
+                <equals arg1="@{persistence}" arg2="hibernate"/>
+                <else>
+                    <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras/@{persistence}" target="install"/>
+                </else>
+            </if>
+            <delete dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras"/>
+            <projectfiles dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
+            <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}" target="dist">
+                <property name="webapp.name" value="appfuse-light-@{web}-@{persistence}"/>
+            </ant>
+            <copy todir="${distribution.dir}/distribution">
+                <fileset dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/dist" includes="*.zip"/>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="projectfiles">
+        <attribute name="dir"/>
+        <sequential>
+            <exec dir="@{dir}" executable="mvn.bat" os="Windows XP">
+                <arg line="eclipse:eclipse idea:idea"/>
+            </exec>
+            <exec dir="@{dir}" executable="mvn" os="Mac OS X">
+                <arg line="eclipse:eclipse idea:idea"/>
+            </exec>
+            <exec dir="@{dir}" executable="mvn.sh" os="Linux">
+                <arg line="eclipse:eclipse idea:idea"/>
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <target name="test-projects" depends="create-distros" description="Runs all the tests in the various distributions">
+        <foreach param="project" target="test-distro">
+            <fileset dir="${distribution.dir}">
+                <include name="appfuse-light-*"/>
+            </fileset>
+        </foreach>
+    </target>
+    
+    <target name="test-distro">
+        <ant dir="${project}" inheritall="false" target="test-all"/>
+    </target>
+    
+    <target name="upload" description="Uploads distributions to java.net">
+        <foreach param="zipFile" target="fileupload">
+            <fileset dir="${distribution.dir}/distribution">
+                <include name="*.zip"/>
+            </fileset>
+        </foreach>
+    </target>
+
+    <target name="fileupload">
+        <echo>${zipFile}</echo>
+        <stringutil string="${zipFile}" property="startOfFilename">
+            <lastindexof string="appfuse-light"/>
+        </stringutil>
+        <stringutil string="${zipFile}" property="filename">
+            <substring beginindex="${startOfFilename}"/>
+        </stringutil>
+        <echo>Uploading: ${filename}</echo>
+        <upload fromFile="${distribution.dir}/distribution/${filename}" toFile="${webapp.version}/${filename}"/>
+    </target>
+
+    <presetdef name="upload">
+        <javaNetUpload projectName="${project.name}"
+                       fromFile="${fromFile}" toFile="${toFile}"
+                       fileDescription="Source Distribution - view README.txt for instructions"
+                       overwrite="yes" fileStatus="Stable"/>
+    </presetdef>
+</project>

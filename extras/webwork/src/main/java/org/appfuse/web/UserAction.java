@@ -1,0 +1,105 @@
+package org.appfuse.web;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.appfuse.model.User;
+import org.appfuse.service.UserManager;
+
+import com.opensymphony.xwork.ActionContext;
+import com.opensymphony.xwork.ActionSupport;
+
+public class UserAction extends ActionSupport {
+    private final Log log = LogFactory.getLog(UserAction.class);
+    private UserManager mgr;
+    private List users; 
+    private User user;
+    private String id;
+    private String cancel;
+    private String delete;
+    
+    public void setCancel(String cancel) {
+        this.cancel = cancel;
+    }
+
+    public void setDelete(String delete) {
+        this.delete = delete;
+    }
+    
+    public void setUserManager(UserManager userManager) {
+        this.mgr = userManager;
+    }
+    
+    public List getUsers() { 
+        return users; 
+    }
+    
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+    public User getUser() {
+        return user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    public String delete() {
+    
+        mgr.removeUser(user.getId().toString());
+        
+        List args = new ArrayList();
+        args.add(user.getFullName());
+        ActionContext.getContext().getSession().put("message", 
+                getText("user.deleted", args));
+                
+        return "delete";
+    }
+    
+    public String edit() {
+        // check for an add
+        if (id != null) {
+            user = mgr.getUser(id);
+        } else {
+            user = new User();
+        }        
+        return SUCCESS;
+    }
+    
+    public String execute() {
+        if (cancel != null) {
+            return "cancel";
+        }
+        
+        if (delete != null) {
+            return delete();
+        }
+        
+        return SUCCESS;
+    }
+    
+    public String save() {
+        if (log.isDebugEnabled()) {
+            log.debug("entering 'save' method");
+        }
+        
+        mgr.saveUser(user);
+        
+        List args = new ArrayList();
+        args.add(user.getFullName());
+        
+        ActionContext.getContext().getSession().put("message", 
+                getText("user.saved", args));
+                
+        return SUCCESS;
+    }
+    
+    public String list() { 
+        users = mgr.getUsers();
+        return SUCCESS; 
+    } 
+}

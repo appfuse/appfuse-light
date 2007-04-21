@@ -1,0 +1,302 @@
+<!-- This file is designed to install JSF into AppFuse Light -->
+<project name="jsf" basedir="." default="help">
+
+    <!-- common installation targets -->
+    <import file="../common-build.xml"/>
+
+    <!-- =================================================================== -->
+    <!-- Replace Spring MVC with JSF                                         -->
+    <!-- =================================================================== -->
+    <target name="install" description="Installs JSF into AppFuse Light">
+        <echo level="info">Modifying pom.xml</echo>
+
+        <!-- Replace Commons Validator for Spring with JSF in dependencies file -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<dependency>
+            <groupId>org.springmodules</groupId>
+            <artifactId>spring-modules-validation</artifactId>
+            <version>0.8</version>
+        </dependency>]]></replacetoken>
+        <replacevalue><![CDATA[<dependency>
+            <groupId>net.java.dev.ajax4jsf</groupId>
+            <artifactId>ajax4jsf</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.facelets</groupId>
+            <artifactId>jsf-facelets</artifactId>
+            <version>1.1.11</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>el-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.el</groupId>
+            <artifactId>el-ri</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.myfaces.core</groupId>
+            <artifactId>myfaces-api</artifactId>
+            <version>1.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.myfaces.core</groupId>
+            <artifactId>myfaces-impl</artifactId>
+            <version>1.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.myfaces.tomahawk</groupId>
+            <artifactId>tomahawk</artifactId>
+            <version>1.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>test</scope>
+        </dependency>]]></replacevalue>
+        </replace>
+        
+        <!-- Replace jWebUnit with Canoo WebTest -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<dependency>
+            <groupId>jwebunit</groupId>
+            <artifactId>jwebunit</artifactId>
+            <version>1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>httpunit</groupId>
+            <artifactId>httpunit</artifactId>
+            <version>1.6</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>rhino</groupId>
+                    <artifactId>js</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>]]></replacetoken>
+        <replacevalue><![CDATA[<dependency>
+            <groupId>com.canoo</groupId>
+            <artifactId>webtest</artifactId>
+            <version>1454</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.xml</groupId>
+                    <artifactId>jsr173</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>oro</groupId>
+            <artifactId>oro</artifactId>
+            <version>2.0.8</version>
+        </dependency>]]></replacevalue>
+        </replace>
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[
+        <dependency>
+            <groupId>displaytag</groupId>
+            <artifactId>displaytag</artifactId>
+            <version>1.1</version>
+        </dependency>]]></replacetoken>
+        </replace>
+
+        <!-- Add MyFaces to Jetty configuration -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<configuration>
+                    <scanIntervalSeconds>3</scanIntervalSeconds>
+                </configuration>]]></replacetoken>
+            <replacevalue><![CDATA[<configuration>
+                    <scanIntervalSeconds>3</scanIntervalSeconds>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.myfaces.core</groupId>
+                        <artifactId>myfaces-impl</artifactId>
+                        <version>1.1.5</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                        <version>1.2.13</version>
+                    </dependency>
+                </dependencies>]]></replacevalue>
+        </replace>
+
+        <!-- Add repo that has the EL required by Facelets -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[</repositories>]]></replacetoken>
+            <replacevalue><![CDATA[    <repository>
+            <id>javax.el</id>
+            <url>http://delo.dcs.fmph.uniba.sk/sioux/maven2</url>
+        </repository>
+        <repository>
+            <id>appfuse</id>
+            <url>http://static.appfuse.org/repository</url>
+        </repository>
+    </repositories>]]></replacevalue>
+        </replace>
+
+        <echo level="info">Removing Spring MVC-specific files</echo>
+        <delete>
+            <fileset dir="../..">
+                <include name="**/UserController*.java"/>
+                <include name="**/UserFormController*.java"/>
+                <include name="**/U*WebTest.java"/>
+                <include name="**/action-servlet.xml"/>
+                <include name="**/*validation.xml"/>
+                <!-- TODO: Get this working for JSF -->
+                <include name="**/dataAccessFailure.jsp"/>
+                <include name="**/validator.jsp"/>
+                <exclude name="extras/**"/>
+            </fileset>
+        </delete>
+        
+        <echo level="info">Configuring web.xml for JSF</echo>
+        <!-- Add Facelets parameters -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<filter>
+        <filter-name>exportFilter</filter-name>
+        <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
+    </filter>]]></replacetoken>
+            <replacevalue><![CDATA[<context-param>
+        <param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
+        <param-value>com.sun.facelets.FaceletViewHandler</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>facelets.DEVELOPMENT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>facelets.LIBRARIES</param-name>
+        <param-value>
+            /WEB-INF/taglibs/tomahawk.taglib.xml
+        </param-value>
+    </context-param>
+    
+    <filter>
+        <filter-name>ajax4jsf</filter-name>
+        <filter-class>org.ajax4jsf.Filter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>extensionsFilter</filter-name>
+        <filter-class>org.apache.myfaces.webapp.filter.ExtensionsFilter</filter-class>
+        <init-param>
+            <param-name>maxFileSize</param-name>
+            <param-value>2m</param-value>
+        </init-param>
+    </filter>]]></replacevalue>
+        </replace>
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[
+    <filter-mapping>
+        <filter-name>exportFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>]]></replacetoken>
+        <replacevalue><![CDATA[    <filter-mapping>
+        <filter-name>extensionsFilter</filter-name>
+        <servlet-name>faces</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>extensionsFilter</filter-name>
+        <url-pattern>/faces/myFacesExtensionResource/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ajax4jsf</filter-name>
+        <servlet-name>faces</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>]]></replacevalue>
+        </replace>
+        <!-- Add MyFaces Listener -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[</listener>]]></replacetoken>
+            <replacevalue><![CDATA[</listener>
+
+    <listener>
+        <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+    </listener>]]></replacevalue>
+        </replace>
+        <!-- Change DispatcherServlet to FacesServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<servlet-name>action</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>]]></replacetoken>
+            <replacevalue><![CDATA[<servlet-name>faces</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>]]></replacevalue>
+        </replace>
+        <!-- Change Servlet mapping to point to FacesServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<servlet-name>action</servlet-name>]]></replacetoken>
+            <replacevalue><![CDATA[<servlet-name>faces</servlet-name>]]></replacevalue>
+        </replace>
+        
+        <echo level="info">Installing JSF JARs and .java files</echo>
+        <copy todir="../.." overwrite="true">
+            <fileset dir="${basedir}">
+                <include name="**"/>
+                <exclude name="build.xml"/>
+                <exclude name="README.txt"/>
+            </fileset>
+        </copy>
+        <delete>
+            <fileset dir="../../src/main/webapp">
+                <include name="user*.jsp"/>
+            </fileset>
+        </delete>
+        
+        <echo level="info">Modifying build.xml</echo>
+        <!-- Replace test-web target -->
+        <replace file="../../build.xml">
+            <replacetoken><![CDATA[<target name="test-web" depends="compile"
+        description="Runs jWebUnit tests in a running server">
+        <property name="testcase" value="WebTest"/>
+        <antcall target="test"/>
+    </target>]]></replacetoken>
+            <replacevalue><![CDATA[<target name="test-web" depends="compile" description="Runs Canoo WebTests in Tomcat to test JSPs">
+
+        <taskdef resource="webtest_base_relaxed.taskdef">
+            <classpath>
+                <path refid="test.classpath"/>
+                <!-- for log4j.xml -->
+                <path location="${resources.dir}"/>
+            </classpath>
+        </taskdef>
+
+        <mkdir dir="${test.dir}/data"/>
+        <!-- Delete old results file if it exists -->
+        <delete file="${test.dir}/data/web-tests-result.xml"/>
+        
+        <!-- This is so the default will be used if no test case is specified -->
+        <property name="testcase" value="run-all-tests"/>
+        <ant antfile="${test.resources.dir}/web-tests.xml" target="${testcase}"/>
+    </target>]]></replacevalue>
+        </replace>
+        
+        <echo level="info">Setting HtmlUnit logging level to ERROR to prevent warnings</echo>
+        <replace file="../../src/main/resources/log4j.xml">
+            <replacetoken><![CDATA[<logger name="org.appfuse">
+        <level value="DEBUG"/>
+    </logger>]]></replacetoken>
+            <replacevalue><![CDATA[<logger name="org.appfuse">
+        <level value="DEBUG"/>
+    </logger>
+
+    <logger name="com.gargoylesoftware.htmlunit">
+        <level value="ERROR"/>
+    </logger>]]></replacevalue>
+        </replace>
+        
+        <echo/> 
+        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
+    </target>
+</project>

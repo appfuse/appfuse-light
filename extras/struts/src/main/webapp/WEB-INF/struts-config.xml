@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+    "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+    <!-- ======================================== Form Bean Definitions -->
+
+    <form-beans>
+        <form-bean
+            name="userForm" type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="user" type="org.appfuse.model.User"/>
+        </form-bean>
+    </form-beans>
+
+    <!-- =================================== Global Exception Definitions -->
+    <global-exceptions>
+       <exception key="error.required" type="org.springframework.dao.DataAccessException"
+                  path="/dataAccessFailure.jsp"/>
+    </global-exceptions>
+
+    <!-- =================================== Global Forward Definitions -->
+
+    <global-forwards>
+        <forward name="users" path="/users.html" redirect="true"/>
+    </global-forwards>
+
+    <!-- =================================== Action Mapping Definitions -->
+
+    <action-mappings>
+
+        <action path="/users" type="org.apache.struts.actions.ForwardAction"
+            parameter="/user.html"/>
+
+        <action path="/user" type="org.springframework.web.struts.DelegatingActionProxy"
+            name="userForm" scope="request" parameter="method" validate="false">
+            <forward name="list" path="/userList.jsp"/>
+            <forward name="edit" path="/userForm.jsp"/>
+        </action>
+
+    </action-mappings>
+
+
+    <!-- ================================ Message Resources Definitions -->
+
+    <message-resources parameter="messages"/>
+
+    <!-- ======================================= Plug Ins Configuration -->
+
+    <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+        <set-property property="contextConfigLocation"
+            value="/WEB-INF/action-servlet.xml"/>
+    </plug-in>
+
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames" value="/WEB-INF/validator-rules.xml,
+                                        /WEB-INF/validation.xml"/>
+    </plug-in>
+</struts-config>
+
+

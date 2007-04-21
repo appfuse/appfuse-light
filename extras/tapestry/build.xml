@@ -1,0 +1,216 @@
+<!-- This file is designed to install Tapestry into AppFuse Light -->
+<project name="tapestry" basedir="." default="help">
+
+    <!-- common installation targets -->
+    <import file="../common-build.xml"/>
+
+    <!-- =================================================================== -->
+    <!-- Replace Spring MVC with Tapestry                                    -->
+    <!-- =================================================================== -->
+    <target name="install" description="Installs Tapestry into AppFuse Light">
+        <echo level="info">Modifying pom.xml</echo>
+      
+        <!-- Replace Commons Validator for Spring with Tapestry in dependencies file -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<dependency>
+            <groupId>org.springmodules</groupId>
+            <artifactId>spring-modules-validation</artifactId>
+            <version>0.8</version>
+        </dependency>]]></replacetoken>
+        <replacevalue><![CDATA[<dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-framework</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tapestry</groupId>
+            <artifactId>tapestry-contrib</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.javaforge.tapestry</groupId>
+            <artifactId>tapestry-flash</artifactId>
+            <version>0.1.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>tapestry</groupId>
+                    <artifactId>tapestry</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.javaforge.tapestry</groupId>
+            <artifactId>tapestry-spring</artifactId>
+            <version>0.1.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>tapestry</groupId>
+                    <artifactId>tapestry</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>tapestry</groupId>
+                    <artifactId>tapestry-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>]]></replacevalue>
+        </replace>
+
+        <!-- Add Tapestry @ JavaForge Repository -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[</repositories>]]></replacetoken>
+        <replacevalue><![CDATA[  <repository>
+      <id>tapestry@javaforge</id>
+      <url>http://howardlewisship.com/repository</url>
+    </repository>
+  </repositories>]]></replacevalue>
+        </replace>
+
+        <!-- Remove the Display Tag -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<dependency>
+      <groupId>displaytag</groupId>
+      <artifactId>displaytag</artifactId>
+      <version>1.1</version>
+    </dependency>
+    ]]></replacetoken>
+        </replace>
+        
+        <echo level="info">Removing Spring MVC-specific files</echo>
+        <delete>
+            <fileset dir="../..">
+                <include name="**/UserController*.java"/>
+                <include name="**/UserFormController*.java"/>
+                <include name="**/action-servlet.xml"/>
+                <include name="**/*validation.xml"/>
+                <include name="**/validator*"/>
+                <!-- TODO: Get this working for Tapestry -->
+                <include name="**/dataAccessFailure.jsp"/>
+                <include name="**/messages.jsp"/>
+                <include name="**/user*.jsp"/>
+                <exclude name="extras/**"/>
+            </fileset>
+        </delete>
+        
+        <move file="../../src/main/webapp/styles/displaytag.css" tofile="../../src/main/webapp/styles/table.css"/>
+        
+        <!-- Remove displaytag.css reference -->
+        <replace file="../../src/main/webapp/styles/global.css" token="displaytag.css" value="table.css"/>
+        
+        <!-- Remove DisplayTag Filter -->
+        <echo level="info">Configuring web.xml for Tapestry</echo>
+        <!-- Remove DisplayTag Filter -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[
+    <filter>
+        <filter-name>exportFilter</filter-name>
+        <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
+    </filter>]]></replacetoken>
+        </replace>
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[
+    <filter-mapping>
+        <filter-name>exportFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>]]></replacetoken>
+        </replace>
+        <!-- Add Redirect Filter -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<filter>
+        <filter-name>sitemesh</filter-name>]]></replacetoken>
+            <replacevalue><![CDATA[<filter>
+        <filter-name>redirect</filter-name>
+        <filter-class>org.apache.tapestry.RedirectFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>sitemesh</filter-name>]]></replacevalue>
+        </replace>
+        <!-- Add Redirect Filter Mapping -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<listener>]]></replacetoken>
+            <replacevalue><![CDATA[<filter-mapping>
+        <filter-name>redirect</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+
+    <listener>]]></replacevalue>
+        </replace>
+        <!-- Change DispatcherServlet to ApplicationServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<servlet-name>action</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>]]></replacetoken>
+            <replacevalue><![CDATA[<servlet-name>tapestry</servlet-name>
+        <servlet-class>org.apache.tapestry.ApplicationServlet</servlet-class>]]></replacevalue>
+        </replace>
+        <!-- Change Servlet mapping to point to ApplicationServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>]]></replacetoken>
+            <replacevalue><![CDATA[<servlet-mapping>
+        <servlet-name>tapestry</servlet-name>
+        <url-pattern>/app</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>tapestry</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>tapestry</servlet-name>
+        <url-pattern>*.direct</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>tapestry</servlet-name>
+        <url-pattern>*.sdirect</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>tapestry</servlet-name>
+        <url-pattern>/assets/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>tapestry</servlet-name>
+        <url-pattern>*.svc</url-pattern>
+    </servlet-mapping>]]></replacevalue>
+        </replace>
+
+        <echo level="info">Moving index.jsp to home.html</echo>
+        <move file="../../src/main/webapp/index.jsp" tofile="../../src/main/webapp/WEB-INF/pages/home.html"/>
+        <!-- Remove taglibs.jsp import and change title -->
+        <replace file="../../src/main/webapp/WEB-INF/pages/home.html">
+            <replacetoken><![CDATA[<%@ include file="/taglibs.jsp"%>
+
+<title><fmt:message key="index.title"/></title>]]></replacetoken>
+            <replacevalue><![CDATA[<title><span jwcid="@Insert" value="message:index.title"/></title>]]></replacevalue>
+        </replace>
+        <!-- Change link on 'View Demonstration' button -->
+        <replace file="../../src/main/webapp/WEB-INF/pages/home.html">
+            <replacetoken><![CDATA[<button class="button" onclick="location.href='users.html'">View Demonstration</button>]]></replacetoken>
+            <replacevalue><![CDATA[<a jwcid="@PageLink" page="users" id="demoLink" style="display:none"/>
+        <button class="button" onclick="location.href=document.getElementById('demoLink').href">View Demonstration</button>]]></replacevalue>
+        </replace>
+        
+        <echo level="info">Removing includes messages.jsp in decorators/default.jsp</echo>
+        <replace file="../../src/main/webapp/decorators/default.jsp">
+            <replacetoken><![CDATA[<%@ include file="/messages.jsp"%>
+            <decorator:body/>]]></replacetoken>
+            <replacevalue><![CDATA[<decorator:body/>]]></replacevalue>
+        </replace>
+
+        <echo level="info">Installing Tapestry JARs and .java files</echo>
+        <copy todir="../.." overwrite="true">
+            <fileset dir="${basedir}">
+                <include name="**"/>
+                <exclude name="build.xml"/>
+                <exclude name="README.txt"/>
+            </fileset>
+        </copy>
+        
+        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
+    </target>
+</project>

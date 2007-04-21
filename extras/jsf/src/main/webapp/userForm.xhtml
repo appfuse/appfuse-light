@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:t="http://myfaces.apache.org/tomahawk">
+
+<f:view>
+<f:loadBundle var="messages" basename="messages"/>
+
+<head>
+    <title>#{messages['userForm.title']}</title>
+    <style type="text/css">
+        .jscalendar-DB-div-style {
+            position: absolute;
+            margin-top: -69px;
+            margin-left: -408px;
+        }
+    </style>
+</head>
+
+<h:messages errorClass="error" layout="table" style="width: 100%"/>
+
+<p>Please fill in user's information below:</p>
+
+<h:form id="userForm">
+<h:inputHidden value="#{userForm.user.id}">
+    <f:convertNumber/>
+</h:inputHidden>
+<h:panelGrid columns="3" styleClass="detail" columnClasses="label">
+
+    <h:outputLabel for="firstName" value="#{messages['user.firstName']}"/>
+    <h:inputText value="#{userForm.user.firstName}" id="firstName"/>
+    <h:message for="firstName" styleClass="errorMessage"/>
+
+    <h:outputLabel for="lastName" value="#{messages['user.lastName']}"/>
+    
+    <h:inputText value="#{userForm.user.lastName}" id="lastName" required="true"/>
+    <h:message for="lastName" styleClass="errorMessage"/>
+
+    <h:outputLabel for="birthday" value="#{messages['user.birthday']}"/>
+    <t:inputCalendar monthYearRowClass="yearMonthHeader" weekRowClass="weekHeader" id="birthday"
+            currentDayCellClass="currentDayCell" value="#{userForm.user.birthday}" 
+            renderAsPopup="true" addResources="true"/>
+    <h:message for="birthday" styleClass="errorMessage"/>
+    <h:inputHidden value=""/>
+    
+    <h:panelGroup>
+        <h:commandButton value="Save" action="#{userForm.save}" id="save" styleClass="button"/>
+    <c:if test="${not empty userForm.id}">
+        <h:commandButton value="Delete" action="#{userForm.delete}" id="delete" styleClass="button"/>
+    </c:if>
+        <h:commandButton value="Cancel" action="cancel" immediate="true" id="cancel" styleClass="button"/>
+    </h:panelGroup>
+    <h:inputHidden value=""/>
+</h:panelGrid>
+</h:form>
+
+<script type="text/javascript">
+    Form.focusFirstElement(document.forms['userForm']);
+</script>
+
+</f:view>
+</html>

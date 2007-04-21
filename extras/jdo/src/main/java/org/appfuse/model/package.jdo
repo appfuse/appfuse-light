@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE jdo PUBLIC 
+    "-//Sun Microsystems, Inc.//DTD Java Data Objects Metadata 2.0//EN" 
+    "http://java.sun.com/dtd/jdo_2_0.dtd">
+<jdo>
+    <package name="org.appfuse.model">
+        <class name="User" identity-type="application" detachable="true" table="app_user">
+            <field name="id" primary-key="true" value-strategy="native"/>
+            <field name="firstName">
+                <column name="first_name" jdbc-type="VARCHAR" length="50"/>
+            </field>
+            <field name="lastName">
+                <column name="last_name" jdbc-type="VARCHAR" length="50"/>
+            </field>
+            <field name="birthday">
+                <column name="birthday" jdbc-type="DATE" allows-null="true"/>
+            </field>
+        </class>
+    </package>
+</jdo>

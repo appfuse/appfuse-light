@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+       
+    <!-- So tests that use AbstractTransactionalDataSourceSpringContextTests will pass -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="30"/>
+        <property name="maxIdle" value="10"/>
+        <property name="maxWait" value="1000"/>
+        <property name="defaultAutoCommit" value="true"/>
+    </bean>
+
+    <bean id="persistenceManagerFactory" class="org.jpox.PersistenceManagerFactoryImpl" destroy-method="close">
+        <property name="connectionFactory" ref="dataSource"/>
+        <property name="nontransactionalRead" value="true"/>
+        <property name="retainValues" value="true"/>
+        <property name="autoCreateSchema" value="true"/>
+        <property name="identifierCase" value="LowerCase"/>
+        <property name="validateTables" value="false"/>
+    </bean>
+    
+    <bean id="transactionManager" class="org.springframework.orm.jdo.JdoTransactionManager">
+        <property name="persistenceManagerFactory" ref="persistenceManagerFactory"/>
+    </bean>
+    
+    <bean id="userDao" class="org.appfuse.dao.jdo.UserDaoJdo">
+        <property name="persistenceManagerFactory" ref="persistenceManagerFactory"/>   
+    </bean>
+    
+</beans>
