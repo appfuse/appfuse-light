@@ -23,7 +23,7 @@
     </td>
 </tr>
 <tr>
-    <th><label for="firstName" class="required">* <fmt:message key="user.lastName"/>:</label></th>
+    <th><label for="lastName" class="required">* <fmt:message key="user.lastName"/>:</label></th>
     <td>
         <form:input path="lastName" id="firstName"/>
         <form:errors path="lastName" cssClass="fieldError"/>

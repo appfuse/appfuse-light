@@ -1,36 +1,31 @@
 package org.appfuse.web;
 
-import java.util.List;
-
-import net.sourceforge.jwebunit.WebTestCase;
-
-import org.appfuse.model.User;
-import org.appfuse.service.UserManager;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import java.util.ResourceBundle;
 
 public class UserWebTest extends WebTestCase {
+    private ResourceBundle messages;
 
     public UserWebTest(String name) {
         super(name);
         getTestContext().setBaseUrl("http://localhost:8080");
         getTestContext().setResourceBundleName("messages");
+        messages = ResourceBundle.getBundle("messages");
         //getTestContext().setLocale(Locale.GERMAN);
         //getTestContext().getWebClient().setHeaderField("Accept-Language", "de");
     }
 
     public void testWelcomePage() {
         beginAt("/");
-        assertTitleEqualsKey("index.title");
+        assertTitleKeyMatches("index.title");
     }
 
     public void testAddUser() {
         beginAt("/user.html?method=edit");
-        assertTitleEqualsKey("userForm.title");
+        assertTitleKeyMatches("userForm.title");
         setFormElement("user.firstName", "Spring");
         setFormElement("user.lastName", "User");
         submit("save");
-        assertTitleEqualsKey("userList.title");
+        assertTitleKeyMatches("userList.title");
     }
 
     public void testListUsers() {
@@ -48,19 +43,20 @@ public class UserWebTest extends WebTestCase {
         beginAt("/user.html?method=edit&id=" + getInsertedUserId());
         assertFormElementEquals("user.firstName", "Spring");
         submit("save");
-        assertTitleEqualsKey("userList.title");
+        assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
         beginAt("/user.html?method=edit&id=" + getInsertedUserId());
-        assertTitleEqualsKey("userForm.title");
+        assertTitleKeyMatches("userForm.title");
         submit("delete");
-        assertTitleEqualsKey("userList.title");
+        assertTitleKeyMatches("userList.title");
     }
 
     /**
      * Convenience method to get the id of the inserted user
      * Assumes last inserted user is "Spring User"
+     * @return last id in the table
      */
     public String getInsertedUserId() {
         beginAt("/users.html");
@@ -69,5 +65,9 @@ public class UserWebTest extends WebTestCase {
         String[][] sparseTableCellValues =
                 getDialog().getSparseTableBySummaryOrId("userList");
         return sparseTableCellValues[sparseTableCellValues.length-1][0];
+    }
+
+    protected void assertTitleKeyMatches(String title) {
+        assertTitleEquals(messages.getString(title) + " | " + messages.getString("webapp.name"));
     }
 }

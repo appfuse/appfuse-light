@@ -37,4 +37,11 @@
     <target name="dist" depends="create" description="Creates distribution with framework installed">
         <ant dir="../../../${app.name}" target="dist"/>
     </target>
+
+    <target name="clean" description="Deletes generated artifacts in extras/**">
+        <delete>
+            <fileset dir="." includes="**/target/**"/>
+            <fileset dir="." includes="**/target"/>
+        </delete>
+    </target>
 </project>

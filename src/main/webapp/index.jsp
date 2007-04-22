@@ -1,9 +1,7 @@
 <%@ include file="/taglibs.jsp"%>
 
-<title><fmt:message key="index.title"/></title>
-
-<div id="main">
-    <h3>Welcome to AppFuse Light!</h3>
+<div id="intro">
+    <h2>Welcome to AppFuse Light!</h2>
     <p>
         <a href="http://appfuse-light.dev.java.net">AppFuse Light</a> is a lightweight version of <a href="http://appfuse.org">AppFuse</a>.
         I was inspired to create it while writing <a href="http://springlive.com">Spring Live</a> and 
@@ -33,14 +31,14 @@
         Spring</a>-managed middle-tier backend and <a href="http://www.hibernate.org">
         Hibernate</a> for persistence. By default, AppFuse Light uses Spring for
         its MVC framework, but you can change it to 
-        <a href="http://struts.apache.org">Struts</a>, 
+        <a href="http://struts.apache.org">Struts 1.x</a>, <a href="http://struts.apache.org/2.x/">Struts 2.x</a>,
         <a href="http://opensymphony.com/webwork">WebWork</a>, 
         <a href="http://jakarta.apache.org/tapestry">Tapestry</a>
         or <a href="http://www.myfaces.org">JSF</a>.  Installers are in the "extras" directory.
     </p>
     <p>
         By default, AppFuse Light expects you to have PostgreSQL installed with
-        an "appfuse-light" database created. For everything to work out-of-the-box,
+        an "appfuse_light" database created. For everything to work out-of-the-box,
         this database should be owned by a "postgres" user with the same
         password.  More information on database configuration can be found
         in this project's README.txt file.
@@ -62,22 +60,11 @@
     <li>JSP 2.0 is out, so it will be used to simplify syntax.</li>
     <li>Simplicity is more important than configurability.</li>
 </ul>
-
-<h3>Notes</h3>
-<ul>
-    <li>AppFuse Light ships with project files for both <a href="http://www.eclipse.org">Eclipse</a>
-    and <a href="http://www.jetbrains.com/idea/">IDEA</a>. For information on setting up  
-    AppFuse Light to run tests and debug Tomcat, see
-    <a href="http://confluence.sourcebeat.com/display/SPL/FAQ">the FAQ</a>.</li>
-    <li><a href="http://opensymphony.com/sitemesh">SiteMesh</a> is used for page decoration. It was
-    <a href="http://raibledesigns.com/page/rd?anchor=sitemesh_passed_the_10_minute">
-    so easy to use</a>, I couldn't resist!</li>
-</ul>
 </content>
 
 <script type="text/javascript">
 function readMore() {
-    var main = document.getElementById("main");
+    var main = document.getElementById("intro");
     var more = document.getElementById("readmore");
     if (main.style.display == "") {
         main.style.display = "none";

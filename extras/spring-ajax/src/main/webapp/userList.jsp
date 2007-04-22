@@ -13,10 +13,10 @@
     <a href="http://particletree.com/features/lightbox-gone-wild/">Lightbox</a> feature.
 </p>
 
-<button onclick="location.href='userform.html'">Add User</button>
+<button onclick="location.href='userform.html'"style="float: right; margin-top: -30px; width: 100px">Add User</button>
 <aa:zone name="userTable">
 
-<display:table name="users" class="list" requestURI="" id="userList" export="true" excludedParams="*" pagesize="5" sort="list">
+<display:table name="users" class="table" requestURI="" id="userList" export="true" excludedParams="*" pagesize="5" sort="list">
     <display:setProperty name="export.pdf.filename" value="users.pdf"/>
     <display:column sortProperty="id" sortable="true" media="html" titleKey="user.id">
         <a href="${ctx}/userform.html?id=${userList.id}">${userList.id}</a>

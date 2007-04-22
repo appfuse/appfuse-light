@@ -1,87 +1,89 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>${title}</title>
+    <title><#if title != ''>${title}<#else>Welcome</#if> | ${rc.getMessage("webapp.name")}</title>
     <meta http-equiv="Cache-Control" content="no-store"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <link href="${base}/styles/global.css" type="text/css" rel="stylesheet"/>
-    <link href="${base}/images/favicon.ico" rel="SHORTCUT ICON"/>
-    <script type="text/javascript" src="${base}/scripts/prototype.js"></script> 
+    <link rel="shortcut icon" href="${base}/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="${base}/styles/deliciouslyblue/theme.css" title="default" />
+    <link rel="alternate stylesheet" type="text/css" href="${base}/styles/deliciouslygreen/theme.css" title="green" />
+    <script type="text/javascript" src="${base}/scripts/prototype.js"></script>
     <script type="text/javascript" src="${base}/scripts/scriptaculous.js"></script>
+    <script type="text/javascript" src="${base}/scripts/stylesheetswitcher.js"></script>
     <script type="text/javascript" src="${base}/scripts/global.js"></script>
     ${head}
-    <!-- HTML & Design contributed by Boer Attila (http://www.calcium.ro) -->
-    <!-- Found at http://www.csszengarden.com/?cssfile=/083/083.css&page=2 -->
 </head>
+
 <body>
 <a name="top"></a>
-<div id="container">
-    <div id="intro">
-        <div id="pageHeader">
-            <h1><span>Welcome to AppFuse Light</span></h1>
-            <div id="logo" onclick="location.href='${base}'"
-                onkeypress="location.href='${base}'"></div>
-            <h2><span>Spring Rocks!</span></h2>
+<div id="page">
+
+    <div id="header" class="clearfix">
+
+        <h1 style="cursor: pointer" onclick="location.href='${base}/'">AppFuse Light</h1>
+
+        <div id="branding">
+            <a href="http://www.springframework.org" title="Spring - java/j2ee Application Framework">
+                <img src="${base}/images/powered-by-spring.png" width="125" height="66" alt="Spring Framework"/></a>
         </div>
-    
-        <div id="quickSummary">
-            <p>
-                <a href="http://appfuse-light.dev.java.net">AppFuse Light</a> is a lightweight version of
-                <a href="http://raibledesigns.com/appfuse">AppFuse</a> designed 
-                to accelerate starting a webapp with the 
-                <a href="http://www.springframework.org">Spring Framework</a>.
-            </p>
-            <p class="credit">
-                <a href="http://www.csszengarden.com/?cssfile=/083/083.css&amp;page=2">
-                Design and CSS</a> donated by <a href="http://www.calcium.ro">
-                Bo&eacute;r Attila</a>.
-            </p>
-        </div>
-    
-        <div id="content">
+
+        <p>${rc.getMessage("webapp.tagline")}</p>
+    </div>
+
+    <div id="content">
+
+        <div id="main">
+            <h1>${title}</h1>
             <#include "/messages.ftl"/>
             ${body}
-        </div>
-    </div>
 
-    <div id="supportingText">
-        <div id="underground">
-          <#if page.getProperty("page.underground")?exists>
-              ${page.getProperty("page.underground")}
-          </#if>
-        </div>
-    
-        <div id="footer">
-            <a href="http://validator.w3.org/check/referer" title="Check the validity of this site&#8217;s XHTML">xhtml</a> &middot;
-            <a href="http://jigsaw.w3.org/css-validator/check/referer" title="Check the validity of this site&#8217;s CSS">css</a> &middot;
-            <a href="http://www.apache.org/licenses/LICENSE-2.0" title="View the license for AppFuse Light, courtesy of Apache Software Foundation.">license</a> &middot;
-            <a href="http://bobby.watchfire.com/bobby/bobbyServlet?URL=${Request.requestURL}&amp;output=Submit&amp;gl=sec508&amp;test=" title="Check the accessibility of this site according to U.S. Section 508">508</a> &middot;
-            <a href="http://bobby.watchfire.com/bobby/bobbyServlet?URL=${Request.requestURL}&amp;output=Submit&amp;gl=wcag1-aaa&amp;test=" title="Check the accessibility of this site according to WAI Content Accessibility Guidelines 1">aaa</a>
-        </div>
-
-    </div>
-	
-    <div id="linkList">
-        <div id="linkList2">
-            <div id="lresources">
-                <h3 class="menubar">Resources</h3>
-                <ul>
-                    <li><a href="http://appfuse-light.dev.java.net">AppFuse Light</a></li>
-                    <li><a href="http://www.springframework.org">Spring Framework</a></li>
-                    <li><a href="http://springlive.com">Spring Live ~ Book</a></li>
-                    <li><a href="http://jroller.com/page/raible">Spring Live - Weblog</a></li>
-                    <li><a href="http://sourcebeat.com">SourceBeat</a></li>
-                    <li><a href="http://raibledesigns.com">Raible Designs</a></li>
-                </ul>
+            <div id="underground">
+                <#if page.getProperty("page.underground")?exists>
+                ${page.getProperty("page.underground")}
+                </#if>
             </div>
         </div>
+
+        <div id="sub">
+            <h3>Resources</h3>
+
+            <p>The following is a list of resources that will make <a href="http://springframework.org">Spring</a> infinitely easier to use.</p>
+
+            <ul class="glassList">
+                <li><a href="http://static.springframework.org/spring/docs/2.0.x/reference/index.html">Spring 2.0 Docs</a></li>
+                <li><a href="http://static.springframework.org/spring/docs/2.0.x/api/index.html">Spring 2.0 API</a></li>
+                <li><a href="http://www.springframework.org/bookreview">Spring Books</a></li>
+                <li><a href="http://forum.springframework.org/">Spring Forums</a></li>
+                <li><a href="http://springmodules.dev.java.net">Spring Modules</a></li>
+            </ul>
+
+            <img src="${base}/images/image.gif" alt="Click to Change Theme" width="150" height="112" class="right" style="margin: 10px 0 20px 0"
+                 onclick="StyleSheetSwitcher.setActive((StyleSheetSwitcher.getActive() == 'default') ? 'green' : 'default')"/>
+        </div>
+
+        <div id="nav">
+            <div class="wrapper">
+                <h2 class="accessibility">Navigation</h2>
+                <ul class="clearfix">
+                    <li><a href="${base}/" title="Home"><span>Home</span></a></li>
+                    <li><a href="${base}/users.html" title="View Users"><span>Users</span></a></li>
+                </ul>
+            </div>
+        </div><!-- end nav -->
+
+    </div><!-- end content -->
+
+    <div id="footer">
+        <p>
+            <a href="http://validator.w3.org/check?uri=referer">Valid XHTML 1.0</a> |
+            <a href="http://www.oswd.org/design/preview/id/2634">Deliciously Blue</a> from <a href="http://www.oswd.org/">OSWD</a> |
+            Design by <a href="http://www.oswd.org/user/profile/id/8377">super j man</a>
+        </p>
     </div>
-
 </div>
-
 </body>
 </html>

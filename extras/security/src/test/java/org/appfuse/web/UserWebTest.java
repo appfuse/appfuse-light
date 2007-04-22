@@ -2,17 +2,23 @@ package org.appfuse.web;
 
 import net.sourceforge.jwebunit.WebTestCase;
 
+import java.util.ResourceBundle;
+
 public class UserWebTest extends WebTestCase {
+    private ResourceBundle messages;
 
     public UserWebTest(String name) {
         super(name);
         getTestContext().setBaseUrl("http://localhost:8080");
         getTestContext().setResourceBundleName("messages");
+        messages = ResourceBundle.getBundle("messages");
+        //getTestContext().setLocale(Locale.GERMAN);
+        //getTestContext().getWebClient().setHeaderField("Accept-Language", "de");
     }
     
     protected void setUp() throws Exception {
         beginAt("/users.html");
-        assertTitleEquals("AppFuse Light ~ Login");
+        assertTitleEquals("Login | AppFuse Light");
         setFormElement("j_username", "mraible");
         setFormElement("j_password", "tomcat");
         submit();
@@ -20,21 +26,21 @@ public class UserWebTest extends WebTestCase {
     
     protected void tearDown() throws Exception {
         clickLinkWithText("Logout");
-        assertTitleEqualsKey("index.title");
+        assertTitleKeyMatches("index.title");
     }
 
     public void testWelcomePage() {
         beginAt("/");
-        assertTitleEqualsKey("index.title");
+        assertTitleKeyMatches("index.title");
     }
 
     public void testAddUser() {
         beginAt("/userform.html");
-        assertTitleEqualsKey("userForm.title");
+        assertTitleKeyMatches("userForm.title");
         setFormElement("firstName", "Spring");
         setFormElement("lastName", "User");
         submit("save");
-        assertTitleEqualsKey("userList.title");
+        assertTitleKeyMatches("userList.title");
     }
 
     public void testListUsers() {
@@ -51,14 +57,14 @@ public class UserWebTest extends WebTestCase {
         beginAt("/userform.html?id=" + getInsertedUserId());
         assertFormElementEquals("firstName", "Spring");
         submit("save");
-        assertTitleEqualsKey("userList.title");
+        assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
         beginAt("/userform.html?id=" + getInsertedUserId());
-        assertTitleEqualsKey("userForm.title");
+        assertTitleKeyMatches("userForm.title");
         submit("delete");
-        assertTitleEqualsKey("userList.title");
+        assertTitleKeyMatches("userList.title");
     }
 
     /**
@@ -72,5 +78,9 @@ public class UserWebTest extends WebTestCase {
         String[][] tableCellValues =
                 getDialog().getSparseTableBySummaryOrId("userList");
         return tableCellValues[tableCellValues.length-1][0];
+    }
+
+    protected void assertTitleKeyMatches(String title) {
+        assertTitleEquals(messages.getString(title) + " | " + messages.getString("webapp.name"));
     }
 }

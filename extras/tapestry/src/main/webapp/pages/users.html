@@ -10,9 +10,9 @@
 </span>
 
 <a jwcid="@PageLink" page="userForm" id="formLink" style="display:none"/>
-<button class="button" onclick="location.href=document.getElementById('formLink').href">Add User</button>
+<button class="button" onclick="location.href=document.getElementById('formLink').href"style="float: right; margin-top: -30px; width: 100px">Add User</button>
 
-<table jwcid="table@contrib:Table" class="list" id="userList"
+<table jwcid="table@contrib:Table" class="table" id="userList"
     rowsClass="ognl:beans.evenOdd.next" row="ognl:row" source="ognl:userManager.users" 
     columns="id, firstName, lastName, birthday"
     arrowUpAsset="ognl:assets.upArrow" arrowDownAsset="ognl:assets.downArrow">

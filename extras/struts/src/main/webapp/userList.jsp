@@ -2,9 +2,9 @@
 
 <title><fmt:message key="userList.title"/></title>
 
-<button onclick="location.href='user.html?method=edit'">Add User</button>
+<button onclick="location.href='user.html?method=edit'"style="float: right; margin-top: -30px; width: 100px">Add User</button>
 
-<display:table name="users" class="list" requestURI="" id="userList" export="true" pagesize="10">
+<display:table name="users" class="table" requestURI="" id="userList" export="true" pagesize="10">
     <display:column property="id" sortable="true" href="user.html?method=edit"
         paramId="id" paramProperty="id" titleKey="user.id" media="html"/>
     <display:column property="id" media="csv excel xml pdf" titleKey="user.id"/>
