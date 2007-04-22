@@ -1,45 +1,165 @@
 <html>
-<head>
-<title>Project Home Page</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-</head>
+  <head>
+    <title>
+      home
+    </title>
+  </head>
+  <body>
+    <div id="projecthome" class="app">
+      <p>
+        <a href="https://appfuse.org"><img src="https://appfuse.dev.java.net/images/icon.gif" 
+            alt="AppFuse Logo" style="margin: 10px; float: left; border: 0" /></a>
+        <a href="http://www.springlive.com"><img src="http://sourcebeat.com/images/books/springlive/coverImage.jpg" 
+            alt="Spring Live Book" class="bookCover" height="150" width="120"
+            style="margin: 10px; margin-top: 0px; float: right; border: 1px solid black" /></a>
+        AppFuse Light is a lightweight version of <a href="http://appfuse.org">AppFuse</a>.
+        I was inspired to create it while writing <a href="http://springlive.com">Spring Live</a>
+        and looking at the <em>struts-blank</em> and <em>webapp-minimal</em> applications that ship with 
+        Struts and Spring, respectively. These "starter" apps were not robust enough 
+        for me, and I wanted something like AppFuse, only simpler.  
+      </p>
+      <p>
+        Much of the documentation for developing with AppFuse Light can be found in the
+        <a href="http://www.sourcebeat.com/titles/springlive/public/Rev_11/SpringLive_SampleChapter.pdf">
+        QuickStart Chapter</a> from Spring Live.  If you have issues downloading this PDF, you might try 
+        saving it to your hard drive before opening it.  The QuickStart Chapter covers developing with 
+        Struts, Chapter 4 covers developing with Spring MVC and Appendix A covers JSF, Tapestry and WebWork.  
+        AppFuse has <a href="http://raibledesigns.com/appfuse/tutorials">online tutorials</a> for
+        developing with all of these frameworks. 
+      </p>
+            
+      <p>
+        AppFuse Light uses Spring MVC and Hibernate by default.  However, you can change your web framework to JSF, Struts, Tapestry or WebWork.
+        You can also change your persistence framework to be iBATIS, JDO (JPOX), Spring JDBC or OJB. Both Ant and Maven 2 are supported
+        for building and testing.
+        <br /><br />
+        For a web framework comparison check out <a href="framework-comparison/">my presentation</a> on comparing these frameworks. 
+        A more detailed comparison can be found in Spring Live, Chapter 11. <a href="https://appfuse.org">
+        AppFuse</a> contains all 5 web framework options as well.
+        <br /><br />
+        The major differences between AppFuse and AppFuse Light are that AppFuse has the following features:
+        <ul>
+            <li>Authentication and Authorization with Acegi Security</li>
+            <li>User Management</li>
+            <li>Code generation for CRUD-based applications</li>
+            <li>File Upload</li>
+            <li>Active and Vibrant User Community</li>
+        </ul>
+      </p>
+      
+      <a name="setup"><h3>Setup</h3></a>
+      <blockquote>
+        <p>To run this application, you will need to have PostgreSQL (or MySQL) installed.
+        PostgreSQL is the default database and you will need to create a "appfuse-light"
+        database and "postgres/postgres" user for everything to work properly. 
+        PostgreSQL version 8.x or MySQL version 4.1.x is recommended. Both have 
+        graphical installers and easy to use GUI clients.
+        <br /><br />
+        To change any PostgreSQL settings, see src/main/resources/jdbc.properties. 
+        <br /><br />
+        If you'd rather use MySQL or another database, perform the following steps:
+        </p>
+        <ol>
+            <li>Modify jdbc.properties to have the correct settings for your database.</li>
+            <li>If you're using Hibernate, change the "hibernate.dialect" property in
+                src/main/webapp/WEB-INF/applicationContext-hibernate.xml.</li>
+            <li>Modify pom.xml to replace the PostgreSQL driver with your driver.</li>
+        </ol>
+        <p>
+        After setting up your database properly, you should be able to run all the tests
+        using "mvn" or "ant test-all". To create your own application, run "ant new". 
+        Then cd into your project and run "mvn jetty:run" to startup the Maven Jetty 
+        plugin. You should be able to see your project at http://localhost:8080/${app.name}.
+        The nice thing about using this plugin is you can edit JSPs/classes/etc. and 
+        Jetty will reload them on-the-fly.
 
-<body bgcolor="#FFFFFF" text="#000000">
-<h1>Default project home page </h1>
-<p>Congratulations on your new java.net project! </p>
-<p>This page is the home page for your new project. This content is appearing 
-  because you have selected the option <b>Use project index.html</b>. To edit 
-  the information displayed on this page, just use CVS to check out your project's 
-  CVS repository and edit index.html in directory www. You can get more information 
-  on how to set-up your local CVS client, click on <b>Version Control</b> on the 
-  left nav bar. </p>
-<p>If you don't want to use CVS to manage your home page, click on the <b>Edit 
-  project</b> link on this page and unclick the option <b>Use project index.html</b>. 
-  Your project home page contents will be generated from the <b>Edit project</b> 
-  field <b>Description</b>. Edit the text on that field to change your home page 
-  contents. Click on <b>Submit changes</b> to save your edits. </p>
-<p>If you are looking for <a href="https://java-net.dev.java.net/ProjectPages.html#templates">sample 
-  home page templates</a>, check out the <a href="https://java-net.dev.java.net/ProjectPages.html">java.net 
-  Project Starter Kit</a>. Copy either of the templates into your project's html 
-  to get started on your project's home page. </p>
-<p>You can find lots of helpful information in the Starter Kit to get your project 
-  started. Some of the things you will find in there include:</p>
-<ul>
-  <li>Hints on how to <a href="https://java-net.dev.java.net/ProjectPages.html#pages">set-up 
-    your project's</a> home page</li>
-  <li>Ideas on how to <a href="https://java-net.dev.java.net/ProjectPages.html#publicity">publicize 
-    your project</a> including RSS feeds</li>
-  <li>Hints on <a href="https://java-net.dev.java.net/pagedesign.html">project 
-    page HTML</a></li>
-  <li>Setting up project <a href="https://java-net.dev.java.net/ProjectPages.html#wiki">wiki 
-    pages</a></li>
-  <li>And places to go if <a href="https://java-net.dev.java.net/ProjectPages.html#feedback">you 
-    have questions</a>.</li>
-</ul>
-<p>Remember that you will attract more new members and your project team will 
-  work more effectively if you, as the project owner, supply sufficient information 
-  about your project for visitors to your project space. Good luck with your new 
-  project! </p>
-</body>
+        If you'd prefer to use Ant rather than Maven, you will need to tell AppFuse Light where
+        you've installed your server. Installation Tomcat and defining an 
+        CATALINA_HOME environment variable is the recommended method, but you can
+        also specify a "server.home" property in build.properties to use another
+        server.  For example:</p>
+
+        <pre style="margin-left: 10px">server.home=$TOOLS_HOME/resin-3.0.16</pre>
+
+        <p>You can also <a href="http://raibledesigns.com/page/rd?entry=edit_java_webapps_redux_jetty">
+        integrate Jetty with Eclipse for rapid development with no deploy cycle</a>. The
+        <a href="https://appfuse-light.dev.java.net/source/browse/*checkout*/appfuse-light/README.txt">
+        README.txt</a> file contains information on using Maven 2 to generate Eclipse
+        and IDEA project files.
+        <br /><br />
+        After setting up your environment, you can create your application using
+        the "QuickStart" instructions below, or deploy this one using the "Build
+        and Test" instructions.</p>
+      </blockquote>
+      
+      <a name="quickstart"><h3>QuickStart</h3></a>
+      <blockquote>
+        <em>See the <a href="#setup">setup</a> section for how to setup a database for this
+        application.</em><br /><br />
+        <a href="https://appfuse-light.dev.java.net/servlets/ProjectDocumentList">
+        Download</a>, extract and run "ant new". Enter your project name when prompted.
+        Spring MVC is the  default web framework. If you'd like to use JSF, Struts, 
+        Tapestry or WebWork instead, you can navigate to the the respective directory in 
+        the "extras" folder and run "ant install". You only need to do this if you
+        download <em>appfuse-light-all.zip</em>.
+        <br /><br />
+        Hibernate is the default persistence framework, but there are installers
+        for iBATIS, JDO (JPOX), OJB and Spring JDBC. 
+      </blockquote>     
+  
+      <a name="buildandtest"><h3>Build and Test</h3></a>
+      <p>
+        <ol>
+          <li>Make sure you have junit.jar in your $ANT_HOME/lib directory.</li>
+          <li>Download and install <a href="http://jakarta.apache.org/site/binindex.cgi#tomcat-5.5">
+              Tomcat 5.x</a> or another 2.4 container. If you setup 
+              a CATALINA_HOME environment variable, everything should work w/o changes.
+              For another container (i.e. Jetty or Resin), you'll need to define a 
+              server.home variable in build.properties (or modify build.xml).
+              <br /><br />
+              If you're using Tomcat and you want to use Tomcat's Ant Tasks, you'll need
+              to use the "tomcat.xml" file - calling it with "ant -f tomcat.xml <em>target</em>".
+              For these targets to work, you'll need an "admin" user with a "manager" role
+              in $CATALINA_HOME/conf/tomcat-users.xml.  The password is defined in 
+              build.properties.</li>
+           <li>Run "ant test-all" to verify all tests pass.</li>
+           <li>Run "ant deploy", start your server and view the application at 
+              <a href="http://localhost:8080/appfuse-light">http://localhost:8080/appfuse-light</a></li>
+            <li>You can also use <a href="http://maven.apache.org">Maven 2</a> with AppFuse Light, if
+			    you'd prefer using it to build. Using "mvn jetty:run" is a great way to
+			    develop applications.</li>
+        </ol>
+      </p>
+       
+      <a name="issues"><h3>Issues</h3></a>
+      <p>
+        <ul>
+            <li><a href="http://confluence.sourcebeat.com/display/SPL/FAQ">FAQ</a></li>
+            <li><a href="https://appfuse-light.dev.java.net/servlets/ProjectMailingListList">Mailing List</a></li>
+            <li><a href="http://issues.appfuse.org/browse/EQX">Issue Tracker</a></li>
+        </ul>
+      </p>
+      
+      <a name="demo"><h3>Demo</h3></a>
+      <p>
+        <ul>
+          <li><a href="http://demo.raibledesigns.com/appfuse-light">Spring</a>
+            &middot; <a href="http://demo.raibledesigns.com/appfuse-light-ajax">Spring + Ajax</a>
+            &middot; <a href="http://demo.raibledesigns.com/appfuse-light-security">Spring + Acegi</a></li>
+          <li><a href="http://demo.raibledesigns.com/appfuse-light-jsf">JSF + Facelets</a></li>
+          <li><a href="http://demo.raibledesigns.com/appfuse-light-struts">Struts 1</a>
+            &middot; <a href="http://demo.raibledesigns.com/appfuse-light-struts2">Struts 2</a></li>
+          <li><a href="http://demo.raibledesigns.com/appfuse-light-tapestry">Tapestry</a></li>
+          <li><a href="http://demo.raibledesigns.com/appfuse-light-webwork">WebWork</a></li>
+        </ul>
+      </p>
+      
+      <hr>
+      <small>
+      <a href="http://java-enterprise.dev.java.net/">
+      <img src="https://appfuse.dev.java.net/images/foundry-small.gif" border="0" alt="foundry"></a>
+      <i>Part of the <a href="http://java-enterprise.dev.java.net/">
+      Java Enterprise Community</a>.</i></small>
+    </div>
+  </body>
 </html>
-
