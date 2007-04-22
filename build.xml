@@ -110,14 +110,14 @@
             </classpath>
             <formatter type="xml"/>
             <formatter type="brief" usefile="false"/>
-            <batchtest todir="${test.dir}/data" if="testcase">
+            <batchtest todir="${test.dir}/data" if="test">
                 <fileset dir="${test.dir}/classes">
-                    <include name="**/*${testcase}*"/>
+                    <include name="**/*${test}*"/>
                     <exclude name="**/*TestCase.class"/>
                     <exclude name="**/*$*.class"/>
                 </fileset>
             </batchtest>
-            <batchtest todir="${test.dir}/data" unless="testcase">
+            <batchtest todir="${test.dir}/data" unless="test">
                 <fileset dir="${test.dir}/classes">
                     <include name="**/*Test.class*"/>
                     <exclude name="**/*WebTest.class"/>
@@ -133,20 +133,23 @@
 
     <target name="test-web" depends="compile"
         description="Runs jWebUnit tests in a running server">
-        <property name="testcase" value="WebTest"/>
+        <property name="test" value="WebTest"/>
         <antcall target="test"/>
     </target>
 
     <target name="test-tomcat" depends="war"
         description="Starts Tomcat, runs jWebUnit tests, stops Tomcat">
 
+        <property name="cargo.wait" value="false"/>
         <taskdef resource="cargo.tasks" classpathref="test.classpath"/>
 
         <cargo containerId="${cargo.server}" id="cargo.server" home="${server.home}" 
-            output="${test.dir}/cargo.log" action="start" wait="false">
+            output="${test.dir}/cargo.log" action="start" wait="${cargo.wait}">
             <configuration home="${test.dir}/${cargo.server}">
-                <deployable type="war" file="${basedir}/${dist.dir}/${webapp.name}.war"/>
-            </configuration>   
+                <deployable type="war" file="${basedir}/${dist.dir}/${webapp.name}.war">
+                    <property name="context" value="ROOT"/>
+                </deployable>
+            </configuration>
         </cargo>
 
         <antcall target="test-web"/>

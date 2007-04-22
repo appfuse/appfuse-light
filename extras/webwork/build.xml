@@ -16,6 +16,12 @@
             <groupId>org.springmodules</groupId>
             <artifactId>spring-modules-validation</artifactId>
             <version>0.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>rhino</groupId>
+                    <artifactId>js</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>]]></replacetoken>
         <replacevalue><![CDATA[<dependency>
             <groupId>opensymphony</groupId>

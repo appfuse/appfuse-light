@@ -6,7 +6,7 @@ public class UserWebTest extends WebTestCase {
 
     public UserWebTest(String name) {
         super(name);
-        getTestContext().setBaseUrl("http://localhost:8080/appfuse-light");
+        getTestContext().setBaseUrl("http://localhost:8080");
         getTestContext().setResourceBundleName("messages");
         //getTestContext().setLocale(Locale.GERMAN);
         //getTestContext().getWebClient().setHeaderField("Accept-Language", "de");

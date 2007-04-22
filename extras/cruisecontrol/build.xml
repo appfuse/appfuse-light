@@ -10,7 +10,7 @@
     <target name="svn">
         <delete dir="projects/${ant.project.name}"/>
         <svn>
-            <checkout url="https://appfuse-light.dev.java.net/svn/appfuse-light/trunk/appfuse-light"
+            <checkout url="https://appfuse-light.dev.java.net/svn/appfuse-light/trunk"
                   revision="HEAD" destPath="projects/${ant.project.name}" />
         </svn>
     </target-->
@@ -23,8 +23,7 @@
 
     <target name="test" depends="cvs">
         <echo>Changing port for Cargo and jWebUnit tests</echo>
-        <replace dir="projects/${ant.project.name}" 
-            token=":8080/appfuse-light" value=":8181/appfuse-light">
+        <replace dir="projects/${ant.project.name}" token=":8080" value=":8181">
             <include name="**/*WebTest.java"/>
         </replace>
         <replace file="projects/${ant.project.name}/build.xml">
