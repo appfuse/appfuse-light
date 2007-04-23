@@ -28,7 +28,7 @@
 
         <div id="branding">
             <a href="http://appfuse.org" title="AppFuse - eliminating project startup time">
-                <img src="${ctx}/images/powered-by-appfuse.gif" width="203" height="75" alt="AppFuse"/></a>
+                <img src="${base}/images/powered-by-appfuse.gif" width="203" height="75" alt="AppFuse"/></a>
         </div>
 
         <p>Providing integration and style to open source Java frameworks.</p>

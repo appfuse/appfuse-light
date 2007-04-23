@@ -107,8 +107,8 @@
     <bean id="inMemoryDaoImpl" class="org.acegisecurity.userdetails.memory.InMemoryDaoImpl">
         <property name="userMap">
             <value>
-                tomcat=536c0b339345616c1b33caf454454d8b8a190d6c,ROLE_USER
-                mraible=536c0b339345616c1b33caf454454d8b8a190d6c,ROLE_USER,ROLE_ADMIN
+                user=12dea96fec20593566ab75692c9949596833adc9,ROLE_USER
+                admin=d033e22ae348aeb5660fc2140aec35850c4da997,ROLE_USER,ROLE_ADMIN
             </value>
         </property>
    </bean>

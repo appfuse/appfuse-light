@@ -1,11 +1,12 @@
 <%@ include file="/taglibs.jsp"%>
 
-<title>AppFuse Light ~ Login</title>
+<title>Login</title>
 
 <p>
     Please enter your username and password to login.
-    User tomcat/tomcat has a <strong>User</strong> role,
-    while mraible/tomcat has an <strong>Admin</strong> role.
+    User user/user has a <strong>ROLE_USER</strong> role,
+    while admin/admin has an <strong>ROLE_ADMIN</strong> role. These users
+    and their encrypted passwords are stored in <em>WEB-INF/security.xml</em>.
 </p>
 
 <form action="<c:url value="/j_security_check"/>" id="loginForm" method="post">

@@ -3,10 +3,7 @@
 <head>
     <title><fmt:message key="userForm.title"/></title>
     <%-- Calendar Setup - put in decorator if needed in multiple pages --%>
-    <link  href="${ctx}/styles/calendar.css"  type="text/css"  rel="stylesheet"/>
-
-</head>
-
+    <link href="${ctx}/styles/calendar.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="${ctx}/scripts/calendar.js"></script>
     <script type="text/javascript" src="${ctx}/scripts/calendar-setup.js"></script>
     <script type="text/javascript" src="${ctx}/scripts/lang/calendar-en.js"></script>
@@ -14,6 +11,7 @@
     <script type="text/javascript" src="${ctx}/dwr/interface/UserManager.js"></script>
     <script type="text/javascript" src="${ctx}/dwr/engine.js"></script>
     <script type="text/javascript" src="${ctx}/dwr/util.js"></script>
+</head>
 
 <p ${(not empty param.ajax) ? 'style="display:none"' : ""}>This page uses DWR to save the user and do an in-page-update.  The effects
 showing the success message and then dropping it off the screen is done with script.aculo.us.</p>

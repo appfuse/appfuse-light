@@ -1,5 +1,7 @@
 package org.appfuse.web;
 
+import net.sourceforge.jwebunit.WebTestCase;
+
 import java.util.ResourceBundle;
 
 public class UserWebTest extends WebTestCase {

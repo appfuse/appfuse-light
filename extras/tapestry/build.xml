@@ -100,7 +100,8 @@
         <move file="../../src/main/webapp/styles/displaytag.css" tofile="../../src/main/webapp/styles/table.css"/>
         
         <!-- Remove displaytag.css reference -->
-        <replace file="../../src/main/webapp/styles/global.css" token="displaytag.css" value="table.css"/>
+        <replace file="../../src/main/webapp/styles/deliciouslyblue/theme.css" token="displaytag.css" value="table.css"/>
+        <replace file="../../src/main/webapp/styles/deliciouslygreen/theme.css" token="displaytag.css" value="table.css"/>
         
         <!-- Remove DisplayTag Filter -->
         <echo level="info">Configuring web.xml for Tapestry</echo>
