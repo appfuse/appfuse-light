@@ -294,7 +294,7 @@
                                 <containerId>tomcat5x</containerId>
                                 <zipUrlInstaller>
                                     <url>
-                                        http://apache.org/dist/tomcat/tomcat-5/v${tomcat.version}/bin/apache-tomcat-${tomcat.version}.zip
+                                        http://archive.apache.org/dist/tomcat/tomcat-5/v${tomcat.version}/bin/apache-tomcat-${tomcat.version}.zip
                                     </url>
                                     <installDir>${installDir}</installDir>
                                 </zipUrlInstaller>

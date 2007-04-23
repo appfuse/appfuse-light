@@ -19,8 +19,8 @@ public class UserWebTest extends WebTestCase {
     protected void setUp() throws Exception {
         beginAt("/users.html");
         assertTitleEquals("Login | AppFuse Light");
-        setFormElement("j_username", "mraible");
-        setFormElement("j_password", "tomcat");
+        setFormElement("j_username", "admin");
+        setFormElement("j_password", "admin");
         submit();
     }
     
