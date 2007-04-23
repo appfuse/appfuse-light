@@ -54,7 +54,7 @@
 <content tag="underground">
 <h3>Assumptions</h3>
 <ul>
-    <li>It's 2004, no one uses Netscape 4 anymore, or at least
+    <li>It's 2007, no one uses Netscape 4 anymore, or at least
         no one does by choice. All HTML will be XHTML compliant,
         without a space: i.e. &lt;br/&gt; not &lt;br /&gt;.</li>
     <li>JSP 2.0 is out, so it will be used to simplify syntax.</li>
