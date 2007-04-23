@@ -28,3 +28,7 @@ cd ../spring-jdbc
 ant test
 cd ../security
 ant test
+cd ../stripes
+ant test
+cd ../wicket
+ant test
