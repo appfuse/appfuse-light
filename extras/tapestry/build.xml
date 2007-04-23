@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.javaforge.tapestry</groupId>
             <artifactId>tapestry-flash</artifactId>
-            <version>0.1.1</version>
+            <version>1.0.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>tapestry</groupId>
@@ -47,7 +47,7 @@
         <dependency>
             <groupId>com.javaforge.tapestry</groupId>
             <artifactId>tapestry-spring</artifactId>
-            <version>0.1.2</version>
+            <version>1.0.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>tapestry</groupId>
