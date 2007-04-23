@@ -1,155 +1,76 @@
+div.exportlinks {
+    margin: -5px 0 10px 5px;
+    padding: 2px 4px 2px 0;
+    width: 100%;
+}
+
+div.exportlinks span {
+    background-repeat: no-repeat;
+}
+
+span.export {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 4px 1px 0;
+}
+
 span.pagebanner {
     display: block;
-    margin: 0 0 0 0;
+    margin: 10px 0 10px 0;
     padding: 2px 4px 2px 0;
-    width: 79%;
 }
 
 span.pagelinks {
     display: block;
-}
-
-table.list {
-    border: 1px solid #808080;
-    border-collapse: collapse;
-    margin-top: 10px;
+    font-size: .95em;
+    margin-bottom: 5px;
+    margin-top: -32px;
+    padding: 2px 0 2px 0;
+    text-align: right;
     width: 100%;
-    background: white;
-}
-
-table.list td {
-    padding-left: 3px;
-}
-
-table.list th {
-    background-color: silver;
-    padding: 2px;
-    padding-left: 3px;
-    border-bottom: 1px solid black;
-    text-align: left;
-    color: black;
-}
-
-/* The following 3 rules are for Tapestry's contrib:Table */
-table.list th table {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-table.list th table td {
-    text-align: left;
-}
-
-table.list th table td:hover, table.list th table td a:hover {
-    background-color: #ffd;
-}
-
-table.list th table tr:hover {
-    background-color: #ffd;
-    border: 1px solid white;
-}
-
-table.list tr.even {
-    background: #eee;
-    border-top: 1px solid silver;
-}
-
-table.list tr.odd {
-    background: white;
-    border-top: 1px solid silver;
-}
-
-table.list th a, table.list th a:visited {
-    background-color: transparent;
-    color: #000000;
-    text-decoration: none;
 }
 
 th.sorted a, th.sortable a {
     background-position: right;
     display: block;
-    padding: 0 3px;
 }
 
-table.list th.order1 a {
-	background-image: url(../images/arrow_down.png) !important;
+.table th.order1 a {
+    background-image: url(../images/arrow_down.png) !important;
 }
 
-table.list th.order2 a {
+.table th.order2 a {
     background-image: url(../images/arrow_up.png) !important;
 }
 
-table.list th.sortable a {
-    background-image: url(../images/arrow_off.png);
-}
-
-table.list th.sorted {
-    background-color: #eee;
+.table th.sorted {
+    background-color: #ffd;
     color: #000000;
 }
 
-table.list th.sorted a, table.list th.sortable a {
+.table th.sorted a, .table th.sortable a {
     background-position: right;
     background-repeat: no-repeat;
     display: block;
 }
 
-table.list th.sortable:hover {
-    background-color: #ffd;
-}
-
-table.list thead tr {
-    background-color: #FFCC00;
-}
-
-table.list tr.even {
-    background: #EEEEEE;
-    border-top: 1px solid #C0C0C0;
+.table tr.even {
+    background: #eee;
+    border-top: 1px solid #c0c0c0;
     color: #000000;
 }
 
-table.list tr.odd {
-    background: #FFFFFF;
-    border-top: 1px solid #C0C0C0;
+.table tr.odd {
+    background: #fff;
+    border-top: 1px solid #c0c0c0;
     color: #000000;
 }
 
-/* highlight table row onmouseover */
-table.list tr:hover, table.list tr.over {
-    background: #FFFF40;
+/* highlight .table row onmouseover */
+.table tr.over, .table tr:hover {
     border-bottom: 1px solid #C0C0C0;
     border-top: 1px solid #C0C0C0;
     color: #000000;
     cursor: pointer;
-    cursor: hand; /* IE 5.5 non-compliant workaround */
-}
-
-/* Labels for validation and label tag */
-label {
-    font-weight: normal;
-    cursor: pointer;
-    cursor: hand;
-}
-
-label.required {
-    font-weight: bold;
-}
-
-label.error {
-    font-weight: bold;
-    background: transparent;
-    color: red;
-}
-
-/* These are the styles for detail screen tables */
-table.detail {
-    margin-left: 10px;
-    padding: 5px;
-    font-weight: normal;
-}
-
-table.detail th {
-    text-align: right;
-    padding: 0 3px 0 0;
+    background: #ffd;
 }
