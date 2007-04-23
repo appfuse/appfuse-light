@@ -189,7 +189,7 @@
         <echo level="info">Moving index.jsp to home.html</echo>
         <move file="../../src/main/webapp/index.jsp" tofile="../../src/main/webapp/WEB-INF/pages/home.html"/>
         <!-- Remove taglibs.jsp import -->
-        <replace file="../../src/main/java/org/appfuse/web/Index.html">
+        <replace file="../../src/main/webapp/WEB-INF/pages/home.html">
             <replacetoken><![CDATA[<%@ include file="/taglibs.jsp"%>
 
 <div id="intro">]]></replacetoken>
