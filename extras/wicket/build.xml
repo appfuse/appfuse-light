@@ -1,0 +1,168 @@
+<!-- This file is designed to install Wicket into AppFuse Light -->
+<project name="wicket" basedir="." default="help">
+
+    <!-- common installation targets -->
+    <import file="../common-build.xml"/>
+
+    <!-- =================================================================== -->
+    <!-- Replace Spring MVC with Wicket                                    -->
+    <!-- =================================================================== -->
+    <target name="install" description="Installs Wicket into AppFuse Light">
+        <echo level="info">Modifying pom.xml</echo>
+
+        <!-- Change pom.xml to include *.html from Java sources (a Wicket convention) -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>]]></replacetoken>
+            <replacevalue><![CDATA[<resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.html</include>
+                </includes>
+            </resource>]]></replacevalue>
+        </replace>
+        <!-- Replace Commons Validator for Spring with Wicket in dependencies file -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<dependency>
+            <groupId>org.springmodules</groupId>
+            <artifactId>spring-modules-validation</artifactId>
+            <version>0.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>rhino</groupId>
+                    <artifactId>js</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>]]></replacetoken>
+        <replacevalue><![CDATA[<dependency>
+            <groupId>wicket</groupId>
+            <artifactId>wicket</artifactId>
+            <version>1.2.5</version>
+        </dependency>]]></replacevalue>
+        </replace>
+
+        <!-- Remove the Display Tag -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<dependency>
+      <groupId>displaytag</groupId>
+      <artifactId>displaytag</artifactId>
+      <version>1.1</version>
+    </dependency>
+    ]]></replacetoken>
+        </replace>
+
+        <echo level="info">Modifying build.xml</echo>
+        <!-- Include *.html from source tree when building WAR -->
+        <replace file="../../build.xml">
+            <replacetoken><![CDATA[<classes dir="${build.dir}/classes"/>
+            <classes dir="${resources.dir}"/>]]></replacetoken>
+            <replacevalue><![CDATA[<classes dir="${build.dir}/classes"/>
+            <classes dir="${src.dir}" includes="**/*.html"/>
+            <classes dir="${resources.dir}"/>]]></replacevalue>
+        </replace>
+        
+        <echo level="info">Removing Spring MVC-specific files</echo>
+        <delete>
+            <fileset dir="../..">
+                <include name="**/UserController*.java"/>
+                <include name="**/UserFormController*.java"/>
+                <include name="**/action-servlet.xml"/>
+                <include name="**/*validation.xml"/>
+                <include name="**/validator*"/>
+                <!-- TODO: Get this working for Wicket -->
+                <include name="**/dataAccessFailure.jsp"/>
+                <include name="**/messages.jsp"/>
+                <include name="**/user*.jsp"/>
+                <exclude name="extras/**"/>
+            </fileset>
+        </delete>
+        
+        <move file="../../src/main/webapp/styles/displaytag.css" tofile="../../src/main/webapp/styles/table.css"/>
+        
+        <!-- Remove displaytag.css reference -->
+        <replace file="../../src/main/webapp/styles/deliciouslyblue/theme.css" token="displaytag.css" value="table.css"/>
+        <replace file="../../src/main/webapp/styles/deliciouslygreen/theme.css" token="displaytag.css" value="table.css"/>
+        
+        <!-- Remove DisplayTag Filter -->
+        <echo level="info">Configuring web.xml for Wicket</echo>
+        <!-- Remove DisplayTag Filter -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[
+    <filter>
+        <filter-name>exportFilter</filter-name>
+        <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
+    </filter>
+    ]]></replacetoken>
+        </replace>
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[
+    <filter-mapping>
+        <filter-name>exportFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+]]></replacetoken>
+        </replace>
+
+        <!-- Change DispatcherServlet to ApplicationServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<servlet-name>action</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>]]></replacetoken>
+            <replacevalue><![CDATA[<servlet-name>wicket</servlet-name>
+        <servlet-class>wicket.protocol.http.WicketServlet</servlet-class>
+        <init-param>
+            <param-name>applicationClassName</param-name>
+            <param-value>org.appfuse.web.Application</param-value>
+        </init-param>]]></replacevalue>
+        </replace>
+        <!-- Change Servlet mapping to point to ApplicationServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>]]></replacetoken>
+            <replacevalue><![CDATA[<servlet-mapping>
+        <servlet-name>wicket</servlet-name>
+        <url-pattern>/app/*</url-pattern>
+    </servlet-mapping>]]></replacevalue>
+        </replace>
+
+        <echo level="info">Moving index.jsp to Index.html</echo>
+        <move file="../../src/main/webapp/index.jsp" tofile="../../src/main/java/org/appfuse/web/Index.html"/>
+        <!-- Remove taglibs.jsp import and add some Wicket Markup -->
+        <replace file="../../src/main/java/org/appfuse/web/Index.html">
+            <replacetoken><![CDATA[<%@ include file="/taglibs.jsp"%>
+
+<div id="intro">]]></replacetoken>
+            <replacevalue><![CDATA[<div id="intro"><span wicket:id="message">Message goes here</span>]]></replacevalue>
+        </replace>
+        <!-- Change link on 'View Demonstration' button -->
+        <replace file="../../src/main/java/org/appfuse/web/Index.html">
+            <replacetoken><![CDATA[<button class="button" onclick="location.href='users.html'">View Demonstration</button>]]></replacetoken>
+            <replacevalue><![CDATA[<a jwcid="@PageLink" page="users" id="demoLink" style="display:none"/>
+        <button class="button" onclick="location.href=document.getElementById('demoLink').href">View Demonstration</button>]]></replacevalue>
+        </replace>
+        
+        <echo level="info">Removing includes messages.jsp in decorators/default.jsp</echo>
+        <replace file="../../src/main/webapp/decorators/default.jsp">
+            <replacetoken><![CDATA[<%@ include file="/messages.jsp"%>
+            <decorator:body/>]]></replacetoken>
+            <replacevalue><![CDATA[<decorator:body/>]]></replacevalue>
+        </replace>
+
+        <echo level="info">Installing Wicket JARs and .java files</echo>
+        <copy todir="../.." overwrite="true">
+            <fileset dir="${basedir}">
+                <include name="**"/>
+                <exclude name="build.xml"/>
+                <exclude name="README.txt"/>
+            </fileset>
+        </copy>
+        
+        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
+    </target>
+</project>

@@ -1,0 +1,145 @@
+<!-- This file is designed to install Stripes into AppFuse Light -->
+<project name="stripes" basedir="." default="help">
+
+    <!-- common installation targets -->
+    <import file="../common-build.xml"/>
+
+    <!-- =================================================================== -->
+    <!-- Replace Spring MVC with Stripes                                     -->
+    <!-- =================================================================== -->
+    <target name="install" description="Installs Stripes into AppFuse Light">
+        <echo level="info">Modifying pom.xml</echo>
+
+        <!-- Change pom.xml to compile with JDK 5 -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<defaultGoal>install</defaultGoal>
+        <plugins>]]></replacetoken>
+            <replacevalue><![CDATA[<defaultGoal>install</defaultGoal>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>]]></replacevalue>
+        </replace>
+        <!-- Replace Commons Validator for Spring with Stripes in dependencies file -->
+        <replace file="../../pom.xml">
+            <replacetoken><![CDATA[<dependency>
+            <groupId>org.springmodules</groupId>
+            <artifactId>spring-modules-validation</artifactId>
+            <version>0.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>rhino</groupId>
+                    <artifactId>js</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>]]></replacetoken>
+        <replacevalue><![CDATA[<dependency>
+            <groupId>net.sourceforge.stripes</groupId>
+            <artifactId>stripes</artifactId>
+            <version>1.4.2</version>
+        </dependency>]]></replacevalue>
+        </replace>
+
+        <echo level="info">Removing Spring MVC-specific files</echo>
+        <delete>
+            <fileset dir="../..">
+                <include name="**/UserController*.java"/>
+                <include name="**/UserFormController*.java"/>
+                <include name="**/action-servlet.xml"/>
+                <include name="**/*validation.xml"/>
+                <include name="**/validator*"/>
+                <exclude name="extras/**"/>
+            </fileset>
+        </delete>
+        
+        <echo level="info">Configuring web.xml for Stripes</echo>
+        <!-- Add Stripes Filter -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+    </filter>]]></replacetoken>
+            <replacevalue><![CDATA[<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>stripesFilter</filter-name>
+        <filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
+        <init-param>
+            <param-name>ActionResolver.PackageFilters</param-name>
+            <param-value>org.appfuse.web</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ActionResolver.Class</param-name>
+            <param-value>org.appfuse.web.ActionResolver</param-value>
+        </init-param>
+    </filter>]]></replacevalue>
+        </replace>
+        
+        <!-- Add mapping for Stripes Filter -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>exportFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>]]></replacetoken>
+            <replacevalue><![CDATA[<filter-mapping>
+        <filter-name>exportFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>stripesFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>stripesFilter</filter-name>
+        <servlet-name>stripesDispatcher</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>]]></replacevalue>
+        </replace>
+
+        <!-- Use Stripes' DispatcherServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<servlet-name>action</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>]]></replacetoken>
+            <replacevalue><![CDATA[<servlet-name>stripesDispatcher</servlet-name>
+        <servlet-class>net.sourceforge.stripes.controller.DispatcherServlet</servlet-class>]]></replacevalue>
+        </replace>
+
+        <!-- Remove mapping for DispatcherServlet -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[<servlet-mapping>
+        <servlet-name>action</servlet-name>]]></replacetoken>
+            <replacevalue><![CDATA[<servlet-mapping>
+        <servlet-name>stripesDispatcher</servlet-name>]]></replacevalue>
+        </replace>
+        
+        <echo level="info">Installing Stripes JARs and .java files</echo>
+        <copy todir="../.." overwrite="true">
+            <fileset dir="${basedir}">
+                <include name="**"/>
+                <exclude name="build.xml"/>
+                <exclude name="README.txt"/>
+            </fileset>
+        </copy>
+        
+        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
+    </target>
+</project>

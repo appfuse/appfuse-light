@@ -17,7 +17,6 @@
     <script type="text/javascript" src="${base}/scripts/global.js"></script>
     ${head}
 </head>
-
 <body>
 <a name="top"></a>
 <div id="page">

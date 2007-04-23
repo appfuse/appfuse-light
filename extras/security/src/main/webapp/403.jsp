@@ -11,7 +11,6 @@
     picture to cheer you up?
 </p>
 <p style="text-align: center; margin-top: 20px">
-    <a href="http://community.webshots.com/photo/56793801/56801692jkyHaR" title="Hawaii, click to Zoom In">
-    <img style="border: 0" src="${pageContext.request.contextPath}/images/403.jpg" alt="Hawaii" /></a>
+    <img style="border: 0" src="${pageContext.request.contextPath}/images/403.jpg" alt="Hawaii" />
 </p>
 </page:applyDecorator>

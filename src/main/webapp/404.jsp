@@ -6,78 +6,83 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>404 ~ Page Not Found</title>
+    <title>Page Not Found</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-    <link href="${ctx}/styles/global.css" type="text/css" rel="stylesheet"/>
-    <link href="${ctx}/images/favicon.ico" rel="SHORTCUT ICON"/>
-    <!-- HTML & Design contributed by Boer Attila (http://www.calcium.ro) -->
-    <!-- Found at http://www.csszengarden.com/?cssfile=/083/083.css&page=2 -->
+    <link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/styles/deliciouslyblue/theme.css" title="default" />
+    <link rel="alternate stylesheet" type="text/css" href="${ctx}/styles/deliciouslygreen/theme.css" title="green" />
+    <script type="text/javascript" src="${ctx}/scripts/prototype.js"></script>
+    <script type="text/javascript" src="${ctx}/scripts/scriptaculous.js"></script>
+    <script type="text/javascript" src="${ctx}/scripts/stylesheetswitcher.js"></script>
+    <script type="text/javascript" src="${ctx}/scripts/global.js"></script>
 </head>
 <body>
 <a name="top"></a>
-<div id="container">
-    <div id="intro">
-        <div id="pageHeader">
-            <h1><span>Page Not Found</span></h1>
-            <div id="logo" onclick="location.href='<c:url value="/"/>'"
-                onkeypress="location.href='<c:url value="/"/>'"></div>
-            <h2><span>404</span></h2>
+<div id="page">
+
+    <div id="header" class="clearfix">
+
+        <h1 style="cursor: pointer" onclick="location.href='${ctx}/'">AppFuse Light</h1>
+
+        <div id="branding">
+            <a href="http://appfuse.org" title="AppFuse - eliminating project startup time">
+                <img src="${ctx}/images/powered-by-appfuse.gif" width="203" height="75" alt="AppFuse"/></a>
         </div>
-    
-        <div id="quickSummary">
-            <p>
-                <a href="http://appfuse-light.dev.java.net">AppFuse Light</a> is a lightweight version of 
-                <a href="http://raibledesigns.com/appfuse">AppFuse</a> designed 
-                to accelerate starting a webapp with the 
-                <a href="http://www.springframework.org">Spring Framework</a>.
-            </p>
-            <p class="credit">
-                <a href="http://www.csszengarden.com/?cssfile=/083/083.css&amp;page=2">
-                Design and CSS</a> donated by <a href="http://www.calcium.ro">
-                Bo&eacute;r Attila</a>.
-            </p>
-        </div>
-    
-        <div id="content">
-            <p>
+
+        <p><fmt:message key="webapp.tagline"/></p>
+    </div>
+
+    <div id="content">
+
+        <div id="main">
+            <h1>Page Not Found</h1>
             The page your requested was not found.  You might try returning to the 
-            <a href="<c:url value="/"/>">welcome page</a>. While you&#39;re here, how 
+            <a href="<c:url value="/"/>">welcome page</a>. While you're here, how 
             about a pretty picture to cheer you up? 
             </p>
 
             <p style="text-align: center; margin-top: 20px">
-                <a href="http://community.webshots.com/photo/87848122/87848260vtOXvy"
-                    title="Emerald Lake - Western Canada, click to Zoom In">
-                <img style="border: 0"
-                    src="<c:url value="/images/404.jpg"/>"
-                    alt="Emerald Lake - Western Canada" /></a>
+                <img style="border: 0" src="<c:url value="/images/404.jpg"/>" alt="Emerald Lake - Western Canada" />
             </p>
         </div>
-    </div>
+        
+        <div id="sub">
+            <h3>Resources</h3>
 
-    <div id="supportingText">
-        <div id="underground"></div>
-        <div id="footer">
-            <a href="http://validator.w3.org/check/referer" title="Check the validity of this site&#8217;s XHTML">xhtml</a> &middot;
-            <a href="http://jigsaw.w3.org/css-validator/check/referer" title="Check the validity of this site&#8217;s CSS">css</a> &middot;
-            <a href="http://www.apache.org/licenses/LICENSE-2.0" title="View the license for AppFuse Light, courtesy of Apache Software Foundation.">license</a> &middot;
-            <a href="http://bobby.watchfire.com/bobby/bobbyServlet?URL=<c:out value="${pageContext.request.requestURL}"/>&amp;output=Submit&amp;gl=sec508&amp;test=" title="Check the accessibility of this site according to U.S. Section 508">508</a> &middot;
-            <a href="http://bobby.watchfire.com/bobby/bobbyServlet?URL=<c:out value="${pageContext.request.requestURL}"/>&amp;output=Submit&amp;gl=wcag1-aaa&amp;test=" title="Check the accessibility of this site according to WAI Content Accessibility Guidelines 1">aaa</a>
+            <p>The following is a list of resources that will make <a href="http://springframework.org">Spring</a> infinitely easier to use.</p>
+
+            <ul class="glassList">
+                <li><a href="http://static.springframework.org/spring/docs/2.0.x/reference/index.html">Spring 2.0 Docs</a></li>
+                <li><a href="http://static.springframework.org/spring/docs/2.0.x/api/index.html">Spring 2.0 API</a></li>
+                <li><a href="http://www.springframework.org/bookreview">Spring Books</a></li>
+                <li><a href="http://forum.springframework.org/">Spring Forums</a></li>
+                <li><a href="http://springmodules.dev.java.net">Spring Modules</a></li>
+            </ul>
+
+            <img src="${ctx}/images/image.gif" alt="Click to Change Theme" width="150" height="112" class="right" style="margin: 10px 0 20px 0"
+                 onclick="StyleSheetSwitcher.setActive((StyleSheetSwitcher.getActive() == 'default') ? 'green' : 'default')"/>
         </div>
 
-    </div>
-	
-    <div id="linkList">
-        <div id="linkList2">
-            <div id="lresources">
+        <div id="nav">
+            <div class="wrapper">
+                <h2 class="accessibility">Navigation</h2>
+                <ul class="clearfix">
+                    <li><a href="${ctx}/" title="Home"><span>Home</span></a></li>
+                    <li><a href="${ctx}/users.html" title="View Users"><span>Users</span></a></li>
+                </ul>
             </div>
-        </div>
+        </div><!-- end nav -->
+
+    </div><!-- end content -->
+
+    <div id="footer">
+        <p>
+            <a href="http://validator.w3.org/check?uri=referer">Valid XHTML 1.0</a> |
+            <a href="http://www.oswd.org/design/preview/id/2634">Deliciously Blue</a> from <a href="http://www.oswd.org/">OSWD</a> |
+            Design by <a href="http://www.oswd.org/user/profile/id/8377">super j man</a>
+        </p>
     </div>
-
 </div>
-
 </body>
 </html>
-
-

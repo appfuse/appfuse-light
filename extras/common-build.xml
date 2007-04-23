@@ -4,11 +4,11 @@
 
     <property name="fw" value="${ant.project.name}"/>
     <property name="app.name" value="appfuse-light-${fw}"/>
-    
+
     <target name="help" description="Print usage for key targets">
         <echo>Key Targets:
 
-     create: Creates ${app.name} 
+     create: Creates ${app.name}
     install: Installs ${fw} into appfuse-light
      deploy: Creates ${app.name} and deploys
        dist: Creates ${app.name} and distribution
@@ -17,23 +17,23 @@
     </target>
 
     <target name="create" description="Creates project">
-	<property name="app.name" value="appfuse-light-undefined"/>
+	    <property name="app.name" value="appfuse-light-undefined"/>
         <delete dir="../../../${app.name}"/>
-        <delete dir="db"/>   
+        <delete dir="db"/>
         <ant dir="../.." target="new"/>
-        
+
         <!-- New project created, install framework and run tests -->
-	<ant dir="../../../${app.name}/extras/${fw}" target="install"/>   
+	    <ant dir="../../../${app.name}/extras/${fw}" target="install"/>
     </target>
-    
+
     <target name="test" depends="create" description="Creates project and runs tests">
         <ant dir="../../../${app.name}" target="test-all"/>
     </target>
-    
+
     <target name="deploy" depends="create" description="Creates project and deploys it">
         <ant dir="../../../${app.name}" target="deploy"/>
     </target>
-    
+
     <target name="dist" depends="create" description="Creates distribution with framework installed">
         <ant dir="../../../${app.name}" target="dist"/>
     </target>

@@ -144,7 +144,7 @@
         <taskdef resource="cargo.tasks" classpathref="test.classpath"/>
 
         <cargo containerId="${cargo.server}" id="cargo.server" home="${server.home}" 
-            output="${test.dir}/cargo.log" action="start" wait="${cargo.wait}">
+            action="start" wait="${cargo.wait}">
             <configuration>
                 <deployable type="war" file="${basedir}/${dist.dir}/${webapp.name}.war">
                     <property name="context" value="ROOT"/>

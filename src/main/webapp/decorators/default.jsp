@@ -19,7 +19,6 @@
     <script type="text/javascript" src="${ctx}/scripts/global.js"></script>
     <decorator:head/>
 </head>
-
 <body>
 <a name="top"></a>
 <div id="page">
