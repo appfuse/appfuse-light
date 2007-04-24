@@ -65,6 +65,12 @@
             <createzip web="jsf" persistence="ojb"/>
             <createzip web="jsf" persistence="spring-jdbc"/>
     
+            <createzip web="stripes" persistence="hibernate"/>
+            <createzip web="stripes" persistence="ibatis"/>
+            <createzip web="stripes" persistence="jdo"/>
+            <createzip web="stripes" persistence="ojb"/>
+            <createzip web="stripes" persistence="spring-jdbc"/>
+            
             <createzip web="struts" persistence="hibernate"/>
             <createzip web="struts" persistence="ibatis"/>
             <createzip web="struts" persistence="jdo"/>
@@ -88,6 +94,12 @@
             <createzip web="webwork" persistence="jdo"/>
             <createzip web="webwork" persistence="ojb"/>
             <createzip web="webwork" persistence="spring-jdbc"/>
+            
+            <createzip web="wicket" persistence="hibernate"/>
+            <createzip web="wicket" persistence="ibatis"/>
+            <createzip web="wicket" persistence="jdo"/>
+            <createzip web="wicket" persistence="ojb"/>
+            <createzip web="wicket" persistence="spring-jdbc"/>
         </parallel>
     </target>
 
