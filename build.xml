@@ -93,7 +93,7 @@
         <!-- Check that junit.jar is in $ANT_HOME/lib -->
         <available classname="junit.framework.TestCase" property="junit.present"/>
         <fail unless="junit.present"
-            message="Please copy ~/.m2/repository/junit/junit/junit-3.8.2.jar into ${env.ANT_HOME}/lib"/>
+            message="Please copy ~/.m2/repository/junit/junit/3.8.2/junit-3.8.2.jar into ${env.ANT_HOME}/lib"/>
 
         <mkdir dir="${test.dir}/data"/>
         <junit printsummary="no" fork="true" forkmode="once"
