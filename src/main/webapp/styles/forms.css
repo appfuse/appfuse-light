@@ -166,7 +166,7 @@ p label {
 }
 
 input.text, input.number, input.url, input.email, input.password, input.file,
-textarea.textarea, select.select{
+textarea.textarea, select.select {
     font-size: 1.2em;
     border-top: 1px solid #7c7c7c;
     border-left: 1px solid #c3c3c3;
@@ -264,7 +264,7 @@ form li.error{
     margin: 3px 0 !important;
 }
 
-input.error, textarea.error{
+input.error, textarea.error {
     border: 1px solid #EF5959;
     border-left: 1px solid #FF8F8F;
     border-top: 1px solid #FF8F8F;

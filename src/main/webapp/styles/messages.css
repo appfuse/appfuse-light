@@ -18,6 +18,11 @@
     border: 2px solid red;
 }
 
+input.error {
+    margin: 0;
+    background: #ffd;
+}
+
 /* IE fix, followed by the rest of the world fix */
 li.error {
     padding: 3px !important;

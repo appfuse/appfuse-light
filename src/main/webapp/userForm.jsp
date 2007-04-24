@@ -25,7 +25,7 @@
 <tr>
     <th><label for="lastName" class="required">* <fmt:message key="user.lastName"/>:</label></th>
     <td>
-        <form:input path="lastName" id="firstName"/>
+        <form:input path="lastName" id="lastName"/>
         <form:errors path="lastName" cssClass="fieldError"/>
     </td>
 </tr>

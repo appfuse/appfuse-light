@@ -10,7 +10,10 @@ public class ActionResolver extends NameBasedActionResolver {
      * @return the normal name, except all lowercase
      */
     protected String getUrlBinding(String name) {
-        return super.getUrlBinding(name).toLowerCase();
+        if (name != null) {
+            return super.getUrlBinding(name).toLowerCase();
+        }
+        return name;
     }
 
     /**

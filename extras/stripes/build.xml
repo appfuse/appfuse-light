@@ -27,9 +27,15 @@
             <groupId>net.sourceforge.stripes</groupId>
             <artifactId>stripes</artifactId>
             <version>1.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>test</scope>
         </dependency>]]></replacevalue>
         </replace>
-
+        
         <echo level="info">Removing Spring MVC-specific files</echo>
         <delete>
             <fileset dir="../..">
@@ -67,6 +73,14 @@
                 net.sourceforge.stripes.integration.spring.SpringInterceptor,
                 net.sourceforge.stripes.controller.BeforeAfterMethodInterceptor
             </param-value>
+        </init-param>
+        <init-param>
+            <param-name>LocalizationBundleFactory.ErrorMessageBundle</param-name>
+            <param-value>messages</param-value>
+        </init-param>
+        <init-param>
+            <param-name>LocalizationBundleFactory.FieldNameBundle</param-name>
+            <param-value>messages</param-value>
         </init-param>
     </filter>]]></replacevalue>
         </replace>
