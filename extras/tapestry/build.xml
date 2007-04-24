@@ -63,11 +63,8 @@
 
         <!-- Add Tapestry @ JavaForge Repository -->
         <replace file="../../pom.xml">
-            <replacetoken><![CDATA[</build>]]></replacetoken>
-        <replacevalue><![CDATA[</build>
-
-    <repositories>
-        <repository>
+            <replacetoken><![CDATA[</repositories>]]></replacetoken>
+        <replacevalue><![CDATA[        <repository>
             <id>tapestry@javaforge</id>
             <url>http://howardlewisship.com/repository</url>
         </repository>

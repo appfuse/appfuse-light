@@ -137,11 +137,8 @@
 
         <!-- Add repo that has the EL required by Facelets and Core JSF's Validator (from appfuse repo) -->
         <replace file="../../pom.xml">
-            <replacetoken><![CDATA[</build>]]></replacetoken>
-            <replacevalue><![CDATA[</build>
-
-    <repositories>
-        <repository>
+            <replacetoken><![CDATA[</repositories>]]></replacetoken>
+            <replacevalue><![CDATA[        <repository>
             <id>javax.el</id>
             <url>http://delo.dcs.fmph.uniba.sk/sioux/maven2</url>
         </repository>
