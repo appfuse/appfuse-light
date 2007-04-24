@@ -10,21 +10,6 @@
     <target name="install" description="Installs Stripes into AppFuse Light">
         <echo level="info">Modifying pom.xml</echo>
 
-        <!-- Change pom.xml to compile with JDK 5 -->
-        <replace file="../../pom.xml">
-            <replacetoken><![CDATA[<defaultGoal>install</defaultGoal>
-        <plugins>]]></replacetoken>
-            <replacevalue><![CDATA[<defaultGoal>install</defaultGoal>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>]]></replacevalue>
-        </replace>
         <!-- Replace Commons Validator for Spring with Stripes in dependencies file -->
         <replace file="../../pom.xml">
             <replacetoken><![CDATA[<dependency>
@@ -75,6 +60,13 @@
         <init-param>
             <param-name>ActionResolver.Class</param-name>
             <param-value>org.appfuse.web.ActionResolver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>Interceptor.Classes</param-name>
+            <param-value>
+                net.sourceforge.stripes.integration.spring.SpringInterceptor,
+                net.sourceforge.stripes.controller.BeforeAfterMethodInterceptor
+            </param-value>
         </init-param>
     </filter>]]></replacevalue>
         </replace>

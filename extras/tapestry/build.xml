@@ -63,12 +63,15 @@
 
         <!-- Add Tapestry @ JavaForge Repository -->
         <replace file="../../pom.xml">
-            <replacetoken><![CDATA[</repositories>]]></replacetoken>
-        <replacevalue><![CDATA[  <repository>
-      <id>tapestry@javaforge</id>
-      <url>http://howardlewisship.com/repository</url>
-    </repository>
-  </repositories>]]></replacevalue>
+            <replacetoken><![CDATA[</build>]]></replacetoken>
+        <replacevalue><![CDATA[</build>
+
+    <repositories>
+        <repository>
+            <id>tapestry@javaforge</id>
+            <url>http://howardlewisship.com/repository</url>
+        </repository>
+    </repositories>]]></replacevalue>
         </replace>
 
         <!-- Remove the Display Tag -->
