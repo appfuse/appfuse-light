@@ -65,7 +65,7 @@
     <target name="compile" description="Compile main source tree java files">
         <mkdir dir="${build.dir}/classes"/>
         <javac destdir="${build.dir}/classes" debug="true" optimize="false"
-            deprecation="false" failonerror="true">
+            deprecation="false" failonerror="true" source="1.5" target="1.5">
             <src path="${src.dir}"/>
             <classpath>
                 <path refid="compile.classpath"/>
@@ -75,7 +75,7 @@
         <!-- compile tests -->
         <mkdir dir="${test.dir}/classes"/>
         <javac destdir="${test.dir}/classes" debug="true" optimize="false"
-            deprecation="false" failonerror="true">
+            deprecation="false" failonerror="true" source="1.5" target="1.5">
             <src path="${test.src}"/>
             <classpath>
                 <path refid="test.classpath"/>
