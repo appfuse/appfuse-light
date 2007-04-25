@@ -1,80 +1,97 @@
 <html>
-  <head>
+<head>
     <title>
-      framework comparison
+        framework comparison
     </title>
     <!-- attempt to fix stylesheets not rendering -->
-    <style type="text/css"> 
-      @import url(/branding/css/tigris.css);
-      @import url(/branding/css/inst.css);
-     </style>
-  </head>
-  <body>
-     <div id="projecthome" class="app">
-      <a name="introduction"></a>
-      <h3>Introduction</h3>
-      <p>
-        Deciding which Java web framework to use when developing your applications can be a difficult
-        choice.  I've often wondered which one is "best" myself.  Since 2004, I've been playing and developing with the top five web frameworks for Java: JSF, Spring, Struts, Tapestry and WebWork. For my most recent opinion on which one is my preferred choice, see
+    <style type="text/css">
+        @import url( /branding/css/tigris.css );
+        @import url( /branding/css/inst.css );
+    </style>
+</head>
+<body>
+<div id="projecthome" class="app">
+    <a name="introduction"></a>
+
+    <h3>Introduction</h3>
+
+    <p>
+        Deciding which Java web framework to use when developing your applications can be a difficult choice. I've
+        often wondered which one is "best" myself. Since 2004, I've been playing and developing with the top
+        seven web frameworks for Java: JSF, Spring MVC, Stripes, Struts 1, Struts 2 (formerly WebWork), Tapestry and
+        Wicket. For my most recent opinion on which one is my preferred choice, see
         <a href="http://raibledesigns.com/page/rd?entry=re_what_web_application_framework">
-        What Web Application framework should you use?</a>.  You might also checkout the following whitepapers I've written at <a href="http://virtuas.com">Virtuas</a>:
+        What Web Application framework should you use?</a>.
+
+        You might also checkout the following whitepapers I wrote while I worked for
+        <a href="http://virtuas.com">Virtuas</a>:
         <ul>
-            <li><a href="http://www.virtuas.com/articles/webframework-sweetspots.html">
-            Java Web Framework Sweet Spots</a> (March 2006)</li>
+            <li><a href="JavaWebFrameworkSweetSpots.pdf">Java Web Framework Sweet Spots</a> (March 2006)</li>
             <li><a href="http://www.virtuas.com/osl-jwf-01.pdf">Comparing Web Frameworks</a> (June 2005)</li>
         </ul>
-      </p>
-      <a name="presentation"></a>
-      <h3>Presentation</h3>
-      <p>
-        From my learnings, I've created a <a href="WebFrameworks.pdf">presentation that you can download</a> (updated September 2006). This presentation
-        will likely improve over time as I learn more about each framework. 
-      </p>
-      <a name="code"></a>
-      <h3>The Code</h3>
-      <p>
-        While talking about how the different frameworks do things, <em>showing</em> how they 
-        do things is better.  For this reason, AppFuse Light contains implementations for a simple
-        CRUD app using all 5 of the aforementioned frameworks.  In addition, the download contains
+    </p>
+    <a name="presentation"></a>
+
+    <h3>Presentation</h3>
+
+    <p>
+        From my learnings, I've created a <a href="WebFrameworks.pdf">presentation that you can download</a> (updated
+        April 2007). This presentation will likely improve over time as I learn more about each framework.
+    </p>
+    <a name="code"></a>
+
+    <h3>The Code</h3>
+
+    <p>
+        While talking about how the different frameworks do things, <em>showing</em> how they
+        do things is better. For this reason, AppFuse Light contains implementations for a simple
+        CRUD app using all 7 of the aforementioned frameworks. In addition, the download contains
         JUnit and UI tests for each framework.
-      </p>
-      <p>
+    </p>
+
+    <p>
         <ul>
-          <li>
-          <a href="https://appfuse-light.dev.java.net/servlets/ProjectDocumentList">Download AppFuse Light</a>
-          </li>
+            <li>
+                <a href="https://appfuse-light.dev.java.net/servlets/ProjectDocumentList">Download AppFuse Light</a>
+            </li>
         </ul>
 
         See the <a href="https://appfuse-light.dev.java.net/#quickstart">QuickStart Guide</a> for installation
-        and build/test/deploy instructions. If you'd like, you can <a href="https://appfuse-light.dev.java.net/source/browse/appfuse-light/">
-        browse CVS</a> for the code.  Spring is the default web framework, the others are in the "extras" folder.
-      </p>
-      <a name="demos"></a>
-      <h3>Demos</h3>
-      <p>
+        and build/test/deploy instructions. If you'd like, you can
+        <a href="https://appfuse-light.dev.java.net/source/browse/appfuse-light/">
+        browse Subversion</a> for the code. Spring MVC is the default web framework, the others can be installed from
+        the "extras" folder.
+    </p>
+    <!--<a name="demos"></a>
+
+    <h3>Demos</h3>
+
+    <p>
         <ul>
-          <li><a href="http://demo.raibledesigns.com/appfuse-light">Spring</a>
-            &middot; <a href="http://demo.raibledesigns.com/appfuse-light-ajax">Spring + Ajax</a>
-            &middot; <a href="http://demo.raibledesigns.com/appfuse-light-security">Spring + Acegi</a></li>
-          <li><a href="http://demo.raibledesigns.com/appfuse-light-jsf">JSF + Facelets</a></li>
-          <li><a href="http://demo.raibledesigns.com/appfuse-light-struts">Struts 1</a>
-            &middot; <a href="http://demo.raibledesigns.com/appfuse-light-struts2">Struts 2</a></li>
-          <li><a href="http://demo.raibledesigns.com/appfuse-light-tapestry">Tapestry</a></li>
-          <li><a href="http://demo.raibledesigns.com/appfuse-light-webwork">WebWork</a></li>
+            <li><a href="http://demo.raibledesigns.com/appfuse-light">Spring</a>
+                &middot; <a href="http://demo.raibledesigns.com/appfuse-light-ajax">Spring + Ajax</a>
+                &middot; <a href="http://demo.raibledesigns.com/appfuse-light-security">Spring + Acegi</a></li>
+            <li><a href="http://demo.raibledesigns.com/appfuse-light-jsf">JSF + Facelets</a></li>
+            <li><a href="http://demo.raibledesigns.com/appfuse-light-struts">Struts 1</a>
+                &middot; <a href="http://demo.raibledesigns.com/appfuse-light-struts2">Struts 2</a></li>
+            <li><a href="http://demo.raibledesigns.com/appfuse-light-tapestry">Tapestry</a></li>
+            <li><a href="http://demo.raibledesigns.com/appfuse-light-webwork">WebWork</a></li>
         </ul>
-      </p>
-      <a name="more"></a>
-      <h3>More Information</h3>
-      <p>
+    </p>-->
+    <a name="more"></a>
+
+    <h3>More Information</h3>
+
+    <p>
         For more information about integrating these frameworks with Spring, as well as a detailed
         comparison, see Chapter 11 of <a href="http://springlive.com">Spring Live</a>.
-      </p>
-      <hr/>
-      <small>
-      <a href="http://java-enterprise.dev.java.net/">
-      <img src="https://appfuse.dev.java.net/images/foundry-small.gif" border="0" alt="foundry"></a>
-      <i>Part of the <a href="http://java-enterprise.dev.java.net/">
-      Java Enterprise Community</a>.</i></small>
-    </div>
-  </body>
+    </p>
+    <hr/>
+    <small>
+        <a href="http://java-enterprise.dev.java.net/">
+            <img src="https://appfuse.dev.java.net/images/foundry-small.gif" border="0" alt="foundry"></a>
+        <i>Part of the <a href="http://java-enterprise.dev.java.net/">
+            Java Enterprise Community</a>.</i></small>
+</div>
+</body>
 </html>

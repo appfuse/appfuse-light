@@ -114,7 +114,7 @@ public class UserForm extends BasePage {
      */
     private static abstract class EditForm extends Form {
         /**
-         * Convinience method that adds and prepares a form component
+         * Convenience method that adds and prepares a form component
          * 
          * @param fc
          *            form component

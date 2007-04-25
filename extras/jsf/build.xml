@@ -136,6 +136,7 @@
         </replace>
 
         <!-- Add repo that has the EL required by Facelets and Core JSF's Validator (from appfuse repo) -->
+        <!-- Also add appfuse for core-jsf dependency -->
         <replace file="../../pom.xml">
             <replacetoken><![CDATA[</repositories>]]></replacetoken>
             <replacevalue><![CDATA[        <repository>
