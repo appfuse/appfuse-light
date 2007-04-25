@@ -25,7 +25,7 @@
         from app_user;
     </select>
     
-	<delete id="deleteUser" parameterClass="java.lang.Long">
+    <delete id="deleteUser" parameterClass="java.lang.Long">
         delete from app_user where id = #id#;
     </delete>
 

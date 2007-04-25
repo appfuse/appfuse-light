@@ -6,11 +6,11 @@
 
 <body jwcid="@Body">
 <span jwcid="@If" condition="ognl:beans.delegate.hasErrors">
-	<div class="error">
-	    <span jwcid="@Delegator" delegate="ognl:beans.delegate.firstError">
-	        Error Message
-	    </span>
-	</div>
+    <div class="error">
+        <span jwcid="@Delegator" delegate="ognl:beans.delegate.firstError">
+            Error Message
+        </span>
+    </div>
 </span>
 
 <p>Please fill in user's information below:</p>

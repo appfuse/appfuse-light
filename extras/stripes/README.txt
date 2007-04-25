@@ -7,7 +7,4 @@ Known Issues:
 1. It doesn't seem possible to put <stripes:messages> in a messages.jsp file that's
    included in a SiteMesh decorator. Putting in directly in the page works fine.
 
-2. Tests in UserFormBean test haven't been flushed out for all CRUD operations (due
-   to #2).
-
-3. Tests fail when running from Ant.
+2. Tests in UserFormBeanTest test haven't been flushed out for all CRUD operations.

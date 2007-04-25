@@ -5,7 +5,7 @@ import net.sourceforge.jwebunit.WebTestCase;
 import java.util.ResourceBundle;
 
 public class UserWebTest extends WebTestCase {
-	private ResourceBundle messages;
+    private ResourceBundle messages;
 
     public UserWebTest(String name) {
         super(name);

@@ -40,6 +40,6 @@ public abstract class BaseStrutsTestCase extends MockStrutsTestCase {
                 sc.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE));
         
         ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(
-        		    getSession().getServletContext());
+                    getSession().getServletContext());
     }
 }

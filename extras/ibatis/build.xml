@@ -9,7 +9,7 @@
     <!-- =================================================================== -->
     <target name="install" description="Installs iBATIS into AppFuse Light">
         <echo level="info">Modifying pom.xml</echo>
-	    
+        
         <!-- Replace Hibernate with iBATIS in dependencies file -->
         <replace file="../../pom.xml">
             <replacetoken><![CDATA[<dependency>

@@ -9,7 +9,7 @@
     <!-- =================================================================== -->
     <target name="install" description="Installs JDO into AppFuse Light">
         <echo level="info">Modifying pom.xml</echo>
-	    
+        
         <!-- Replace Hibernate with JPOX in dependencies file -->
         <replace file="../../pom.xml">
             <replacetoken><![CDATA[<dependency>
@@ -104,6 +104,6 @@
             <replacevalue>target name="deploy" depends="enhance"</replacevalue>
         </replace>   
         
-    	<echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
+        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
     </target>
 </project>

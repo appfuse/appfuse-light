@@ -17,13 +17,13 @@
     </target>
 
     <target name="create" description="Creates project">
-	    <property name="app.name" value="appfuse-light-undefined"/>
+        <property name="app.name" value="appfuse-light-undefined"/>
         <delete dir="../../../${app.name}"/>
         <delete dir="db"/>
         <ant dir="../.." target="new"/>
 
         <!-- New project created, install framework and run tests -->
-	    <ant dir="../../../${app.name}/extras/${fw}" target="install"/>
+        <ant dir="../../../${app.name}/extras/${fw}" target="install"/>
     </target>
 
     <target name="test" depends="create" description="Creates project and runs tests">

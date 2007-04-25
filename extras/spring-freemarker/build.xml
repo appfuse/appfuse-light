@@ -85,14 +85,14 @@
             <replacevalue><![CDATA[    <servlet>
         <servlet-name>sitemesh-freemarker</servlet-name>
         <servlet-class>com.opensymphony.module.sitemesh.freemarker.FreemarkerDecoratorServlet</servlet-class>
-      	<init-param>
-      		<param-name>TemplatePath</param-name>
-      		<param-value>/</param-value>
-      	</init-param>
-      	<init-param>
-      		<param-name>default_encoding</param-name>
-      		<param-value>ISO-8859-1</param-value>
-      	</init-param>
+          <init-param>
+              <param-name>TemplatePath</param-name>
+              <param-value>/</param-value>
+          </init-param>
+          <init-param>
+              <param-name>default_encoding</param-name>
+              <param-value>ISO-8859-1</param-value>
+          </init-param>
     </servlet>
 
     <servlet>

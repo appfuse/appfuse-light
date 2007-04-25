@@ -21,8 +21,9 @@
             <replacevalue><![CDATA[<resource>
                 <directory>src/main/java</directory>
                 <includes>
-                    <include>**/*.xml</include>
                     <include>**/*.html</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>                    
                 </includes>
             </resource>]]></replacevalue>
         </replace>
@@ -46,6 +47,11 @@
         </dependency>
         <dependency>
             <groupId>wicket</groupId>
+            <artifactId>wicket-extensions</artifactId>
+            <version>1.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>wicket</groupId>
             <artifactId>wicket-spring-annot</artifactId>
             <version>1.2.6</version>
         </dependency>]]></replacevalue>
@@ -62,12 +68,22 @@
         </replace>
 
         <echo level="info">Modifying build.xml</echo>
+        <!-- Add source HTML files to classpath for running tests -->
+        <replace file="../../build.xml">
+            <replacetoken><![CDATA[<path location="${web.dir}"/>]]></replacetoken>
+            <replacevalue><![CDATA[<path location="${web.dir}"/>
+                <path location="${src.dir}"/>]]></replacevalue>
+        </replace>
+
         <!-- Include *.html from source tree when building WAR -->
         <replace file="../../build.xml">
             <replacetoken><![CDATA[<classes dir="${build.dir}/classes"/>
             <classes dir="${resources.dir}"/>]]></replacetoken>
             <replacevalue><![CDATA[<classes dir="${build.dir}/classes"/>
-            <classes dir="${src.dir}" includes="**/*.html"/>
+            <classes dir="${src.dir}">
+                <include name="**/*.html"/>
+                <include name="**/*.properties"/>
+            </classes>
             <classes dir="${resources.dir}"/>]]></replacevalue>
         </replace>
         
@@ -79,6 +95,8 @@
                 <include name="**/action-servlet.xml"/>
                 <include name="**/*validation.xml"/>
                 <include name="**/validator*"/>
+                <include name="**/calendar*"/>
+                <include name="**/scripts/lang/**"/>
                 <!-- TODO: Get this working for Wicket -->
                 <include name="**/dataAccessFailure.jsp"/>
                 <include name="**/messages.jsp"/>
@@ -135,28 +153,17 @@
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>]]></replacevalue>
         </replace>
-
-        <echo level="info">Moving index.jsp to Index.html</echo>
-        <move file="../../src/main/webapp/index.jsp" tofile="../../src/main/java/org/appfuse/web/Index.html"/>
-        <!-- Remove taglibs.jsp import and add some Wicket Markup -->
-        <replace file="../../src/main/java/org/appfuse/web/Index.html">
-            <replacetoken><![CDATA[<%@ include file="/taglibs.jsp"%>
-
-<div id="intro">]]></replacetoken>
-            <replacevalue><![CDATA[<div id="intro"><span wicket:id="message">Message goes here</span>]]></replacevalue>
-        </replace>
-        <!-- Change link on 'View Demonstration' button -->
-        <replace file="../../src/main/java/org/appfuse/web/Index.html">
-            <replacetoken><![CDATA[<button class="button" onclick="location.href='users.html'">View Demonstration</button>]]></replacetoken>
-            <replacevalue><![CDATA[<a jwcid="@PageLink" page="users" id="demoLink" style="display:none"/>
-        <button class="button" onclick="location.href=document.getElementById('demoLink').href">View Demonstration</button>]]></replacevalue>
-        </replace>
         
         <echo level="info">Removing includes messages.jsp in decorators/default.jsp</echo>
         <replace file="../../src/main/webapp/decorators/default.jsp">
             <replacetoken><![CDATA[<%@ include file="/messages.jsp"%>
             <decorator:body/>]]></replacetoken>
             <replacevalue><![CDATA[<decorator:body/>]]></replacevalue>
+        </replace>
+        <!-- Change link on 'Users' tab -->
+        <replace file="../../src/main/webapp/decorators/default.jsp">
+            <replacetoken><![CDATA[<a href="${ctx}/users.html" title="View Users">]]></replacetoken>
+            <replacevalue><![CDATA[<a href="${ctx}/app/users" title="View Users">]]></replacevalue>
         </replace>
 
         <echo level="info">Installing Wicket JARs and .java files</echo>

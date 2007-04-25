@@ -100,7 +100,7 @@ public class UserFormControllerTest extends MockObjectTestCase {
         // called by onSubmit()
         mockManager.expects(once()).method("removeUser").with(eq("1"));
         
-    	  request = new MockHttpServletRequest("POST", "/userform.html");
+        request = new MockHttpServletRequest("POST", "/userform.html");
         request.addParameter("delete", "");
         request.addParameter("id", user.getId().toString());
         mv = c.handleRequest(request, new MockHttpServletResponse());

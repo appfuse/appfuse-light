@@ -1,5 +1,4 @@
 /* This is the style for the informational messages presented to the user */
-
 .error, .message, .error{
     background: #ffffcc;
     border: 1px solid #000;
@@ -74,4 +73,25 @@ span.fieldError, .errorMessage {
     font-size: .95em;
     font-weight: bold;
     display: block;
+}
+
+/* Wicket wraps a <ul> and <li> around fieldErrors */
+/* reduce the padding and margin and move to right */
+span.fieldError ul, span.fieldError li {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 140px;
+    margin-top: -10px;
+}
+
+/* Wicket does something similar for feedback panel */
+span.message ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+span.message li {
+    margin: 0 0 0 5px;
 }

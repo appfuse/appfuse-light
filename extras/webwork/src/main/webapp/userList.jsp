@@ -3,7 +3,7 @@
 <title><fmt:message key="userList.title"/></title>
 
 <ww:set name="users" value="users" scope="request"/>
-<button onclick="location.href='editUser.html'"style="float: right; margin-top: -30px; width: 100px">Add User</button>
+<button onclick="location.href='editUser.html'" style="float: right; margin-top: -30px; width: 100px">Add User</button>
 
 <display:table name="users" class="table" requestURI="" id="userList" export="true" pagesize="10">
     <display:column property="id" sortable="true" href="editUser.html" media="html"

@@ -13,11 +13,11 @@
         <property name="defaultAutoCommit" value="true"/>
     </bean>
     
-	<!-- OJB configurer that allows to use LocalDataSourceConnectionFactory -->
-	<bean id="ojbConfigurer" class="org.springmodules.orm.ojb.support.LocalOjbConfigurer"/>
+    <!-- OJB configurer that allows to use LocalDataSourceConnectionFactory -->
+    <bean id="ojbConfigurer" class="org.springmodules.orm.ojb.support.LocalOjbConfigurer"/>
 
-	<!-- Transaction manager for a single OJB PersistenceBroker -->
-	<bean id="transactionManager" class="org.springmodules.orm.ojb.PersistenceBrokerTransactionManager"/>
+    <!-- Transaction manager for a single OJB PersistenceBroker -->
+    <bean id="transactionManager" class="org.springmodules.orm.ojb.PersistenceBrokerTransactionManager"/>
     
     <!-- UserDao for OJB -->
     <bean id="userDao" class="org.appfuse.dao.ojb.UserDaoOjb"/>

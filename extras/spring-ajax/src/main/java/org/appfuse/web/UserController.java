@@ -26,11 +26,11 @@ public class UserController implements Controller {
 
         String value = request.getParameter("value");
         if (value != null) {
-        	String id = request.getParameter("id");
-        	User user = mgr.getUser(id);
-        	user.setFirstName(value);
-        	mgr.saveUser(user);
-        	return new ModelAndView(new RedirectView("/ajaxResponse.jsp", true), "value", value);
+            String id = request.getParameter("id");
+            User user = mgr.getUser(id);
+            user.setFirstName(value);
+            mgr.saveUser(user);
+            return new ModelAndView(new RedirectView("/ajaxResponse.jsp", true), "value", value);
         }
         return new ModelAndView("userList", "users", mgr.getUsers());
     }

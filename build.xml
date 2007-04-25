@@ -8,10 +8,10 @@
     <property name="dist.dir" value="dist"/>
     <property name="build.dir" value="target"/>
     <property name="test.dir" value="${build.dir}/test"/>
-	
+    
     <property file="build.properties"/>
     <property file="${resources.dir}/jdbc.properties"/>
-	
+    
     <property name="webapp.name" value="appfuse-light"/>
     <property name="webapp.version" value="1.0"/>
 
