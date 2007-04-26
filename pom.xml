@@ -23,7 +23,7 @@
     <artifactId>appfuse-light</artifactId>
     <packaging>war</packaging>
     <name>AppFuse Light</name>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8-beta</version>
 
     <build>
         <defaultGoal>install</defaultGoal>
