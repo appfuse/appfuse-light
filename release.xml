@@ -131,7 +131,7 @@
             <delete dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras"/>
             <projectfiles dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
             <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}" target="dist">
-                <property name="webapp.name" value="appfuse-light-@{web}-@{persistence}"/>
+                <property name="webapp.name" value="@{web}-@{persistence}"/>
             </ant>
             <copy todir="${distribution.dir}/distribution">
                 <fileset dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/dist" includes="*.zip"/>
