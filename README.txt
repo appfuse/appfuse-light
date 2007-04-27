@@ -23,25 +23,19 @@ Issues?
 ==================
  Setup
 ==================
-To run this application, you will need to have PostgreSQL (or MySQL) installed.
-PostgreSQL is the default database and you will need to create a "appfuse_light" 
-database and "postgres/postgres" user for everything to work properly. 
-PostgreSQL version 8.x or MySQL version 4.1.x is recommended. Both have 
-graphical installers and easy to use GUI clients.
-
-To change any PostgreSQL settings, see src/main/resources/jdbc.properties. 
-
-If you'd rather use MySQL or another database, perform the following steps:
+To run this application, you don't need to have a database installed. H2 is the 
+default database and a database will be created for you on-the-fly when testing
+or viewing the application. You can also use PostgreSQL or MySQL, but you'll have
+to tweak a few things.
 
 1. Modify jdbc.properties to have the correct settings for your database.
-2. If you're using Hibernate, change the "hibernate.dialect" property in
-   src/main/webapp/WEB-INF/applicationContext-hibernate.xml.
-3. Modify pom.xml to replace the PostgreSQL driver with your driver.
+2. Modify pom.xml to comment out the H2 dependency and uncomment the MySQL or 
+   PostgreSQL driver JDBC.
  
 After setting up your database properly, you should be able to run all the tests
 using "mvn test". To create your own application, run "ant new". Then cd into
 your project and run "mvn jetty:run" to startup the Maven Jetty plugin. You 
-should be able to see your project at http://localhost:8080/${app.name}.
+should be able to see your project at http://localhost:8080.
 
 If you'd prefer to use Ant rather than Maven, you will need to tell AppFuse Light
 where you've installed your server. Installating Tomcat and defining an 

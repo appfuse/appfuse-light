@@ -124,7 +124,7 @@
             </if>
             <if>
                 <equals arg1="@{persistence}" arg2="hibernate"/>
-                <else>
+               <else>
                     <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras/@{persistence}" target="install"/>
                 </else>
             </if>
@@ -142,15 +142,7 @@
     <macrodef name="projectfiles">
         <attribute name="dir"/>
         <sequential>
-            <exec dir="@{dir}" executable="mvn.bat" os="Windows XP">
-                <arg line="eclipse:eclipse idea:idea"/>
-            </exec>
-            <exec dir="@{dir}" executable="mvn" os="Mac OS X">
-                <arg line="eclipse:eclipse idea:idea"/>
-            </exec>
-            <exec dir="@{dir}" executable="mvn.sh" os="Linux">
-                <arg line="eclipse:eclipse idea:idea"/>
-            </exec>
+            <maven dir="@{dir}" arg="eclipse:eclipse idea:idea"/>
         </sequential>
     </macrodef>
 
@@ -163,7 +155,9 @@
     </target>
     
     <target name="test-distro">
-        <ant dir="${project}" inheritall="false" target="test-all"/>
+        <!-- For some reason, Cargo hangs when starting appfuse-light-jdo, testing with Maven instead -->
+        <!--<ant dir="${project}" inheritall="false" target="test-all"/>-->
+        <maven dir="${project}" arg="integration-test"/>
     </target>
     
     <target name="upload" description="Uploads distributions to java.net">
@@ -192,4 +186,21 @@
                        fileDescription="Source Distribution - view README.txt for instructions"
                        overwrite="yes" fileStatus="Stable"/>
     </presetdef>
+    
+    <!-- Simple macro to call proper executables for each OS -->
+    <macrodef name="maven">
+        <attribute name="dir"/>
+        <attribute name="arg"/>
+        <sequential>
+            <exec dir="@{dir}" executable="mvn.bat" os="Windows XP" failonerror="true">
+                <arg line="@{arg}"/>
+            </exec>
+            <exec dir="@{dir}" executable="mvn" os="Mac OS X" failonerror="true">
+                <arg line="@{arg}"/>
+            </exec>
+            <exec dir="@{dir}" executable="mvn.sh" os="Linux" failonerror="true">
+                <arg line="@{arg}"/>
+            </exec>
+        </sequential>
+    </macrodef>
 </project>

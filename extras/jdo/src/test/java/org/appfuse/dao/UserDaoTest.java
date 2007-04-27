@@ -15,7 +15,7 @@ public class UserDaoTest extends BaseDaoTestCase {
     protected String[] getConfigLocations() {
         return new String[] {
             "/WEB-INF/applicationContext*.xml",
-            "/org/appfuse/dao/applicationContext-test.xml" };
+            "classpath:/applicationContext-test.xml" };
     }
 
     public void testGetUsers() {

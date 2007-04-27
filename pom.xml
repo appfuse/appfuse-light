@@ -184,11 +184,23 @@
             <artifactId>log4j</artifactId>
             <version>1.2.13</version>
         </dependency>
+        <!-- If you change the database, make sure and change the userIncrementer bean's class if you're using
+             OJB or Spring JDBC. This bean is in src/main/webapp/WEB-INF/applicationContext-${framework}.xml. -->
+        <!--<dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.0.20070304</version>
+        </dependency>-->
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.0.5</version>
+        </dependency>
+        <!--dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>8.1-407.jdbc3</version>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>

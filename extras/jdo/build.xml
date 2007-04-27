@@ -36,6 +36,26 @@
         </dependency>]]></replacevalue>
         </replace>
 
+        <echo level="info">Add jpox-maven-plugin to pom.xml</echo>
+        <replace file="../../build.xml">
+            <replacetoken><![CDATA[</plugin>
+        </plugins>]]></replacetoken>
+            <replacevalue><![CDATA[</plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jpox-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>]]></replacevalue>
+        </replace>
+
         <echo level="info">Changing lazyLoadingFilter to be JDO version</echo>
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
             <replacetoken>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</replacetoken>
@@ -66,11 +86,7 @@
             <replacetoken><![CDATA[<fileset dir="${src.dir}" includes="**/*.xml"/>]]></replacetoken>
             <replacevalue><![CDATA[<fileset dir="${src.dir}" includes="**/*.xml"/>
             <!-- Copy JDO mapping files -->
-            <fileset dir="${src.dir}" includes="**/*.jdo"/>
-        </copy>
-        <!-- Copy overriding test files -->
-        <copy todir="${test.dir}/classes">
-            <fileset dir="${test.src}" includes="**/*.xml"/>]]></replacevalue>
+            <fileset dir="${resources.dir}" includes="**/*.jdo"/>]]></replacevalue>
         </replace>
             
         <echo level="info">Adding 'enhance' target for JDO</echo>

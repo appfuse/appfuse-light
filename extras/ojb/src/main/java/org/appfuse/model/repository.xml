@@ -1,15 +1,13 @@
 <descriptor-repository version="1.0">
 
     <jdbc-connection-descriptor jcd-alias="dataSource" jdbc-level="3.0"
-        default-connection="true" useAutoCommit="1" platform="PostgreSQL">
-        <sequence-manager className="org.apache.ojb.broker.util.sequence.SequenceManagerNextValImpl">
-            <attribute attribute-name="autoNaming" attribute-value="false"/>
-        </sequence-manager>
+        default-connection="true" useAutoCommit="1" platform="MySQL">
+        <sequence-manager className="org.apache.ojb.broker.util.sequence.SequenceManagerNativeImpl"/>
     </jdbc-connection-descriptor>
 
     <class-descriptor class="org.appfuse.model.User" table="app_user">
         <field-descriptor name="id" column="id" autoincrement="true"
-            primarykey="true" sequence-name="user_sequence"/>
+            primarykey="true" access="readonly" />
         <field-descriptor name="firstName" column="first_name"/>
         <field-descriptor name="lastName" column="last_name"/>
     </class-descriptor>

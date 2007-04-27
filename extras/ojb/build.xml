@@ -84,19 +84,19 @@
         <sql driver="${jdbc.driverClassName}" url="${jdbc.url}"
             userid="${jdbc.username}" password="${jdbc.password}">
             <fileset dir="${basedir}">
-                <include name="src/**/create-postgresql.sql"/>
+                <include name="src/**/create-mysql.sql"/>
             </fileset>
             <classpath refid="compile.classpath"/>
         </sql>
     </target>]]></replacevalue>
         </replace>    
         
-        <echo level="info">Modifying 'test' target to depend on 'createdb'</echo>
+        <echo level="info">Modifying 'test-all' target to depend on 'createdb'</echo>
         <replace file="../../build.xml">
-            <replacetoken>target name="test" depends="compile"</replacetoken>
-            <replacevalue>target name="test" depends="compile,createdb"</replacevalue>
+            <replacetoken>name="test-all" depends="test,test-tomcat"</replacetoken>
+            <replacevalue>name="test-all" depends="createdb,test,test-tomcat"</replacevalue>
         </replace>
-        
-        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>   
+
+        <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>
     </target>
 </project>

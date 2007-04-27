@@ -25,22 +25,26 @@
 <div id="readmore" style="display:none">
     <h3>Introduction to AppFuse Light</h3>
     <p>
-        AppFuse Light is designed to show webapp developers how to start
+        AppFuse Light is designed to show Java Web Developers how to start
         a bare-bones webapp using a <a href="http://www.springframework.org">
         Spring</a>-managed middle-tier backend and <a href="http://www.hibernate.org">
         Hibernate</a> for persistence. By default, AppFuse Light uses Spring for
         its MVC framework, but you can change it to 
-        <a href="http://struts.apache.org">Struts 1.x</a>, <a href="http://struts.apache.org/2.x/">Struts 2.x</a>,
+        <a href="http://myfaces.apache.org">JSF/MyFaces</a>,
+        <a href="http://mc4j.org/confluence/display/stripes/Home">Stripes</a>,
+        <a href="http://struts.apache.org">Struts 1.x</a>, 
+        <a href="http://struts.apache.org/2.x/">Struts 2.x</a>,
         <a href="http://opensymphony.com/webwork">WebWork</a>, 
-        <a href="http://jakarta.apache.org/tapestry">Tapestry</a>
-        or <a href="http://www.myfaces.org">JSF</a>.  Installers are in the "extras" directory.
+        <a href="http://jakarta.apache.org/tapestry">Tapestry</a> or
+        <a href="http://wicket.sourceforge.net/">Wicket</a>. In addition, there's a
+        number of extras for Spring MVC, including Velocity and FreeMarker versions, Ajax
+        support and Acegi Security support. Installers are in the "extras" directory.
     </p>
     <p>
-        By default, AppFuse Light expects you to have PostgreSQL installed with
-        an "appfuse_light" database created. For everything to work out-of-the-box,
-        this database should be owned by a "postgres" user with the same
-        password.  More information on database configuration can be found
-        in this project's README.txt file.
+        By default, AppFuse Light expects you to have MySQL installed. It will create an
+        "appfuse_light" database the first time tests are run or the application is started.
+        More information on database configuration can be found in this project's README.txt 
+        file.
     </p>
     <p> 
         Since no server configuration is required, this application should

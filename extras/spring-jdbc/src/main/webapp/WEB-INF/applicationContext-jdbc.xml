@@ -18,10 +18,10 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="userIncrementer" class="org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer">
+    <bean id="userIncrementer" class="org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer">
         <property name="dataSource" ref="dataSource"/>
         <property name="incrementerName" value="user_sequence"/>
-        <!--property name="columnName" value="value"/-->
+        <property name="columnName" value="value"/>
     </bean>
     
     <bean id="userDao" class="org.appfuse.dao.jdbc.UserDaoJdbc">

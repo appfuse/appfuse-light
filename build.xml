@@ -157,7 +157,8 @@
         <cargo refid="cargo.server" action="stop"/>
     </target>
 
-    <target name="test-all" depends="clear,test,test-tomcat"
+    <!-- <target name="test-all" depends="clear,test,test-tomcat", clear not needed with H2 -->
+    <target name="test-all" depends="test,test-tomcat"
         description="Runs JUnit tests and starts Tomcat to run jWebUnit tests"/>
         
     <target name="test-reports" description="Generate test reports">

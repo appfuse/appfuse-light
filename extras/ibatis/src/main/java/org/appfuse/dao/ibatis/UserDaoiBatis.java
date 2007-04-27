@@ -16,7 +16,6 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
  * @author Matt Raible
  */
 public class UserDaoiBatis extends SqlMapClientDaoSupport implements UserDao {
-    
     private DataFieldMaxValueIncrementer incrementer;
     
     public void setIncrementer(DataFieldMaxValueIncrementer incrementer) {

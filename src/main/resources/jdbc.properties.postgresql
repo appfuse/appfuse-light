@@ -1,0 +1,6 @@
+jdbc.driverClassName=org.postgresql.Driver
+jdbc.url=jdbc:postgresql://localhost/appfuse_light
+jdbc.username=postgres
+jdbc.password=postgres
+
+hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
