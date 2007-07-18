@@ -32,7 +32,7 @@
             path="/${webapp.name}"/>
     </target>
 
-    <target name="reload" description="Reload application in Tomcat">
+    <target name="reload" description="Reload application in Tomcat" depends="deploy">
         <reload url="${tomcat.manager.url}"
             username="${tomcat.manager.username}"
             password="${tomcat.manager.password}"
