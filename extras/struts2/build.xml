@@ -26,12 +26,12 @@
         <replacevalue><![CDATA[<dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
-            <version>2.0.6</version>
+            <version>2.0.8</version>
         </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-spring-plugin</artifactId>
-            <version>2.0.6</version>
+            <version>2.0.8</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -87,6 +87,10 @@
     <filter>
         <filter-name>struts</filter-name>
         <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+        <init-param>
+            <param-name>actionPackages</param-name>
+            <param-value>org.appfuse.web</param-value>
+        </init-param>
     </filter>]]></replacevalue>
         </replace>
         
