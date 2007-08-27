@@ -49,11 +49,33 @@
             <version>1.1.6</version>
         </dependency>
         <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.1</version>
             <scope>test</scope>
-        </dependency>]]></replacevalue>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shale</groupId>
+            <artifactId>shale-test</artifactId>
+            <version>1.0.4</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Sun's Reference Implementation -->
+        <!--<dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>1.2_04</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>1.2_04</version>
+        </dependency>-->]]></replacevalue>
         </replace>
         
         <!-- Replace jWebUnit with Canoo WebTest -->
@@ -83,21 +105,16 @@
             </exclusions>
         </dependency>]]></replacetoken>
         <replacevalue><![CDATA[<dependency>
-            <groupId>com.canoo</groupId>
+            <groupId>com.canoo.webtest</groupId>
             <artifactId>webtest</artifactId>
-            <version>1454</version>
+            <version>R_1600</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
-                    <groupId>javax.xml</groupId>
-                    <artifactId>jsr173</artifactId>
+                    <groupId>groovy</groupId>
+                    <artifactId>groovy-all</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>oro</groupId>
-            <artifactId>oro</artifactId>
-            <version>2.0.8</version>
         </dependency>]]></replacevalue>
         </replace>
         <replace file="../../pom.xml">
@@ -258,7 +275,7 @@
         <replace file="../../build.xml">
             <replacetoken><![CDATA[<target name="test-web" depends="compile"
         description="Runs jWebUnit tests in a running server">
-        <property name="testcase" value="WebTest"/>
+        <property name="test" value="WebTest"/>
         <antcall target="test"/>
     </target>]]></replacetoken>
             <replacevalue><![CDATA[<target name="test-web" depends="compile" description="Runs Canoo WebTests in Tomcat to test JSPs">

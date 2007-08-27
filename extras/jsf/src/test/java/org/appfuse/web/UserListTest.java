@@ -8,10 +8,13 @@ import org.appfuse.service.UserManager;
 public class UserListTest extends BasePageTestCase {
     private UserList bean;
 
-    protected void setUp() throws Exception {    
-        super.setUp();
-        bean = (UserList) getManagedBean("userList");
-        
+    protected void onSetUp() throws Exception {    
+        super.onSetUp();
+
+        UserManager userManager = (UserManager) applicationContext.getBean("userManager");
+        bean = new UserList();
+        bean.setUserManager(userManager);
+
         // create a new user
         User user = new User();
         user.setFirstName("Matt");
@@ -19,7 +22,6 @@ public class UserListTest extends BasePageTestCase {
         user.setBirthday(new Date());
         
         // persist to database
-        UserManager userManager = (UserManager) ctx.getBean("userManager");
         userManager.saveUser(user);
     }
     

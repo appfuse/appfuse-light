@@ -3,16 +3,20 @@ package org.appfuse.web;
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
 
-
 public class UserFormTest extends BasePageTestCase {
     private UserForm bean;
     private String userId;
+    private UserManager userManager;
 
-    protected void setUp() throws Exception {    
-        super.setUp();
-        bean = (UserForm) getManagedBean("userForm");
-        // verify that "userForm" has been defined as a managed-bean
-        assertNotNull("you need to define 'userForm' in faces-config.xml", bean);
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
+    }
+
+    protected void onSetUp() throws Exception {
+        super.onSetUp();
+        
+        bean = new UserForm();
+        bean.setUserManager(userManager);
         
         // create a new user
         User user = new User();
@@ -20,16 +24,15 @@ public class UserFormTest extends BasePageTestCase {
         user.setLastName("Raible");
         
         // persist to database
-        UserManager userManager = (UserManager) ctx.getBean("userManager");
         userManager.saveUser(user);
         userId = user.getId().toString();
     }
     
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    protected void onTearDown() throws Exception {
+        super.onTearDown();
         bean = null;
     }
-    
+
     public void testEdit() throws Exception {
         bean.setId(userId);
         assertEquals(bean.edit(), "success");
