@@ -38,7 +38,7 @@ function saveUser() {
             alert(DWRUtil.getValue('birthday') + " is not a valid date, please try again.");
             return false;
         }
-        UserManager.saveUser(showSuccessMessage, user);
+        UserManager.saveUser(user, showSuccessMessage);
     }
 }
 
