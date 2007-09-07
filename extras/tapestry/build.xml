@@ -58,6 +58,11 @@
                     <artifactId>tapestry-annotations</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+		<dependency>
+            <groupId>net.sf.tacos</groupId>
+            <artifactId>tacos-core</artifactId>
+            <version>4.1.0</version>
         </dependency>]]></replacevalue>
         </replace>
 
