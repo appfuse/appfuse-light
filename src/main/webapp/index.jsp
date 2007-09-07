@@ -9,7 +9,7 @@
         applications that ship with Struts and Spring, respectively.
         These "starter" apps were not robust enough for me, and I wanted 
         something like AppFuse, only simpler.  Much of the documentation for developing
-        with AppFuse Light can be found in the <a href="http://sourcebeat.com/titles/springlive/public/Rev_11/SpringLive_SampleChapter.pdf">
+        with AppFuse Light can be found in the <a href="http://sourcebeat.com/titles/springlive/public/Rev_12/SpringLive_SampleChapter.pdf">
         Spring QuickStart Chapter</a> in Spring Live.  If you have issues downloading this 
         PDF, you might try saving it to your hard drive before opening it.
     </p>

@@ -15,6 +15,7 @@
 <form:errors path="*" cssClass="error"/>
 <form:hidden path="id"/>
 <table class="detail">
+<c:choose>foo<c:when test="${foo}">foo</c:when><c:otherwise></c:otherwise></c:choose>
 <tr>
     <th><label for="firstName"><fmt:message key="user.firstName"/>:</label></th>
     <td>
@@ -25,7 +26,7 @@
 <tr>
     <th><label for="lastName" class="required">* <fmt:message key="user.lastName"/>:</label></th>
     <td>
-        <form:input path="lastName" id="lastName"/>
+        <form:input path="LastName" id="lastName"/>
         <form:errors path="lastName" cssClass="fieldError"/>
     </td>
 </tr>

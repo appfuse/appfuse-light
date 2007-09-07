@@ -5,7 +5,7 @@
 An Error has occurred in this application.  
 
 <% if (exception != null) { %>
-    <pre><% exception.printStackTrace(new java.io.PrintWriter(out)); %></pre>
+    <% exception.printStackTrace(new java.io.PrintWriter(out)); %>
 <% } else { %>
     Please check your log files for further information.
 <% } %>
