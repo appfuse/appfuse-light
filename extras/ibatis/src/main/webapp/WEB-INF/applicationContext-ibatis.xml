@@ -13,7 +13,7 @@
         <property name="defaultAutoCommit" value="true"/>
     </bean>
     
-    <!-- Transaction manager for iBATIS Daos -->
+    <!-- Transaction manager for iBATIS DAOs -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -35,5 +35,5 @@
         <property name="sqlMapClient" ref="sqlMapClient"/>
     </bean>
     
-    <!-- Add additional Dao definitions here -->
+    <!-- Add additional DAO definitions here -->
 </beans>
