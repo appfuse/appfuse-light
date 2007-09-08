@@ -27,4 +27,6 @@ function highlightTableRows(tableId) {
 // Show the document's title on the status bar
 window.defaultStatus=document.title;
 
-window.onload = StyleSheetSwitcher.initialize();
+// The following doesn't work in IE 6 or 7
+// window.onload = StyleSheetSwitcher.initialize();
+StyleSheetSwitcher.initialize();
