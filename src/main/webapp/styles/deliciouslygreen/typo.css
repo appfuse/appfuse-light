@@ -196,17 +196,17 @@
                     border: 1px solid #e0e0e0;
                     padding: 0.5em;
                 }
-                .table thead th {
+                .table thead th, .table th {
                     border: 1px solid #e0e0e0;
                     text-align: left;
                     font-size: 1em;
                     font-weight: bold;
                     background: #C9FF94;
                  }
-								        .table th a {
-								            background: transparent;
-								            color: #008000;
-								        }
+                .table th a {
+                    background: transparent;
+                    color: #008000;
+                }
                 .table tfoot th, tfoot td {
                     border: 1px solid #e0e0e0;
                     text-align: left;
@@ -230,6 +230,11 @@
                 .table tfoot td {
                     border: 1px solid #996;
                 }
+                /* Fixes for Tapestry (doesn't use thead/tbody) */
+                #tableView .table th { padding: 0 !important }
+                .table th table.tableHeaderTable td { border: 0 }
+                .table .tableHeaderTable td a { text-decoration: none }
+                .table th table.tableHeaderTable { width: 100%; height: 100%; margin: 0 !important }
     /* END TABLE */
 	
     hr {
