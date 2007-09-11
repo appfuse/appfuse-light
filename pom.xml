@@ -323,7 +323,7 @@
                                 <containerId>tomcat5x</containerId>
                                 <zipUrlInstaller>
                                     <url>
-                                        http://archive.apache.org/dist/tomcat/tomcat-5/v${tomcat.version}/bin/apache-tomcat-${tomcat.version}.zip
+                                        http://archive.apache.org/dist/tomcat/tomcat-6/v${tomcat.version}/bin/apache-tomcat-${tomcat.version}.zip
                                     </url>
                                     <installDir>${installDir}</installDir>
                                 </zipUrlInstaller>
@@ -369,6 +369,6 @@
         <cargo.host>localhost</cargo.host>
         <cargo.port>8080</cargo.port>
         <cargo.wait>false</cargo.wait>
-        <tomcat.version>5.5.23</tomcat.version>
+        <tomcat.version>6.0.14</tomcat.version>
     </properties>
 </project>
