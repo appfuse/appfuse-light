@@ -11,7 +11,7 @@ import wicket.model.IModel;
 import wicket.model.Model;
 
 public abstract class BasePage extends WebPage {
-    protected Log log = LogFactory.getLog(getClass());
+    transient protected Log log = LogFactory.getLog(getClass());
     
     /**
      * IModel implementation used to display the page title. Default to an empty
