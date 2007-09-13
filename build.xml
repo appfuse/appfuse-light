@@ -302,7 +302,7 @@
                 <exclude name="sandbox/**"/>
                 <exclude name="${webapp.name}*"/>
                 <exclude name="*.log"/>
-                <exclude name="java-net.xml"/>
+                <exclude name="release.xml"/>
                 <exclude name="**/.#**"/>
                 <exclude name="*.sh"/>
                 <exclude name="www/**"/>

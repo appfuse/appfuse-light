@@ -23,14 +23,14 @@ Issues?
 ==================
  Setup
 ==================
-To run this application, you don't need to have a database installed. H2 is the 
+To run this application, you don't need to have a database installed. MySQL is the
 default database and a database will be created for you on-the-fly when testing
-or viewing the application. You can also use PostgreSQL or MySQL, but you'll have
-to tweak a few things.
+or viewing the application. You can also use PostgreSQL or another database, but
+you'll have to tweak a few things.
 
 1. Modify jdbc.properties to have the correct settings for your database.
-2. Modify pom.xml to comment out the H2 dependency and uncomment the MySQL or 
-   PostgreSQL driver JDBC.
+2. Modify pom.xml to comment out the MySQL dependency and add a new one for your
+   JDBC Driver. You can use http://mvnrepository.com to search for Maven artifacts.
  
 After setting up your database properly, you should be able to run all the tests
 using "mvn test". To create your own application, run "ant new". Then cd into
@@ -61,7 +61,7 @@ and Test" instructions.
 
 Eclipse:
 ----------
-Download Maven 2.0.4, install it, and add $M2_HOME/bin to your $PATH. From the 
+Download Maven 2.0.7, install it, and add $M2_HOME/bin to your $PATH. From the
 command line, cd into the appfuse-light directory and type "mvn eclipse:eclipse". If
 you'd like to download source JARs as well, run:
 
@@ -91,7 +91,7 @@ http://raibledesigns.com/page/rd?entry=edit_java_webapps_redux_jetty
 
 IDEA:
 ----------
-Download Maven 2.0.4, install it, and add $M2_HOME/bin to your $PATH. From the 
+Download Maven 2.0.7, install it, and add $M2_HOME/bin to your $PATH. From the 
 command line, cd into the appfuse-light directory and type "mvn idea:idea". Get a
 cup of coffee or soda (or even better, a beer!) while you wait for Maven 
 to download all the dependencies.
