@@ -2,7 +2,7 @@
 <logic:messagesPresent>
     <div class="error">
         <html:messages id="error">
-            ${error}<br/>
+            <c:out value="${error}"/><br/>
         </html:messages>
     </div>
 </logic:messagesPresent>
@@ -11,7 +11,7 @@
 <logic:messagesPresent message="true">
     <div class="message">
         <html:messages id="message" message="true">
-            ${message}<br/>
+            <c:out value="${message}"/><br/>
         </html:messages>
     </div>
 </logic:messagesPresent>
