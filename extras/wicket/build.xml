@@ -62,7 +62,7 @@
             <replacetoken><![CDATA[<dependency>
       <groupId>displaytag</groupId>
       <artifactId>displaytag</artifactId>
-      <version>1.1</version>
+      <version>1.1.1</version>
     </dependency>
     ]]></replacetoken>
         </replace>
