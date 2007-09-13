@@ -5,7 +5,6 @@
     <property name="web.dir" value="src/main/webapp"/>
     <property name="test.src" value="src/test/java"/>
     <property name="test.resources.dir" value="src/test/resources"/>
-    <property name="dist.dir" value="dist"/>
     <property name="build.dir" value="target"/>
     <property name="test.dir" value="${build.dir}/test"/>
     
@@ -93,7 +92,7 @@
         <!-- Check that junit.jar is in $ANT_HOME/lib -->
         <available classname="junit.framework.TestCase" property="junit.present"/>
         <fail unless="junit.present"
-            message="Please copy ~/.m2/repository/junit/junit/3.8.2/junit-3.8.2.jar into ${env.ANT_HOME}/lib"/>
+            message="Please copy ~/.m2/repository/junit/junit/4.4/junit-4.4.jar into ${env.ANT_HOME}/lib"/>
 
         <mkdir dir="${test.dir}/data"/>
         <junit printsummary="no" fork="true" forkmode="once"
@@ -146,7 +145,7 @@
         <cargo containerId="${cargo.server}" id="cargo.server" home="${server.home}" 
             action="start" wait="${cargo.wait}">
             <configuration>
-                <deployable type="war" file="${basedir}/${dist.dir}/${webapp.name}.war">
+                <deployable type="war" file="${basedir}/${build.dir}/${webapp.name}.war">
                     <property name="context" value="ROOT"/>
                 </deployable>
             </configuration>
@@ -184,8 +183,8 @@
     </target>
     
     <target name="war" depends="compile,copy-jars" description="Packages app as WAR">
-        <mkdir dir="${dist.dir}"/>
-        <war destfile="${dist.dir}/${webapp.name}.war"
+        <mkdir dir="${build.dir}"/>
+        <war destfile="${build.dir}/${webapp.name}.war"
             webxml="${web.dir}/WEB-INF/web.xml" compress="true">
             <classes dir="${build.dir}/classes"/>
             <classes dir="${resources.dir}"/>
@@ -213,20 +212,19 @@
     
     <target name="deploywar" depends="war" description="Deploy application as a WAR file">
         <copy todir="${deploy.dir}" preservelastmodified="true"
-            file="${dist.dir}/${webapp.name}.war"/>
+            file="${build.dir}/${webapp.name}.war"/>
     </target>
 
     <target name="clean" description="Clean output directories">
         <delete dir="${build.dir}"/>
-        <delete dir="${dist.dir}"/>
     </target>
     
     <!-- Creates release (source) distribution -->
     <target name="dist" depends="clean"
         description="create zip and tar.gz of ${webapp.name} for distribution">
         <property name="archive.name" value="${webapp.name}-${webapp.version}"/>
-        <mkdir dir="${dist.dir}"/>
-        <property name="archive.target" value="${dist.dir}/${archive.name}"/>
+        <mkdir dir="${build.dir}"/>
+        <property name="archive.target" value="${build.dir}/${archive.name}"/>
         <zip zipfile="${archive.target}.zip">
             <zipfileset prefix="${webapp.name}-${webapp.version}" dir="${basedir}">
                 <patternset id="srcfiles">
@@ -240,7 +238,6 @@
                     <exclude name="**/*.bak"/>
                     <exclude name="*/**.java.txt"/>
                     <exclude name="${build.dir}/**"/>
-                    <exclude name="${dist.dir}/**"/>
                     <exclude name="**/${build.dir}/**"/>
                     <exclude name="db/**"/>   
                     <exclude name="sandbox/**"/>
@@ -300,7 +297,7 @@
         <echo level="info">Creating new application named '${app.name}'...</echo>
         <copy todir="../${app.name}">
             <fileset dir="${basedir}">
-                <exclude name="${dist.dir}/**"/>
+                <exclude name="${build.dir}/**"/>
                 <exclude name="db/**"/>
                 <exclude name="sandbox/**"/>
                 <exclude name="${webapp.name}*"/>
