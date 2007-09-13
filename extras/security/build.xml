@@ -15,37 +15,29 @@
         <replace file="../../pom.xml">
             <replacetoken><![CDATA[    <dependencies>]]></replacetoken>
       <replacevalue><![CDATA[    <dependencies>
-          <dependency>
-              <groupId>org.acegisecurity</groupId>
-              <artifactId>acegi-security</artifactId>
-              <version>1.0.5</version>
-              <exclusions>
-                  <!-- exclude older versions of Spring -->
-                  <exclusion>
-                      <groupId>org.springframework</groupId>
-                      <artifactId>spring-aop</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>org.springframework</groupId>
-                      <artifactId>spring-dao</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>org.springframework</groupId>
-                      <artifactId>spring-jdbc</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>org.springframework</groupId>
-                      <artifactId>spring-mock</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>org.springframework</groupId>
-                      <artifactId>spring-remoting</artifactId>
-                  </exclusion>
-                  <exclusion>
-                      <groupId>org.springframework</groupId>
-                      <artifactId>spring-support</artifactId>
-                  </exclusion>
-              </exclusions>
+        <dependency>
+            <groupId>org.acegisecurity</groupId>
+            <artifactId>acegi-security</artifactId>
+            <version>1.0.5</version>
+            <exclusions>
+                <!-- exclude older versions of Spring -->
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-remoting</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-jdbc</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-support</artifactId>
+                </exclusion>
+            </exclusions>
           </dependency>
           <dependency>
             <groupId>net.sf.ehcache</groupId>
