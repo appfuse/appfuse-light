@@ -23,10 +23,10 @@ Issues?
 ==================
  Setup
 ==================
-To run this application, you don't need to have a database installed. MySQL is the
-default database and a database will be created for you on-the-fly when testing
-or viewing the application. You can also use PostgreSQL or another database, but
-you'll have to tweak a few things.
+To run this application, you will need to have MySQL (or another database) 
+installed. MySQL is the expected default and a database will be created for 
+you on-the-fly when testing or viewing the application. You can also use 
+PostgreSQL or another database, but you'll have to tweak a few things:
 
 1. Modify jdbc.properties to have the correct settings for your database.
 2. Modify pom.xml to comment out the MySQL dependency and add a new one for your

@@ -37,7 +37,7 @@
 
         <div id="main">
             <h1>Page Not Found</h1>
-            The page your requested was not found.  You might try returning to the 
+            <p>The page you requested was not found.  You might try returning to the 
             <a href="<c:url value="/"/>">welcome page</a>. While you're here, how 
             about a pretty picture to cheer you up? 
             </p>
