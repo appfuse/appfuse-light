@@ -149,7 +149,7 @@
                 <include name="**/UserController*.java"/>
                 <include name="**/UserFormController*.java"/>
                 <include name="**/U*WebTest.java"/>
-                <include name="**/action-servlet.xml"/>
+                <include name="**/dispatcher-servlet.xml"/>
                 <include name="**/*validation.xml"/>
                 <!-- TODO: Get this working for JSF -->
                 <include name="**/dataAccessFailure.jsp"/>
@@ -245,14 +245,14 @@
         </replace>
         <!-- Change DispatcherServlet to FacesServlet -->
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
-            <replacetoken><![CDATA[<servlet-name>action</servlet-name>
+            <replacetoken><![CDATA[<servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>]]></replacetoken>
             <replacevalue><![CDATA[<servlet-name>faces</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>]]></replacevalue>
         </replace>
         <!-- Change Servlet mapping to point to FacesServlet -->
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
-            <replacetoken><![CDATA[<servlet-name>action</servlet-name>]]></replacetoken>
+            <replacetoken><![CDATA[<servlet-name>dispatcher</servlet-name>]]></replacetoken>
             <replacevalue><![CDATA[<servlet-name>faces</servlet-name>]]></replacevalue>
         </replace>
         

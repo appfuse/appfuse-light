@@ -1,15 +1,13 @@
 package org.appfuse.web;
 
-import java.util.ArrayList;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
+import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
 import org.jmock.Mock;
 import org.jmock.MockObjectTestCase;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.ModelMap;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserControllerTest extends MockObjectTestCase {
     private UserController c = new UserController();
@@ -22,15 +20,19 @@ public class UserControllerTest extends MockObjectTestCase {
 
     public void testGetUsers() throws Exception {
         // set expected behavior on manager
+        User user1 = new User();
+        user1.setFirstName("ControllerTest");
+        List<User> users = new ArrayList<User>();
+        users.add(user1);
+        
         mockManager.expects(once()).method("getUsers")
-                   .will(returnValue(new ArrayList()));
+                   .will(returnValue(users));
 
-        ModelAndView mav =
-            c.handleRequest(new MockHttpServletRequest(),
-                            (HttpServletResponse) null);
-        Map m = mav.getModel();
-        assertNotNull(m.get("users"));
-        assertEquals(mav.getViewName(), "userList");
+        ModelMap map = new ModelMap();
+        String result = c.execute(map);
+        assertFalse(map.isEmpty());
+        assertNotNull(map.get("userList"));
+        assertEquals("userList", result);
         
         // verify expectations
         mockManager.verify();

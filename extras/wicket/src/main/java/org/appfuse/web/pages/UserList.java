@@ -1,27 +1,24 @@
 package org.appfuse.web.pages;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
+import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.markup.repeater.Item;
+import org.apache.wicket.markup.repeater.data.DataView;
+import org.apache.wicket.model.LoadableDetachableModel;
+import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
 
-import wicket.AttributeModifier;
-import wicket.Component;
-import wicket.extensions.markup.html.repeater.data.DataView;
-import wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
-import wicket.extensions.markup.html.repeater.refreshing.Item;
-import wicket.extensions.markup.html.repeater.util.SortableDataProvider;
-import wicket.markup.html.basic.Label;
-import wicket.markup.html.form.Button;
-import wicket.markup.html.form.Form;
-import wicket.markup.html.link.Link;
-import wicket.markup.html.navigation.paging.PagingNavigator;
-import wicket.markup.html.panel.FeedbackPanel;
-import wicket.model.AbstractReadOnlyModel;
-import wicket.model.IModel;
-import wicket.model.ResourceModel;
-import wicket.spring.injection.annot.SpringBean;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Page to manage and display users.
@@ -30,22 +27,19 @@ import wicket.spring.injection.annot.SpringBean;
  */
 public class UserList extends BasePage {
     private static final long serialVersionUID = -5202104862675278153L;
-    private static final IModel TITLE = new ResourceModel("userList.title");
     @SpringBean
     private UserManager userManager;
 
     public UserList() {
-        setPageTitle(TITLE);
-        
         FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
         add(feedbackPanel);
         feedbackPanel.setVisible(false); // other pages will set this to visible
-        feedbackPanel.setEscapeMessages(false);
+        feedbackPanel.setEscapeModelStrings(false);
         
         // Form and button for routing user to add a new user
         Form form = new Form("form");
         Button button = new Button("add-user") {
-            protected void onSubmit() {
+            public void onSubmit() {
                 onEditUser(new User());
             }
         };
@@ -76,9 +70,8 @@ public class UserList extends BasePage {
                 } else {
                     item.add(new Label("user.birthday", ""));
                 }
-                item.add(new AttributeModifier("class", true, new AbstractReadOnlyModel() {
-                    public Object getObject(Component component) {
-                        Item item = (Item) component;
+                item.add(new AttributeModifier("class", true, new LoadableDetachableModel() {
+                    protected Object load() {
                         return (item.getIndex() % 2 == 1) ? "even" : "odd";
                     }
                 }));

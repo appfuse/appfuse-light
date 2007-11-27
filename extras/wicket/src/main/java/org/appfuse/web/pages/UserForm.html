@@ -1,5 +1,5 @@
 <head>
-    <title wicket:id="page-title">[page title]</title>
+    <title><wicket:message key="userForm.title"/></title>
 </head>
 
 <p>Please fill in user's information below:</p>
@@ -23,8 +23,7 @@
 <tr>
     <th><wicket:message key="user.birthday">Birthday</wicket:message>:</th>
     <td>
-        <input type="text" wicket:id="birthday" class="text small" size="11"/>
-        <span wicket:id="birthdayPicker"/>
+        <div wicket:id="birthday" id="birthday"/>
         <span wicket:id="birthday-feedback" class="fieldError">[birthday feedback]</span>    
     </td>
 </tr>

@@ -16,7 +16,7 @@
 <button onclick="location.href='userform.html'"style="float: right; margin-top: -30px; width: 100px">Add User</button>
 <aa:zone name="userTable">
 
-<display:table name="users" class="table" requestURI="" id="userList" export="true" excludedParams="*" pagesize="5" sort="list">
+<display:table name="userList" class="table" requestURI="" id="userList" export="true" excludedParams="*" pagesize="5" sort="list">
     <display:setProperty name="export.pdf.filename" value="users.pdf"/>
     <display:column sortProperty="id" sortable="true" media="html" titleKey="user.id">
         <a href="${ctx}/userform.html?id=${userList.id}">${userList.id}</a>
@@ -55,7 +55,7 @@
         var editable = document.getElementsByClassName('editable');
         for (i=0; i < editable.length; i++) {
             var userId = editable[i].parentNode.parentNode.getElementsByTagName("a")[0].innerHTML;
-            new Ajax.InPlaceEditor(editable[i].id, 'users.html?id=' + userId);
+            new Ajax.InPlaceEditor(editable[i].id, 'user-ajax.html?id=' + userId);
         }
     }
     function ajaxifyLinks(links) {

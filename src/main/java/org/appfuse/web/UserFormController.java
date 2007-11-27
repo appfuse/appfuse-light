@@ -1,34 +1,50 @@
 package org.appfuse.web;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+@Controller
+@RequestMapping("/userform.*")
 public class UserFormController extends SimpleFormController {
     private final Log log = LogFactory.getLog(UserFormController.class);
-    private UserManager mgr = null;
+    @Autowired
+    private UserManager userManager;
 
+    // needed for setting mocks in tests
     public void setUserManager(UserManager userManager) {
-        this.mgr = userManager;
+        this.userManager = userManager;
     }
     
+    @Autowired(required = false)
+	@Qualifier("beanValidator")
+	private Validator validator;
+
     public UserFormController() {
         setCommandName("user");
         setCommandClass(User.class);
+        setFormView("userForm");
+        setSuccessView("redirect:users.html");
+        if (validator != null)
+            setValidator(validator);
     }
 
     public ModelAndView processFormSubmission(HttpServletRequest request,
@@ -68,11 +84,11 @@ public class UserFormController extends SimpleFormController {
         User user = (User) command;
 
         if (request.getParameter("delete") != null) {
-            mgr.removeUser(user.getId().toString());
+            userManager.removeUser(user.getId().toString());
             request.getSession().setAttribute("message", 
                     getText("user.deleted", user.getFullName()));
         } else {
-            mgr.saveUser(user);
+            userManager.saveUser(user);
             request.getSession().setAttribute("message",
                     getText("user.saved", user.getFullName()));
         }
@@ -85,7 +101,7 @@ public class UserFormController extends SimpleFormController {
         String userId = request.getParameter("id");
 
         if ((userId != null) && !userId.equals("")) {
-            return mgr.getUser(userId);
+            return userManager.getUser(userId);
         } else {
             return new User();
         }
@@ -96,8 +112,8 @@ public class UserFormController extends SimpleFormController {
      * getMessageSourceAccessor() is used because the RequestContext variable
      * is not set in unit tests b/c there's no DispatchServlet Request.
      *
-     * @param msgKey
-     * @return
+     * @param msgKey the i18n key to lookup
+     * @return the message for the key
      */
     public String getText(String msgKey) {
         return getMessageSourceAccessor().getMessage(msgKey);
@@ -107,9 +123,9 @@ public class UserFormController extends SimpleFormController {
      * Convenient method for getting a i18n key's value with a single
      * string argument.
      *
-     * @param msgKey
-     * @param arg
-     * @return
+     * @param msgKey the i18n key to lookup
+     * @param arg arguments to substitute into key's value
+     * @return the message for the key
      */
     public String getText(String msgKey, String arg) {
         return getText(msgKey, new Object[] { arg });
@@ -118,9 +134,9 @@ public class UserFormController extends SimpleFormController {
     /**
      * Convenience method for getting a i18n key's value with arguments.
      *
-     * @param msgKey
-     * @param args
-     * @return
+     * @param msgKey the i18n key to lookup
+     * @param args arguments to substitute into key's value
+     * @return the message for the key
      */
     public String getText(String msgKey, Object[] args) {
         return getMessageSourceAccessor().getMessage(msgKey, args);

@@ -35,7 +35,7 @@
             <fileset dir="../..">
                 <include name="**/UserController*.java"/>
                 <include name="**/UserFormController*.java"/>
-                <include name="**/action-servlet.xml"/>
+                <include name="**/dispatcher-servlet.xml"/>
                 <include name="**/*validation.xml"/>
                 <include name="**/validator*"/>
                 <exclude name="extras/**"/>
@@ -84,7 +84,7 @@
             <replacetoken><![CDATA[
 
     <servlet>
-        <servlet-name>action</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>]]></replacetoken>
@@ -95,7 +95,7 @@
             <replacetoken><![CDATA[
 
     <servlet-mapping>
-        <servlet-name>action</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>]]></replacetoken>
         </replace>

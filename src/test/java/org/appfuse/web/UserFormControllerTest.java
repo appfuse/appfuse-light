@@ -38,7 +38,7 @@ public class UserFormControllerTest extends MockObjectTestCase {
         // set context with messages avoid NPE when controller calls 
         // getMessageSourceAccessor().getMessage()
         StaticApplicationContext ctx = new StaticApplicationContext();
-        Map properties = new HashMap();
+        Map<String, String> properties = new HashMap<String, String>();
         properties.put("basename", "messages");
         ctx.registerSingleton("messageSource", ResourceBundleMessageSource.class, 
                               new MutablePropertyValues(properties));
@@ -46,7 +46,7 @@ public class UserFormControllerTest extends MockObjectTestCase {
         c.setApplicationContext(ctx);    
         
         // setup user values
-        user.setId(new Long(1));
+        user.setId(1L);
         user.setFirstName("Matt");
         user.setLastName("Raible");
     }

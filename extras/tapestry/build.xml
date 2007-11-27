@@ -91,7 +91,7 @@
             <fileset dir="../..">
                 <include name="**/UserController*.java"/>
                 <include name="**/UserFormController*.java"/>
-                <include name="**/action-servlet.xml"/>
+                <include name="**/dispatcher-servlet.xml"/>
                 <include name="**/*validation.xml"/>
                 <include name="**/validator*"/>
                 <!-- TODO: Get this working for Tapestry -->
@@ -149,7 +149,7 @@
         </replace>
         <!-- Change DispatcherServlet to ApplicationServlet -->
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
-            <replacetoken><![CDATA[<servlet-name>action</servlet-name>
+            <replacetoken><![CDATA[<servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>]]></replacetoken>
             <replacevalue><![CDATA[<servlet-name>tapestry</servlet-name>
         <servlet-class>org.apache.tapestry.ApplicationServlet</servlet-class>]]></replacevalue>
@@ -157,7 +157,7 @@
         <!-- Change Servlet mapping to point to ApplicationServlet -->
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
             <replacetoken><![CDATA[<servlet-mapping>
-        <servlet-name>action</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>]]></replacetoken>
             <replacevalue><![CDATA[<servlet-mapping>

@@ -12,7 +12,7 @@
 </tr>
 </thead>
 <tbody>
-#foreach ($user in $users)
+#foreach ($user in $userList)
 #if ($velocityCount % 2 == 0) <tr class="even"> 
 #else <tr class="odd"> 
 #end

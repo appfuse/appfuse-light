@@ -4,17 +4,15 @@ import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
 import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
-import wicket.Page;
-import wicket.markup.html.form.Form;
-import wicket.spring.injection.annot.SpringComponentInjector;
-import wicket.spring.injection.annot.test.AnnotApplicationContextMock;
-import wicket.util.tester.ITestPageSource;
-import wicket.util.tester.WicketTester;
+import org.apache.wicket.Page;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.apache.wicket.spring.injection.annot.test.AnnotApplicationContextMock;
+import org.apache.wicket.util.tester.ITestPageSource;
+import org.apache.wicket.util.tester.WicketTester;
 
 public class UserFormTest extends AbstractDependencyInjectionSpringContextTests {
     private WicketTester tester;
-
-    private UserManager userManager;
 
     protected String[] getConfigLocations() {
         return new String[] { "/WEB-INF/applicationContext*.xml" };
@@ -23,9 +21,10 @@ public class UserFormTest extends AbstractDependencyInjectionSpringContextTests 
     public void onSetUp() {
         tester = new WicketTester();
         AnnotApplicationContextMock context = new AnnotApplicationContextMock();
-        userManager = (UserManager) applicationContext.getBean("userManager");
+        UserManager userManager = (UserManager) applicationContext.getBean("userManager");
         context.putBean("userManager", userManager);
-        tester.addComponentInstantiationListener(new SpringComponentInjector(tester, context));
+        tester.getApplication().addComponentInstantiationListener(
+                new SpringComponentInjector(tester.getApplication(), context));
     }
 
     public void testAdd() {

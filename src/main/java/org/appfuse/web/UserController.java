@@ -1,27 +1,24 @@
 package org.appfuse.web;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.appfuse.service.UserManager;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-public class UserController implements Controller {
-    private final Log log = LogFactory.getLog(UserController.class);
-    private UserManager mgr = null;
+@Controller
+public class UserController {
+    @Autowired
+    private UserManager userManager;
 
+    // need for testing
     public void setUserManager(UserManager userManager) {
-        this.mgr = userManager;
+        this.userManager = userManager;
     }
 
-    public ModelAndView handleRequest(HttpServletRequest request,
-                                      HttpServletResponse response)
-    throws Exception {
-        log.debug("entering 'handleRequest' method...");
-
-        return new ModelAndView("userList", "users", mgr.getUsers());
+    @RequestMapping("/users.*")
+    public String execute(ModelMap model) {
+        model.addAttribute(userManager.getUsers());
+        return "userList";
     }
 }

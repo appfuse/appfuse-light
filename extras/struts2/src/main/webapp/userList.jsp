@@ -9,8 +9,8 @@
     <display:column property="id" sortable="true" href="editUser.html" media="html"
         paramId="id" paramProperty="id" titleKey="user.id"/>
     <display:column property="id" media="csv excel xml pdf" titleKey="user.id"/>
-    <display:column property="firstName" sortable="true" titleKey="user.firstName"/>
-    <display:column property="lastName" sortable="true" titleKey="user.lastName"/>
+    <display:column property="firstName" sortable="true" titleKey="user.firstName" escapeXml="true"/>
+    <display:column property="lastName" sortable="true" titleKey="user.lastName" escapeXml="true"/>
     <display:column sortable="true" titleKey="user.birthday" sortProperty="birthday">
         <fmt:formatDate value="${userList.birthday}" pattern="${datePattern}"/>
     </display:column>

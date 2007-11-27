@@ -1,9 +1,9 @@
 package org.appfuse.web.pages;
 
-import wicket.Page;
-import wicket.markup.html.WebPage;
-import wicket.markup.html.link.IPageLink;
-import wicket.markup.html.link.PageLink;
+import org.apache.wicket.Page;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.link.IPageLink;
+import org.apache.wicket.markup.html.link.PageLink;
 
 public class Index extends WebPage {
     public Index() {        

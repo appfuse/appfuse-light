@@ -17,7 +17,7 @@
       <replacevalue><![CDATA[        <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.9</version>
+            <version>2.3.10</version>
         </dependency>
         <dependency>
             <groupId>org.tuckey</groupId>
@@ -38,8 +38,8 @@
             </fileset>
         </delete>
         
-        <echo level="info">Configuring action-servlet.xml for FreeMarker</echo>
-        <replace file="../../src/main/webapp/WEB-INF/action-servlet.xml">
+        <echo level="info">Configuring dispatcher-servlet.xml for FreeMarker</echo>
+        <replace file="../../src/main/webapp/WEB-INF/dispatcher-servlet.xml">
             <replacetoken><![CDATA[<!-- View Resolver for JSPs -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -55,7 +55,14 @@
                 <prop key="number_format">0.######</prop>
             </props>
         </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="xml_escape" value-ref="fmXmlEscape"/>
+            </map>
+        </property>
     </bean>
+
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="exposeSpringMacroHelpers" value="true"/>
@@ -65,9 +72,14 @@
     </bean>]]></replacevalue>
         </replace>
         <!-- Add a mapping for index.html -->
-        <replace file="../../src/main/webapp/WEB-INF/action-servlet.xml">
+        <replace file="../../src/main/webapp/WEB-INF/dispatcher-servlet.xml">
             <replacetoken><![CDATA[<bean id="filenameController"]]></replacetoken>
-            <replacevalue><![CDATA[<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+            <replacevalue><![CDATA[<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="order" value="0"/>
+    </bean>
+
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="order" value="1"/>
         <property name="mappings">
             <value>
                 /index.html=filenameController
@@ -154,8 +166,7 @@
         <replace file="../../src/main/webapp/index.ftl">
             <replacetoken><![CDATA[<%@ include file="/taglibs.jsp"%>
 
-<title><fmt:message key="index.title"/></title>]]></replacetoken>
-            <replacevalue><![CDATA[<title>${rc.getMessage("index.title")}</title>]]></replacevalue>
+]]></replacetoken>
         </replace>
         
         <echo level="info">To generate IDE project files, use Maven 2 and run "mvn idea:idea" or "mvn eclipse:eclipse"</echo>

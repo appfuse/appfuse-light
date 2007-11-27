@@ -26,12 +26,12 @@
         <replacevalue><![CDATA[<dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
-            <version>2.0.9</version>
+            <version>2.0.11</version>
         </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-spring-plugin</artifactId>
-            <version>2.0.9</version>
+            <version>2.0.11</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -58,22 +58,14 @@
             <fileset dir="../..">
                 <include name="**/UserController*.java"/>
                 <include name="**/UserFormController*.java"/>
-                <include name="**/action-servlet.xml"/>
+                <include name="**/dispatcher-servlet.xml"/>
                 <include name="**/*validation.xml"/>
                 <include name="**/validator*"/>
                 <exclude name="extras/**"/>
             </fileset>
         </delete>
         
-        <echo level="info">Configuring web.xml for Struts</echo>
-        <!-- Add action-servlet.xml as a context files -->
-        <replace file="../../src/main/webapp/WEB-INF/web.xml">
-            <replacetoken><![CDATA[<param-value>/WEB-INF/applicationContext*.xml</param-value>]]></replacetoken>
-            <replacevalue><![CDATA[<param-value>
-            /WEB-INF/applicationContext*.xml
-            /WEB-INF/action-servlet.xml
-        </param-value>]]></replacevalue>
-        </replace>
+        <echo level="info">Configuring web.xml for Struts 2</echo>
         <!-- Add Struts Filter -->
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
             <replacetoken><![CDATA[<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
@@ -130,7 +122,7 @@
             <replacetoken><![CDATA[
 
     <servlet>
-        <servlet-name>action</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>]]></replacetoken>
@@ -141,7 +133,7 @@
             <replacetoken><![CDATA[
 
     <servlet-mapping>
-        <servlet-name>action</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>]]></replacetoken>
         </replace>

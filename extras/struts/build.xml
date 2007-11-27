@@ -24,6 +24,11 @@
             </exclusions>
         </dependency>]]></replacetoken>
         <replacevalue><![CDATA[<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc-struts</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <dependency>
             <groupId>struts</groupId>
             <artifactId>struts</artifactId>
             <version>1.2.9</version>
@@ -52,7 +57,7 @@
             <fileset dir="../..">
                 <include name="**/UserController*.java"/>
                 <include name="**/UserFormController*.java"/>
-                <include name="**/action-servlet.xml"/>
+                <include name="**/dispatcher-servlet.xml"/>
                 <include name="**/*validation.xml"/>
                 <exclude name="extras/**"/>
             </fileset>
@@ -62,6 +67,12 @@
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
             <replacetoken>org.springframework.web.servlet.DispatcherServlet</replacetoken>
             <replacevalue>org.apache.struts.action.ActionServlet</replacevalue>
+        </replace>
+
+        <!-- Change name from dispatcher to action -->
+        <replace file="../../src/main/webapp/WEB-INF/web.xml">
+            <replacetoken><![CDATA[>dispatcher<]]></replacetoken>
+            <replacevalue><![CDATA[>action<]]></replacevalue>
         </replace>
 
         <echo level="info">Installing Struts JARs and .java files</echo>

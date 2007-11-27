@@ -13,24 +13,23 @@ public class UserActionTest extends AbstractDependencyInjectionSpringContextTest
     private UserAction action;
     private String userId;
 
-    public void setUserAction(UserAction action) {
-        this.action = action;
-    }
-
     protected String[] getConfigLocations() {
-        return new String[] {"/WEB-INF/applicationContext*.xml", "/WEB-INF/action-servlet.xml"};
+        return new String[] {"/WEB-INF/applicationContext*.xml"};
     }
 
     protected void onSetUp() throws Exception {
         // grab the UserManager from the ApplicationContext or mock it
-        UserManager mgr = (UserManager) applicationContext.getBean("userManager");
+        UserManager userManager = (UserManager) applicationContext.getBean("userManager");
 
         // add a test user to the database
         User user = new User();
         user.setFirstName("Jack");
         user.setLastName("Raible");
-        mgr.saveUser(user);
+        userManager.saveUser(user);
         userId = user.getId().toString();
+
+        action = new UserAction();
+        action.setUserManager(userManager);
 
         ActionContext.getContext().setSession(new HashMap());
     }

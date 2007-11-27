@@ -12,7 +12,7 @@
 </tr>
 </thead>
 <tbody>
-<#list users as user>
+<#list userList as user>
 <#if user_index % 2 == 0> <tr class="odd"> 
 <#else> <tr class="even"> 
 </#if>

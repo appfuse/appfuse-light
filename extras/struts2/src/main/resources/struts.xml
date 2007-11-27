@@ -49,26 +49,26 @@
         </global-exception-mappings>
 
         <!-- List of Users -->
-        <action name="users" class="userAction" method="list">
+        <action name="users" class="org.appfuse.web.UserAction" method="list">
             <result name="success">userList.jsp</result>
             <result name="input">userList.jsp</result>
         </action>
 
         <!-- Edit User -->
-        <action name="editUser" class="userAction" method="edit">
+        <action name="editUser" class="org.appfuse.web.UserAction" method="edit">
             <result name="success">userForm.jsp</result>
             <result name="input">userList.jsp</result>
         </action>
 
         <!-- Save User -->
-        <action name="saveUser" class="userAction">
+        <action name="saveUser" class="org.appfuse.web.UserAction">
             <result name="cancel" type="redirect">users.html</result>
             <result name="delete" type="redirect">users.html</result>
             <result name="input">userForm.jsp</result>
             <result name="success" type="chain">saveUserWithValidation</result>
         </action>
 
-        <action name="saveUserWithValidation" class="userAction" method="save">
+        <action name="saveUserWithValidation" class="org.appfuse.web.UserAction" method="save">
             <result name="input">userForm.jsp</result>
             <result name="success" type="redirect">users.html</result>
         </action>

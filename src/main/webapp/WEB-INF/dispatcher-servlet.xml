@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
@@ -11,19 +13,12 @@
             </props>
         </property>
     </bean>
-    
-    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
 
-    <bean id="userController" class="org.appfuse.web.UserController">
-        <property name="userManager" ref="userManager"/>
-    </bean>
+    <!-- Activates mapping of @Controller -->
+    <context:component-scan base-package="org.appfuse.web"/>
 
-    <bean id="userFormController" class="org.appfuse.web.UserFormController">
-        <property name="validator" ref="beanValidator"/>
-        <property name="formView" value="userForm"/>
-        <property name="successView" value="redirect:users.html"/>
-        <property name="userManager" ref="userManager"/>
-    </bean>
+    <!-- Activates @Autowired for Controllers -->
+	<context:annotation-config/>
 
     <bean id="filenameController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
 
