@@ -247,6 +247,7 @@
                     <exclude name="**/.#*"/>
                     <exclude name="test-all*"/>
                     <exclude name="release.*"/>
+                    <exclude name="bamboo.*"/>
                     <include name="**"/>
                 </patternset>
             </zipfileset>

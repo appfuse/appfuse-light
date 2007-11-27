@@ -3,4 +3,8 @@ jdbc.url=jdbc:postgresql://localhost/appfuse_light
 jdbc.username=postgres
 jdbc.password=postgres
 
+# You can remove this property if you're not using Hibernate
 hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# You can remove this property if you're not using iBATIS or Spring JDBC
+maxValueIncrementer=org.springframework.jdbc.support.incrementer.PostgreSQLSequenceMaxValueIncrementer
