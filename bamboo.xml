@@ -145,7 +145,7 @@
             <exec dir="@{dir}" executable="mvn" os="Mac OS X" failonerror="true">
                 <arg line="@{arg}"/>
             </exec>
-            <exec dir="@{dir}" executable="mvn.sh" os="Linux" failonerror="true">
+            <exec dir="@{dir}" executable="mvn" os="Linux" failonerror="true">
                 <arg line="@{arg}"/>
             </exec>
         </sequential>
