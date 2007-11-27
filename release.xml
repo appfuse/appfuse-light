@@ -4,12 +4,6 @@
     <property name="project.name" value="${webapp.name}"/>
     <property name="distribution.dir" value="../appfuse-light-dist"/>
 
-    <!-- Check that javanettasks.jar is in $ANT_HOME/lib -->
-    <available classname="org.kohsuke.jnt.FileStatus" property="jar.present"/>
-    <fail unless="jar.present"
-          message="Please download javanettasks.jar (and its dependencies) into ${env.ANT_HOME}/lib"/>
-
-    <taskdef resource="org/kohsuke/javanettasks.properties"/>
     <artifact:dependencies pathId="tasks.classpath">
         <dependency groupId="ant-contrib" artifactId="ant-contrib" version="20020829"/>
         <dependency groupId="org.tigris.antelope" artifactId="antelopetasks" version="3.2.10"/>
@@ -113,6 +107,7 @@
                 <fileset dir="${basedir}">
                     <exclude name="www/**"/>
                     <exclude name="release.*"/>
+                    <exclude name="bamboo.*"/>
                     <exclude name="test-*"/>
                 </fileset>
             </copy>
@@ -161,6 +156,13 @@
     </target>
     
     <target name="upload" description="Uploads distributions to java.net">
+        <!-- Check that javanettasks.jar is in $ANT_HOME/lib -->
+        <available classname="org.kohsuke.jnt.FileStatus" property="jar.present"/>
+        <fail unless="jar.present"
+              message="Please download javanettasks.jar (and its dependencies) into ${env.ANT_HOME}/lib"/>
+    
+        <taskdef resource="org/kohsuke/javanettasks.properties"/>
+    
         <foreach param="zipFile" target="fileupload">
             <fileset dir="${distribution.dir}/distribution">
                 <include name="*.zip"/>
