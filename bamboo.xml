@@ -13,10 +13,10 @@
         <delete dir="${distribution.dir}"/>
     </target>
 
-    <target name="create-distros" description="Create the distributions">
+    <target name="create-projects" description="Create the distributions">
         <mkdir dir="${distribution.dir}"/>
         <parallel>
-            <createproject web="spring" persistence="hibernate"/>
+            <!--createproject web="spring" persistence="hibernate"/>
             <createproject web="spring" persistence="ibatis"/>
             <createproject web="spring" persistence="jdo"/>
             <createproject web="spring" persistence="ojb"/>
@@ -44,7 +44,7 @@
             <createproject web="spring-velocity" persistence="ibatis"/>
             <createproject web="spring-velocity" persistence="jdo"/>
             <createproject web="spring-velocity" persistence="ojb"/>
-            <createproject web="spring-velocity" persistence="spring-jdbc"/>
+            <createproject web="spring-velocity" persistence="spring-jdbc"/-->
     
             <createproject web="jsf" persistence="hibernate"/>
             <createproject web="jsf" persistence="ibatis"/>
@@ -90,7 +90,7 @@
         </parallel>
     </target>
 
-    <target name="test-projects" depends="create-distros" description="Runs all the tests in the various distributions">
+    <target name="test-projects" depends="create-projects" description="Runs all the tests in the various distributions">
         <foreach param="project" target="test-distro">
             <fileset dir="${distribution.dir}">
                 <include name="appfuse-light-*"/>
@@ -100,8 +100,8 @@
     
     <target name="test-distro">
         <!-- For some reason, Cargo hangs when starting appfuse-light-jdo, testing with Maven instead -->
-        <!--ant dir="${project}" inheritall="false" target="test-all"/-->
-        <maven dir="${project}" arg="integration-test"/>
+        <ant dir="${project}" inheritAll="false" target="test-all"/>
+        <!--maven dir="${project}" arg="integration-test"/-->
     </target>
     
     <macrodef name="createproject">
@@ -120,6 +120,20 @@
                 </fileset>
             </copy>
             
+            <if>
+                <equals arg1="@{web}" arg2="spring"/>
+                <else>
+                    <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras/@{web}" target="install"/>
+                </else>
+            </if>
+            <if>
+               <equals arg1="@{persistence}" arg2="hibernate"/>
+               <else>
+                    <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras/@{persistence}" target="install"/>
+                </else>
+            </if>
+            <delete dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras"/>
+
             <!-- Allow overriding of the username and password to database -->
             <property name="jdbc.username" value="root"/>
             <property name="jdbc.password" value=""/>
@@ -129,19 +143,6 @@
             <replace file="${distribution.dir}/appfuse-light-@{web}-@{persistence}/src/main/resources/jdbc.properties" 
                 token="jdbc.password=" value="jdbc.password=${jdbc.password}"/>
             
-            <if>
-                <equals arg1="@{web}" arg2="spring"/>
-                <else>
-                    <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras/@{web}" target="install"/>
-                </else>
-            </if>
-            <if>
-                <equals arg1="@{persistence}" arg2="hibernate"/>
-               <else>
-                    <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras/@{persistence}" target="install"/>
-                </else>
-            </if>
-            <delete dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras"/>
         </sequential>
     </macrodef>
     
