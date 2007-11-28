@@ -138,13 +138,14 @@
 
     <target name="test-tomcat" depends="war"
         description="Starts Tomcat, runs jWebUnit tests, stops Tomcat">
-
+        <property name="cargo.port" value="25888"/>
         <property name="cargo.wait" value="false"/>
         <taskdef resource="cargo.tasks" classpathref="test.classpath"/>
 
         <cargo containerId="${cargo.server}" id="cargo.server" home="${server.home}" 
             action="start" wait="${cargo.wait}">
             <configuration>
+                <property name="cargo.servlet.port" value="${cargo.port}"/>
                 <deployable type="war" file="${basedir}/${build.dir}/${webapp.name}.war">
                     <property name="context" value="ROOT"/>
                 </deployable>
