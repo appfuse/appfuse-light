@@ -20,13 +20,13 @@ public class UserController {
         this.userManager = userManager;
     }
 
-    @RequestMapping("/users.html")
+    @RequestMapping("/users.*")
     public String execute(ModelMap model) {
         model.addAttribute(userManager.getUsers());
         return "userList";
     }
 
-    @RequestMapping("/user-ajax.html")
+    @RequestMapping("/user-ajax.*")
     public ModelAndView updateFirstName(@RequestParam("value") String value, @RequestParam("id") String id) {
         User user = userManager.getUser(id);
         user.setFirstName(value);
