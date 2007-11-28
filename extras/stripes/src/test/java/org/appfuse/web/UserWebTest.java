@@ -9,7 +9,7 @@ public class UserWebTest extends WebTestCase {
 
     public UserWebTest(String name) {
         super(name);
-        getTestContext().setBaseUrl("http://localhost:8080");
+        getTestContext().setBaseUrl("http://localhost:25888");
         getTestContext().setResourceBundleName("messages");
         messages = ResourceBundle.getBundle("messages");
         //getTestContext().setLocale(Locale.GERMAN);

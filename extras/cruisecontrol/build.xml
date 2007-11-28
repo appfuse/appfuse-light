@@ -23,14 +23,14 @@
 
     <target name="test" depends="cvs">
         <echo>Changing port for Cargo and jWebUnit tests</echo>
-        <replace dir="projects/${ant.project.name}" token=":8080" value=":8181">
+        <!--replace dir="projects/${ant.project.name}" token=":25888" value=":8181">
             <include name="**/*WebTest.java"/>
         </replace>
         <replace file="projects/${ant.project.name}/build.xml">
             <replacetoken><![CDATA[<configuration dir="${test.dir}/${cargo.server}">]]></replacetoken>
             <replacevalue><![CDATA[<configuration dir="${test.dir}/${cargo.server}">
                 <property name="cargo.servlet.port" value="8181"/>]]></replacevalue>
-        </replace>
+        </replace-->
 
         <ant dir="projects/${ant.project.name}" target="test-all"/>
     </target>

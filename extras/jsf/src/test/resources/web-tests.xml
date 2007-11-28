@@ -6,7 +6,7 @@
          keys, rather than values -->
     <property file="${resources.dir}/messages.properties"/>
     <property name="host" value="localhost"/>
-    <property name="port" value="8080"/>
+    <property name="port" value="25888"/>
 
     <!-- runs all targets -->
     <target name="run-all-tests" depends="UserTests"

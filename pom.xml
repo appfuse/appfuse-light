@@ -358,7 +358,7 @@
 
     <properties>
         <cargo.host>localhost</cargo.host>
-        <cargo.port>8080</cargo.port>
+        <cargo.port>25888</cargo.port>
         <cargo.wait>false</cargo.wait>
         <tomcat.version>6.0.14</tomcat.version>
     </properties>
