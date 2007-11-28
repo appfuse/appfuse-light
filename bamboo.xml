@@ -116,6 +116,7 @@
                     <exclude name="release.*"/>
                     <exclude name="bamboo.*"/>
                     <exclude name="test-*"/>
+                    <exclude name="target/**"/>
                 </fileset>
             </copy>
             <if>
