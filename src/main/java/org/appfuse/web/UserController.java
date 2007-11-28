@@ -18,7 +18,7 @@ public class UserController {
 
     @RequestMapping("/users.*")
     public String execute(ModelMap model) {
-        model.addAttribute(userManager.getUsers());
+        model.addAttribute("userList", userManager.getUsers());
         return "userList";
     }
 }
