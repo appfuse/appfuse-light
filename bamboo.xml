@@ -17,7 +17,7 @@
         <mkdir dir="${distribution.dir}"/>
         <parallel>
             <createproject web="spring" persistence="hibernate"/>
-            <!--createproject web="spring" persistence="ibatis"/>
+            <createproject web="spring" persistence="ibatis"/>
             <createproject web="spring" persistence="jdo"/>
             <createproject web="spring" persistence="ojb"/>
             <createproject web="spring" persistence="spring-jdbc"/>
@@ -86,7 +86,7 @@
             <createproject web="wicket" persistence="ibatis"/>
             <createproject web="wicket" persistence="jdo"/>
             <createproject web="wicket" persistence="ojb"/>
-            <createproject web="wicket" persistence="spring-jdbc"/-->
+            <createproject web="wicket" persistence="spring-jdbc"/>
         </parallel>
     </target>
 
