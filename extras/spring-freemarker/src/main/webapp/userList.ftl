@@ -17,8 +17,8 @@
 <#else> <tr class="even"> 
 </#if>
     <td><a href="userform.html?id=${user.id}">${user.id}</a></td>
-    <td>${user.firstName}</td>
-    <td>${user.lastName}</td>
+    <td>${user.firstName?html}</td>
+    <td>${user.lastName?html}</td>
     <td><#if user.birthday??>${user.birthday?date}</#if></td>
 </tr>
 </#list>

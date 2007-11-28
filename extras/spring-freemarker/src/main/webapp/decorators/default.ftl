@@ -1,9 +1,10 @@
+[#ftl]
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title><#if title != ''>${title}<#else>Welcome</#if> | ${rc.getMessage("webapp.name")}</title>
+    <title>[#if title != '']${title}[#else]Welcome[/#if] | ${rc.getMessage("webapp.name")}</title>
     <meta http-equiv="Cache-Control" content="no-store"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
@@ -37,13 +38,13 @@
 
         <div id="main">
             <h1>${title}</h1>
-            <#include "/messages.ftl"/>
+            [#include "/messages.ftl"/]
             ${body}
 
             <div id="underground">
-                <#if page.getProperty("page.underground")?exists>
+                [#if page.getProperty("page.underground")?exists]
                 ${page.getProperty("page.underground")}
-                </#if>
+                [/#if]
             </div>
         </div>
 
