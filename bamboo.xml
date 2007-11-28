@@ -17,7 +17,7 @@
         <mkdir dir="${distribution.dir}"/>
         <parallel>
             <createproject web="spring" persistence="hibernate"/>
-            <createproject web="spring" persistence="ibatis"/>
+            <!--createproject web="spring" persistence="ibatis"/>
             <createproject web="spring" persistence="jdo"/>
             <createproject web="spring" persistence="ojb"/>
             <createproject web="spring" persistence="spring-jdbc"/>
@@ -86,7 +86,7 @@
             <createproject web="wicket" persistence="ibatis"/>
             <createproject web="wicket" persistence="jdo"/>
             <createproject web="wicket" persistence="ojb"/>
-            <createproject web="wicket" persistence="spring-jdbc"/>
+            <createproject web="wicket" persistence="spring-jdbc"/-->
         </parallel>
     </target>
 
@@ -119,6 +119,16 @@
                     <exclude name="target/**"/>
                 </fileset>
             </copy>
+            
+            <!-- Allow overriding of the username and password to database -->
+            <property name="jdbc.username" value="root"/>
+            <property name="jdbc.password" value=""/>
+            
+            <replace file="${distribution.dir}/appfuse-light-@{web}-@{persistence}/src/main/resources/jdbc.properties" 
+                token="jdbc.username=root" value="jdbc.username=${jdbc.username}"/>
+            <replace file="${distribution.dir}/appfuse-light-@{web}-@{persistence}/src/main/resources/jdbc.properties" 
+                token="jdbc.password=" value="jdbc.password=${jdbc.password}"/>
+            
             <if>
                 <equals arg1="@{web}" arg2="spring"/>
                 <else>
