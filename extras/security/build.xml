@@ -38,8 +38,8 @@
                     <artifactId>spring-support</artifactId>
                 </exclusion>
             </exclusions>
-          </dependency>
-          <dependency>
+        </dependency>
+        <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
             <version>1.3.0</version>

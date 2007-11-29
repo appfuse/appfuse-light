@@ -21,17 +21,32 @@
             <groupId>org.springmodules</groupId>
             <artifactId>spring-modules-ojb</artifactId>
             <version>0.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>hsqldb</groupId>
+                    <artifactId>hsqldb</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jdo</groupId>
+                    <artifactId>jdori</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>ojb</groupId>
             <artifactId>db-ojb</artifactId>
             <version>1.0.3</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xerces</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+        <!-- For some reason, this is needed for HttpUnit when testing after Acegi has been installed -->
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.8.1</version>
+            <scope>test</scope>
         </dependency>]]></replacevalue>
         </replace>
 
