@@ -107,7 +107,9 @@
         <attribute name="persistence"/>
         <attribute name="web"/>
         <sequential>
-            <property name="release.dir" value="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
+            <!-- Don't put ${distribution.dir}/appfuse-light-@{web}-@{persistence} into a property. -->
+            <!-- It won't work because of Ant's property immutability and the <parallel> task.      -->
+            <delete dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}" failonerror="false"/>
             <mkdir dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
             <copy todir="${distribution.dir}/appfuse-light-@{web}-@{persistence}">
                 <fileset dir="${basedir}">
@@ -120,17 +122,19 @@
             <if>
                 <equals arg1="@{web}" arg2="spring"/>
                 <else>
+                    <echo>Installing @{web}...</echo>
                     <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras/@{web}" target="install"/>
                 </else>
             </if>
             <if>
-                <equals arg1="@{persistence}" arg2="hibernate"/>
+               <equals arg1="@{persistence}" arg2="hibernate"/>
                <else>
+                    <echo>Installing @{persistence}...</echo>
                     <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras/@{persistence}" target="install"/>
                 </else>
             </if>
             <delete dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}/extras"/>
-            <projectfiles dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
+            <!--projectfiles dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/-->
             <ant dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}" target="dist">
                 <property name="webapp.name" value="appfuse-light-@{web}-@{persistence}"/>
             </ant>
@@ -157,8 +161,8 @@
     
     <target name="test-distro">
         <!-- For some reason, Cargo hangs when starting appfuse-light-jdo, testing with Maven instead -->
-        <!--<ant dir="${project}" inheritall="false" target="test-all"/>-->
-        <maven dir="${project}" arg="integration-test"/>
+        <ant dir="${project}" inheritall="false" target="test-all"/>
+        <!--maven dir="${project}" arg="integration-test"/-->
     </target>
     
     <target name="upload" description="Uploads distributions to java.net">

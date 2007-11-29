@@ -16,7 +16,7 @@
     <target name="create-projects" description="Create the distributions">
         <mkdir dir="${distribution.dir}"/>
         <parallel>
-            <!--createproject web="spring" persistence="hibernate"/>
+            <createproject web="spring" persistence="hibernate"/>
             <createproject web="spring" persistence="ibatis"/>
             <createproject web="spring" persistence="jdo"/>
             <createproject web="spring" persistence="ojb"/>
@@ -44,7 +44,7 @@
             <createproject web="spring-velocity" persistence="ibatis"/>
             <createproject web="spring-velocity" persistence="jdo"/>
             <createproject web="spring-velocity" persistence="ojb"/>
-            <createproject web="spring-velocity" persistence="spring-jdbc"/-->
+            <createproject web="spring-velocity" persistence="spring-jdbc"/>
     
             <createproject web="jsf" persistence="hibernate"/>
             <createproject web="jsf" persistence="ibatis"/>
@@ -108,7 +108,6 @@
         <attribute name="persistence"/>
         <attribute name="web"/>
         <sequential>
-            <property name="release.dir" value="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
             <mkdir dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
             <copy todir="${distribution.dir}/appfuse-light-@{web}-@{persistence}">
                 <fileset dir="${basedir}">
