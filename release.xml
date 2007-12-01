@@ -161,7 +161,7 @@
     
     <target name="test-distro">
         <!-- For some reason, Cargo hangs when starting appfuse-light-jdo, testing with Maven instead -->
-        <ant dir="${project}" inheritall="false" target="test-all"/>
+        <ant dir="${project}" inheritAll="false" target="test-all"/>
         <!--maven dir="${project}" arg="integration-test"/-->
     </target>
     
