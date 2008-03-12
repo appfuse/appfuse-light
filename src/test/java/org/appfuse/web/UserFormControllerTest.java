@@ -32,7 +32,7 @@ public class UserFormControllerTest extends MockObjectTestCase {
         mockManager = new Mock(UserManager.class);
         
         // manually set properties (dependencies) on userFormController
-        c.setUserManager((UserManager) mockManager.proxy());
+        c.userManager = (UserManager) mockManager.proxy();
         c.setFormView("userForm");
         
         // set context with messages avoid NPE when controller calls 

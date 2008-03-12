@@ -27,16 +27,11 @@ import java.util.Date;
 public class UserFormController extends SimpleFormController {
     private final Log log = LogFactory.getLog(UserFormController.class);
     @Autowired
-    private UserManager userManager;
-
-    // needed for setting mocks in tests
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
-    }
+    UserManager userManager;
     
     @Autowired(required = false)
 	@Qualifier("beanValidator")
-	private Validator validator;
+	Validator validator;
 
     public UserFormController() {
         setCommandName("user");

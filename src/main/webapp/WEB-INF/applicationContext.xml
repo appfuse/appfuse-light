@@ -28,7 +28,6 @@
         </tx:attributes>
     </tx:advice>
 
-    <bean id="userManager" class="org.appfuse.service.impl.UserManagerImpl">
-        <property name="userDao" ref="userDao"/>
-    </bean>
+    <!-- Scans for @Repository, @Service and @Component -->
+    <context:component-scan base-package="org.appfuse"/>
 </beans>

@@ -9,12 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserController {
     @Autowired
-    private UserManager userManager;
-
-    // need for testing
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
-    }
+    UserManager userManager;
 
     @RequestMapping("/users.*")
     public String execute(ModelMap model) {

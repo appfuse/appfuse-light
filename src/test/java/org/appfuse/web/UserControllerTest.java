@@ -15,7 +15,7 @@ public class UserControllerTest extends MockObjectTestCase {
 
     protected void setUp() throws Exception {
         mockManager = new Mock(UserManager.class);
-        c.setUserManager((UserManager) mockManager.proxy());
+        c.userManager = (UserManager) mockManager.proxy();
     }
 
     public void testGetUsers() throws Exception {
