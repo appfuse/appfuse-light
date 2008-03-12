@@ -15,7 +15,7 @@
             <replacetoken><![CDATA[<dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
-            <version>3.2.5.ga</version>
+            <version>3.2.6.ga</version>
         </dependency>]]></replacetoken>
         <replacevalue><![CDATA[<dependency>
             <groupId>org.springmodules</groupId>
