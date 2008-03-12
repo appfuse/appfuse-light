@@ -4,6 +4,7 @@ import org.apache.wicket.Page;
 import org.apache.wicket.extensions.yui.calendar.DateField;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.ComponentFeedbackPanel;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -17,25 +18,25 @@ import org.appfuse.service.UserManager;
 public class UserForm extends BasePage {
     @SpringBean
     private UserManager userManager;
-    private final Page backPage;
+    private final Page responsePage;
 
     /**
      * Constructor user to create a new user
      *
-     * @param backPage page to navigate to after this page completes its work
+     * @param responsePage page to navigate to after this page completes its work
      */
-    public UserForm(Page backPage) {
-        this(backPage, new User());
+    public UserForm(Page responsePage) {
+        this(responsePage, new User());
     }
 
     /**
      * Constructor used to edit an user
      *
-     * @param backPage page to navigate to after this page completes its work
+     * @param responsePage page to navigate to after this page completes its work
      * @param user     user to edit
      */
-    public UserForm(final Page backPage, User user) {
-        this.backPage = backPage;
+    public UserForm(final Page responsePage, User user) {
+        this.responsePage = responsePage;
 
         // Create and add the form
         EditForm form = new EditForm("user-form", user) {
@@ -65,10 +66,12 @@ public class UserForm extends BasePage {
         String message = MapVariableInterpolator.interpolate(getLocalizer().getString("user.saved", this),
                 new MicroMap("name", user.getFullName()));
         getSession().info(message);
-        backPage.get("feedback").setVisible(true);
+        FeedbackPanel feedback = (FeedbackPanel) responsePage.get("feedback");
+        feedback.setVisible(true);
+        feedback.setEscapeModelStrings(true);
 
         setRedirect(true);
-        setResponsePage(backPage);
+        setResponsePage(responsePage);
     }
 
     /**
@@ -83,16 +86,16 @@ public class UserForm extends BasePage {
                 new MicroMap("name", user.getFullName()));
         getSession().info(message);
 
-        backPage.get("feedback").setVisible(true);
+        responsePage.get("feedback").setVisible(true);
         setRedirect(true);
-        setResponsePage(backPage);
+        setResponsePage(responsePage);
     }
 
     /**
      * Lister method for cancel action
      */
     private void onCancelEditing() {
-        setResponsePage(backPage);
+        setResponsePage(responsePage);
     }
 
     /**
