@@ -26,12 +26,12 @@
         <replacevalue><![CDATA[<dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-framework</artifactId>
-            <version>4.1.3</version>
+            <version>4.1.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-contrib</artifactId>
-            <version>4.1.3</version>
+            <version>4.1.5</version>
         </dependency>
         <dependency>
             <groupId>com.javaforge.tapestry</groupId>
@@ -62,7 +62,7 @@
 		<dependency>
             <groupId>net.sf.tacos</groupId>
             <artifactId>tacos-core</artifactId>
-            <version>4.1.0</version>
+            <version>4.1.1</version>
         </dependency>]]></replacevalue>
         </replace>
 
