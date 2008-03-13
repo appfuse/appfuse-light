@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.appfuse</groupId>
+    <artifactId>appfuse-light</artifactId>
+    <packaging>grails-app</packaging>
+    <name>appfuse-light</name>
+    <version>0.5-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.octo.mtg</groupId>
+                <artifactId>grails-maven-plugin</artifactId>
+                <version>0.2</version>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+    <!--dependencies>
+        <dependency>
+            <groupId>com.octo.mtg</groupId>
+            <artifactId>grails-1.0.1</artifactId>
+            <version>0.2</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies-->
+    <properties>
+        <grailsVersion>1.0.1</grailsVersion>
+        <grailsHome>${env.GRAILS_HOME}</grailsHome>
+    </properties>
+</project>

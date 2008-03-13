@@ -1,0 +1,8 @@
+open|/selenium-test
+clickAndWait|link=BookController
+clickAndWait|link=New Book
+type|title|book0b
+clickAndWait|//input[@value='Create']
+clickAndWait|link=Book List
+verifyTextPresent|book0b
+
