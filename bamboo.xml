@@ -108,6 +108,7 @@
         <attribute name="persistence"/>
         <attribute name="web"/>
         <sequential>
+        	<delete dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
             <mkdir dir="${distribution.dir}/appfuse-light-@{web}-@{persistence}"/>
             <copy todir="${distribution.dir}/appfuse-light-@{web}-@{persistence}">
                 <fileset dir="${basedir}">
