@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
+@RequestMapping("/userform.*")
 public class UserFormController extends SimpleFormController {
     private final Log log = LogFactory.getLog(UserFormController.class);
     @Autowired

@@ -20,7 +20,6 @@
     <!-- Activates @Autowired for Controllers -->
 	<context:annotation-config/>
 
-    <bean id="urlMapping" class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
     <bean id="filenameController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
 
     <!-- View Resolver for JSPs -->
