@@ -1,4 +1,4 @@
-<!-- This file is designed to install Acegi into AppFuse Light -->
+<!-- This file is designed to install Spring Security into AppFuse Light -->
 <project name="security" basedir="." default="help">
 
     <!-- common installation targets -->
@@ -6,28 +6,32 @@
     <import file="../common-build.xml"/>
 
     <!-- =================================================================== -->
-    <!-- Install Acegi Security                                              -->
+    <!-- Install Spring Security Security                                              -->
     <!-- =================================================================== -->
-    <target name="install" description="Installs Acegi into AppFuse Light">
+    <target name="install" description="Installs Spring Security into AppFuse Light">
         <echo level="info">Modifying pom.xml</echo>
 
-        <!-- Add Acegi and to the list of dependencies -->
+        <!-- Add Spring Security and to the list of dependencies -->
         <replace file="../../pom.xml">
             <replacetoken><![CDATA[    <dependencies>]]></replacetoken>
       <replacevalue><![CDATA[    <dependencies>
         <dependency>
-            <groupId>org.acegisecurity</groupId>
-            <artifactId>acegi-security</artifactId>
-            <version>1.0.5</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>2.0.1</version>
             <exclusions>
                 <!-- exclude older versions of Spring -->
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-core</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.springframework</groupId>
-                    <artifactId>spring-remoting</artifactId>
+                    <artifactId>spring-context</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -40,36 +44,55 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>2.0.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-jdbc</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-support</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>1.3.0</version>
+            <version>1.4.1</version>
         </dependency>]]></replacevalue>
         </replace>
         
-        <echo level="info">Configuring web.xml for Acegi Security</echo>
+        <echo level="info">Configuring web.xml for Spring Security</echo>
         <!-- Add security.xml to list of context files loaded by Spring -->
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
             <replacetoken>/WEB-INF/applicationContext*.xml</replacetoken>
             <replacevalue>/WEB-INF/applicationContext*.xml,/WEB-INF/security.xml</replacevalue>
         </replace>
 
-        <!-- Add Acegi Security filter -->
+        <!-- Add Spring Security Security filter -->
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
             <replacetoken><![CDATA[<filter>
         <filter-name>sitemesh</filter-name>]]></replacetoken>
             <replacevalue><![CDATA[<filter>
         <filter-name>securityFilter</filter-name>
-        <filter-class>org.acegisecurity.util.FilterToBeanProxy</filter-class>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
         <init-param>
-            <param-name>targetClass</param-name>
-            <param-value>org.acegisecurity.util.FilterChainProxy</param-value>
+            <param-name>targetBeanName</param-name>
+            <param-value>springSecurityFilterChain</param-value>
         </init-param>
     </filter>
 
     <filter>
         <filter-name>sitemesh</filter-name>]]></replacevalue>
         </replace>
-        <!-- Add Acegi Security filter mapping -->
+        <!-- Add Spring Security Security filter mapping -->
         <replace file="../../src/main/webapp/WEB-INF/web.xml">
             <replacetoken><![CDATA[<filter-mapping>
         <filter-name>sitemesh</filter-name>]]></replacetoken>
@@ -106,15 +129,15 @@
         <echo level="info">Adding security-related features to decorator and form</echo>
         <replace file="../../src/main/webapp/taglibs.jsp">
             <replacetoken><![CDATA[<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>]]></replacetoken>
-            <replacevalue><![CDATA[<%@ taglib uri="http://acegisecurity.org/authz" prefix="authz" %>
+            <replacevalue><![CDATA[<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>]]></replacevalue>
         </replace>
         <!-- won't work for freemarker or velocity -->
         <replace file="../../src/main/webapp/decorators/default.jsp">
             <replacetoken><![CDATA[<%@ include file="/messages.jsp"%>]]></replacetoken>
-            <replacevalue><![CDATA[<authz:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+            <replacevalue><![CDATA[<security:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
                 <div class="logout"><a href="${ctx}/logout.jsp">Logout</a></div>
-            </authz:authorize>
+            </security:authorize>
             <%@ include file="/messages.jsp"%>]]></replacevalue>
         </replace>
         <replace file="../../src/main/webapp/userForm.jsp">
@@ -122,9 +145,9 @@
           <input type="submit" class="button" name="delete" value="Delete"/>
         </c:if>]]></replacetoken>
             <replacetoken><![CDATA[<c:if test="${not empty param.id}">
-        <authz:authorize ifAllGranted="ROLE_ADMIN">
+        <security:authorize ifAllGranted="ROLE_ADMIN">
           <input type="submit" class="button" name="delete" value="Delete"/>
-        </authz:authorize>
+        </security:authorize>
         </c:if>]]></replacetoken>
         </replace>
         

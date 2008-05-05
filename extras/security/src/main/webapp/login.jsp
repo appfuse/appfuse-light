@@ -12,7 +12,7 @@
 <form action="<c:url value="/j_security_check"/>" id="loginForm" method="post">
 <p>
     <c:if test="${param.error == 'true'}">
-        <div class="error">${sessionScope.ACEGI_SECURITY_LAST_EXCEPTION.message}</div>
+        <div class="error">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION_KEY.message}</div>
     </c:if>
 
     <label for="username">Username</label><br/>
