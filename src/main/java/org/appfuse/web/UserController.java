@@ -11,7 +11,6 @@ public class UserController {
     @Autowired
     UserManager userManager;
 
-    @RequestMapping("/users.*")
     public String execute(ModelMap model) {
         model.addAttribute("userList", userManager.getUsers());
         return "userList";
