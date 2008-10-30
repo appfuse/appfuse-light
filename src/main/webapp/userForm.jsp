@@ -2,11 +2,6 @@
 
 <head>
     <title><fmt:message key="userForm.title"/></title>
-    <%-- Calendar Setup - put in decorator if needed in multiple pages --%>
-    <link  href="${ctx}/styles/calendar.css"  type="text/css"  rel="stylesheet"/>
-    <script type="text/javascript" src="${ctx}/scripts/calendar.js"></script>
-    <script type="text/javascript" src="${ctx}/scripts/calendar-setup.js"></script>
-    <script type="text/javascript" src="${ctx}/scripts/lang/calendar-en.js"></script>
 </head>
 
 <p>Please fill in user's information below:</p>
@@ -14,7 +9,22 @@
 <form:form commandName="user" method="post" action="userform.html" onsubmit="return validateUser(this)" id="userForm">
 <form:errors path="*" cssClass="error"/>
 <form:hidden path="id"/>
+<form:hidden path="version"/>
 <table class="detail">
+<tr>
+    <th><label for="username"><fmt:message key="user.username"/>:</label></th>
+    <td>
+        <form:input path="username" id="username"/>
+        <form:errors path="username" cssClass="fieldError"/>
+    </td>
+</tr>
+<tr>
+    <th><label for="password"><fmt:message key="user.password"/>:</label></th>
+    <td>
+        <form:password path="password" id="password"/>
+        <form:errors path="password" cssClass="password"/>
+    </td>
+</tr>
 <tr>
     <th><label for="firstName"><fmt:message key="user.firstName"/>:</label></th>
     <td>
@@ -30,11 +40,10 @@
     </td>
 </tr>
 <tr>
-    <th><label for="birthday"><fmt:message key="user.birthday"/>:</label></th>
+    <th><label for="email" class="required">* <fmt:message key="user.email"/>:</label></th>
     <td>
-        <form:input path="birthday" id="birthday" size="11"/>
-        <button id="birthdayCal" type="button" class="button"> ... </button> [<fmt:message key="date.format"/>]
-        <form:errors path="birthday" cssClass="fieldError"/>
+        <form:input path="email" id="email"/>
+        <form:errors path="email" cssClass="fieldError"/>
     </td>
 </tr>
 <tr>
@@ -52,13 +61,6 @@
 
 <script type="text/javascript">
     Form.focusFirstElement($('userForm'));
-    Calendar.setup(
-    {
-        inputField  : "birthday",      // id of the input field
-        ifFormat    : "%m/%d/%Y",      // the date format
-        button      : "birthdayCal"    // id of the button
-    }
-    );
 </script>
 
 <v:javascript formName="user" staticJavascript="false" xhtml="true" cdata="false"/>

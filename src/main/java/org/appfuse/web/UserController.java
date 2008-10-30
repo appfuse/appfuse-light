@@ -13,7 +13,7 @@ public class UserController {
 
     @RequestMapping("/users.*")
     public String execute(ModelMap model) {
-        model.addAttribute("userList", userManager.getUsers());
+        model.addAttribute("userList", userManager.getUsers(null));
         return "userList";
     }
 }

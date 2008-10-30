@@ -1,21 +1,23 @@
 package org.appfuse.web;
 
-import net.sourceforge.jwebunit.WebTestCase;
+import net.sourceforge.jwebunit.html.Table;
+import net.sourceforge.jwebunit.html.Row;
+import net.sourceforge.jwebunit.html.Cell;
+import net.sourceforge.jwebunit.junit.WebTestCase;
+
 
 import java.util.ResourceBundle;
 
 public class UserWebTest extends WebTestCase {
     private ResourceBundle messages;
-
-    public UserWebTest(String name) {
-        super(name);
+    
+    public void setUp() {
+        setScriptingEnabled(false);
         getTestContext().setBaseUrl("http://localhost:25888");
         getTestContext().setResourceBundleName("messages");
         messages = ResourceBundle.getBundle("messages");
-        //getTestContext().setLocale(Locale.GERMAN);
-        //getTestContext().getWebClient().setHeaderField("Accept-Language", "de");
     }
-
+    
     public void testWelcomePage() {
         beginAt("/");
         assertTitleKeyMatches("index.title");
@@ -24,8 +26,8 @@ public class UserWebTest extends WebTestCase {
     public void testAddUser() {
         beginAt("/userform.html");
         assertTitleKeyMatches("userForm.title");
-        setFormElement("firstName", "Spring");
-        setFormElement("lastName", "User");
+        setTextField("firstName", "Spring");
+        setTextField("lastName", "User");
         submit("save");
         assertTitleKeyMatches("userList.title");
     }
@@ -43,7 +45,7 @@ public class UserWebTest extends WebTestCase {
 
     public void testEditUser() {
         beginAt("/userform.html?id=" + getInsertedUserId());
-        assertFormElementEquals("firstName", "Spring");
+        assertTextFieldEquals("firstName", "Spring");
         submit("save");
         assertTitleKeyMatches("userList.title");
     }
@@ -64,9 +66,9 @@ public class UserWebTest extends WebTestCase {
         beginAt("/users.html");
         assertTablePresent("userList");
         assertTextInTable("userList", "Spring");
-        String[][] tableCellValues =
-                getDialog().getSparseTableBySummaryOrId("userList");
-        return tableCellValues[tableCellValues.length-1][0];
+        Table table = getTable("userList");
+        Cell cell = (Cell) ((Row) table.getRows().get(table.getRowCount()-1)).getCells().get(0);
+        return cell.getValue();
     }
 
     protected void assertTitleKeyMatches(String title) {

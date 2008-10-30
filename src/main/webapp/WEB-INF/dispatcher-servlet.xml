@@ -14,11 +14,11 @@
         </property>
     </bean>
 
-    <!-- Activates mapping of @Controller -->
-    <context:component-scan base-package="org.appfuse.web"/>
+<!-- Activates mapping of @Controller -->
+<context:component-scan base-package="org.appfuse.web"/>
 
-    <!-- Activates @Autowired for Controllers -->
-	<context:annotation-config/>
+<!-- Activates @Autowired for Controllers -->
+<context:annotation-config/>
 
     <bean id="filenameController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
 
