@@ -7,18 +7,18 @@
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
-                <prop key="org.springframework.dao.DataAccessException">        
+                <prop key="org.springframework.dao.DataAccessException">
                     dataAccessFailure
                 </prop>
             </props>
         </property>
     </bean>
 
-<!-- Activates mapping of @Controller -->
-<context:component-scan base-package="org.appfuse.web"/>
+    <!-- Activates mapping of @Controller -->
+    <context:component-scan base-package="org.appfuse.web"/>
 
-<!-- Activates @Autowired for Controllers -->
-<context:annotation-config/>
+    <!-- Activates @Autowired for Controllers -->
+    <context:annotation-config/>
 
     <bean id="filenameController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
 

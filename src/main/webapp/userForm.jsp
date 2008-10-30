@@ -12,17 +12,17 @@
 <form:hidden path="version"/>
 <table class="detail">
 <tr>
-    <th><label for="username"><fmt:message key="user.username"/>:</label></th>
+    <th><label for="username">* <fmt:message key="user.username"/>:</label></th>
     <td>
         <form:input path="username" id="username"/>
         <form:errors path="username" cssClass="fieldError"/>
     </td>
 </tr>
 <tr>
-    <th><label for="password"><fmt:message key="user.password"/>:</label></th>
+    <th><label for="password">* <fmt:message key="user.password"/>:</label></th>
     <td>
         <form:password path="password" id="password"/>
-        <form:errors path="password" cssClass="password"/>
+        <form:errors path="password" cssClass="fieldError"/>
     </td>
 </tr>
 <tr>
@@ -33,7 +33,7 @@
     </td>
 </tr>
 <tr>
-    <th><label for="lastName" class="required">* <fmt:message key="user.lastName"/>:</label></th>
+    <th><label for="lastName" class="required"><fmt:message key="user.lastName"/>:</label></th>
     <td>
         <form:input path="lastName" id="lastName"/>
         <form:errors path="lastName" cssClass="fieldError"/>
