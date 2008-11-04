@@ -30,17 +30,18 @@ public class UserFormController extends SimpleFormController {
     @Autowired
     UserManager userManager;
 
-    @Autowired(required = false)
-    @Qualifier("beanValidator")
-    Validator validator;
-
     public UserFormController() {
         setCommandName("user");
         setCommandClass(User.class);
         setFormView("userForm");
         setSuccessView("redirect:users.html");
-        if (validator != null)
+    }
+
+    @Autowired(required = false)
+    public void setFormValidator(Validator validator) {
+        if (validator != null) {
             setValidator(validator);
+        }
     }
 
     public ModelAndView processFormSubmission(HttpServletRequest request,
@@ -75,11 +76,6 @@ public class UserFormController extends SimpleFormController {
                                  HttpServletResponse response, Object command,
                                  BindException errors)
             throws Exception {
-        // validation, TODO: Figure out how to do automatically
-        validator.validate(command, errors);
-        if (errors.getErrorCount() > 0)
-            return showForm(request, response, errors);
-        
         log.debug("entering 'onSubmit' method...");
 
         User user = (User) command;

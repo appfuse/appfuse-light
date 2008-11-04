@@ -1,4 +1,0 @@
-## Success Messages
-#if ($message)
-    <div class="message">${message}</div>
-#end
