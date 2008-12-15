@@ -21,7 +21,7 @@
 <tr>
     <th><label for="password">* <fmt:message key="user.password"/>:</label></th>
     <td>
-        <form:password path="password" id="password"/>
+        <form:password path="password" id="password" showPassword="true"/>
         <form:errors path="password" cssClass="fieldError"/>
     </td>
 </tr>

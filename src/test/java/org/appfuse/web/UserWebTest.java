@@ -26,8 +26,11 @@ public class UserWebTest extends WebTestCase {
     public void testAddUser() {
         beginAt("/userform.html");
         assertTitleKeyMatches("userForm.title");
+        setTextField("username", "springuser");
+        setTextField("password", "springuser");
         setTextField("firstName", "Spring");
         setTextField("lastName", "User");
+        setTextField("email", "springuser@appfuse.org");
         submit("save");
         assertTitleKeyMatches("userList.title");
     }

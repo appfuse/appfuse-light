@@ -1,14 +1,17 @@
 package org.appfuse.web;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
-import org.jmock.Mock;
-import org.jmock.MockObjectTestCase;
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+import org.jmock.integration.junit4.JMock;
+import org.jmock.integration.junit4.JUnit4Mockery;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.context.support.StaticApplicationContext;
@@ -18,67 +21,74 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public class UserFormControllerTest extends MockObjectTestCase {
-    private final Log log = LogFactory.getLog(UserFormControllerTest.class);
-    private UserFormController c = new UserFormController();
-    private MockHttpServletRequest request = null;
-    private ModelAndView mv = null;
-    private User user = new User();
-    private Mock mockManager = null;
+@RunWith(JMock.class)
+public class UserFormControllerTest {
+    final Log log = LogFactory.getLog(UserFormControllerTest.class);
+    UserFormController c = new UserFormController();
+    MockHttpServletRequest request = null;
+    ModelAndView mv = null;
+    User user = new User();
+    UserManager userManager = null;
+    Mockery context = new JUnit4Mockery();
 
-    protected void setUp() throws Exception {
-        super.setUp();
-        mockManager = new Mock(UserManager.class);
-        
+    @Before
+    public void setUp() {
+        userManager = context.mock(UserManager.class);
         // manually set properties (dependencies) on userFormController
-        c.userManager = (UserManager) mockManager.proxy();
+        c.userManager = userManager;
         c.setFormView("userForm");
-        
+
         // set context with messages avoid NPE when controller calls 
         // getMessageSourceAccessor().getMessage()
         StaticApplicationContext ctx = new StaticApplicationContext();
         Map<String, String> properties = new HashMap<String, String>();
         properties.put("basename", "messages");
-        ctx.registerSingleton("messageSource", ResourceBundleMessageSource.class, 
-                              new MutablePropertyValues(properties));
+        ctx.registerSingleton("messageSource", ResourceBundleMessageSource.class,
+                new MutablePropertyValues(properties));
         ctx.refresh();
-        c.setApplicationContext(ctx);    
-        
+        c.setApplicationContext(ctx);
+
         // setup user values
         user.setId(1L);
         user.setFirstName("Matt");
         user.setLastName("Raible");
     }
-    
+
+    @Test
     public void testEdit() throws Exception {
         log.debug("testing edit...");
-        
+
         // set expected behavior on manager
-        mockManager.expects(once()).method("getUser")
-                   .will(returnValue(new User()));
-        
+        context.checking(new Expectations() {{
+            one(userManager).getUser(with(equal("1")));
+            will(returnValue(new User()));
+        }});
+
         request = new MockHttpServletRequest("GET", "/userform.html");
         request.addParameter("id", user.getId().toString());
         mv = c.handleRequest(request, new MockHttpServletResponse());
         assertEquals("userForm", mv.getViewName());
-        
-        // verify expectations
-        mockManager.verify();
     }
 
+    @Test
     public void testSave() throws Exception {
         // set expected behavior on manager
         // called by formBackingObject()
-        mockManager.expects(once()).method("getUser")
-                   .will(returnValue(user));
-        
-        User savedUser = user;
+        context.checking(new Expectations() {{
+            one(userManager).getUser(with(equal("1")));
+            will(returnValue(user));
+        }});
+
+        final User savedUser = user;
         savedUser.setLastName("Updated Last Name");
         // called by onSubmit()
-        mockManager.expects(once()).method("saveUser")
-                   .with(eq(savedUser));
-        
+        context.checking(new Expectations() {{
+            one(userManager).saveUser(with(equal(savedUser)));
+        }});
+
         request = new MockHttpServletRequest("POST", "/userform.html");
         request.addParameter("id", user.getId().toString());
         request.addParameter("firstName", user.getFirstName());
@@ -87,26 +97,26 @@ public class UserFormControllerTest extends MockObjectTestCase {
         Errors errors = (Errors) mv.getModel().get(BindException.MODEL_KEY_PREFIX + "user");
         assertNull(errors);
         assertNotNull(request.getSession().getAttribute("message"));
-        
-        // verify expectations
-        mockManager.verify();
     }
-    
+
+    @Test
     public void testRemove() throws Exception {
         // set expected behavior on manager
         // called by formBackingObject()
-        mockManager.expects(once()).method("getUser")
-                   .will(returnValue(user));
+        context.checking(new Expectations() {{
+            one(userManager).getUser(with(equal("1")));
+            will(returnValue(user));
+        }});
+
         // called by onSubmit()
-        mockManager.expects(once()).method("removeUser").with(eq("1"));
-        
+        context.checking(new Expectations() {{
+            one(userManager).removeUser("1");
+        }});
+
         request = new MockHttpServletRequest("POST", "/userform.html");
         request.addParameter("delete", "");
         request.addParameter("id", user.getId().toString());
         mv = c.handleRequest(request, new MockHttpServletResponse());
         assertNotNull(request.getSession().getAttribute("message"));
-        
-        // verify expectations
-        mockManager.verify();
-    }   
+    }
 }
