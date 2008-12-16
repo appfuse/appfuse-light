@@ -146,7 +146,7 @@
         
         <!-- This is so the default will be used if no test case is specified -->
         <property name="test" value="run-all-tests"/>
-        <ant antfile="${test.resources.dir}/web-tests.xml" target="${testcase}"/>
+        <ant antfile="${test.resources.dir}/web-tests.xml" target="${test}"/>
     </target>
 
     <target name="test-tomcat" depends="war"
@@ -202,7 +202,7 @@
             webxml="${web.dir}/WEB-INF/web.xml" compress="true">
             <classes dir="${build.dir}/classes"/>
             <classes dir="${resources.dir}"/>
-            <fileset dir="${web.dir}" excludes="**/web.xml"/>
+            <fileset dir="${web.dir}"/>
             <zipfileset prefix="WEB-INF/lib" dir="${build.dir}/jars"/>
         </war>
     </target>

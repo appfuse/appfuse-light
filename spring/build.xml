@@ -130,8 +130,7 @@
           to generate reports at ${test.dir}/reports.</fail>
     </target>
 
-    <target name="test-web" depends="compile"
-        description="Runs jWebUnit tests in a running server">
+    <target name="test-web" depends="compile" description="Runs jWebUnit tests in a running server">
         <property name="test" value="WebTest"/>
         <antcall target="test"/>
     </target>
@@ -189,7 +188,7 @@
             webxml="${web.dir}/WEB-INF/web.xml" compress="true">
             <classes dir="${build.dir}/classes"/>
             <classes dir="${resources.dir}"/>
-            <fileset dir="${web.dir}" excludes="**/web.xml"/>
+            <fileset dir="${web.dir}"/>
             <zipfileset prefix="WEB-INF/lib" dir="${build.dir}/jars"/>
         </war>
     </target>

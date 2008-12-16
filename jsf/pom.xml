@@ -91,12 +91,17 @@
                 </includes>
             </testResource>
         </testResources>
+        <!-- Read the contents of the file below to see how to change databases -->
+        <filters>
+            <filter>src/main/resources/jdbc.properties</filter>
+        </filters>
     </build>
 
     <repositories>
         <repository>
             <id>java.net-m1-releases</id>
-            <name>Java.net Maven1 Repository - for javax.faces, javax.el, com.sun.el, and com.sun.facelets releases</name>
+            <name>Java.net Maven1 Repository - for javax.faces, javax.el, com.sun.el, and com.sun.facelets releases
+            </name>
             <url>http://download.java.net/maven/1/</url>
             <layout>legacy</layout>
         </repository>
@@ -169,12 +174,38 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- The following dependencies are used by Ant (build.xml). You can remove if you're only using Maven. -->
+        <dependency>
+            <groupId>org.codehaus.cargo</groupId>
+            <artifactId>cargo-ant</artifactId>
+            <version>0.9</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>ant</groupId>
+                    <artifactId>ant</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ant</groupId>
+                    <artifactId>ant-junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>com.canoo.webtest</groupId>
             <artifactId>webtest</artifactId>
             <version>R_1600</version>
             <scope>test</scope>
             <exclusions>
+                <exclusion>
+                    <groupId>ant</groupId>
+                    <artifactId>ant</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ant</groupId>
+                    <artifactId>ant-junit</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>groovy</groupId>
                     <artifactId>groovy-all</artifactId>
@@ -245,14 +276,15 @@
                         <configuration>
                             <tasks>
                                 <taskdef resource="webtest_base_relaxed.taskdef">
-                                    <classpath refid="maven.test.classpath" />
+                                    <classpath refid="maven.test.classpath"/>
                                 </taskdef>
-                                <mkdir dir="target/webtest-data" />
+                                <mkdir dir="target/webtest-data"/>
                                 <!-- Delete old results file if it exists -->
-                                <delete file="target/webtest-data/web-tests-result.xml" />
+                                <delete file="target/webtest-data/web-tests-result.xml"/>
                                 <!-- This is so the default will be used if no test case is specified -->
-                                <property name="test" value="run-all-tests" />
-                                <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'</echo>
+                                <property name="test" value="run-all-tests"/>
+                                <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'
+                                </echo>
                                 <ant antfile="src/test/resources/web-tests.xml" target="${test}">
                                     <property name="resources.dir" value="src/main/resources"/>
                                     <property name="webapp.name" value="${project.build.finalName}"/>
@@ -288,22 +320,6 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>h2</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
-                <jdbc.groupId>com.h2database</jdbc.groupId>
-                <jdbc.artifactId>h2</jdbc.artifactId>
-                <jdbc.version>1.0.20061217</jdbc.version>
-                <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:h2:/tmp/appfuse_light</jdbc.url>
-                <jdbc.username>sa</jdbc.username>
-                <jdbc.password></jdbc.password>
-            </properties>
-        </profile>
     </profiles>
 
     <properties>
@@ -312,6 +328,16 @@
         <!-- Framework dependency versions -->
         <appfuse.version>2.1-SNAPSHOT</appfuse.version>
         <jwebunit.version>2.1</jwebunit.version>
+
+        <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
+        <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+        <jdbc.groupId>com.h2database</jdbc.groupId>
+        <jdbc.artifactId>h2</jdbc.artifactId>
+        <jdbc.version>1.0.20061217</jdbc.version>
+        <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
+        <jdbc.url>jdbc:h2:/tmp/appfuse_light</jdbc.url>
+        <jdbc.username>sa</jdbc.username>
+        <jdbc.password></jdbc.password>
 
         <!-- Cargo settings -->
         <cargo.container>tomcat5x</cargo.container>

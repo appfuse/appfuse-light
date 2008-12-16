@@ -39,6 +39,13 @@
     </scm>
 
     <modules>
+        <module>jsf</module>
         <module>spring</module>
+        <module>spring-freemarker</module>
+        <module>spring-security</module>
+        <module>stripes</module>
+        <module>struts</module>
+        <module>tapestry</module>
+        <module>wicket</module>
     </modules>
 </project>

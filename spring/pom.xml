@@ -99,6 +99,10 @@
                 </includes>
             </testResource>
         </testResources>
+        <!-- Read the contents of the file below to see how to change databases -->
+        <filters>
+            <filter>src/main/resources/jdbc.properties</filter>
+        </filters>
     </build>
 
     <dependencies>
@@ -167,9 +171,11 @@
 
     <profiles>
         <profile>
-            <id>tomcat</id>
+            <id>integration-test</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>!maven.test.skip</name>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -243,22 +249,6 @@
                 </plugins>
             </build>
         </profile>
-        <profile>
-            <id>h2</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
-                <jdbc.groupId>com.h2database</jdbc.groupId>
-                <jdbc.artifactId>h2</jdbc.artifactId>
-                <jdbc.version>1.0.20061217</jdbc.version>
-                <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:h2:/tmp/appfuse_light</jdbc.url>
-                <jdbc.username>sa</jdbc.username>
-                <jdbc.password></jdbc.password>
-            </properties>
-        </profile>
     </profiles>
 
     <properties>
@@ -268,6 +258,16 @@
         <appfuse.version>2.1-SNAPSHOT</appfuse.version>
         <jwebunit.version>2.1</jwebunit.version>
         
+        <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
+        <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+        <jdbc.groupId>com.h2database</jdbc.groupId>
+        <jdbc.artifactId>h2</jdbc.artifactId>
+        <jdbc.version>1.0.20061217</jdbc.version>
+        <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
+        <jdbc.url>jdbc:h2:/tmp/appfuse_light</jdbc.url>
+        <jdbc.username>sa</jdbc.username>
+        <jdbc.password></jdbc.password>
+
         <!-- Cargo settings -->
         <cargo.container>tomcat5x</cargo.container>
         <cargo.container.home>${env.CATALINA_HOME}</cargo.container.home>
@@ -275,12 +275,5 @@
         <cargo.host>localhost</cargo.host>
         <cargo.port>25888</cargo.port>
         <cargo.wait>false</cargo.wait>
-
-        <!-- Database settings -->
-        <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
-        <jdbc.groupId>mysql</jdbc.groupId>
-        <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
-        <jdbc.version>5.1.6</jdbc.version>
-        <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
     </properties>
 </project>
