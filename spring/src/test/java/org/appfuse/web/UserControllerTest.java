@@ -38,7 +38,6 @@ public class UserControllerTest {
         context.checking(new Expectations() {{
             one(userManager).getUsers(null);
             will(returnValue(users));
-
         }});
 
         ModelMap map = new ModelMap();
