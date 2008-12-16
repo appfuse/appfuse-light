@@ -1,0 +1,25 @@
+div.calendar td {
+    padding: 0px;
+}
+
+div.calendar button {
+    font-size: 10px !important;
+    border: 1px outset silver;
+}
+
+div.calendar select {
+    font-size: 10px;
+}
+
+div.calendar div.calendarHeader {
+    background-color: #8F9E27 !important;
+}
+
+div.calendar div.calendarBody>table {
+    margin-left: 10px;
+}
+
+div.calendar table.footerTable {
+    margin: -10px 0px 10px 5px;
+    width: 200px !important;
+}

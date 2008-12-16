@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE page-specification PUBLIC 
+    "-//Apache Software Foundation//Tapestry Specification 4.0//EN" 
+    "http://jakarta.apache.org/tapestry/dtd/Tapestry_4_0.dtd">
+    
+<page-specification class="org.appfuse.web.UserForm">
+    <inject property="engineService" object="engine-service:page"/>
+    <bean name="delegate" class="org.apache.tapestry.valid.ValidationDelegate"/>
+
+    <component id="form" type="Form">
+        <binding name="delegate" value="ognl:beans.delegate"/>
+        <binding name="clientValidationEnabled" value="true"/>
+    </component>
+  
+    <property name="user"/>
+    <inject property="userManager" type="spring" object="userManager"/>
+
+    <component id="lastNameField" type="TextField">
+        <binding name="value" value="user.lastName"/>
+        <binding name="displayName" value="message:lastName"/>
+    </component>
+         
+</page-specification>

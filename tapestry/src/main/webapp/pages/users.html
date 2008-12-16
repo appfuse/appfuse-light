@@ -1,0 +1,24 @@
+<html jwcid="@Shell" title="message:userList.title">
+
+<span jwcid="@If" condition="ognl:message != null">
+    <div class="message">
+        <span jwcid="@Insert" value="ognl:message" raw="true"/>
+    </div>
+</span>
+
+<a jwcid="@PageLink" page="userForm" id="formLink" style="display:none"/>
+<button class="button" onclick="location.href=document.getElementById('formLink').href"style="float: right; margin-top: -30px; width: 100px">Add User</button>
+
+<table jwcid="table@contrib:Table" class="table" id="userList"
+    rowsClass="ognl:beans.evenOdd.next" row="ognl:row" source="ognl:users" 
+    columns="id, firstName, lastName, email"
+    arrowUpAsset="ognl:assets.upArrow" arrowDownAsset="ognl:assets.downArrow">
+    <tr jwcid="idColumnValue@Block">
+        <a jwcid="@DirectLink" listener="ognl:requestCycle.getPage('userForm').listeners.edit" parameters="ognl:row.id">
+            <span jwcid="@Insert" value="ognl:row.id"/>
+        </a>
+    </tr>
+</table>
+
+<script type="text/javascript">highlightTableRows("userList");</script>
+</html>

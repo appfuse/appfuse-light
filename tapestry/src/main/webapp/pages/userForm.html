@@ -1,0 +1,79 @@
+<html jwcid="@Shell" title="message:userForm.title">
+<head>
+    <link href="styles/calendar.css" type="text/css" rel="stylesheet"/>
+</head>
+
+<body jwcid="@Body">
+<span jwcid="@If" condition="ognl:beans.delegate.hasErrors">
+    <div class="error">
+        <span jwcid="@Delegator" delegate="ognl:beans.delegate.firstError">
+            Error Message
+        </span>
+    </div>
+</span>
+
+<p>Please fill in user's information below:</p>
+
+<form jwcid="form" id="userForm">
+    <input type="hidden" jwcid="@Hidden" value="ognl:user.id"/>
+    <input type="hidden" jwcid="@Hidden" value="ognl:user.version"/>
+    <table class="detail">
+        <tr>
+            <th>
+                <label for="username"><span key="username">Username</span></label>:
+            </th>
+            <td>
+                <input jwcid="@TextField" type="text" value="ognl:user.username" id="username"
+                       validators="validators:required" displayName="message:username"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="password"><span key="password">Password</span></label>:
+            </th>
+            <td>
+                <input jwcid="@TextField" type="text" hidden="true" value="ognl:user.password" id="password"
+                       validators="validators:required" displayName="message:password"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="firstName"><span key="firstName">First Name</span></label>:
+            </th>
+            <td>
+                <input jwcid="@TextField" type="text" value="ognl:user.firstName" id="firstName"
+                       displayName="message:firstName"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label jwcid="@FieldLabel" field="ognl:components.lastNameField">Last Name</label>:
+            </th>
+            <td><input jwcid="lastNameField" type="text" id="lastName"/></td>
+        </tr>
+        <tr>
+            <th>
+                <label for="email"><span key="email">E-Mail</span></label>:
+            </th>
+            <td>
+                <input jwcid="@TextField" type="text" value="ognl:user.email" id="email"
+                       validators="validators:required" displayName="message:email"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" class="button" jwcid="@Submit" value="Save" id="save"
+                       listener="ognl:listeners.save"/>
+              <span jwcid="@If" condition="ognl:user.id != null">
+                <input type="submit" class="button" jwcid="@Submit" value="Delete" id="delete"
+                       listener="ognl:listeners.delete"/>
+              </span>
+                <input type="submit" class="button" jwcid="@Submit" value="Cancel" id="cancel"
+                       listener="ognl:listeners.cancel" onclick="form.onsubmit = null"/>
+            </td>
+    </table>
+</form>
+
+</body>
+</html>
