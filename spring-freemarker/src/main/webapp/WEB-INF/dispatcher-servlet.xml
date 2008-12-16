@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.springframework.dao.DataAccessException">
+                    dataAccessFailure
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Activates mapping of @Controller -->
+    <context:component-scan base-package="org.appfuse.web"/>
+
+    <!-- Activates @Autowired for Controllers -->
+    <context:annotation-config/>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="order" value="0"/>
+    </bean>
+
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="order" value="1"/>
+        <property name="mappings">
+            <value>
+                /index.html=filenameController
+            </value>
+        </property>
+    </bean>
+    
+    <bean id="filenameController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+
+    <!-- FreeMarker Configurer and View Resolver -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="datetime_format">MM/dd/yyyy</prop>
+                <prop key="number_format">0.######</prop>
+            </props>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="xml_escape" value-ref="fmXmlEscape"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="requestContextAttribute" value="rc"/>
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".ftl"/>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
+
+    <bean id="beanValidator" class="org.springmodules.validation.commons.DefaultBeanValidator">
+        <property name="validatorFactory" ref="validatorFactory"/>
+    </bean>
+</beans>
