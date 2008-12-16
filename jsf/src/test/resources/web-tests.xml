@@ -1,6 +1,6 @@
 <!DOCTYPE project [
-    <!ENTITY config SYSTEM "config.xml">
-]>
+        <!ENTITY config SYSTEM "config.xml">
+        ]>
 <project basedir="." default="run-all-tests">
     <!-- Include messages.properties so we can test against keys, rather than values -->
     <property file="${resources.dir}/messages.properties"/>
@@ -8,8 +8,7 @@
     <property name="port" value="25888"/>
 
     <!-- runs all targets -->
-    <target name="run-all-tests" depends="UserTests"
-        description="Call and executes all test cases (targets)">
+    <target name="run-all-tests" depends="UserTests" description="Call and executes all test cases (targets)">
         <echo>All UserTests passed!</echo>
     </target>
 
@@ -29,7 +28,7 @@
                 <setinputfield name="userForm:password" value="tpass"/>
                 <setinputfield name="userForm:firstName" value="Test"/>
                 <setinputfield name="userForm:lastName" value="Name"/>
-                <setinputfield name="userForm:email" value="appfuse@raibledesigns.com"/>
+                <setinputfield name="userForm:email" value="jsf@appfuse.org"/>
                 <clickbutton label="Save"/>
 
                 <!-- View user list -->
