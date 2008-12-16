@@ -113,37 +113,14 @@
             <version>${displaytag.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springmodules</groupId>
-            <artifactId>spring-modules-validation</artifactId>
-            <version>${springmodules.validation.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-support</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xml-apis</groupId>
-                    <artifactId>xml-apis</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>rhino</groupId>
-                    <artifactId>js</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
-            <version>2.0.11</version>
+            <version>${struts.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-spring-plugin</artifactId>
-            <version>2.0.11</version>
+            <version>${struts.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -285,7 +262,8 @@
         <!-- Framework dependency versions -->
         <appfuse.version>2.1-SNAPSHOT</appfuse.version>
         <jwebunit.version>2.1</jwebunit.version>
-
+        <struts.version>2.0.14</struts.version>
+        
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
         <jdbc.groupId>com.h2database</jdbc.groupId>
