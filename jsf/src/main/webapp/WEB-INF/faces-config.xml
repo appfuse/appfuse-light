@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+    version="1.2">
+
+    <!-- Spring VariableResolver for JSF -->
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>en</supported-locale>
+            <supported-locale>es</supported-locale>
+        </locale-config>
+        <message-bundle>messages</message-bundle>
+    </application>
+    
+    <navigation-rule>
+        <from-view-id>/users.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>add</from-outcome>
+            <to-view-id>/userForm.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/userForm.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/userForm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/users.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/users.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <managed-bean>
+        <managed-bean-name>userList</managed-bean-name>
+        <managed-bean-class>org.appfuse.web.UserList</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>userManager</property-name>
+            <value>#{userManager}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>userForm</managed-bean-name>
+        <managed-bean-class>org.appfuse.web.UserForm</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>id</property-name>
+            <value>#{param.id}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>userManager</property-name>
+            <value>#{userManager}</value>
+        </managed-property>
+    </managed-bean>
+</faces-config>

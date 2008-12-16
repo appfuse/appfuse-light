@@ -1,0 +1,48 @@
+<!DOCTYPE project [
+    <!ENTITY config SYSTEM "config.xml">
+]>
+<project basedir="." default="run-all-tests">
+    <!-- Include messages.properties so we can test against keys, rather than values -->
+    <property file="${resources.dir}/messages.properties"/>
+    <property name="host" value="localhost"/>
+    <property name="port" value="25888"/>
+
+    <!-- runs all targets -->
+    <target name="run-all-tests" depends="UserTests"
+        description="Call and executes all test cases (targets)">
+        <echo>All UserTests passed!</echo>
+    </target>
+
+    <!-- Verify adding a user, viewing and deleting a user works -->
+    <target name="UserTests" description="Tests User CRUD">
+        <webtest name="userTests">
+            &config;
+            <steps>
+                <!-- View add screen -->
+                <invoke url="/users.html"/>
+                <clickbutton label="Add User"/>
+
+                <verifytitle text="${userForm.title}.*" regex="true"/>
+
+                <!-- Enter data and save -->
+                <setinputfield name="userForm:username" value="tname"/>
+                <setinputfield name="userForm:password" value="tpass"/>
+                <setinputfield name="userForm:firstName" value="Test"/>
+                <setinputfield name="userForm:lastName" value="Name"/>
+                <setinputfield name="userForm:email" value="appfuse@raibledesigns.com"/>
+                <clickbutton label="Save"/>
+
+                <!-- View user list -->
+                <verifytitle text="${userList.title}.*" regex="true"/>
+
+                <!-- Delete first user in table -->
+                <invoke url="/users.html"/>
+
+                <clicklink xpath="//table[@id='editUser:users']/tbody/tr[1]/td/a"/>
+                <verifytitle description="view user form" text="${userForm.title}.*" regex="true"/>
+                <clickbutton label="Delete"/>
+                <verifytitle description="view user list" text="${userList.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+</project>
