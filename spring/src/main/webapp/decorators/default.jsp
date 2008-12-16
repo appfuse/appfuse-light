@@ -41,7 +41,7 @@
 
         <div id="main">
             <h1><decorator:title/></h1>
-						<div id="body">
+            <div id="body">
                 <%@ include file="/messages.jsp"%>
                 <decorator:body/>
 
