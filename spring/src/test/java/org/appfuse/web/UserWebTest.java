@@ -5,7 +5,6 @@ import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Cell;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
-
 import java.util.ResourceBundle;
 
 public class UserWebTest extends WebTestCase {

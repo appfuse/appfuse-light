@@ -43,7 +43,7 @@ public class UserWebTest extends WebTestCase {
         assertTablePresent("userList");
 
         //check that a set of strings are present somewhere in table
-        assertTextInTable("userList", new String[]{"Spring", "User"});
+        assertTextInTable("userList", new String[] {"Spring", "User"});
     }
 
     public void testEditUser() {
