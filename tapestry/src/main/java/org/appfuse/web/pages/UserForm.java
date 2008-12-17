@@ -9,6 +9,7 @@ import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.corelib.components.Form;
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
+import org.appfuse.service.UserExistsException;
 import org.appfuse.web.util.MessageUtil;
 import org.slf4j.Logger;
 
@@ -63,17 +64,19 @@ public class UserForm {
         }
     }
 
-    void onActivate(Long id) {
+    void onActivate(String id) {
         if (id != null) {
-            user = userManager.get(id);
+            user = userManager.getUser(id);
         }
     }
 
-    Object onSuccess() {
+    Object onSuccess() throws UserExistsException {
         if (delete) return onDelete();
         if (cancel) return onCancel();
 
-        userManager.save(user);
+        log.debug("Saving user...");
+        
+        userManager.saveUser(user);
 
         String msg = MessageUtil.convert(messages.get("user.saved"));
         String message = String.format(msg, user.getFullName());
@@ -96,7 +99,7 @@ public class UserForm {
         String msg = MessageUtil.convert(messages.get("user.deleted"));
         String message = String.format(msg, user.getFullName());
 
-        userManager.remove(user.getId());
+        userManager.removeUser(user.getId().toString());
         userList.setMessage(message);
         return userList;
     }

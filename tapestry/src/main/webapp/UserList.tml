@@ -7,7 +7,7 @@
 
 <div>
     <t:messagebanner t:id="message"/>
-    <t:eventlink t:id="addButton">
+    <t:eventlink t:id="addButton" id="addButton">
         <input type="button" class="button" value="Add User" style="float: right; margin-top: -30px; width: 100px"/>
     </t:eventlink>
 </div>
@@ -17,7 +17,7 @@
              fullName,accountNonExpired,accountNonLocked,credentialsNonExpired,
              version,enabled,accountExpired,accountLocked,credentialsExpired">
     <t:parameter name="idCell">
-        <t:pagelink page="userform" context="user.id">
+        <t:pagelink page="userform" context="user.id" id="user${user.id}">
             ${user.id}
         </t:pagelink>
     </t:parameter>

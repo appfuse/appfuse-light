@@ -135,7 +135,7 @@
             <version>${tapestry.version}</version>
         </dependency>
 
-        <!-- Force newer version of commons-collections -->
+        <!-- Force newer version of commons-collections for JWebUnit -->
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>

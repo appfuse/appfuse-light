@@ -26,11 +26,11 @@ public class UserWebTest extends WebTestCase {
         beginAt("/app/users");
         submit("add-user");
         assertTitleKeyMatches("userForm.title");
-        setFormElement("username", "suser");
-        setFormElement("password", "spass");
-        setFormElement("firstName", "Spring");
-        setFormElement("lastName", "User");
-        setFormElement("email", "suser@appfuse.org");
+        setTextField("username", "suser");
+        setTextField("password", "spass");
+        setTextField("firstName", "Spring");
+        setTextField("lastName", "User");
+        setTextField("email", "suser@appfuse.org");
         submit("save");
         assertTitleKeyMatches("userList.title");
     }
