@@ -13,7 +13,7 @@
 </div>
 
 <t:grid source="users" row="user" id="userList" class="table"
-    exclude="username,password,confirmPassword,passwordHint,phoneNumber,website,
+        exclude="username,password,confirmPassword,passwordHint,phoneNumber,website,
              fullName,accountNonExpired,accountNonLocked,credentialsNonExpired,
              version,enabled,accountExpired,accountLocked,credentialsExpired">
     <t:parameter name="idCell">

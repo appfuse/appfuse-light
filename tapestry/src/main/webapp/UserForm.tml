@@ -5,26 +5,26 @@
 </head>
 <body>
 
-	<form t:id="userForm" clientValidation="true">
-		<t:errors/>
+<form t:id="userForm" clientValidation="true">
+    <t:errors/>
 
-		<div class="t-beaneditor">
-			<t:beaneditor t:id="user" object="user"
-                exclude="id,confirmPassword,passwordHint,phoneNumber,website,version,
+    <div class="t-beaneditor">
+        <t:beaneditor t:id="user" object="user"
+                      exclude="id,confirmPassword,passwordHint,phoneNumber,website,version,
                          enabled,accountExpired,accountLocked,credentialsExpired">
-			</t:beaneditor>
+        </t:beaneditor>
 
-			<div class="t-beaneditor-row" style="text-align: center">
-				<input type="submit" id="save" value="Save"/>
-				<input t:type="submit" t:id="delete" id="delete" value="Delete"/>
-                <input t:type="submit" t:id="cancel" id="cancel" value="Cancel"/>
-			</div>
-		</div>
- 	</form>
+        <div class="t-beaneditor-row" style="text-align: center">
+            <input type="submit" id="save" value="Save"/>
+            <input t:type="submit" t:id="delete" id="delete" value="Delete"/>
+            <input t:type="submit" t:id="cancel" id="cancel" value="Cancel"/>
+        </div>
+    </div>
+</form>
 
-    <script type="text/javascript">
-        Form.focusFirstElement($("userForm"));
-    </script>
+<script type="text/javascript">
+    Form.focusFirstElement($("userForm"));
+</script>
 
 </body>
 </html>
