@@ -35,7 +35,7 @@ public class UserActionTest extends AbstractTransactionalDataSourceSpringContext
         user.setFirstName("Jack");
         user.setLastName("Raible");
         user.setEmail("jraible@appfuse.org");
-        userManager.saveUser(user);
+        user = userManager.saveUser(user);
         userId = user.getId().toString();
 
         action = new UserAction();

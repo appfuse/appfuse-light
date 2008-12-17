@@ -12,7 +12,12 @@
         <param-value>messages</param-value>
     </context-param>
 
-    
+    <!-- Context Configuration for Tapestry 5 -->
+    <context-param>
+        <param-name>tapestry.app-package</param-name>
+        <param-value>org.appfuse.web</param-value>
+    </context-param>
+
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -38,13 +43,14 @@
     <!-- Use "org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter" if you're using JPA -->
 
     <filter>
-        <filter-name>redirect</filter-name>
-        <filter-class>org.apache.tapestry.RedirectFilter</filter-class>
-    </filter>
-
-    <filter>
         <filter-name>sitemesh</filter-name>
         <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+    </filter>
+
+    <!-- T5/Spring Filter -->
+    <filter>
+        <filter-name>app</filter-name>
+        <filter-class>org.apache.tapestry5.spring.TapestrySpringFilter</filter-class>
     </filter>
 
     <context-param>
@@ -81,22 +87,16 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 
-
+    <!-- T5 Filter Mapping -->
     <filter-mapping>
-        <filter-name>redirect</filter-name>
-        <url-pattern>/</url-pattern>
+        <filter-name>app</filter-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <servlet>
-        <servlet-name>tapestry</servlet-name>
-        <servlet-class>org.apache.tapestry.ApplicationServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    
     <servlet>
         <servlet-name>dwr-invoker</servlet-name>
         <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
@@ -107,52 +107,11 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>tapestry</servlet-name>
-        <url-pattern>/app</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>tapestry</servlet-name>
-        <url-pattern>*.html</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>tapestry</servlet-name>
-        <url-pattern>*.direct</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>tapestry</servlet-name>
-        <url-pattern>*.sdirect</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>tapestry</servlet-name>
-        <url-pattern>/assets/*</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>tapestry</servlet-name>
-        <url-pattern>*.svc</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/index</welcome-file>
     </welcome-file-list>
-
-    <error-page>
-        <error-code>404</error-code>
-        <location>/404.jsp</location>
-    </error-page>
-
-    <error-page>
-        <error-code>500</error-code>
-        <location>/error.jsp</location>
-    </error-page>
-
 </web-app>

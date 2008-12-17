@@ -1,0 +1,21 @@
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+    <t:delegate to="activeBlock"/>
+
+    <t:block id="error">
+        <t:if test="${message}">
+        <div class="error" id="errorMessages">
+            ${message}
+        </div>
+        </t:if>
+    </t:block>
+
+    <t:block id="success">
+        <t:if test="${message}">
+        <div class="message" id="successMessages">
+            ${message}
+        </div>
+        </t:if>
+    </t:block>
+
+</t:container>

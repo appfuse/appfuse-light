@@ -1,0 +1,15 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Doh!</title>
+</head>
+<body>
+    <p>An Error has occurred in this application.</p>
+    
+    <div style="overflow:auto">${error}</div>
+
+    <p>You may attempt to
+        <t:pagelink page="index">try again</t:pagelink>.
+    </p>
+</body>
+</html>

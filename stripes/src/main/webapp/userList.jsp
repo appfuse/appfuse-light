@@ -4,7 +4,7 @@
 
 <stripes:messages/>
 
-<button onclick="location.href='userform.html'"style="float: right; margin-top: -30px; width: 100px">Add User</button>
+<button onclick="location.href='userform.html'" style="float: right; margin-top: -30px; width: 100px">Add User</button>
 
 <display:table name="actionBean.users" class="table" requestURI="users.html" id="userList" export="true" pagesize="10" excludedParams="ajax">
     <display:setProperty name="export.pdf.filename" value="users.pdf"/>

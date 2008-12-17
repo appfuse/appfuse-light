@@ -27,7 +27,7 @@ public class UserFormTest extends BasePageTestCase {
         user.setEmail("mraible@gmail.com");
         
         // persist to database
-        userManager.saveUser(user);
+        user = userManager.saveUser(user);
         userId = user.getId().toString();
     }
     

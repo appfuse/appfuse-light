@@ -23,43 +23,50 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testAddUser() {
-        beginAt("/userForm.html");
+        beginAt("/userform");
         assertTitleKeyMatches("userForm.title");
-        setFormElement("username", "suser");
-        setFormElement("password", "spass");
-        setFormElement("firstName", "Spring");
-        setFormElement("lastName", "User");
-        setFormElement("email", "suser@appfuse.org");
-        submit("save");
+        setTextField("username", "tapestry");
+        setTextField("password", "howard");
+        setTextField("firstName", "Tapestry");
+        setTextField("lastName", "User");
+        setTextField("email", "tapestry@appfuse.org");
+        clickButtonWithText("Save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testListUsers() {
-        beginAt("/users.html");
+        beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
 
         // check that table is present
         assertTablePresent("userList");
 
         // check that a set of strings are present somewhere in table
-        assertTextInTable("userList", new String[] {"Spring", "User"});
+        assertTextInTable("userList", new String[] {"Tapestry", "User"});
     }
 
     public void testEditUser() {
-        beginAt("/users.html");
+        beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
         clickLinkWithText(getInsertedUserId());
-        assertTextFieldEquals("firstName", "Spring");
-        submit("save");
+        assertTextFieldEquals("firstName", "Tapestry");
+        clickButtonWithText("Save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
-        beginAt("/users.html");
+        beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
         clickLinkWithText(getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
         submit("delete");
+        assertTitleKeyMatches("userList.title");
+    }
+
+    public void testCancel() {
+        beginAt("/userform");
+        assertTitleKeyMatches("userForm.title");
+        submit("cancel");
         assertTitleKeyMatches("userList.title");
     }
 
@@ -69,9 +76,9 @@ public class UserWebTest extends WebTestCase {
      * @return last id in the table
      */
     public String getInsertedUserId() {
-        beginAt("/users.html");
+        beginAt("/userlist");
         assertTablePresent("userList");
-        assertTextInTable("userList", "Spring");
+        assertTextInTable("userList", "Tapestry");
         Table table = getTable("userList");
         Cell cell = (Cell) ((Row) table.getRows().get(table.getRowCount()-1)).getCells().get(0);
         return cell.getValue();

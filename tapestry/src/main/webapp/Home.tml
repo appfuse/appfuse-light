@@ -1,54 +1,59 @@
-<html jwcid="@Shell" title="">
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+      xmlns="http://www.w3.org/1999/xhtml">
+<body>
 <div id="intro">
-    <h3>Welcome to AppFuse Light!</h3>
+    <h2>Welcome to AppFuse Light!</h2>
     <p>
         <a href="http://appfuse-light.dev.java.net">AppFuse Light</a> is a lightweight version of <a href="http://appfuse.org">AppFuse</a>.
-        I was inspired to create it while writing <a href="http://springlive.com">Spring Live</a> and
-        looking at the <em>struts-blank</em> and <em>webapp-minimal</em>
+        I was inspired to create it while writing <a href="http://springlive.com">Spring Live</a> and 
+        looking at the <em>struts-blank</em> and <em>webapp-minimal</em> 
         applications that ship with Struts and Spring, respectively.
-        These "starter" apps were not robust enough for me, and I wanted
+        These "starter" apps were not robust enough for me, and I wanted 
         something like AppFuse, only simpler.  Much of the documentation for developing
         with AppFuse Light can be found in the <a href="http://sourcebeat.com/titles/springlive/public/Rev_12/SpringLive_SampleChapter.pdf">
-        Spring QuickStart Chapter</a> in Spring Live.  If you have issues downloading this
+        Spring QuickStart Chapter</a> in Spring Live.  If you have issues downloading this 
         PDF, you might try saving it to your hard drive before opening it.
     </p>
     <p>
         The basic AppFuse Light application shows how to do simple
-        <acronym title="Create, Retrieve, Update and Delete">CRUD</acronym> on a database table.
-        To see this feature, click on the button below. <a href="?" onclick="readMore(); return false">Click here</a>
+        <acronym title="Create, Retrieve, Update and Delete">CRUD</acronym> on a database table.  
+        To see this feature, click on the button below. <a href="?" onclick="readMore(); return false">Click here</a> 
         to learn more about AppFuse Light.
     </p>
     <p>
-        <a jwcid="@PageLink" page="users" id="demoLink" style="display:none"/>
-        <button class="button" onclick="location.href=document.getElementById('demoLink').href">View Demonstration</button>
+        <button class="button" onclick="location.href='userlist'">View Demonstration</button>
     </p>
 </div>
 <div id="readmore" style="display:none">
     <h3>Introduction to AppFuse Light</h3>
     <p>
-        AppFuse Light is designed to show webapp developers how to start
+        AppFuse Light is designed to show Java Web Developers how to start
         a bare-bones webapp using a <a href="http://www.springframework.org">
         Spring</a>-managed middle-tier backend and <a href="http://www.hibernate.org">
         Hibernate</a> for persistence. By default, AppFuse Light uses Spring for
-        its MVC framework, but you can change it to
-        <a href="http://struts.apache.org">Struts 1.x</a>,
+        its MVC framework, but you can change it to 
+        <a href="http://myfaces.apache.org">JSF/MyFaces</a>,
+        <a href="http://mc4j.org/confluence/display/stripes/Home">Stripes</a>,
+        <a href="http://struts.apache.org">Struts 1.x</a>, 
         <a href="http://struts.apache.org/2.x/">Struts 2.x</a>,
-        <a href="http://opensymphony.com/webwork">WebWork</a>,
-        <a href="http://jakarta.apache.org/tapestry">Tapestry</a>
-        or <a href="http://www.myfaces.org">JSF</a>.  Installers are in the "extras" directory.
+        <a href="http://opensymphony.com/webwork">WebWork</a>, 
+        <a href="http://jakarta.apache.org/tapestry">Tapestry</a> or
+        <a href="http://wicket.sourceforge.net/">Wicket</a>. In addition, there's a
+        number of extras for Spring MVC, including Velocity and FreeMarker versions, Ajax
+        support and Acegi Security support. Installers are in the "extras" directory.
     </p>
     <p>
         By default, AppFuse Light expects you to have MySQL installed. It will create an
         "appfuse_light" database the first time tests are run or the application is started.
-        More information on database configuration can be found in this project's README.txt
+        More information on database configuration can be found in this project's README.txt 
         file.
     </p>
-    <p>
+    <p> 
         Since no server configuration is required, this application should
         this application should work with any Servlet 2.4 servlet engine.
     </p>
     <p>
-        <button class="button" onclick="readMore();">&laquo; Back</button>
+        <button class="button" onclick="readMore();">&#171; Back</button>
     </p>
 </div>
 <content tag="underground">
@@ -75,4 +80,5 @@ function readMore() {
     }
 }
 </script>
+</body>
 </html>
