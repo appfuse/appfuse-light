@@ -22,7 +22,7 @@ public class UserFormBeanTest extends AbstractTransactionalDataSourceSpringConte
         deleteFromTables(new String[] {"app_user"});
         
         // grab the UserManager from the ApplicationContext or mock it
-        UserManager mgr = (UserManager) applicationContext.getBean("userManager");
+        UserManager userManager = (UserManager) applicationContext.getBean("userManager");
 
         // add a test user to the database
         User user = new User();
@@ -31,7 +31,7 @@ public class UserFormBeanTest extends AbstractTransactionalDataSourceSpringConte
         user.setFirstName("Jack");
         user.setLastName("Raible");
         user.setEmail("jack@appfuse.org");
-        mgr.saveUser(user);
+        user = userManager.saveUser(user);
         userId = user.getId().toString();
     }
 
