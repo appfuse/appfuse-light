@@ -51,13 +51,7 @@ public class UserForm {
     }
 
     public String save() throws UserExistsException {
-        // Fix issue caused by WebTest and/or JSF
-        User user = getUser();
-        if (user.getId().equals(0L)) {
-            user.setId(null);
-        }
-
-        userManager.saveUser(user);
+        userManager.saveUser(getUser());
         addMessage("user.saved", getUser().getFullName());
 
         return "success";

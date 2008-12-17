@@ -195,16 +195,12 @@
         <dependency>
             <groupId>com.canoo.webtest</groupId>
             <artifactId>webtest</artifactId>
-            <version>R_1600</version>
+            <version>${webtest.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
-                    <groupId>ant</groupId>
+                    <groupId>org.apache.ant</groupId>
                     <artifactId>ant</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>ant</groupId>
-                    <artifactId>ant-junit</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>groovy</groupId>
@@ -310,7 +306,7 @@
                                 <!-- exclude groovy to prevent trying to fetch pom -->
                                 <exclusions>
                                     <exclusion>
-                                        <groupId>groovy</groupId>
+                                        <groupId>org.codehaus.groovy</groupId>
                                         <artifactId>groovy-all</artifactId>
                                     </exclusion>
                                 </exclusions>

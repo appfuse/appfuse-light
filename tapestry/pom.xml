@@ -199,6 +199,24 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- This dependency is used by Ant (build.xml). You can remove if you're only using Maven. -->
+        <dependency>
+            <groupId>org.codehaus.cargo</groupId>
+            <artifactId>cargo-ant</artifactId>
+            <version>0.9</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>ant</groupId>
+                    <artifactId>ant</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ant</groupId>
+                    <artifactId>ant-junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <profiles>
