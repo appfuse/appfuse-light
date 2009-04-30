@@ -38,6 +38,42 @@
         <url>https://appfuse-light.dev.java.net/source/browse/appfuse-light/trunk/web</url>
     </scm>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+												<baseResource implementation="org.mortbay.resource.ResourceCollection">
+                            <resourcesAsCSV>
+                                ${basedir}/src/main/resources,
+                                ${basedir}/src/main/webapp
+                            </resourcesAsCSV>
+                        </baseResource>
+                    </webAppConfig>
+                    <scanIntervalSeconds>3</scanIntervalSeconds>
+                    <scanTargetPatterns>
+                        <scanTargetPattern>
+                            <directory>src/main/webapp/WEB-INF</directory>
+                            <excludes>
+                                <exclude>**/*.jsp</exclude>
+                                <exclude>**/*.html</exclude>
+                                <exclude>**/*.xhtml</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/*.xml</include>
+                                <include>**/*.properties</include>
+                            </includes>
+                        </scanTargetPattern>
+                    </scanTargetPatterns>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <modules>
         <module>jsf</module>
         <module>spring</module>
