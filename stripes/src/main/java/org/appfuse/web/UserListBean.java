@@ -20,7 +20,7 @@ public class UserListBean extends BaseActionBean {
 
     @DefaultHandler
     public final Resolution execute() {
-        users = userManager.getUsers(null);
+        users = userManager.getUsers();
         return new ForwardResolution("/userList.jsp");
     }
 }

@@ -1,5 +1,8 @@
 package org.appfuse.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
 import org.jmock.Expectations;
@@ -11,9 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.ui.ModelMap;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(JMock.class)
 public class UserControllerTest {
@@ -36,7 +36,7 @@ public class UserControllerTest {
         users.add(user1);
 
         context.checking(new Expectations() {{
-            one(userManager).getUsers(null);
+            one(userManager).getUsers();
             will(returnValue(users));
         }});
 

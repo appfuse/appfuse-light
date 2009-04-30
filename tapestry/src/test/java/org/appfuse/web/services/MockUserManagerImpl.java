@@ -1,13 +1,13 @@
 package org.appfuse.web.services;
 
-import org.appfuse.service.impl.UserManagerImpl;
-import org.appfuse.service.UserManager;
-import org.appfuse.service.UserExistsException;
-import org.appfuse.model.User;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import org.appfuse.model.User;
+import org.appfuse.service.UserExistsException;
+import org.appfuse.service.UserManager;
+import org.appfuse.service.impl.UserManagerImpl;
 
 public class MockUserManagerImpl extends UserManagerImpl implements UserManager {
     private List<User> users = new ArrayList<User>();
@@ -33,7 +33,7 @@ public class MockUserManagerImpl extends UserManagerImpl implements UserManager 
     }
 
     @Override
-    public List<User> getUsers(User user) {
+    public List<User> getUsers() {
         return users;
     }
 

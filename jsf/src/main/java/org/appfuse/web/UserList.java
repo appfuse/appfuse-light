@@ -1,14 +1,13 @@
 package org.appfuse.web;
 
-import org.apache.commons.beanutils.BeanComparator;
-import org.apache.commons.collections.comparators.ReverseComparator;
-
-import org.appfuse.service.UserManager;
-
 import java.io.Serializable;
-import java.util.Collections;
+import static java.util.Collections.sort;
 import java.util.Comparator;
 import java.util.List;
+
+import org.apache.commons.beanutils.BeanComparator;
+import org.apache.commons.collections.comparators.ReverseComparator;
+import org.appfuse.service.UserManager;
 
 
 public class UserList implements Serializable {
@@ -37,9 +36,9 @@ public class UserList implements Serializable {
     }
     
     public List getUsers() {
-        List users = userManager.getUsers(null);
+        List users = userManager.getUsers();
 
-        Comparator comparator = null;
+        Comparator comparator;
 
         if (sortColumn.equalsIgnoreCase("birthday")) {
             comparator = new BeanDateComparator(sortColumn);
@@ -51,7 +50,7 @@ public class UserList implements Serializable {
             comparator = new ReverseComparator(comparator);
         }
         
-        Collections.sort(users, comparator);
+        sort(users, comparator);
 
         return users;
     }

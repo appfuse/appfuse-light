@@ -15,7 +15,7 @@
     <property name="webapp.version" value="1.0"/>
 
     <property environment="env"/>
-    <property name="cargo.server" value="tomcat5x"/>
+    <property name="cargo.server" value="tomcat6x"/>
     <property name="server.home" value="${env.CATALINA_HOME}"/>
     <property name="deploy.dir" value="${server.home}/webapps"/>
 
@@ -341,7 +341,7 @@
            
     <target name="beandoc" description="Generate beandoc reports">
         <artifact:dependencies pathId="beandoc.classpath">
-            <remoteRepository url="http://static.appfuse.org/repository"/>
+            <remoteRepository url="http://oss.sonatype.org/content/groups/appfuse"/>
             <dependency groupId="org.springframework" artifactId="beandoc" version="0.7.0"/>
         </artifact:dependencies>
 

@@ -100,7 +100,7 @@ public class UserAction extends ActionSupport {
     }
     
     public String list() { 
-        users = userManager.getUsers(null);
+        users = userManager.getUsers();
         return SUCCESS; 
     } 
 }
