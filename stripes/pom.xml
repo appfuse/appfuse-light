@@ -71,6 +71,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <!-- Ideally, we shouldn't have to do this: http://tinyurl.com/6q97a5 -->
+                    <!-- Fixed in 1.6: http://www.stripesframework.org/jira/browse/STS-714 -->
                     <forkMode>pertest</forkMode>
                     <excludes>
                         <exclude>**/*WebTest.java</exclude>
