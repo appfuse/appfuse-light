@@ -14,7 +14,8 @@
     limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -23,18 +24,20 @@
     <packaging>pom</packaging>
     <name>AppFuse Light Modules</name>
     <version>2.1-SNAPSHOT</version>
-        
+
     <description>
         AppFuse Light Web Frameworks: JSF, Spring MVC, Stripes, Struts 2, Tapestry, Wicket.
     </description>
 
     <scm>
         <connection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk/web</connection>
-        <developerConnection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk/web</developerConnection>
+        <developerConnection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk/web
+        </developerConnection>
         <url>https://appfuse-light.dev.java.net/source/browse/appfuse-light/trunk/web</url>
     </scm>
 
     <build>
+        <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -51,7 +54,7 @@
                 <configuration>
                     <webAppConfig>
                         <contextPath>/</contextPath>
-                            <baseResource implementation="org.mortbay.resource.ResourceCollection">
+                        <baseResource implementation="org.mortbay.resource.ResourceCollection">
                             <resourcesAsCSV>
                                 ${basedir}/src/main/resources,
                                 ${basedir}/src/main/webapp
@@ -94,4 +97,62 @@
         <spring.version>2.5.6</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>create-archetype</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>build-archetype</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <tasks if="web.framework">
+                                        <delete dir="target/archetype"/>
+                                        <ant antfile="../build.xml" dir="." target="build-archetype">
+                                            <property name="module" value="${web.framework}"/>
+                                        </ant>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>test-archetype</id>
+                                <phase>verify</phase>
+                                <configuration>
+                                    <tasks if="web.framework">
+                                        <ant antfile="../build.xml" dir="." target="test">
+                                            <property name="archetype" value="${pom.artifactId}-archetype"/>
+                                        </ant>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>deploy-archetype</id>
+                                <phase>deploy</phase>
+                                <configuration>
+                                    <tasks if="web.framework">
+                                        <ant antfile="../build.xml" dir="." target="deploy">
+                                            <property name="module" value="${web.framework}"/>
+                                        </ant>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
