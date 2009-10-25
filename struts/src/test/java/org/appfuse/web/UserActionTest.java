@@ -8,6 +8,13 @@ import org.springframework.test.AbstractTransactionalDataSourceSpringContextTest
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.config.Configuration;
+import com.opensymphony.xwork2.config.ConfigurationManager;
+import com.opensymphony.xwork2.config.providers.XWorkConfigurationProvider;
+import com.opensymphony.xwork2.inject.Container;
+import com.opensymphony.xwork2.util.LocalizedTextUtil;
+import com.opensymphony.xwork2.util.ValueStack;
+import com.opensymphony.xwork2.util.ValueStackFactory;
 
 public class UserActionTest extends AbstractTransactionalDataSourceSpringContextTests {
     private UserAction action;
@@ -41,7 +48,17 @@ public class UserActionTest extends AbstractTransactionalDataSourceSpringContext
         action = new UserAction();
         action.setUserManager(userManager);
 
-        ActionContext.getContext().setSession(new HashMap());
+        // Initialize ActionContext
+        ConfigurationManager configurationManager = new ConfigurationManager();
+        configurationManager.addContainerProvider(new XWorkConfigurationProvider());
+        Configuration config = configurationManager.getConfiguration();
+        Container container = config.getContainer();
+
+        ValueStack stack = container.getInstance(ValueStackFactory.class).createValueStack();
+        stack.getContext().put(ActionContext.CONTAINER, container);
+        ActionContext.setContext(new ActionContext(stack.getContext()));
+
+        ActionContext.getContext().setSession(new HashMap<String, Object>());
     }
 
     protected void onTearDown() throws Exception {

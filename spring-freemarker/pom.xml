@@ -106,7 +106,24 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>${jdbc.groupId}</groupId>
+            <artifactId>${jdbc.artifactId}</artifactId>
+            <version>${jdbc.version}</version>
+        </dependency>
         <!-- Web Dependencies -->
+        <dependency>
+            <groupId>org.appfuse</groupId>
+            <artifactId>appfuse-web</artifactId>
+            <version>${appfuse.version}</version>
+            <type>pom</type>
+        </dependency>
+				<dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
@@ -115,7 +132,7 @@
         <dependency>
             <groupId>org.springmodules</groupId>
             <artifactId>spring-modules-validation</artifactId>
-            <version>${springmodules.validation.version}</version>
+            <version>0.5</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -140,19 +157,19 @@
         <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock</artifactId>
-            <version>${jmock.version}</version>
+            <version>2.5.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock-junit4</artifactId>
-            <version>${jmock.version}</version>
+            <version>2.5.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <version>4.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -172,7 +189,7 @@
         <dependency>
             <groupId>org.codehaus.cargo</groupId>
             <artifactId>cargo-ant</artifactId>
-            <version>0.9</version>
+            <version>1.0.1-alpha-1</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -226,7 +243,7 @@
                             <wait>${cargo.wait}</wait>
                             <container>
                                 <containerId>${cargo.container}</containerId>
-                                <!--home>${cargo.container.home}</home-->
+                                <home>${cargo.container.home}</home>
                                 <zipUrlInstaller>
                                     <url>${cargo.container.url}</url>
                                     <installDir>${installDir}</installDir>
@@ -274,14 +291,14 @@
 
         <!-- Framework dependency versions -->
         <appfuse.version>2.1-SNAPSHOT</appfuse.version>
-        <freemarker.version>2.3.12</freemarker.version>
-        <jwebunit.version>2.1</jwebunit.version>
+        <freemarker.version>2.3.15</freemarker.version>
+        <jwebunit.version>2.2</jwebunit.version>
         
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
         <jdbc.groupId>com.h2database</jdbc.groupId>
         <jdbc.artifactId>h2</jdbc.artifactId>
-        <jdbc.version>1.0.20061217</jdbc.version>
+        <jdbc.version>1.2.121</jdbc.version>
         <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
         <jdbc.url>jdbc:h2:/tmp/appfuse_light</jdbc.url>
         <jdbc.username>sa</jdbc.username>
@@ -290,7 +307,9 @@
         <!-- Cargo settings -->
         <cargo.container>tomcat6x</cargo.container>
         <cargo.container.home>${env.CATALINA_HOME}</cargo.container.home>
-        <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.18/bin/apache-tomcat-6.0.18.zip</cargo.container.url>
+        <cargo.container.url>
+            http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.20/bin/apache-tomcat-6.0.20.zip
+        </cargo.container.url>
         <cargo.host>localhost</cargo.host>
         <cargo.port>25888</cargo.port>
         <cargo.wait>false</cargo.wait>
