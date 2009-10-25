@@ -40,7 +40,7 @@
         <sequential>
             <delete dir="${test.dir}/@{archetype}"/>
             <maven dir="${test.dir}" archetype="@{archetype}" version="@{version}"/>
-            <mvn dir="${test.dir}/@{archetype}" command="integration-test -Ddao.framework=@{dao.framework}"/>
+            <mvn dir="${test.dir}/@{archetype}" command="integration-test -Ddao.framework=@{dao.framework} -P!db"/>
         </sequential>
     </macrodef>
 
