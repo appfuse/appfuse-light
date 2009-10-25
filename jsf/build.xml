@@ -12,7 +12,7 @@
     <property file="${resources.dir}/jdbc.properties"/>
     
     <property name="webapp.name" value="appfuse-light"/>
-    <property name="webapp.version" value="1.0"/>
+    <property name="webapp.version" value="1.0-SNAPSHOT"/>
 
     <property environment="env"/>
     <property name="cargo.server" value="tomcat6x"/>
