@@ -85,6 +85,8 @@
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.tml</include>
                     <include>**/*.xml</include>
                 </includes>
             </resource>
@@ -105,17 +107,6 @@
             <filter>src/main/resources/jdbc.properties</filter>
         </filters>
     </build>
-
-    <repositories>
-        <repository>
-            <id>java.net</id>
-            <url>http://download.java.net/maven/2</url>
-        </repository>
-        <repository>
-            <id>tapestry@javaforge</id>
-            <url>http://howardlewisship.com/repository</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>

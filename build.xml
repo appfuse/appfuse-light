@@ -163,12 +163,6 @@
                 <replacevalue><![CDATA[import org.appfuse.util]]></replacevalue>
             </replace>
 
-            <!-- Fix messed up package name on RequestUtil -->
-            <replace dir="@{dir}/target/generated-sources/archetype/src">
-                <replacetoken><![CDATA[import org.appfuse.util.RequestUtil]]></replacetoken>
-                <replacevalue><![CDATA[import org.appfuse.webapp.util.RequestUtil]]></replacevalue>
-            </replace>
-
             <replace dir="@{dir}/target/generated-sources/archetype/src">
                 <replacetoken><![CDATA[import org.appfuse.util.MessageUtil]]></replacetoken>
                 <replacevalue><![CDATA[import ${package}.util.MessageUtil]]></replacevalue>
@@ -184,8 +178,8 @@
             <!-- Manually add ${package} to *.tld files -->
             <replace dir="@{dir}/target/generated-sources/archetype/src">
                 <include name="**/*.tld"/>
-                <replacetoken>org.appfuse.webapp.taglib</replacetoken>
-                <replacevalue>${package}.webapp.taglib</replacevalue>
+                <replacetoken>org.appfuse.web.taglib</replacetoken>
+                <replacevalue>${package}.web.taglib</replacevalue>
             </replace>
 
             <!-- Make sure .tld files are filtered -->
@@ -268,7 +262,7 @@
             <if>
                 <equals arg1="${dest}" arg2=""/>
                 <then>
-                    <!-- Make sure all Java files are in webapp directory -->
+                    <!-- Make sure all Java files are in web directory -->
                     <replace dir="@{dir}/target/generated-sources/archetype">
                         <include name="**/*"/>
                         <replacetoken>${package}</replacetoken>
@@ -286,12 +280,12 @@
                     <!-- sources -->
                     <delete dir="${web.root}/src/main/java/org"/>
                     <mkdir dir="${web.root}/src/webapp"/>
-                    <move todir="${web.root}/src/webapp">
+                    <move todir="${web.root}/src/web">
                         <fileset dir="${web.root}/src/main/java"/>
                     </move>
                     <mkdir dir="${web.root}/src/main/java"/>
-                    <move todir="${web.root}/src/main/java/webapp">
-                        <fileset dir="${web.root}/src/webapp"/>
+                    <move todir="${web.root}/src/main/java/web">
+                        <fileset dir="${web.root}/src/web"/>
                     </move>
 
                     <!-- tests -->
@@ -300,7 +294,7 @@
                         <fileset dir="${web.root}/src/test/java"/>
                     </move>
                     <mkdir dir="${web.root}/src/test/java"/>
-                    <move todir="${web.root}/src/test/java/webapp">
+                    <move todir="${web.root}/src/test/java/web">
                         <fileset dir="${web.root}/src/tests"/>
                     </move>
                 </then>
