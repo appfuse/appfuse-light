@@ -30,11 +30,46 @@
     </description>
 
     <scm>
-        <connection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk/web</connection>
-        <developerConnection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk/web
-        </developerConnection>
-        <url>https://appfuse-light.dev.java.net/source/browse/appfuse-light/trunk/web</url>
+        <connection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk</connection>
+        <developerConnection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk</developerConnection>
+        <url>https://appfuse-light.dev.java.net/source/browse/appfuse-light/trunk</url>
     </scm>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>http://issues.appfuse.org/browse/EQX</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Bamboo</system>
+        <url>http://builds.appfuse.org</url>
+        <notifiers>
+            <notifier>
+                <type>mail</type>
+                <sendOnError>true</sendOnError>
+                <sendOnFailure>true</sendOnFailure>
+                <sendOnSuccess>false</sendOnSuccess>
+                <sendOnWarning>false</sendOnWarning>
+                <configuration>
+                    <address>mraible@appfuse.dev.java.net</address>
+                </configuration>
+            </notifier>
+            <notifier>
+                <type>rss</type>
+                <configuration>
+                    <url>feed://builds.appfuse.org/rss/createAllBuildsRssFeed.action?feedType=rssAll</url>
+                </configuration>
+            </notifier>
+        </notifiers>
+    </ciManagement>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <build>
         <defaultGoal>install</defaultGoal>
@@ -80,6 +115,24 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>appfuse-releases</id>
+            <name>AppFuse Release Repository</name>
+            <url>http://oss.sonatype.org/content/repositories/appfuse-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>appfuse-snapshots</id>
+            <name>AppFuse Snapshot Repository</name>
+            <url>http://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
+        </snapshotRepository>
+        <!--site>
+            <id>appfuse-site</id>
+            <name>AppFuse Maven Site</name>
+            <url>scp://static.appfuse.org/var/www/appfuse-site</url>
+        </site-->
+    </distributionManagement>
 
     <modules>
         <module>jsf</module>
