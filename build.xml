@@ -23,8 +23,7 @@
     </target>
 
     <target name="build-archetype" description="Builds Archetypes">
-        <property name="dest" value=""/>
-        <buildArchetype module="${module}" dest="${dest}"/>
+        <buildArchetype module="${module}"/>
     </target>
 
     <target name="deploy" description="Deploys archetype">
@@ -62,7 +61,6 @@
     <macrodef name="buildArchetype">
         <attribute name="module" default=""/>
         <attribute name="dir" default="target/@{module}-archetype"/>
-        <attribute name="dest" default=""/>
 
         <sequential>
             <mkdir dir="@{dir}"/>
@@ -78,30 +76,6 @@
 
             <!-- Fix bug that happens in Bamboo -->
             <delete dir="@{dir}" includes="main/**"/>
-
-            <!-- Remove displaytag for JSF and Tapestry -->
-            <if>
-                <equals arg1="@{module}" arg2="jsf"/>
-                <then>
-                    <delete dir="@{dir}" includes="**/displaytag*.properties"/>
-                </then>
-            </if>
-            <if>
-                <equals arg1="@{module}" arg2="tapestry"/>
-                <then>
-                    <delete dir="@{dir}" includes="**/displaytag*.properties"/>
-                </then>
-            </if>
-
-            <!-- Remove hibernate.cfg.xml from web projects when creating modular archetypes -->
-            <if>
-                <equals arg1="@{dest}" arg2="web"/>
-                <then>
-                    <delete dir="@{dir}/web/src/main/resources">
-                        <include name="**/hibernate.cfg.xml"/>
-                    </delete>
-                </then>
-            </if>
 
             <mvn dir="@{dir}" command="archetype:create-from-project"/>
 
@@ -202,103 +176,48 @@
                 <replacevalue>org.appfuse</replacevalue>
             </replace>
 
-            <if>
-                <equals arg1="${dest}" arg2=""/>
-                <then>
-                    <replace dir="@{dir}/target/generated-sources/archetype">
-                        <include name="**/archetype-metadata.xml"/>
-                        <replacetoken><![CDATA[<fileSet encoding="UTF-8">
-      <directory>src/main/resources</directory>
-      <includes>
-        <include>**/*.tml</include>
-      </includes>
-    </fileSet>]]></replacetoken>
-                        <replacevalue><![CDATA[<fileSet packaged="true" encoding="UTF-8">
-      <directory>src/main/resources</directory>
-      <includes>
-        <include>**/*.tml</include>
-      </includes>
-    </fileSet>]]></replacevalue>
-                    </replace>
-                </then>
-                <else>
-                    <replace dir="@{dir}/target/generated-sources/archetype">
-                        <include name="**/archetype-metadata.xml"/>
-                        <replacetoken><![CDATA[<fileSet encoding="UTF-8">
-          <directory>src/main/resources</directory>
-          <includes>
-            <include>**/*.tml</include>
-          </includes>
-        </fileSet>]]></replacetoken>
-                        <replacevalue><![CDATA[<fileSet packaged="true" encoding="UTF-8">
-          <directory>src/main/resources</directory>
-          <includes>
-            <include>**/*.tml</include>
-          </includes>
-        </fileSet>]]></replacevalue>
-                    </replace>
-                </else>
-            </if>
+            <!-- Make sure web.xml has proper package replacement -->
+            <replace dir="@{dir}/target/generated-sources/archetype">
+                <include name="**/web.xml"/>
+                <replacetoken>org.appfuse.web</replacetoken>
+                <replacevalue>${package}.web</replacevalue>
+            </replace>
 
-            <if>
-                <equals arg1="${dest}" arg2=""/>
-                <then>
-                    <!-- Make sure web.xml has proper value for Tapestry -->
-                    <replace dir="@{dir}/target/generated-sources/archetype">
-                        <include name="**/web.xml"/>
-                        <replacetoken><![CDATA[<param-value>org.appfuse.web</param-value>]]></replacetoken>
-                        <replacevalue><![CDATA[<param-value>${package}.web</param-value>]]></replacevalue>
-                    </replace>
-                </then>
-                <else>
-                    <replace dir="@{dir}/target/generated-sources/archetype">
-                        <include name="**/web.xml"/>
-                        <replacetoken><![CDATA[<param-value>org.appfuse.web</param-value>]]></replacetoken>
-                        <replacevalue><![CDATA[<param-value>${package}</param-value>]]></replacevalue>
-                    </replace>
-                </else>
-            </if>
+            <!-- Make sure all Java files are in web directory -->
+            <replace dir="@{dir}/target/generated-sources/archetype">
+                <include name="**/*"/>
+                <replacetoken>${package}</replacetoken>
+                <replacevalue>${package}.web</replacevalue>
+            </replace>
+            <replace dir="@{dir}/target/generated-sources/archetype">
+                <include name="**/*"/>
+                <replacetoken>web.web</replacetoken>
+                <replacevalue>web</replacevalue>
+            </replace>
 
-            <if>
-                <equals arg1="${dest}" arg2=""/>
-                <then>
-                    <!-- Make sure all Java files are in web directory -->
-                    <replace dir="@{dir}/target/generated-sources/archetype">
-                        <include name="**/*"/>
-                        <replacetoken>${package}</replacetoken>
-                        <replacevalue>${package}.web</replacevalue>
-                    </replace>
-                    <replace dir="@{dir}/target/generated-sources/archetype">
-                        <include name="**/*"/>
-                        <replacetoken>web.web</replacetoken>
-                        <replacevalue>web</replacevalue>
-                    </replace>
+            <property name="web.root"
+                      value="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources"/>
 
-                    <property name="web.root"
-                              value="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources"/>
+            <!-- sources -->
+            <delete dir="${web.root}/src/main/java/org"/>
+            <mkdir dir="${web.root}/src/webapp"/>
+            <move todir="${web.root}/src/web">
+                <fileset dir="${web.root}/src/main/java"/>
+            </move>
+            <mkdir dir="${web.root}/src/main/java"/>
+            <move todir="${web.root}/src/main/java/web">
+                <fileset dir="${web.root}/src/web"/>
+            </move>
 
-                    <!-- sources -->
-                    <delete dir="${web.root}/src/main/java/org"/>
-                    <mkdir dir="${web.root}/src/webapp"/>
-                    <move todir="${web.root}/src/web">
-                        <fileset dir="${web.root}/src/main/java"/>
-                    </move>
-                    <mkdir dir="${web.root}/src/main/java"/>
-                    <move todir="${web.root}/src/main/java/web">
-                        <fileset dir="${web.root}/src/web"/>
-                    </move>
-
-                    <!-- tests -->
-                    <mkdir dir="${web.root}/src/tests"/>
-                    <move todir="${web.root}/src/tests">
-                        <fileset dir="${web.root}/src/test/java"/>
-                    </move>
-                    <mkdir dir="${web.root}/src/test/java"/>
-                    <move todir="${web.root}/src/test/java/web">
-                        <fileset dir="${web.root}/src/tests"/>
-                    </move>
-                </then>
-            </if>
+            <!-- tests -->
+            <mkdir dir="${web.root}/src/tests"/>
+            <move todir="${web.root}/src/tests">
+                <fileset dir="${web.root}/src/test/java"/>
+            </move>
+            <mkdir dir="${web.root}/src/test/java"/>
+            <move todir="${web.root}/src/test/java/web">
+                <fileset dir="${web.root}/src/tests"/>
+            </move>
 
             <!-- Fix ${artifactId}app replacement bug -->
             <replace dir="@{dir}/target/generated-sources/archetype">
