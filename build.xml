@@ -89,9 +89,9 @@
 
             <!-- Add a description to the archetype's pom.xml -->
             <replace file="@{dir}/target/generated-sources/archetype/pom.xml">
-                <replacetoken><![CDATA[</name>]]></replacetoken>
-                <replacevalue><![CDATA[</name>
-  <description>AppFuse Archetype</description>]]></replacevalue>
+                <replacetoken><![CDATA[<build>]]></replacetoken>
+                <replacevalue><![CDATA[<description>AppFuse Archetype</description>
+  <build>]]></replacevalue>
             </replace>
 
             <!--replace file="@{dir}/target/generated-sources/archetype/pom.xml">
