@@ -94,7 +94,7 @@
   <description>AppFuse Archetype</description>]]></replacevalue>
             </replace>
 
-            <replace file="@{dir}/target/generated-sources/archetype/pom.xml">
+            <!--replace file="@{dir}/target/generated-sources/archetype/pom.xml">
                 <replacetoken><![CDATA[</description>]]></replacetoken>
                 <replacevalue><![CDATA[</description>
         <distributionManagement>
@@ -108,13 +108,8 @@
             <name>AppFuse Snapshot Repository</name>
             <url>http://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
         </snapshotRepository>
-        <site>
-            <id>appfuse-site</id>
-            <name>AppFuse Maven Site</name>
-            <url>scp://static.appfuse.org/var/www/appfuse-site</url>
-        </site>
     </distributionManagement>]]></replacevalue>
-            </replace>
+            </replace-->
 
             <!-- Preserve embedded package names -->
             <replace dir="@{dir}/target/generated-sources/archetype/src">

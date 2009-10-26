@@ -108,18 +108,33 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>${jdbc.groupId}</groupId>
-            <artifactId>${jdbc.artifactId}</artifactId>
-            <version>${jdbc.version}</version>
-        </dependency>
-        <!-- Web Dependencies -->
+        <!-- AppFuse Dependencies -->
         <dependency>
             <groupId>org.appfuse</groupId>
             <artifactId>appfuse-web</artifactId>
             <version>${appfuse.version}</version>
             <type>pom</type>
+            <!-- This exclusion and the dependency following this one allow DAO framework switching. -->
+            <!-- You only need these if you want to use JPA or iBATIS. See APF-565 for more information. -->
+            <!-- It does no harm to leave it in for Hibernate, but it's not needed. -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.appfuse</groupId>
+                    <artifactId>appfuse-hibernate</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.appfuse</groupId>
+            <artifactId>appfuse-${dao.framework}</artifactId>
+            <version>${appfuse.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${jdbc.groupId}</groupId>
+            <artifactId>${jdbc.artifactId}</artifactId>
+            <version>${jdbc.version}</version>
+        </dependency>
+        <!-- Struts Web Dependencies -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -153,7 +168,7 @@
             </exclusions>
         </dependency>
 
-        <!-- Force newer version of commons-collections -->
+        <!-- Force newer version of commons-collections for JWebUnit -->
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
