@@ -77,7 +77,7 @@
             <!-- Fix bug that happens in Bamboo -->
             <delete dir="@{dir}" includes="main/**"/>
 
-            <mvn dir="@{dir}" command="archetype:create-from-project"/>
+            <mvn dir="@{dir}" command="archetype:create-from-project -DpackageName=org.appfuse.web"/>
 
             <!-- Change the version number of the generated archetype -->
             <replace file="@{dir}/target/generated-sources/archetype/pom.xml" token="1.0-SNAPSHOT" value="${version}"/>
