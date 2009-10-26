@@ -200,7 +200,7 @@
 
             <!-- sources -->
             <delete dir="${web.root}/src/main/java/org"/>
-            <mkdir dir="${web.root}/src/webapp"/>
+            <mkdir dir="${web.root}/src/web"/>
             <move todir="${web.root}/src/web">
                 <fileset dir="${web.root}/src/main/java"/>
             </move>
@@ -218,13 +218,6 @@
             <move todir="${web.root}/src/test/java/web">
                 <fileset dir="${web.root}/src/tests"/>
             </move>
-
-            <!-- Fix ${artifactId}app replacement bug -->
-            <replace dir="@{dir}/target/generated-sources/archetype">
-                <include name="**/*"/>
-                <replacetoken>${artifactId}app</replacetoken>
-                <replacevalue>web</replacevalue>
-            </replace>
 
             <mvn command="install" dir="@{dir}/target/generated-sources/archetype"/>
         </sequential>
