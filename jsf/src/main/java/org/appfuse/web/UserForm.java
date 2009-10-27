@@ -51,23 +51,28 @@ public class UserForm {
     }
 
     public String save() throws UserExistsException {
-        userManager.saveUser(getUser());
-        addMessage("user.saved", getUser().getFullName());
+		// For some reason, WebTest + Tomcat causes version to be 0. Works fine on Jetty.
+        if (user.getId() != null && user.getId() == 0) {
+            user.setId(null);
+        }
+
+        userManager.saveUser(user);
+        addMessage("user.saved", user.getFullName());
 
         return "success";
     }
 
     public String delete() {
-        userManager.removeUser(getUser().getId().toString());
-        addMessage("user.deleted", getUser().getFullName());
+        userManager.removeUser(user.getId().toString());
+        addMessage("user.deleted", user.getFullName());
 
         return "success";
     }
 
     // Convenience methods ====================================================
     public static String getRequestParameter(String name) {
-        return (String) FacesContext.getCurrentInstance().getExternalContext()
-                                    .getRequestParameterMap().get(name);
+        return FacesContext.getCurrentInstance().getExternalContext()
+                           .getRequestParameterMap().get(name);
     }
 
     public void addMessage(String key, String arg) {
