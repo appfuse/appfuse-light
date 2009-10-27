@@ -145,6 +145,26 @@
         <module>wicket</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>appfuse</id>
+            <url>http://oss.sonatype.org/content/groups/appfuse</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>appfuse</id>
+            <url>http://oss.sonatype.org/content/groups/appfuse</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
     <properties>
         <jetty.version>6.1.21</jetty.version>
         <spring.version>2.5.6</spring.version>
