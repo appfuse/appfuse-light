@@ -70,7 +70,7 @@ public class UserForm extends BasePage {
         }
 
         String message = MapVariableInterpolator.interpolate(getLocalizer().getString("user.saved", this),
-                new MicroMap("name", user.getFullName()));
+                new MicroMap<String, String>("name", user.getFullName()));
         getSession().info(message);
         FeedbackPanel feedback = (FeedbackPanel) responsePage.get("feedback");
         feedback.setVisible(true);
@@ -89,7 +89,7 @@ public class UserForm extends BasePage {
         userManager.removeUser(user.getId().toString());
 
         String message = MapVariableInterpolator.interpolate(getLocalizer().getString("user.deleted", this),
-                new MicroMap("name", user.getFullName()));
+                new MicroMap<String, String>("name", user.getFullName()));
         getSession().info(message);
 
         responsePage.get("feedback").setVisible(true);
@@ -117,7 +117,7 @@ public class UserForm extends BasePage {
          * @param label IModel containing the string used in ${label} variable of
          *              validation messages
          */
-        private void add(FormComponent fc, IModel label) {
+        private void add(FormComponent fc, IModel<String> label) {
             // Add the component to the form
             super.add(fc);
             // Set its label model
@@ -138,20 +138,20 @@ public class UserForm extends BasePage {
              * us to easily connect form components to the bean properties
              * (component id is used as the property expression)
              */
-            super(id, new CompoundPropertyModel(user));
+            super(id, new CompoundPropertyModel<User>(user));
             add(new RequiredTextField("username"), new ResourceModel("user.username"));
             add(new RequiredTextField("password"), new ResourceModel("user.password"));
             add(new TextField("firstName"), new ResourceModel("user.firstName"));
             add(new TextField("lastName"), new ResourceModel("user.lastName"));
             add(new RequiredTextField("email"), new ResourceModel("user.email"));
 
-            add(new Button("save", new Model("Save")) {
+            add(new Button("save", new Model<String>("Save")) {
                 public void onSubmit() {
                     onSave((User) getForm().getModelObject());
                 }
             });
 
-            Button delete = new Button("delete", new Model("Delete")) {
+            Button delete = new Button("delete", new Model<String>("Delete")) {
                 public void onSubmit() {
                     onDelete((User) getForm().getModelObject());
                 }
@@ -168,7 +168,7 @@ public class UserForm extends BasePage {
              * tells wicket that when this button is pressed it should not
              * perform any form processing (ie bind request values to the bean).
              */
-            add(new Button("cancel", new Model("Cancel")) {
+            add(new Button("cancel", new Model<String>("Cancel")) {
                 public void onSubmit() {
                     onCancel();
                 }

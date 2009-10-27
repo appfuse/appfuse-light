@@ -47,15 +47,15 @@ public class UserList extends BasePage {
         form.add(button);
         add(form);
 
-        SortableDataProvider dp = new SortableUserDataProvider(userManager);
+        SortableUserDataProvider dp = new SortableUserDataProvider(userManager);
 
-        final DataView dataView = new DataView("users", dp) {
-            protected void populateItem(final Item item) {
-                User user = (User) item.getModelObject();
+        final DataView<User> dataView = new DataView<User>("users", dp) {
+            protected void populateItem(final Item<User> item) {
+                User user = item.getModelObject();
 
-                Link link = new Link("edit-link", item.getModel()) {
+                Link<User> link = new Link<User>("edit-link", item.getModel()) {
                     public void onClick() {
-                        onEditUser((User) getModelObject());
+                        onEditUser(getModelObject());
                     }
                 };
                 link.add(new Label("user.id", String.valueOf(user.getId())));

@@ -4,14 +4,15 @@ import org.appfuse.web.pages.Index;
 import org.appfuse.web.pages.UserForm;
 import org.appfuse.web.pages.UserList;
 
-import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.settings.IRequestCycleSettings;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.apache.wicket.protocol.http.WebApplication;
 
 public class Application extends WebApplication {
+    @Override
     public void init() {
-        // notice in 2.0+ versions this is replaced by new SpringWicketModule(this);
-        addComponentInstantiationListener(new SpringComponentInjector(this));
+        super.init();
+        addComponentInstantiationListener(new SpringComponentInjector(this));    
         configure(); 
         
         // Fixed SiteMesh: http://spatula.net/blog/2006/10/wicket-sitemesh-feces-nocturnus.html
@@ -25,7 +26,7 @@ public class Application extends WebApplication {
         mountBookmarkablePage("/userform", UserForm.class);
     }
 
-    public Class getHomePage() {
+    public Class<Index> getHomePage() {
         return Index.class;
     }
 }
