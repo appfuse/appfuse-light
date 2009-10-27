@@ -134,7 +134,7 @@
             <artifactId>${jdbc.artifactId}</artifactId>
             <version>${jdbc.version}</version>
         </dependency>
-        <!-- Struts Web Dependencies -->
+        <!-- Wicket Web Dependencies -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -167,6 +167,12 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
+        </dependency>
+        <!-- Force newer version of slf4j-log4j12 for JWebUnit -->
+				<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.8</version>
         </dependency>
 
         <!-- Testing Dependencies -->
