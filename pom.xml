@@ -127,11 +127,11 @@
             <name>AppFuse Snapshot Repository</name>
             <url>http://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
         </snapshotRepository>
-        <!--site>
-            <id>appfuse-site</id>
-            <name>AppFuse Maven Site</name>
-            <url>scp://static.appfuse.org/var/www/appfuse-site</url>
-        </site-->
+        <site>
+            <id>appfuse-light-site</id>
+            <name>AppFuse Light Maven Site</name>
+            <url>scp://static.appfuse.org/var/www/appfuse-site/light</url>
+        </site>
     </distributionManagement>
 
     <modules>
