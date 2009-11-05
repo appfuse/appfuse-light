@@ -94,23 +94,6 @@
   <build>]]></replacevalue>
             </replace>
 
-            <!--replace file="@{dir}/target/generated-sources/archetype/pom.xml">
-                <replacetoken><![CDATA[</description>]]></replacetoken>
-                <replacevalue><![CDATA[</description>
-        <distributionManagement>
-        <repository>
-            <id>appfuse-releases</id>
-            <name>AppFuse Release Repository</name>
-            <url>http://oss.sonatype.org/content/repositories/appfuse-releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>appfuse-snapshots</id>
-            <name>AppFuse Snapshot Repository</name>
-            <url>http://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>]]></replacevalue>
-            </replace-->
-
             <!-- Preserve embedded package names -->
             <replace dir="@{dir}/target/generated-sources/archetype/src">
                 <replacetoken><![CDATA[import ${package}.Constants]]></replacetoken>
