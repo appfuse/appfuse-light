@@ -34,7 +34,6 @@ public abstract class BasePageTester extends Assert {
         if (tester != null) {
             tester.shutdown();
         }
-
     }
 
     protected Element populateForm() {
