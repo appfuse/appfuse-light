@@ -313,7 +313,7 @@
         <web.framework>wicket</web.framework>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.1-SNAPSHOT</appfuse.version>
+        <appfuse.version>2.1.0-M1</appfuse.version>
         <jwebunit.version>2.2</jwebunit.version>
         <wicket.version>1.4.3</wicket.version>
 
