@@ -22,16 +22,16 @@
     <artifactId>appfuse-light</artifactId>
     <packaging>pom</packaging>
     <name>AppFuse Light Modules</name>
-    <version>2.1.0-M1</version>
+    <version>2.1.0-M2-SNAPSHOT</version>
 
     <description>
         AppFuse Light Web Frameworks: JSF, Spring MVC, Stripes, Struts 2, Tapestry, Wicket.
     </description>
 
     <scm>
-        <connection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/tags/release-2.0.1-M1</connection>
-        <developerConnection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/tags/release-2.0.1-M1</developerConnection>
-        <url>https://appfuse-light.dev.java.net/source/browse/appfuse-light/tags/release-2.0.1-M1</url>
+        <connection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk</connection>
+        <developerConnection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk</developerConnection>
+        <url>https://appfuse-light.dev.java.net/source/browse/appfuse-light/trunk</url>
     </scm>
 
     <issueManagement>
