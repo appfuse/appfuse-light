@@ -35,21 +35,6 @@
         float: left;
     }
 </style>
-<script type="text/javascript">
-    function changeIt() {
-        var groupId = document.getElementById("groupId").value;
-        var artifactId = document.getElementById("artifactId").value;
-        var version = document.getElementById("version").value;
-        var webFramework = document.getElementById("webFramework").value;
-        var archetypeArtifactId = "appfuse-light-";
-
-        archetypeArtifactId += webFramework;
-        if (version.match(/.*SNAPSHOT/) || parseInt(version) > 2.1) archetypeArtifactId += "-archetype";
-        var cmd = 'mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=' + archetypeArtifactId + ' -DarchetypeVersion=' + version + ' -DgroupId=' + groupId + ' -DartifactId=' + artifactId;
-        if (version.match(/.*SNAPSHOT/)) cmd += ' -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse';
-        document.getElementById("cmdLine").value = cmd;
-    }
-</script>
 </head>
 <body>
 <div id="mvncmd">
@@ -81,11 +66,24 @@
     <div>
         <label for="cmdLine" id="cmdLabel">Command Line:</label>
         <textarea id="cmdLine" onfocus="this.select();"></textarea>
-
-        <script type="text/javascript">changeIt();</script>
     </div>
-    <br/>
+    <script type="text/javascript">
+        function changeIt() {
+            var groupId = document.getElementById("groupId").value;
+            var artifactId = document.getElementById("artifactId").value;
+            var version = document.getElementById("version").value;
+            var webFramework = document.getElementById("webFramework").value;
+            var archetypeArtifactId = "appfuse-light-";
+
+            archetypeArtifactId += webFramework;
+            if (version.match(/.*SNAPSHOT/) || parseInt(version) > 2.1) archetypeArtifactId += "-archetype";
+            var cmd = 'mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=' + archetypeArtifactId + ' -DarchetypeVersion=' + version + ' -DgroupId=' + groupId + ' -DartifactId=' + artifactId;
+            if (version.match(/.*SNAPSHOT/)) cmd += ' -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse';
+            document.getElementById("cmdLine").value = cmd;
+        }
+
+        changeIt();
+    </script>
 </div>
 </body>
 </html>
-
