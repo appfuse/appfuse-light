@@ -137,7 +137,7 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.4</version>
+            <version>2.5</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -168,7 +168,7 @@
             <version>3.2.1</version>
         </dependency>
         <!-- Force newer version of slf4j-log4j12 for JWebUnit -->
-				<dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.5.8</version>
@@ -187,10 +187,18 @@
             <version>2.5.1</version>
             <scope>test</scope>
         </dependency>
+        <!-- Upgrade junit-dep used by jmock -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit-dep</artifactId>
+            <version>4.5</version>
+            <scope>test</scope>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.4</version>
+            <version>4.7</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -312,7 +320,7 @@
         <web.framework>wicket</web.framework>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.1.0-M1</appfuse.version>
+        <appfuse.version>2.1.0-M2-SNAPSHOT</appfuse.version>
         <jwebunit.version>2.2</jwebunit.version>
         <wicket.version>1.4.3</wicket.version>
 
