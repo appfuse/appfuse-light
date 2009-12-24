@@ -3,7 +3,7 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.xsd">
+              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
     <http auto-config="false" lowercase-comparisons="false">
         <intercept-url pattern="/**/*.html*" access="ROLE_ADMIN,ROLE_USER"/>
@@ -12,13 +12,15 @@
         <logout logout-url="/logout.jsp"/>
     </http>
 
-    <authentication-provider>
-        <password-encoder hash="sha"/>
-        <user-service>
-            <user name="user" password="12dea96fec20593566ab75692c9949596833adc9" authorities="ROLE_USER"/>
-            <user name="admin" password="d033e22ae348aeb5660fc2140aec35850c4da997" authorities="ROLE_ADMIN"/>
-        </user-service>
-    </authentication-provider>
+    <authentication-manager>
+        <authentication-provider>
+            <password-encoder hash="sha"/>
+            <user-service>
+                <user name="user" password="12dea96fec20593566ab75692c9949596833adc9" authorities="ROLE_USER"/>
+                <user name="admin" password="d033e22ae348aeb5660fc2140aec35850c4da997" authorities="ROLE_ADMIN"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
 
     <global-method-security>
         <protect-pointcut expression="execution(* *..service.UserManager.removeUser(..))" access="ROLE_ADMIN"/>
