@@ -1,6 +1,6 @@
 <title>${rc.getMessage("userList.title")}</title>
 
-<button onclick="location.href='userform.html'" style="float: right; margin-top: -30px; width: 100px">Add User</button>
+<button onclick="location.href='userform'" style="float: right; margin-top: -30px; width: 100px">Add User</button>
 
 <table class="table" id="userList">
 <thead>
@@ -16,7 +16,7 @@
 <#if user_index % 2 == 0> <tr class="odd"> 
 <#else> <tr class="even"> 
 </#if>
-    <td><a href="userform.html?id=${user.id}">${user.id}</a></td>
+    <td><a href="userform?id=${user.id}">${user.id}</a></td>
     <td>${user.firstName?html}</td>
     <td>${user.lastName?html}</td>
     <td>${user.email?html}</td>

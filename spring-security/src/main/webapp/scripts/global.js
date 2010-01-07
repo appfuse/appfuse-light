@@ -93,10 +93,13 @@ function get(url) {
             var  text = response.responseText;
             if (200 == response.status) {
                 // if response contains title, replace existing title
-                if (response.responseText.indexOf("<title>")) {
+                if (text.indexOf("<title>") > -1) {
                     var title = text.substring(text.indexOf("<title>") + 7, text.indexOf(("</title>")));
                     document.title = title + " " + document.title.substring(document.title.indexOf("|"));
                     $('main').getElementsByTagName("h1")[0].innerHTML = title;
+                } else {
+                    $('main').getElementsByTagName("h1")[0].innerHTML = "";
+                    document.title = "Welcome " + document.title.substring(document.title.indexOf("|"));
                 }
 
                 // if response contains head, append to current head

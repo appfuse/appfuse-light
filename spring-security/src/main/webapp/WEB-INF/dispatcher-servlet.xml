@@ -11,9 +11,8 @@
     <context:component-scan base-package="org.appfuse.web"/>
 
     <!-- Application Message Bundle -->
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
-        <property name="cacheSeconds" value="0"/>
     </bean>
 
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">

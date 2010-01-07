@@ -90,8 +90,8 @@
                         <contextPath>/</contextPath>
                         <baseResource implementation="org.mortbay.resource.ResourceCollection">
                             <resourcesAsCSV>
-                                ${basedir}/src/main/resources,
-                                ${basedir}/src/main/webapp
+                                ${basedir}/src/main/webapp,
+                                ${basedir}/src/main/resources
                             </resourcesAsCSV>
                         </baseResource>
                     </webAppConfig>
@@ -100,6 +100,7 @@
                         <scanTargetPattern>
                             <directory>src/main/webapp/WEB-INF</directory>
                             <includes>
+                                <include>urlrewrite.xml</include>
                                 <include>web.xml</include>
                             </includes>
                         </scanTargetPattern>
@@ -179,7 +180,7 @@
     </pluginRepositories>
 
     <properties>
-        <jetty.version>6.1.21</jetty.version>
+        <jetty.version>6.1.22</jetty.version>
         <spring.version>3.0.0.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

@@ -11,9 +11,8 @@
     <context:component-scan base-package="org.appfuse.web"/>
 
     <!-- Application Message Bundle -->
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
-        <property name="cacheSeconds" value="0"/>
     </bean>
 
     <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -28,6 +27,7 @@
 
     <!-- Configures the @Controller programming model -->
     <mvc:annotation-driven/>
+    <mvc:view-controller path="/index.html" view-name="index"/>
 
     <!-- Configures Handler Interceptors -->
     <mvc:interceptors>
@@ -41,21 +41,6 @@
     <bean id="beanValidator" class="org.springmodules.validation.commons.DefaultBeanValidator">
         <property name="validatorFactory" ref="validatorFactory"/>
     </bean>
-
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-        <property name="order" value="0"/>
-    </bean>
-
-    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="order" value="1"/>
-        <property name="mappings">
-            <value>
-                /index.html=filenameController
-            </value>
-        </property>
-    </bean>
-    
-    <bean id="filenameController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
 
     <!-- FreeMarker Configurer and View Resolver -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
