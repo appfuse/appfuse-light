@@ -51,7 +51,9 @@
     <td>
         <input type="submit" class="button" name="save" value="Save"/>
       <c:if test="${not empty param.id}">
-        <input type="submit" class="button" name="delete" value="Delete" onclick="bCancel=true"/>
+      <security:authorize ifAllGranted="ROLE_ADMIN">
+        <input type="submit" class="button" name="delete" value="Delete"/>
+      </security:authorize>
       </c:if>
       	<input type="submit" class="button" name="cancel" value="Cancel" onclick="bCancel=true"/>
     </td>
