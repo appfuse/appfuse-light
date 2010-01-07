@@ -99,18 +99,26 @@
                     <scanTargetPatterns>
                         <scanTargetPattern>
                             <directory>src/main/webapp/WEB-INF</directory>
-                            <excludes>
-                                <exclude>**/*.jsp</exclude>
-                                <exclude>**/*.html</exclude>
-                                <exclude>**/*.xhtml</exclude>
-                            </excludes>
                             <includes>
-                                <include>**/*.xml</include>
-                                <include>**/*.properties</include>
+                                <include>web.xml</include>
                             </includes>
                         </scanTargetPattern>
                     </scanTargetPatterns>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>javarebel-maven-plugin</artifactId>
+                <version>1.0.5</version>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

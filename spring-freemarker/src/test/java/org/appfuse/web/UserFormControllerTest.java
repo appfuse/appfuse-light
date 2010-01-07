@@ -13,12 +13,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.MutablePropertyValues;
+import org.springframework.context.MessageSource;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.context.support.StaticApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindException;
+import org.springframework.validation.DataBinder;
 import org.springframework.validation.Errors;
+import org.springframework.validation.MapBindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -29,7 +35,6 @@ public class UserFormControllerTest {
     final Log log = LogFactory.getLog(UserFormControllerTest.class);
     UserFormController c = new UserFormController();
     MockHttpServletRequest request = null;
-    ModelAndView mv = null;
     User user = new User();
     UserManager userManager = null;
     Mockery context = new JUnit4Mockery();
@@ -39,7 +44,6 @@ public class UserFormControllerTest {
         userManager = context.mock(UserManager.class);
         // manually set properties (dependencies) on userFormController
         c.userManager = userManager;
-        c.setFormView("userForm");
 
         // set context with messages avoid NPE when controller calls 
         // getMessageSourceAccessor().getMessage()
@@ -49,8 +53,8 @@ public class UserFormControllerTest {
         ctx.registerSingleton("messageSource", ResourceBundleMessageSource.class,
                 new MutablePropertyValues(properties));
         ctx.refresh();
-        c.setApplicationContext(ctx);
-
+        c.setMessages((MessageSource) ctx.getBean("messageSource"));
+                                                                                       
         // setup user values
         user.setId(1L);
         user.setFirstName("Matt");
@@ -64,23 +68,17 @@ public class UserFormControllerTest {
         // set expected behavior on manager
         context.checking(new Expectations() {{
             one(userManager).getUser(with(equal("1")));
-            will(returnValue(new User()));
+            will(returnValue(user));
         }});
 
         request = new MockHttpServletRequest("GET", "/userform.html");
-        request.addParameter("id", user.getId().toString());
-        mv = c.handleRequest(request, new MockHttpServletResponse());
-        assertEquals("userForm", mv.getViewName());
+        request.addParameter("id", "1");
+        User user = c.getUser(request);
+        assertEquals("Matt", user.getFirstName());
     }
 
     @Test
     public void testSave() throws Exception {
-        // set expected behavior on manager
-        // called by formBackingObject()
-        context.checking(new Expectations() {{
-            one(userManager).getUser(with(equal("1")));
-            will(returnValue(user));
-        }});
 
         final User savedUser = user;
         savedUser.setLastName("Updated Last Name");
@@ -90,23 +88,13 @@ public class UserFormControllerTest {
         }});
 
         request = new MockHttpServletRequest("POST", "/userform.html");
-        request.addParameter("id", user.getId().toString());
-        request.addParameter("firstName", user.getFirstName());
-        request.addParameter("lastName", "Updated Last Name");
-        mv = c.handleRequest(request, new MockHttpServletResponse());
-        Errors errors = (Errors) mv.getModel().get(BindException.MODEL_KEY_PREFIX + "user");
-        assertNull(errors);
+        String view = c.onSubmit(savedUser, new DataBinder(user).getBindingResult(), request);
+        assertEquals("redirect:users", view);
         assertNotNull(request.getSession().getAttribute("message"));
     }
 
     @Test
     public void testRemove() throws Exception {
-        // set expected behavior on manager
-        // called by formBackingObject()
-        context.checking(new Expectations() {{
-            one(userManager).getUser(with(equal("1")));
-            will(returnValue(user));
-        }});
 
         // called by onSubmit()
         context.checking(new Expectations() {{
@@ -115,8 +103,8 @@ public class UserFormControllerTest {
 
         request = new MockHttpServletRequest("POST", "/userform.html");
         request.addParameter("delete", "");
-        request.addParameter("id", user.getId().toString());
-        mv = c.handleRequest(request, new MockHttpServletResponse());
+        String view = c.onSubmit(user, new DataBinder(user).getBindingResult(), request);
+        assertEquals("redirect:users", view);
         assertNotNull(request.getSession().getAttribute("message"));
     }
 }

@@ -8,7 +8,7 @@
 
 <form:form commandName="user" method="post" action="userform.html" onsubmit="return validateUser(this)" id="userForm">
 <form:errors path="*" cssClass="error"/>
-<form:hidden path="id" />
+<form:hidden path="id"/>
 <form:hidden path="version"/>
 <table class="detail">
 <tr>

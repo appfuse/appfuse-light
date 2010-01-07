@@ -41,8 +41,7 @@ public class UserWebTest extends WebTestCase {
         assertTablePresent("userList");
 
         //check that a set of strings are present somewhere in table
-        assertTextInTable("userList",
-                new String[]{"Spring", "User"});
+        assertTextInTable("userList", new String[] {"Spring", "User"});
     }
 
     public void testEditUser() {
@@ -74,6 +73,6 @@ public class UserWebTest extends WebTestCase {
     }
 
     protected void assertTitleKeyMatches(String title) {
-        assertTitleEquals(messages.getString(title) + " | " + messages.getString("webapp.name")); 
+        assertTitleEquals(messages.getString(title) + " | " + messages.getString("webapp.name"));
     }
 }

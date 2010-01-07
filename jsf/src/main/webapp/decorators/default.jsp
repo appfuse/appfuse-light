@@ -55,9 +55,9 @@
             <p>The following is a list of resources that will make <a href="http://springframework.org">Spring</a> infinitely easier to use.</p>
 
             <ul class="glassList">
-                <li><a href="http://static.springframework.org/spring/docs/2.5.x/reference/index.html">Spring 2.5 Docs</a></li>
-                <li><a href="http://static.springframework.org/spring/docs/2.5.x/api/index.html">Spring 2.5 API</a></li>
-                <li><a href="http://www.springframework.org/bookreview">Spring Books</a></li>
+                <li><a href="http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/">Spring 3.0 Docs</a></li>
+                <li><a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/">Spring 3.0 API</a></li>
+                <li><a href="http://www.amazon.com/s/ref=nb_ss?url=search-alias%3Daps&field-keywords=spring+framework">Spring Books</a></li>
                 <li><a href="http://forum.springframework.org/">Spring Forums</a></li>
                 <li><a href="http://springmodules.dev.java.net">Spring Modules</a></li>
             </ul>

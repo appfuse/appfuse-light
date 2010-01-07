@@ -14,7 +14,8 @@
     limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -315,7 +316,7 @@
         <!-- Framework dependency versions -->
         <appfuse.version>2.1.0-M2-SNAPSHOT</appfuse.version>
         <jwebunit.version>2.2</jwebunit.version>
-        
+
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
         <jdbc.groupId>com.h2database</jdbc.groupId>
@@ -324,7 +325,7 @@
         <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
         <jdbc.url>jdbc:h2:/tmp/appfuse_light</jdbc.url>
         <jdbc.username>sa</jdbc.username>
-        <jdbc.password />
+        <jdbc.password/>
 
         <!-- Cargo settings -->
         <cargo.container>tomcat6x</cargo.container>

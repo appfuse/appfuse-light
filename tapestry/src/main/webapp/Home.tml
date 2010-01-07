@@ -34,11 +34,11 @@
         its MVC framework, but you can change it to 
         <a href="http://myfaces.apache.org">JSF/MyFaces</a>,
         <a href="http://mc4j.org/confluence/display/stripes/Home">Stripes</a>,
-        <a href="http://struts.apache.org">Struts 1.x</a>, 
+        <a href="http://stripesframework.org">Stripes</a>,
         <a href="http://struts.apache.org/2.x/">Struts 2.x</a>,
         <a href="http://opensymphony.com/webwork">WebWork</a>, 
         <a href="http://jakarta.apache.org/tapestry">Tapestry</a> or
-        <a href="http://wicket.sourceforge.net/">Wicket</a>. In addition, there's a
+        <a href="http://wicket.apache.org/">Wicket</a>. In addition, there's a
         number of extras for Spring MVC, including Velocity and FreeMarker versions, Ajax
         support and Acegi Security support. Installers are in the "extras" directory.
     </p>
