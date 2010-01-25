@@ -315,7 +315,7 @@
 
         <!-- Framework dependency versions -->
         <appfuse.version>2.1.0-M2-SNAPSHOT</appfuse.version>
-        <freemarker.version>2.3.15</freemarker.version>
+        <freemarker.version>2.3.16</freemarker.version>
         <jwebunit.version>2.2</jwebunit.version>
         
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
