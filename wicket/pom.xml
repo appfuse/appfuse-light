@@ -165,26 +165,26 @@
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
+            <version>${commons.collections.version}</version>
         </dependency>
         <!-- Force newer version of slf4j-log4j12 for JWebUnit -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.8</version>
+            <version>${slf4j.version}</version>
         </dependency>
 
         <!-- Testing Dependencies -->
         <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock</artifactId>
-            <version>2.5.1</version>
+            <version>${jmock.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock-junit4</artifactId>
-            <version>2.5.1</version>
+            <version>${jmock.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- Upgrade junit-dep used by jmock -->
@@ -198,7 +198,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.7</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -321,7 +321,11 @@
 
         <!-- Framework dependency versions -->
         <appfuse.version>2.1.0-M2-SNAPSHOT</appfuse.version>
+        <commons.collections.version>3.2.1</commons.collections.version>
+        <jmock.version>2.5.1</jmock.version>
+        <junit.version>3.8.1</junit.version>
         <jwebunit.version>2.2</jwebunit.version>
+        <slf4j.version>1.6.1</slf4j.version>
         <wicket.version>1.4.3</wicket.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
@@ -330,7 +334,7 @@
         <jdbc.artifactId>h2</jdbc.artifactId>
         <jdbc.version>1.2.121</jdbc.version>
         <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
-        <jdbc.url>jdbc:h2:/tmp/appfuse_light</jdbc.url>
+        <jdbc.url>jdbc:h2:/tmp/appfuse_light;MVCC=TRUE</jdbc.url>
         <jdbc.username>sa</jdbc.username>
         <jdbc.password />
 
