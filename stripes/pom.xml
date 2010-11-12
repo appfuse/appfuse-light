@@ -304,7 +304,7 @@
         <web.framework>stripes</web.framework>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.1.0-M2-SNAPSHOT</appfuse.version>
+        <appfuse.version>2.1.0-M2</appfuse.version>
         <jwebunit.version>2.2</jwebunit.version>
         <stripes.version>1.5</stripes.version>
         
