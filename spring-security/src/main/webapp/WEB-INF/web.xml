@@ -124,6 +124,10 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -157,7 +161,7 @@
         <error-code>403</error-code>
         <location>/403.jsp</location>
     </error-page>
-    
+
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>
