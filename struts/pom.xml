@@ -323,7 +323,7 @@
         <web.framework>struts</web.framework>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.1.0-M2</appfuse.version>
+        <appfuse.version>2.1.0-SNAPSHOT</appfuse.version>
         <jwebunit.version>2.2</jwebunit.version>
         <struts.version>2.1.8</struts.version>
 

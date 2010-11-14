@@ -334,7 +334,7 @@
         <web.framework>tapestry</web.framework>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.1.0-M2</appfuse.version>
+        <appfuse.version>2.1.0-SNAPSHOT</appfuse.version>
         <jwebunit.version>2.2</jwebunit.version>
         <tapestry.version>5.1.0.5</tapestry.version>
 
