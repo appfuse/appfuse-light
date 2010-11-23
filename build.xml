@@ -43,7 +43,7 @@
         <attribute name="archetype" default=""/>
         <attribute name="version" default=""/>
         <attribute name="command"
-                   default="archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=@{archetype}
+                   default="org.apache.maven.plugins:maven-archetype-plugin:2.0-alpha-4:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=@{archetype}
                    -DarchetypeVersion=@{version} -DgroupId=com.mycompany -DartifactId=@{archetype} -DpackageName=com.mycompany"/>
 
         <sequential>
@@ -71,10 +71,12 @@
             <!-- Fix bug that happens in Bamboo -->
             <delete dir="@{dir}" includes="main/**"/>
 
-            <mvn dir="@{dir}" command="archetype:create-from-project -DpackageName=org.appfuse.web"/>
+            <mvn dir="@{dir}" command="org.apache.maven.plugins:maven-archetype-plugin:2.0-alpha-4:create-from-project -DpackageName=org.appfuse.web"/>
 
             <!-- Change the version number of the generated archetype -->
-            <replace file="@{dir}/target/generated-sources/archetype/pom.xml" token="1.0-SNAPSHOT" value="${version}"/>
+            <replace file="@{dir}/target/generated-sources/archetype/pom.xml" value="${version}">
+                <replacetoken><![CDATA[<version>1.0-SNAPSHOT</version>]]></replacetoken>
+            </replace>
             <!-- Change the groupId -->
             <replace file="@{dir}/target/generated-sources/archetype/pom.xml">
                 <replacetoken><![CDATA[<groupId>org.appfuse</groupId>]]></replacetoken>
