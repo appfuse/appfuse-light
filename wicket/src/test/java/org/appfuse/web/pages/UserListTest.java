@@ -5,29 +5,27 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.spring.injection.annot.test.AnnotApplicationContextMock;
 import org.apache.wicket.util.tester.WicketTester;
 import org.appfuse.service.UserManager;
-import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-public class UserListTest extends AbstractDependencyInjectionSpringContextTests {
+@ContextConfiguration({"classpath:/applicationContext-resources.xml", "classpath:/applicationContext-dao.xml",
+            "classpath:/applicationContext-service.xml", "/WEB-INF/applicationContext*.xml"})
+public class UserListTest extends AbstractJUnit4SpringContextTests {
     private WicketTester tester;
 
-    protected String[] getConfigLocations() {
-        return new String[] {
-            "classpath:/applicationContext-resources.xml",
-            "classpath:/applicationContext-dao.xml",
-            "classpath:/applicationContext-service.xml",
-            "/WEB-INF/applicationContext*.xml"
-        };
-    }
-    
+    @Before
     public void onSetUp() {
         tester = new WicketTester();
         AnnotApplicationContextMock context = new AnnotApplicationContextMock();
         UserManager userManager = (UserManager) applicationContext.getBean("userManager");
         context.putBean("userManager", userManager);
         tester.getApplication().addComponentInstantiationListener(
-                new SpringComponentInjector(tester.getApplication(), context));
+                new SpringComponentInjector(tester.getApplication(), context, true));
     }
 
+    @Test
     public void testRenderPage() {
         tester.startPage(UserList.class);
         
