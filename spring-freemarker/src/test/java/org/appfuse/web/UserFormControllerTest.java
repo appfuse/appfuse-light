@@ -8,27 +8,20 @@ import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;
 import org.jmock.integration.junit4.JUnit4Mockery;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.context.MessageSource;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.context.support.StaticApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.ui.ExtendedModelMap;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindException;
 import org.springframework.validation.DataBinder;
-import org.springframework.validation.Errors;
-import org.springframework.validation.MapBindingResult;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.Assert.*;
 
 @RunWith(JMock.class)
 public class UserFormControllerTest {
@@ -71,7 +64,7 @@ public class UserFormControllerTest {
             will(returnValue(user));
         }});
 
-        request = new MockHttpServletRequest("GET", "/userform.html");
+        request = new MockHttpServletRequest("GET", "/userform");
         request.addParameter("id", "1");
         User user = c.getUser(request);
         assertEquals("Matt", user.getFirstName());
@@ -87,7 +80,7 @@ public class UserFormControllerTest {
             one(userManager).saveUser(with(equal(savedUser)));
         }});
 
-        request = new MockHttpServletRequest("POST", "/userform.html");
+        request = new MockHttpServletRequest("POST", "/userform");
         String view = c.onSubmit(savedUser, new DataBinder(user).getBindingResult(), request);
         assertEquals("redirect:users", view);
         assertNotNull(request.getSession().getAttribute("message"));
@@ -101,7 +94,7 @@ public class UserFormControllerTest {
             one(userManager).removeUser("1");
         }});
 
-        request = new MockHttpServletRequest("POST", "/userform.html");
+        request = new MockHttpServletRequest("POST", "/userform");
         request.addParameter("delete", "");
         String view = c.onSubmit(user, new DataBinder(user).getBindingResult(), request);
         assertEquals("redirect:users", view);

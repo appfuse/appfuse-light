@@ -68,6 +68,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.7.2</version>
                 <configuration>
                     <excludes>
                         <exclude>**/*WebTest.java</exclude>
@@ -209,6 +210,12 @@
             <artifactId>jwebunit-htmlunit-plugin</artifactId>
             <version>${jwebunit.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -247,8 +254,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.7.2</version>
                         <executions>
                             <execution>
                                 <id>surefire-it</id>
@@ -324,7 +331,7 @@
 
         <!-- Framework dependency versions -->
         <appfuse.version>2.1.0-SNAPSHOT</appfuse.version>
-        <jwebunit.version>2.2</jwebunit.version>
+        <jwebunit.version>2.5</jwebunit.version>
         <struts.version>2.1.8</struts.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->

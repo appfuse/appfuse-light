@@ -69,6 +69,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.7.2</version>
                 <configuration>
                     <excludes>
                         <exclude>**/*WebTest.java</exclude>
@@ -192,6 +193,12 @@
             <artifactId>jwebunit-htmlunit-plugin</artifactId>
             <version>${jwebunit.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -230,8 +237,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.7.2</version>
                         <executions>
                             <execution>
                                 <id>surefire-it</id>
@@ -310,7 +317,7 @@
         <commons.collections.version>3.2.1</commons.collections.version>
         <jmock.version>2.5.1</jmock.version>
         <junit.version>4.8.2</junit.version>
-        <jwebunit.version>2.2</jwebunit.version>
+        <jwebunit.version>2.5</jwebunit.version>
         <slf4j.version>1.6.1</slf4j.version>
         <wicket.version>1.4.15</wicket.version>
         <mockito.version>1.8.5</mockito.version>

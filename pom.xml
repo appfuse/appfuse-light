@@ -95,7 +95,7 @@
                             </resourcesAsCSV>
                         </baseResource>
                     </webAppConfig>
-                    <scanIntervalSeconds>3</scanIntervalSeconds>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
                     <scanTargetPatterns>
                         <scanTargetPattern>
                             <directory>src/main/webapp/WEB-INF</directory>
@@ -180,7 +180,7 @@
     </pluginRepositories>
 
     <properties>
-        <jetty.version>6.1.22</jetty.version>
+        <jetty.version>6.1.26</jetty.version>
         <spring.version>3.0.5.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

@@ -30,7 +30,7 @@
     <logger name="org.apache.commons.validator.ValidatorResources">
         <level value="ERROR"/>
     </logger>
-                                No 
+
     <logger name="org.springframework">
         <level value="WARN"/>
     </logger>

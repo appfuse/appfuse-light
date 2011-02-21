@@ -12,16 +12,22 @@ public class UserWebTest extends WebTestCase {
 
     @Override
     protected void setUp() {
+        // to get around Obsolete content type encountered: 'text/javascript'.
         setScriptingEnabled(false);
         getTestContext().setBaseUrl("http://localhost:25888");
         getTestContext().setResourceBundleName("messages");
         messages = ResourceBundle.getBundle("messages");
         
-        beginAt("/users.html");
+        beginAt("/users");
         assertTitleEquals("Login | AppFuse Light");
         setTextField("j_username", "admin");
         setTextField("j_password", "admin");
         submit("login");
+    }
+
+    @Override
+    protected void tearDown() {
+       gotoPage("/logout");
     }
 
     public void testLogin() {
@@ -39,7 +45,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testAddUser() {
-        gotoPage("/userform.html");
+        gotoPage("/userform");
         assertTitleKeyMatches("userForm.title");
         setTextField("username", "springuser");
         setTextField("password", "springuser");
@@ -51,7 +57,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testListUsers() {
-        gotoPage("/users.html");
+        gotoPage("/users");
         assertTitleKeyMatches("userList.title");
         
         // check that table is present
@@ -62,7 +68,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testEditUser() {
-        gotoPage("/userform.html?id=" + getInsertedUserId());
+        gotoPage("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
         assertTextFieldEquals("firstName", "Spring");
         submit("save");
@@ -70,7 +76,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testDeleteUser() {
-        gotoPage("/userform.html?id=" + getInsertedUserId());
+        gotoPage("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
         submit("delete");
         assertTitleKeyMatches("userList.title");
@@ -82,7 +88,7 @@ public class UserWebTest extends WebTestCase {
      * @return last id in the table
      */
     protected String getInsertedUserId() {
-        gotoPage("/users.html");
+        gotoPage("/users");
         assertTablePresent("userList");
         assertTextInTable("userList", "Spring");
         Table table = getTable("userList");

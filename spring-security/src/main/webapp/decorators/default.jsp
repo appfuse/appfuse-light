@@ -42,7 +42,7 @@
         <div id="main">
             <h1><decorator:title/></h1>
             <security:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
-                <div class="logout"><a href="${ctx}/logout.jsp">Logout</a></div>
+                <div class="logout"><a href="${ctx}/logout">Logout</a></div>
             </security:authorize>
             <div id="body">
                 <%@ include file="/messages.jsp"%>

@@ -17,7 +17,7 @@
 
 <p>Please fill in user's information below:</p>
 
-<form method="post" action="<@spring.url '/userform.html'/>" id="userForm">
+<form method="post" action="<@spring.url '/userform'/>" id="userForm">
     <@spring.formHiddenInput "user.id"/>
     <@spring.formHiddenInput "user.version"/>
     <table>

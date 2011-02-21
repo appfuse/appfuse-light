@@ -23,7 +23,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testAddUser() {
-        beginAt("/userform.html");
+        beginAt("/userform");
         assertTitleKeyMatches("userForm.title");
         setTextField("username", "springuser");
         setTextField("password", "springuser");
@@ -35,7 +35,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testListUsers() {
-        beginAt("/users.html");
+        beginAt("/users");
 
         // check that table is present
         assertTablePresent("userList");
@@ -45,14 +45,14 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testEditUser() {
-        beginAt("/userform.html?id=" + getInsertedUserId());
+        beginAt("/userform?id=" + getInsertedUserId());
         assertTextFieldEquals("firstName", "Spring");
         submit("save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
-        beginAt("/userform.html?id=" + getInsertedUserId());
+        beginAt("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
         submit("delete");
         assertTitleKeyMatches("userList.title");
@@ -64,7 +64,7 @@ public class UserWebTest extends WebTestCase {
      * @return last id in the table
      */
     protected String getInsertedUserId() {
-        beginAt("/users.html");
+        beginAt("/users");
         assertTablePresent("userList");
         assertTextInTable("userList", "Spring");
         Table table = getTable("userList");
