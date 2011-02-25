@@ -1,8 +1,7 @@
 [#ftl]
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en">
 <head>
     <title>[#if title != '']${title}[#else]Welcome[/#if] | ${rc.getMessage("webapp.name")}</title>
     <meta http-equiv="Cache-Control" content="no-store"/>
@@ -83,7 +82,6 @@
 
     <div id="footer">
         <p>
-            <a href="http://validator.w3.org/check?uri=referer">Valid XHTML 1.0</a> |
             <a href="http://www.oswd.org/design/preview/id/2634">Deliciously Blue</a> from <a href="http://www.oswd.org/">OSWD</a> |
             Design by <a href="http://www.oswd.org/user/profile/id/8377">super j man</a>
         </p>
