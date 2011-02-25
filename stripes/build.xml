@@ -269,10 +269,12 @@
             userid="${jdbc.username}" password="${jdbc.password}">
             <classpath refid="compile.classpath"/>
             <![CDATA[ 
-                INSERT INTO app_user (id, first_name, last_name) 
-                    values (5, 'Julie', 'Raible');
-                INSERT INTO app_user (id, first_name, last_name) 
-                    values (6, 'Abbie', 'Raible');
+                INSERT INTO app_user (id, first_name, last_name, account_expired, account_locked,
+                                      credentials_expired, email, username, password)
+                    values (5, 'Abbie', 'Raible', false, false, false, 'abbie@appfuse.org', 'abbie', 'abbie');
+                INSERT INTO app_user (id, first_name, last_name, account_expired, account_locked,
+                                      credentials_expired, email, username, password)
+                    values (6, 'Jack', 'Raible', false, false, false, 'jack@appfuse.org', 'jack', 'jack');
             ]]>
         </sql>
     </target>

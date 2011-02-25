@@ -29,9 +29,9 @@
     </description>
 
     <scm>
-        <connection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk</connection>
-        <developerConnection>scm:svn:https://appfuse-light.dev.java.net/svn/appfuse-light/trunk</developerConnection>
-        <url>https://appfuse-light.dev.java.net/source/browse/appfuse-light/trunk</url>
+        <connection>scm:svn:https://svn.java.net/svn/appfuse-light~svn/trunk</connection>
+        <developerConnection>scm:svn:https://svn.java.net/svn/appfuse-light~svn/trunk</developerConnection>
+        <url>http://source.appfuse.org/browse/appfuse-light/trunk</url>
     </scm>
 
     <issueManagement>
