@@ -1,5 +1,7 @@
 package org.appfuse.web;
 
+import org.apache.wicket.request.IRequestCycleProcessor;
+import org.appfuse.web.pages.DefaultUrlCodingStrategy;
 import org.appfuse.web.pages.Index;
 import org.appfuse.web.pages.UserForm;
 import org.appfuse.web.pages.UserList;
@@ -7,8 +9,24 @@ import org.appfuse.web.pages.UserList;
 import org.apache.wicket.settings.IRequestCycleSettings;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.appfuse.web.rootmount.RootMountedUrlCodingStrategy;
+import org.appfuse.web.rootmount.RootWebRequestProcessor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application extends WebApplication {
+
+    private List<RootMountedUrlCodingStrategy> rootMounts = new ArrayList<RootMountedUrlCodingStrategy>();
+
+    /**
+     * Constructor
+     */
+    public Application() {
+        // NOTE: there is no need to synchronize this list as it is written to from the init() method.
+        rootMounts = new ArrayList<RootMountedUrlCodingStrategy>(10);
+    }
+
     @Override
     public void init() {
         super.init();
@@ -22,11 +40,35 @@ public class Application extends WebApplication {
         getMarkupSettings().setStripWicketTags(true);
         
         // make bookmarkable pages for easy linking from Menu/SiteMesh
-        mountBookmarkablePage("/users", UserList.class);
-        mountBookmarkablePage("/userform", UserForm.class);
+        //mountBookmarkablePage("/index", Index.class);
+        mountOnRoot(new DefaultUrlCodingStrategy("/users", UserList.class));
+        mountOnRoot(new DefaultUrlCodingStrategy("/userform", UserForm.class));
     }
 
     public Class<Index> getHomePage() {
         return Index.class;
+    }
+
+      /**
+     * Mount a target url strategy no the root URL.
+     *
+     * @param strategy the strategy (not null)
+     */
+    private void mountOnRoot(RootMountedUrlCodingStrategy strategy) {
+        rootMounts.add(strategy);
+
+        // Also add to the wicket mounts so that it can be found when searched by target page class.
+        mount(strategy);
+    }
+
+    @Override
+    protected IRequestCycleProcessor newRequestCycleProcessor() {
+
+        return new RootWebRequestProcessor(rootMounts);
+
+        // Alternative that redirects all unknown requests to the not found page.
+        // Please read {@link RootWebRequestProcessor class comment} before you enable this.
+        //
+        // return new RootWebRequestProcessor(rootMounts, NotFoundPage.class);
     }
 }

@@ -218,7 +218,7 @@
         <dependency>
             <groupId>org.codehaus.cargo</groupId>
             <artifactId>cargo-ant</artifactId>
-            <version>1.0.1-alpha-1</version>
+            <version>${cargo.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -267,7 +267,7 @@
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven2-plugin</artifactId>
-                        <version>1.0</version>
+                        <version>${cargo.version}</version>
                         <configuration>
                             <wait>${cargo.wait}</wait>
                             <container>

@@ -3,7 +3,7 @@
 <div id="intro">
     <h2>Welcome to AppFuse Light!</h2>
     <p>
-        <a href="http://appfuse-light.dev.java.net">AppFuse Light</a> is a lightweight version of <a href="http://appfuse.org">AppFuse</a>.
+        <a href="http://appfuse-light.java.net">AppFuse Light</a> is a lightweight version of <a href="http://appfuse.org">AppFuse</a>.
         I was inspired to create it while writing <a href="http://springlive.com">Spring Live</a> and 
         looking at the <em>struts-blank</em> and <em>webapp-minimal</em> 
         applications that ship with Struts and Spring, respectively.
@@ -17,7 +17,7 @@
         to learn more about AppFuse Light.
     </p>
     <p>
-        <button class="button" onclick="location.href='users.html'">View Demonstration</button>
+        <button class="button" onclick="location.href='users'">View Demonstration</button>
     </p>
 </div>
 <div id="readmore" style="display:none">
@@ -61,7 +61,7 @@
 <content tag="underground">
 <h3>Assumptions</h3>
 <ul>
-    <li>It's 2010, you should be thinking about HTML5 and SOFEA.</li>
+    <li>It's 2011, you should be thinking about HTML5 and SOFEA.</li>
     <li>JRebel should be used to allow quick reloading of classes.</li>
     <li>Conventions are more important than configurability.</li>
 </ul>

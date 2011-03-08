@@ -71,6 +71,6 @@ public class UserFormBean extends BaseActionBean {
     }
 
     private Resolution showList() {
-        return new RedirectResolution("/users.html").flash(this);
+        return new RedirectResolution("/users").flash(this);
     }
 }

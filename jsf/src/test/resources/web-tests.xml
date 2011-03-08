@@ -18,7 +18,7 @@
             &config;
             <steps>
                 <!-- View add screen -->
-                <invoke url="/users.html"/>
+                <invoke url="/users"/>
                 <clickbutton label="Add User"/>
 
                 <verifytitle text="${userForm.title}.*" regex="true"/>
@@ -35,7 +35,7 @@
                 <verifytitle text="${userList.title}.*" regex="true"/>
 
                 <!-- Delete first user in table -->
-                <invoke url="/users.html"/>
+                <invoke url="/users"/>
 
                 <clicklink xpath="//table[@id='editUser:users']/tbody/tr[1]/td/a"/>
                 <verifytitle description="view user form" text="${userForm.title}.*" regex="true"/>

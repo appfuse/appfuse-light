@@ -6,7 +6,7 @@
 
 <p>Please fill in user's information below:</p>
 
-<stripes:form action="/userform.html" id="userForm">
+<stripes:form action="/userform.action" id="userForm">
     <stripes:errors globalErrorsOnly="true"/>
     <stripes:hidden name="user.id"/>
     <stripes:hidden name="user.version"/>

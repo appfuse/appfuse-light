@@ -23,7 +23,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testAddUser() {
-        beginAt("/editUser.html");
+        beginAt("/editUser");
         assertTitleKeyMatches("userForm.title");
         setTextField("user.username", "araible");
         setTextField("user.password", "iloveprincesses");
@@ -35,7 +35,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testListUsers() {
-        beginAt("/users.html");
+        beginAt("/users");
 
         // check that table is present
         assertTablePresent("userList");
@@ -45,14 +45,14 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testEditUser() {
-        beginAt("/editUser.html?id=" + getInsertedUserId());
+        beginAt("/editUser?id=" + getInsertedUserId());
         assertTextFieldEquals("user.firstName", "Abbie");
         submit("save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
-        beginAt("/editUser.html?id=" + getInsertedUserId());
+        beginAt("/editUser?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
         submit("delete");
         assertTitleKeyMatches("userList.title");
@@ -64,7 +64,7 @@ public class UserWebTest extends WebTestCase {
      * @return last id in the table
      */
     protected String getInsertedUserId() {
-        beginAt("/users.html");
+        beginAt("/users");
         assertTablePresent("userList");
         assertTextInTable("userList", "Abbie");
         Table table = getTable("userList");

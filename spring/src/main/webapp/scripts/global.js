@@ -50,7 +50,7 @@ var historyListener = function(newLocation, historyData) {
       newLocation = "";
    }
    get(newLocation);
-}
+};
 
 // The following doesn't work in IE 6 or 7
 // window.onload = StyleSheetSwitcher.initialize();
@@ -66,7 +66,7 @@ window.onload = function() {
             get(url);
         }
     }
-}
+};
 
 function get(url) {
     // if hostname in URL, assume is absolute and strip protocol/server/port

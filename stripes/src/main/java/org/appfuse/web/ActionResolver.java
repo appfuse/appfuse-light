@@ -15,12 +15,4 @@ public class ActionResolver extends NameBasedActionResolver {
         }
         return name;
     }
-
-    /**
-     * Set default suffix to .html instead of .action
-     * @return ".html"
-     */
-    protected String getBindingSuffix() {
-        return ".html";
-    }
 }

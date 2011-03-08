@@ -8,7 +8,7 @@ import net.sourceforge.stripes.integration.spring.SpringBean;
 import org.appfuse.service.UserManager;
 import org.appfuse.model.User;
 
-@UrlBinding("/users.html")
+@UrlBinding("/users.action")
 public class UserListBean extends BaseActionBean {
     @SpringBean
     private UserManager userManager;

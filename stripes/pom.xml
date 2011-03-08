@@ -209,7 +209,7 @@
         <dependency>
             <groupId>org.codehaus.cargo</groupId>
             <artifactId>cargo-ant</artifactId>
-            <version>1.0.1-alpha-1</version>
+            <version>${cargo.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -258,7 +258,7 @@
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven2-plugin</artifactId>
-                        <version>1.0</version>
+                        <version>${cargo.version}</version>
                         <configuration>
                             <wait>${cargo.wait}</wait>
                             <container>
@@ -313,7 +313,7 @@
         <!-- Framework dependency versions -->
         <appfuse.version>2.1.0-SNAPSHOT</appfuse.version>
         <jwebunit.version>2.5</jwebunit.version>
-        <stripes.version>1.5</stripes.version>
+        <stripes.version>1.5.5</stripes.version>
         
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>

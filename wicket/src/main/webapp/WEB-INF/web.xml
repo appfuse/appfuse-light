@@ -51,6 +51,10 @@
             <param-name>configuration</param-name>
             <param-value>development</param-value>
         </init-param>
+        <init-param>
+          <param-name>ignorePaths</param-name>
+          <param-value>images/,scripts/,styles/,dwr/,crossdomain.xml,favicon.ico</param-value>
+        </init-param>
     </filter>
 
     <context-param>
@@ -67,7 +71,6 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
     <filter-mapping>
         <filter-name>messageFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -79,15 +82,13 @@
         <filter-name>lazyLoadingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>-->
-
     <filter-mapping>
         <filter-name>sitemesh</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
     <filter-mapping>
         <filter-name>wicket</filter-name>
-        <url-pattern>/app/*</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <listener>
@@ -107,10 +108,6 @@
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
     </servlet-mapping>
-
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 
     <error-page>
         <error-code>404</error-code>
