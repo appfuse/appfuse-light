@@ -15,7 +15,7 @@
     <!-- Context Configuration for Tapestry 5 -->
     <context-param>
         <param-name>tapestry.app-package</param-name>
-        <param-value>org.appfuse.web</param-value>
+        <param-value>org.appfuse.webapp</param-value>
     </context-param>
 
     <filter>
@@ -33,7 +33,7 @@
 
     <filter>
         <filter-name>messageFilter</filter-name>
-        <filter-class>org.appfuse.web.MessageFilter</filter-class>
+        <filter-class>org.appfuse.webapp.MessageFilter</filter-class>
     </filter>
 
     <!--<filter>

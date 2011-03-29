@@ -35,6 +35,10 @@
     </rule>
 
     <!-- JSF -->
+    <rule>
+        <from>/mainMenu.jsf</from>
+        <to type="redirect">/</to>
+    </rule>
     <rule match-type="regex">
         <from>^([^?]*)/([^?/\.]+)(\?.*)?$</from>
         <to last="true">$1/$2.jsf</to>

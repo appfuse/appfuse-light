@@ -33,5 +33,5 @@
     </global-method-security>
 
     <!-- Override userSecurityAdvice bean in appfuse-service to allow any role to update a user. -->
-    <beans:bean id="userSecurityAdvice" class="org.appfuse.web.UserSecurityAdvice"/>
+    <beans:bean id="userSecurityAdvice" class="org.appfuse.webapp.UserSecurityAdvice"/>
 </beans:beans>

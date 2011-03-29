@@ -38,28 +38,15 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-    
-    <managed-bean>
-        <managed-bean-name>userList</managed-bean-name>
-        <managed-bean-class>org.appfuse.web.UserList</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-        <managed-property>
-            <property-name>userManager</property-name>
-            <value>#{userManager}</value>
-        </managed-property>
-    </managed-bean>
-    
-    <managed-bean>
-        <managed-bean-name>userForm</managed-bean-name>
-        <managed-bean-class>org.appfuse.web.UserForm</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-        <managed-property>
-            <property-name>id</property-name>
-            <value>#{param.id}</value>
-        </managed-property>
-        <managed-property>
-            <property-name>userManager</property-name>
-            <value>#{userManager}</value>
-        </managed-property>
-    </managed-bean>
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>mainMenu</from-outcome>
+            <!-- Doesn't exist, handled by UrlRewriteFilter -->
+            <to-view-id>/mainMenu.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <!-- Add additional rules here -->
+
 </faces-config>

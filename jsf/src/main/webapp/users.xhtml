@@ -3,10 +3,10 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:t="http://myfaces.apache.org/tomahawk">
 
 <f:view>
-<f:loadBundle var="messages" basename="messages"/>
+<f:loadBundle var="text" basename="messages"/>
 
 <head>
-    <title>#{messages['userList.title']}</title>
+    <title>#{text['userList.title']}</title>
     <style type="text/css">
         @import url(#{facesContext.externalContext.requestContextPath}/styles/myfaces.css);
     </style>
@@ -24,7 +24,7 @@
     <t:column>
         <f:facet name="header">
             <t:commandSortHeader columnName="id" arrow="true">
-                <h:outputText value="#{messages['user.id']}"/>
+                <h:outputText value="#{text['user.id']}"/>
             </t:commandSortHeader>
         </f:facet>
         <h:commandLink action="#{userForm.edit}" value="#{user.id}">
@@ -34,7 +34,7 @@
     <t:column>
         <f:facet name="header">
             <t:commandSortHeader columnName="firstName" arrow="true">
-                <h:outputText value="#{messages['user.firstName']}"/>
+                <h:outputText value="#{text['user.firstName']}"/>
             </t:commandSortHeader>
         </f:facet>
         <h:outputText value="#{user.firstName}"/>
@@ -42,7 +42,7 @@
     <t:column>
         <f:facet name="header">
             <t:commandSortHeader columnName="lastName" arrow="true">
-                <h:outputText value="#{messages['user.lastName']}"/>
+                <h:outputText value="#{text['user.lastName']}"/>
             </t:commandSortHeader>
         </f:facet>
         <h:outputText value="#{user.lastName}"/>
@@ -50,14 +50,14 @@
     <t:column>
         <f:facet name="header">
             <t:commandSortHeader columnName="email" arrow="true">
-                <h:outputText value="#{messages['user.email']}"/>
+                <h:outputText value="#{text['user.email']}"/>
             </t:commandSortHeader>
         </f:facet>
         <h:outputText value="#{user.email}"/>
     </t:column>
 </t:dataTable>
 
-<ui:include src="/tableFooter.xhtml">
+<ui:include src="/common/tableFooter.xhtml">
     <ui:param name="tableName" value="users"/>
 </ui:include>
 

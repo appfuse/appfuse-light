@@ -8,8 +8,8 @@
     <property name="port" value="25888"/>
 
     <!-- runs all targets -->
-    <target name="run-all-tests" depends="UserTests" description="Call and executes all test cases (targets)">
-        <echo>All UserTests passed!</echo>
+    <target name="run-all-tests" depends="UserTests"
+        description="Call and executes all test cases (targets)">
     </target>
 
     <!-- Verify adding a user, viewing and deleting a user works -->
@@ -43,5 +43,6 @@
                 <verifytitle description="view user list" text="${userList.title}.*" regex="true"/>
             </steps>
         </webtest>
+        <echo>All UserTests passed!</echo>
     </target>
 </project>

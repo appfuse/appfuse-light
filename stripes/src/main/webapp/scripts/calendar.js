@@ -83,7 +83,7 @@ Calendar = function (firstDayOfWeek, dateStr, onSelected, onClose) {
 /// "static", needed for event handlers.
 Calendar._C = null;
 
-/// detect a special case of "web browser"
+/// detect a special case of "webapp browser"
 Calendar.is_ie = ( /msie/i.test(navigator.userAgent) &&
 		   !/opera/i.test(navigator.userAgent) );
 

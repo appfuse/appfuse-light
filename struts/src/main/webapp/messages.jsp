@@ -10,6 +10,11 @@
 </s:if>
 
 <%-- Success Messages --%>
-<c:if test="${not empty message}">
-    <div class="message"><c:out value="${message}"/></div>
+<c:if test="${not empty messages}">
+    <div class="message" id="successMessages">
+        <c:forEach var="msg" items="${messages}">
+            <c:out value="${msg}"/><br />
+        </c:forEach>
+    </div>
+    <c:remove var="messages" scope="session"/>
 </c:if>

@@ -24,12 +24,33 @@
         <version>2.1.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>org.appfuse</groupId>
     <artifactId>appfuse-light-spring-freemarker</artifactId>
     <packaging>war</packaging>
+    <version>2.1.0-SNAPSHOT</version>
     <name>AppFuse Light Spring MVC/FreeMarker Module</name>
 
     <build>
+        <defaultGoal>install</defaultGoal>
         <plugins>
+            <plugin>
+                <groupId>org.appfuse.plugins</groupId>
+                <artifactId>appfuse-maven-plugin</artifactId>
+                <version>${appfuse.version}</version>
+                <configuration>
+                    <genericCore>${amp.genericCore}</genericCore>
+                    <fullSource>${amp.fullSource}</fullSource>
+                </configuration>
+                <!-- Dependency needed by appfuse:gen-model to connect to database. -->
+                <!-- See http://issues.appfuse.org/browse/APF-868 to learn more.    -->
+                <dependencies>
+                    <dependency>
+                        <groupId>${jdbc.groupId}</groupId>
+                        <artifactId>${jdbc.artifactId}</artifactId>
+                        <version>${jdbc.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
@@ -75,6 +96,38 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>javarebel-maven-plugin</artifactId>
+                <version>1.0.5</version>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -104,6 +157,50 @@
             <filter>src/main/resources/jdbc.properties</filter>
         </filters>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>appfuse-releases</id>
+            <name>AppFuse Release Repository</name>
+            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>appfuse-snapshots</id>
+            <name>AppFuse Snapshot Repository</name>
+            <url>http://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>appfuse-light-site</id>
+            <name>AppFuse Light Maven Site</name>
+            <url>scp://static.appfuse.org/var/www/appfuse-site/light</url>
+        </site>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>appfuse-snapshots</id>
+            <url>http://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>appfuse-snapshots</id>
+            <url>http://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <!-- AppFuse Dependencies -->
@@ -316,14 +413,21 @@
     </profiles>
 
     <properties>
+        <!-- Application settings -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <dao.framework>hibernate</dao.framework>
         <web.framework>spring-freemarker</web.framework>
+        <amp.genericCore>true</amp.genericCore>
+        <amp.fullSource>false</amp.fullSource>
 
         <!-- Framework dependency versions -->
         <appfuse.version>2.1.0-SNAPSHOT</appfuse.version>
+        <cargo.version>1.0.6</cargo.version>
         <freemarker.version>2.3.16</freemarker.version>
+        <jetty.version>6.1.26</jetty.version>
         <jwebunit.version>2.5</jwebunit.version>
-        
+        <spring.version>3.0.5.RELEASE</spring.version>
+
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
         <jdbc.groupId>com.h2database</jdbc.groupId>

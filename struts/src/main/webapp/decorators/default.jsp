@@ -71,6 +71,7 @@
                 <ul class="clearfix">
                     <li><a href="${ctx}/" title="Home"><span>Home</span></a></li>
                     <li><a href="${ctx}/users" title="View Users"><span>Users</span></a></li>
+                    <!-- Add new menu items here -->
                 </ul>
             </div>
         </div><!-- end nav -->

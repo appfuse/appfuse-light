@@ -1,3 +1,9 @@
+function confirmDelete(obj) {   
+    var msg = "Are you sure you want to delete this " + obj + "?";
+    ans = confirm(msg);
+    return ans;
+}
+
 function highlightTableRows(tableId) {
     var previousClass = null;
     var table = document.getElementById(tableId);

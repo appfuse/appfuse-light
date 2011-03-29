@@ -43,8 +43,9 @@
         <attribute name="archetype" default=""/>
         <attribute name="version" default=""/>
         <attribute name="command"
-                   default="org.apache.maven.plugins:maven-archetype-plugin:2.0-alpha-4:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=@{archetype}
-                   -DarchetypeVersion=@{version} -DgroupId=com.mycompany -DartifactId=@{archetype} -DpackageName=com.mycompany"/>
+                   default="archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=@{archetype}
+                   -DarchetypeVersion=@{version} -DgroupId=com.mycompany -DartifactId=@{archetype} -DpackageName=com.mycompany
+                   -Darchetype.keepParent=false -DarchetypeCatalog=local"/>
 
         <sequential>
             <mkdir dir="${test.dir}"/>
@@ -65,13 +66,14 @@
                     <exclude name="**/.svn/**"/>
                     <exclude name="*.iml"/>
                     <exclude name="*.ipr"/>
+                    <exclude name="*.log"/>
                 </fileset>
             </copy>
 
             <!-- Fix bug that happens in Bamboo -->
             <delete dir="@{dir}" includes="main/**"/>
 
-            <mvn dir="@{dir}" command="org.apache.maven.plugins:maven-archetype-plugin:2.0-alpha-4:create-from-project -DpackageName=org.appfuse.web"/>
+            <mvn dir="@{dir}" command="archetype:create-from-project -DpackageName=org.appfuse.webapp -Darchetype.keepParent=false"/>
 
             <!-- Change the version number of the generated archetype -->
             <replace file="@{dir}/target/generated-sources/archetype/pom.xml" value="${version}">
@@ -92,28 +94,28 @@
 
             <!-- Preserve embedded package names -->
             <replace dir="@{dir}/target/generated-sources/archetype/src">
-                <replacetoken><![CDATA[import ${package}.Constants]]></replacetoken>
+                <replacetoken><![CDATA[import ${groupId}.Constants]]></replacetoken>
                 <replacevalue><![CDATA[import org.appfuse.Constants]]></replacevalue>
             </replace>
 
             <replace dir="@{dir}/target/generated-sources/archetype/src">
-                <replacetoken><![CDATA[import ${package}.model]]></replacetoken>
+                <replacetoken><![CDATA[import ${groupId}.model]]></replacetoken>
                 <replacevalue><![CDATA[import org.appfuse.model]]></replacevalue>
             </replace>
 
             <replace dir="@{dir}/target/generated-sources/archetype/src">
-                <replacetoken><![CDATA[import ${package}.service.]]></replacetoken>
+                <replacetoken><![CDATA[import ${groupId}.service.]]></replacetoken>
                 <replacevalue><![CDATA[import org.appfuse.service.]]></replacevalue>
             </replace>
 
             <replace dir="@{dir}/target/generated-sources/archetype/src">
-                <replacetoken><![CDATA[import ${package}.util]]></replacetoken>
+                <replacetoken><![CDATA[import ${groupId}.util]]></replacetoken>
                 <replacevalue><![CDATA[import org.appfuse.util]]></replacevalue>
             </replace>
 
             <replace dir="@{dir}/target/generated-sources/archetype/src">
                 <replacetoken><![CDATA[import org.appfuse.util.MessageUtil]]></replacetoken>
-                <replacevalue><![CDATA[import ${package}.util.MessageUtil]]></replacevalue>
+                <replacevalue><![CDATA[import ${groupId}.util.MessageUtil]]></replacevalue>
             </replace>
 
             <!-- Add jdbc.password back in since archetype plugin strips it out -->
@@ -126,8 +128,8 @@
             <!-- Manually add ${package} to *.tld files -->
             <replace dir="@{dir}/target/generated-sources/archetype/src">
                 <include name="**/*.tld"/>
-                <replacetoken>org.appfuse.web.taglib</replacetoken>
-                <replacevalue>${package}.web.taglib</replacevalue>
+                <replacetoken>org.appfuse.webapp.taglib</replacetoken>
+                <replacevalue>${package}.webapp.taglib</replacevalue>
             </replace>
 
             <!-- Make sure .tld files are filtered -->
@@ -142,56 +144,54 @@
         <include>**/*.tld</include>]]></replacevalue>
             </replace>
 
+            <!-- Fix package for java files -->
+            <replace dir="@{dir}/target/generated-sources/archetype">
+                <include name="**/archetype-metadata.xml"/>
+                <replacetoken><![CDATA[<include>**/*.java</include>]]></replacetoken>
+                <replacevalue><![CDATA[<include>webapp/**/*.java</include>]]></replacevalue>
+            </replace>
+
             <!-- Fix hibernate.cfg.xml and persistence.xml -->
             <replace dir="@{dir}/target/generated-sources/archetype/src">
                 <include name="**/hibernate.cfg.xml"/>
                 <include name="**/persistence.xml"/>
-                <replacetoken>${package}</replacetoken>
+                <replacetoken>${groupId}</replacetoken>
                 <replacevalue>org.appfuse</replacevalue>
             </replace>
 
-            <!-- Make sure web.xml has proper package replacement -->
+            <!-- Make sure webapp.xml has proper package replacement -->
             <replace dir="@{dir}/target/generated-sources/archetype">
                 <include name="**/web.xml"/>
-                <replacetoken>org.appfuse.web</replacetoken>
-                <replacevalue>${package}.web</replacevalue>
+                <replacetoken>org.appfuse.webapp</replacetoken>
+                <replacevalue>${groupId}.webapp</replacevalue>
             </replace>
 
-            <!-- Make sure all Java files are in web directory -->
+            <!-- Make sure all Java files are in webapp directory -->
             <replace dir="@{dir}/target/generated-sources/archetype">
                 <include name="**/*"/>
                 <replacetoken>${package}</replacetoken>
-                <replacevalue>${package}.web</replacevalue>
+                <replacevalue>${package}.webapp</replacevalue>
             </replace>
             <replace dir="@{dir}/target/generated-sources/archetype">
                 <include name="**/*"/>
-                <replacetoken>web.web</replacetoken>
-                <replacevalue>web</replacevalue>
+                <replacetoken>webapp.webapp</replacetoken>
+                <replacevalue>webapp</replacevalue>
             </replace>
 
             <property name="web.root"
                       value="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources"/>
 
             <!-- sources -->
-            <delete dir="${web.root}/src/main/java/org"/>
-            <mkdir dir="${web.root}/src/web"/>
-            <move todir="${web.root}/src/web">
-                <fileset dir="${web.root}/src/main/java"/>
-            </move>
-            <mkdir dir="${web.root}/src/main/java"/>
-            <move todir="${web.root}/src/main/java/web">
-                <fileset dir="${web.root}/src/web"/>
-            </move>
-
+            <move file="${web.root}/src/main/java" tofile="${web.root}/src/main/java/webapp"/>
             <!-- tests -->
-            <mkdir dir="${web.root}/src/tests"/>
-            <move todir="${web.root}/src/tests">
-                <fileset dir="${web.root}/src/test/java"/>
-            </move>
-            <mkdir dir="${web.root}/src/test/java"/>
-            <move todir="${web.root}/src/test/java/web">
-                <fileset dir="${web.root}/src/tests"/>
-            </move>
+            <move file="${web.root}/src/test/java" tofile="${web.root}/src/test/java/webapp"/>
+
+            <!-- Fix CompassPostProcessor -->
+            <replace dir="@{dir}/target/generated-sources/archetype">
+                <include name="**/CompassConfigurationPostProcessor.java"/>
+                <replacetoken>!rootPackage.equals("${groupId}")</replacetoken>
+                <replacevalue>!rootPackage.equals("org.appfuse")</replacevalue>
+            </replace>
 
             <mvn command="install" dir="@{dir}/target/generated-sources/archetype"/>
         </sequential>

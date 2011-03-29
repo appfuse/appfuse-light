@@ -33,7 +33,7 @@
 
     <filter>
         <filter-name>messageFilter</filter-name>
-        <filter-class>org.appfuse.web.MessageFilter</filter-class>
+        <filter-class>org.appfuse.webapp.MessageFilter</filter-class>
     </filter>
 
     <!--<filter>
