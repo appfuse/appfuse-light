@@ -48,6 +48,10 @@
         <level value="ERROR"/>
     </logger>
 
+    <logger name="org.appfuse.tool">
+        <level value="INFO"/>
+    </logger>
+
     <root>
         <level value="WARN"/>
         <appender-ref ref="CONSOLE"/>

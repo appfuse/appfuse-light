@@ -119,11 +119,11 @@
             </replace>
 
             <!-- Add jdbc.password back in since archetype plugin strips it out -->
-            <replace file="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml">
-                <replacetoken><![CDATA[<jdbc.username>root</jdbc.username>]]></replacetoken>
-                <replacevalue><![CDATA[<jdbc.username>root</jdbc.username>
+            <!--replace file="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml">
+                <replacetoken><![CDATA[<jdbc.username>sa</jdbc.username>]]></replacetoken>
+                <replacevalue><![CDATA[<jdbc.username>sa</jdbc.username>
         <jdbc.password></jdbc.password>]]></replacevalue>
-            </replace>
+            </replace-->
 
             <!-- Manually add ${package} to *.tld files -->
             <replace dir="@{dir}/target/generated-sources/archetype/src">
@@ -191,6 +191,13 @@
                 <include name="**/CompassConfigurationPostProcessor.java"/>
                 <replacetoken>!rootPackage.equals("${groupId}")</replacetoken>
                 <replacevalue>!rootPackage.equals("org.appfuse")</replacevalue>
+            </replace>
+
+            <!-- Add jdbc.password back in since archetype plugin strips it out -->
+            <replace file="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml">
+                <replacetoken><![CDATA[<jdbc.username>sa</jdbc.username>]]></replacetoken>
+                <replacevalue><![CDATA[<jdbc.username>sa</jdbc.username>
+        <jdbc.password></jdbc.password>]]></replacevalue>
             </replace>
 
             <mvn command="install" dir="@{dir}/target/generated-sources/archetype"/>
