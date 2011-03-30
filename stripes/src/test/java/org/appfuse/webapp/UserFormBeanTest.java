@@ -1,49 +1,42 @@
 package org.appfuse.webapp;
 
-import net.sourceforge.stripes.mock.MockServletContext;
 import net.sourceforge.stripes.mock.MockRoundtrip;
+import net.sourceforge.stripes.mock.MockServletContext;
+import org.junit.After;
+import org.junit.Test;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-import org.appfuse.model.User;
-import org.appfuse.service.UserManager;
-import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
+import javax.servlet.Filter;
 
-public class UserFormBeanTest extends AbstractTransactionalDataSourceSpringContextTests {
-    private String userId;
-    
-    protected String[] getConfigLocations() {
-        return new String[] {
-            "classpath:/applicationContext-resources.xml",
-            "classpath:/applicationContext-dao.xml",
-            "classpath:/applicationContext-service.xml"
-        };
-    }
+import static org.junit.Assert.assertNotNull;
 
-    protected void onSetUp() throws Exception {
-        deleteFromTables(new String[] {"app_user"});
-        
-        // grab the UserManager from the ApplicationContext or mock it
-        UserManager userManager = (UserManager) applicationContext.getBean("userManager");
+@ContextConfiguration(
+        locations = {"classpath:/applicationContext-resources.xml",
+                "classpath:/applicationContext-dao.xml",
+                "classpath:/applicationContext-service.xml"})
+public class UserFormBeanTest extends AbstractTransactionalJUnit4SpringContextTests {
+    private String userId = "-1";
+    private MockServletContext servletContext;
 
-        // add a test user to the database
-        User user = new User();
-        user.setUsername("jack");
-        user.setPassword("trains");
-        user.setFirstName("Jack");
-        user.setLastName("Raible");
-        user.setEmail("jack@appfuse.org");
-        user = userManager.saveUser(user);
-        userId = user.getId().toString();
-    }
-
+    @Test
     public void testView() throws Exception {
         // Setup the servlet engine
-        MockServletContext ctx = new StripesTestFixture().getServletContext();
+        servletContext = new StripesTestFixture().getServletContext();
 
-        MockRoundtrip trip = new MockRoundtrip(ctx, UserFormBean.class);
+        MockRoundtrip trip = new MockRoundtrip(servletContext, UserFormBean.class);
         trip.addParameter("id", userId);
         trip.execute();
 
         UserFormBean bean = trip.getActionBean(UserFormBean.class);
         assertNotNull(bean.getUser());
+    }
+
+    @After
+    public void onTearDown() {
+        // http://www.stripesframework.org/jira/browse/STS-714
+        for (Filter filter : servletContext.getFilters()) {
+            filter.destroy();
+        }
     }
 }

@@ -6,6 +6,7 @@ import net.sourceforge.stripes.controller.DispatcherServlet;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.ContextLoader;
 
+import javax.servlet.Filter;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletContextEvent;
 import java.util.HashMap;
@@ -40,5 +41,11 @@ public class StripesTestFixture {
     public MockServletContext getServletContext() {
         init();
         return StripesTestFixture.context;
+    }
+
+    public void destroy() {
+        for (Filter filter : context.getFilters()) {
+          filter.destroy();
+        }
     }
 }
