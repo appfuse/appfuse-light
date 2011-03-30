@@ -14,7 +14,6 @@
 <table class="table" id="userList">
     <thead>
         <tr>
-            <th wicket:id="orderById"><wicket:message key="user.id">[id]</wicket:message></th>
             <th wicket:id="orderByFirstName"><wicket:message key="user.firstName">[first name]</wicket:message></th>
             <th wicket:id="orderByLastName"><wicket:message key="user.lastName">[first name]</wicket:message></th>
             <th wicket:id="orderByEmail"><wicket:message key="user.email">[email]</wicket:message></th>
@@ -22,8 +21,7 @@
     </thead>
     <tbody>
         <tr wicket:id="users">
-            <td><a href="UserList.html#" wicket:id="edit-link"><span wicket:id="user.id">[id]</span></a></td>
-            <td><span wicket:id="user.firstName">[first name]</span></td>
+            <td><a href="#" wicket:id="edit-link"><span wicket:id="user.firstName">[first name]</span></a></td>
             <td><span wicket:id="user.lastName">[last name]</span></td>
             <td><span wicket:id="user.email">[email]</span></td>
         </tr>

@@ -53,10 +53,9 @@ public class UserList extends BasePage {
                         onEditUser(getModelObject());
                     }
                 };
-                link.add(new Label("user.id", String.valueOf(user.getId())));
+                link.add(new Label("user.firstName", user.getFirstName()));
 
                 item.add(link);
-                item.add(new Label("user.firstName", user.getFirstName()));
                 item.add(new Label("user.lastName", user.getLastName()));
                 item.add(new Label("user.email", user.getEmail()));
 
@@ -69,7 +68,6 @@ public class UserList extends BasePage {
         };
 
         dataView.setItemsPerPage(10);
-        add(new OrderByBorder("orderById", "id", dp));
         add(new OrderByBorder("orderByFirstName", "firstName", dp));
         add(new OrderByBorder("orderByLastName", "lastName", dp));
         add(new OrderByBorder("orderByEmail", "email", dp));

@@ -1,8 +1,5 @@
 package org.appfuse.webapp;
 
-import net.sourceforge.jwebunit.html.Table;
-import net.sourceforge.jwebunit.html.Row;
-import net.sourceforge.jwebunit.html.Cell;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import java.util.ResourceBundle;
@@ -23,7 +20,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testAddUser() {
-        beginAt("/app/users");
+        beginAt("/users");
         submit("add-user");
         assertTitleKeyMatches("userForm.title");
         setTextField("username", "suser");
@@ -36,7 +33,7 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testListUsers() {
-        beginAt("/app/users");
+        beginAt("/users");
         assertTitleKeyMatches("userList.title");
 
         // check that table is present
@@ -47,35 +44,21 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testEditUser() {
-        beginAt("/app/users");
+        beginAt("/users");
         assertTitleKeyMatches("userList.title");
-        clickLinkWithText(getInsertedUserId());
+        clickLinkWithText("Spring");
         assertTextFieldEquals("firstName", "Spring");
         submit("save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
-        beginAt("/app/users");
+        beginAt("/users");
         assertTitleKeyMatches("userList.title");
-        clickLinkWithText(getInsertedUserId());
+        clickLinkWithText("Spring");
         assertTitleKeyMatches("userForm.title");
         submit("delete");
         assertTitleKeyMatches("userList.title");
-    }
-
-    /**
-     * Convenience method to get the id of the inserted user
-     * Assumes last inserted user is "Spring User"
-     * @return last id in the table
-     */
-    public String getInsertedUserId() {
-        beginAt("/app/users");
-        assertTablePresent("userList");
-        assertTextInTable("userList", "Spring");
-        Table table = getTable("userList");
-        Cell cell = (Cell) ((Row) table.getRows().get(table.getRowCount()-1)).getCells().get(0);
-        return cell.getValue();
     }
 
     protected void assertTitleKeyMatches(String title) {

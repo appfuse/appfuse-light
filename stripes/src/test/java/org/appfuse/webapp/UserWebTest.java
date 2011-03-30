@@ -68,7 +68,8 @@ public class UserWebTest extends WebTestCase {
         assertTablePresent("userList");
         assertTextInTable("userList", "Spring");
         Table table = getTable("userList");
-        Cell cell = (Cell) ((Row) table.getRows().get(table.getRowCount()-1)).getCells().get(0);
+        Cell cell = (Cell) ((Row) table.getRows().get(table.getRowCount()-2)).getCells().get(0);
+        System.out.println("user: " + cell.getValue());
         return cell.getValue();
     }
 
