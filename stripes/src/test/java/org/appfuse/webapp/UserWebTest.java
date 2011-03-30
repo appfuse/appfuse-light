@@ -1,8 +1,5 @@
 package org.appfuse.webapp;
 
-import net.sourceforge.jwebunit.html.Table;
-import net.sourceforge.jwebunit.html.Row;
-import net.sourceforge.jwebunit.html.Cell;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import java.util.ResourceBundle;
@@ -45,32 +42,21 @@ public class UserWebTest extends WebTestCase {
     }
 
     public void testEditUser() {
-        beginAt("/userform?id=" + getInsertedUserId());
+        beginAt("/users");
+        assertTitleKeyMatches("userList.title");
+        clickLinkWithText("Spring");
         assertTextFieldEquals("user.firstName", "Spring");
         submit("save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
-        beginAt("/userform?id=" + getInsertedUserId());
+        beginAt("/users");
+        assertTitleKeyMatches("userList.title");
+        clickLinkWithText("Spring");
         assertTitleKeyMatches("userForm.title");
         submit("delete");
         assertTitleKeyMatches("userList.title");
-    }
-
-    /**
-     * Convenience method to get the id of the inserted user
-     * Assumes last inserted user is "Spring User"
-     * @return last id in the table
-     */
-    protected String getInsertedUserId() {
-        beginAt("/users");
-        assertTablePresent("userList");
-        assertTextInTable("userList", "Spring");
-        Table table = getTable("userList");
-        Cell cell = (Cell) ((Row) table.getRows().get(table.getRowCount()-2)).getCells().get(0);
-        System.out.println("user: " + cell.getValue());
-        return cell.getValue();
     }
 
     protected void assertTitleKeyMatches(String title) {
