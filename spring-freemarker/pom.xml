@@ -308,15 +308,21 @@
 
         <!-- Testing Dependencies -->
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock</artifactId>
-            <version>2.5.1</version>
+            <version>${jmock.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock-junit4</artifactId>
-            <version>2.5.1</version>
+            <version>${jmock.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- Upgrade junit-dep used by jmock -->
@@ -324,13 +330,6 @@
             <groupId>junit</groupId>
             <artifactId>junit-dep</artifactId>
             <version>4.5</version>
-            <scope>test</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -466,6 +465,7 @@
         <cargo.version>1.0.6</cargo.version>
         <freemarker.version>2.3.16</freemarker.version>
         <jetty.version>6.1.26</jetty.version>
+        <jmock.version>2.5.1</jmock.version>
         <junit.version>4.8.2</junit.version>
         <jwebunit.version>2.5</jwebunit.version>
         <spring.version>3.0.5.RELEASE</spring.version>

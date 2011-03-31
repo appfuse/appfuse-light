@@ -1,4 +1,4 @@
-package org.appfuse.webapp;
+package org.appfuse.webapp.action;
 
 import java.util.List;
 

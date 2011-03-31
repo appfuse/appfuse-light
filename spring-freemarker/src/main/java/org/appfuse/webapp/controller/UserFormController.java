@@ -1,4 +1,4 @@
-package org.appfuse.webapp;
+package org.appfuse.webapp.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -73,7 +73,7 @@ public class UserFormController {
         }
 
         log.debug("entering 'onSubmit' method...");
-
+        
         if (request.getParameter("delete") != null) {
             userManager.removeUser(user.getId().toString());
             request.getSession().setAttribute("message",

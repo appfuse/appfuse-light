@@ -1,4 +1,4 @@
-package org.appfuse.webapp;
+package org.appfuse.webapp.action;
 
 import net.sourceforge.stripes.mock.MockServletContext;
 import net.sourceforge.stripes.controller.StripesFilter;
@@ -27,7 +27,7 @@ public class StripesTestFixture {
 
         // Add the Stripes Filter
         Map<String, String> filterParams = new HashMap<String, String>();
-        filterParams.put("ActionResolver.Class", "org.appfuse.webapp.ActionResolver");
+        filterParams.put("ActionResolver.Class", "org.appfuse.webapp.action.ActionResolver");
         filterParams.put("ActionResolver.Packages", "org.appfuse.webapp");
         filterParams.put("Interceptor.Classes", "net.sourceforge.stripes.integration.spring.SpringInterceptor");
         filterParams.put("LocalizationBundleFactory.ErrorMessageBundle", "messages");

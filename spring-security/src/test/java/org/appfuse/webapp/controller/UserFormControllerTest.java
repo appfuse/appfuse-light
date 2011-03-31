@@ -1,4 +1,4 @@
-package org.appfuse.webapp;
+package org.appfuse.webapp.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,7 +38,7 @@ public class UserFormControllerTest {
         // manually set properties (dependencies) on userFormController
         c.userManager = userManager;
 
-        // set context with messages avoid NPE when controller calls 
+        // set context with messages avoid NPE when controller calls
         // getMessageSourceAccessor().getMessage()
         StaticApplicationContext ctx = new StaticApplicationContext();
         Map<String, String> properties = new HashMap<String, String>();
@@ -47,7 +47,7 @@ public class UserFormControllerTest {
                 new MutablePropertyValues(properties));
         ctx.refresh();
         c.setMessages((MessageSource) ctx.getBean("messageSource"));
-                                                                                       
+
         // setup user values
         user.setId(1L);
         user.setFirstName("Matt");

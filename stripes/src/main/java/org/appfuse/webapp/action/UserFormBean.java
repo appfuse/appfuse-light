@@ -1,4 +1,4 @@
-package org.appfuse.webapp;
+package org.appfuse.webapp.action;
 
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;

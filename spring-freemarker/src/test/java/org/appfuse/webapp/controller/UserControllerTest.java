@@ -1,10 +1,11 @@
-package org.appfuse.webapp;
+package org.appfuse.webapp.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
+import org.appfuse.webapp.controller.UserController;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;
