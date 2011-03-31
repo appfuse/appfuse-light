@@ -488,7 +488,7 @@
         <amp.fullSource>false</amp.fullSource>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.1.0</appfuse.version>
+        <appfuse.version>2.1.1-SNAPSHOT</appfuse.version>
         <cargo.version>1.0.6</cargo.version>
         <jetty.version>6.1.26</jetty.version>
         <jmock.version>2.5.1</jmock.version>
