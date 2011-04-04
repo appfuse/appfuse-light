@@ -3,10 +3,10 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:t="http://myfaces.apache.org/tomahawk">
 
 <f:view>
-    <f:loadBundle var="messages" basename="messages"/>
+    <f:loadBundle var="text" basename="messages"/>
 
     <head>
-        <title>#{messages['userForm.title']}</title>
+        <title>#{text['userForm.title']}</title>
         <!-- <style type="text/css">
             .jscalendar-DB-div-style {
                 position: absolute;
@@ -26,23 +26,23 @@
         </h:inputHidden>
         <h:panelGrid columns="3" styleClass="detail" columnClasses="label">
 
-            <h:outputLabel for="username" value="#{messages['user.username']}"/>
+            <h:outputLabel for="username" value="#{text['user.username']}"/>
             <h:inputText value="#{userForm.user.username}" id="username"/>
             <h:message for="username" styleClass="errorMessage"/>
 
-            <h:outputLabel for="password" value="#{messages['user.password']}"/>
+            <h:outputLabel for="password" value="#{text['user.password']}"/>
             <h:inputText value="#{userForm.user.password}" id="password"/>
             <h:message for="password" styleClass="errorMessage"/>
 
-            <h:outputLabel for="firstName" value="#{messages['user.firstName']}"/>
+            <h:outputLabel for="firstName" value="#{text['user.firstName']}"/>
             <h:inputText value="#{userForm.user.firstName}" id="firstName"/>
             <h:message for="firstName" styleClass="errorMessage"/>
 
-            <h:outputLabel for="lastName" value="#{messages['user.lastName']}"/>
+            <h:outputLabel for="lastName" value="#{text['user.lastName']}"/>
             <h:inputText value="#{userForm.user.lastName}" id="lastName" required="true"/>
             <h:message for="lastName" styleClass="errorMessage"/>
 
-            <h:outputLabel for="email" value="#{messages['user.email']}"/>
+            <h:outputLabel for="email" value="#{text['user.email']}"/>
             <h:inputText value="#{userForm.user.email}" id="email" required="true"/>
             <h:message for="email" styleClass="errorMessage"/>
 
