@@ -56,7 +56,7 @@
         this application should work with any Servlet 2.4 servlet engine.
     </p>
     <p>
-        <button class="button" onclick="readMore();">&laquo; Back</button>
+        <button class="button" onclick="readMore();">&#171; Back</button>
     </p>
 </div>
 <content tag="underground">
