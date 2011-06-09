@@ -68,8 +68,17 @@ public class UserWebTest extends WebTestCase {
         assertTablePresent("userList");
         assertTextInTable("userList", "Spring");
         Table table = getTable("userList");
-        Cell cell = (Cell) ((Row) table.getRows().get(table.getRowCount()-1)).getCells().get(0);
-        return cell.getValue();
+        // Find row with Spring in it
+        for (Object r : table.getRows()) {
+            Row row = (Row) r;
+            for (Object c : row.getCells()) {
+                Cell cell = (Cell) c;
+                if (cell.getValue().contains("Spring")) {
+                    return ((Cell) row.getCells().get(0)).getValue();
+                }
+            };
+        }
+        return "";
     }
 
     protected void assertTitleKeyMatches(String title) {
