@@ -20,7 +20,13 @@ public class UserFormTest extends BasePageTestCase {
         assertTrue(table.toString().contains("tapestry"));
         
         List<Node> rows = table.find("tbody").getChildren();
-        String userId = ((Element) rows.get(2)).find("td/a").getChildMarkup().trim();
+        String userId = null;
+        // loop through the rows until we find "tapestry" user
+        for (Node node : rows) {
+            if (((Element) node).getChildMarkup().contains("tapestry")) {
+                userId = ((Element) node).find("td/a").getChildMarkup().trim();
+            }
+        }
 
         Element idLink = table.getElementById("user" + userId);
         doc = tester.clickLink(idLink);
@@ -40,7 +46,13 @@ public class UserFormTest extends BasePageTestCase {
         assertTrue(table.toString().contains("tapestry"));
 
         List<Node> rows = table.find("tbody").getChildren();
-        String userId = ((Element) rows.get(0)).find("td/a").getChildMarkup().trim();
+        String userId = null;
+        // loop through the rows until we find "tapestry" user
+        for (Node node : rows) {
+            if (((Element) node).getChildMarkup().contains("tapestry")) {
+                userId = ((Element) node).find("td/a").getChildMarkup().trim();
+            }
+        }
 
         Element idLink = table.getElementById("user" + userId);
         doc = tester.clickLink(idLink);
