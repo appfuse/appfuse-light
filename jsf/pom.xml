@@ -493,8 +493,8 @@
         <jetty.version>6.1.26</jetty.version>
         <jmock.version>2.5.1</jmock.version>
         <junit.version>4.8.2</junit.version>
-        <myfaces.version>2.0.5</myfaces.version>
-        <spring.version>3.0.5.RELEASE</spring.version>
+        <myfaces.version>2.1.5</myfaces.version>
+        <spring.version>3.0.6.RELEASE</spring.version>
         <webtest.version>3.0</webtest.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
