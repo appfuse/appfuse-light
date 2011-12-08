@@ -87,9 +87,8 @@
 
             <!-- Add a description to the archetype's pom.xml -->
             <replace file="@{dir}/target/generated-sources/archetype/pom.xml">
-                <replacetoken><![CDATA[<build>]]></replacetoken>
-                <replacevalue><![CDATA[<description>AppFuse Archetype</description>
-  <build>]]></replacevalue>
+                <replacetoken><![CDATA[<description>AppFuse Light Web Frameworks: JSF, Spring MVC, Stripes, Struts 2, Tapestry, Wicket.</description>]]></replacetoken>
+                <replacevalue><![CDATA[<description>AppFuse Archetype</description>]]></replacevalue>
             </replace>
 
             <!-- Preserve embedded package names -->
