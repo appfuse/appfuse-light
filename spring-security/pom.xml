@@ -473,7 +473,7 @@
         <jetty.version>6.1.26</jetty.version>
         <junit.version>4.8.2</junit.version>
         <jwebunit.version>2.5</jwebunit.version>
-        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.version>3.0.6.RELEASE</spring.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>

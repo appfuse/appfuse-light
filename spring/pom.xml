@@ -473,7 +473,7 @@
         <jetty.version>6.1.26</jetty.version>
         <jmock.version>2.5.1</jmock.version>
         <junit.version>4.8.2</junit.version>
-        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.version>3.0.6.RELEASE</spring.version>
         <jwebunit.version>2.5</jwebunit.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->

@@ -467,7 +467,7 @@
         <jmock.version>2.5.1</jmock.version>
         <junit.version>4.8.2</junit.version>
         <jwebunit.version>2.5</jwebunit.version>
-        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.version>3.0.6.RELEASE</spring.version>
         <stripes.version>1.5.6</stripes.version>
         
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
