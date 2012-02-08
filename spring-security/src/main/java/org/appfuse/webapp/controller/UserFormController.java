@@ -88,7 +88,7 @@ public class UserFormController {
     }
 
     @ModelAttribute
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(method = RequestMethod.GET)
     protected User getUser(HttpServletRequest request) {
         String userId = request.getParameter("id");
         if ((userId != null) && !userId.equals("")) {
