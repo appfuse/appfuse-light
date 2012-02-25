@@ -138,8 +138,10 @@ public class UserForm extends BasePage {
              * (component id is used as the property expression)
              */
             super(id, new CompoundPropertyModel<User>(user));
+            final PasswordTextField passwordField = new PasswordTextField("password");
+            passwordField.setResetPassword(false);
             add(new RequiredTextField("username"), new ResourceModel("user.username"));
-            add(new RequiredTextField("password"), new ResourceModel("user.password"));
+            add(passwordField, new ResourceModel("user.password"));
             add(new TextField("firstName"), new ResourceModel("user.firstName"));
             add(new TextField("lastName"), new ResourceModel("user.lastName"));
             add(new RequiredTextField("email"), new ResourceModel("user.email"));
