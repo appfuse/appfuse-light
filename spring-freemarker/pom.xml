@@ -491,5 +491,8 @@
         <cargo.host>localhost</cargo.host>
         <cargo.port>25888</cargo.port>
         <cargo.wait>false</cargo.wait>
+
+        <!-- Search index settings -->
+        <search.index.basedir>${project.build.testOutputDirectory}</search.index.basedir>
     </properties>
 </project>
