@@ -1,0 +1,8 @@
+.idea
+target
+*.iml
+*.iws
+*.ipr
+tapestry/src/main/webapp/WEB-INF/app*.properties
+
+.DS_Store
