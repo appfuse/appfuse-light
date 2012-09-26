@@ -17,6 +17,10 @@
         <param-name>tapestry.app-package</param-name>
         <param-value>org.appfuse.webapp</param-value>
     </context-param>
+    <context-param>
+        <param-name>tapestry.use-external-spring-context</param-name>
+        <param-value>true</param-value>
+    </context-param>
 
     <filter>
         <filter-name>encodingFilter</filter-name>

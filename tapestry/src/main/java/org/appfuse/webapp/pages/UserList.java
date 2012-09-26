@@ -29,9 +29,6 @@ public class UserList {
     @InjectPage
     private UserForm form;
 
-    @Component(parameters = {"event=add"})
-    private EventLink addButton;
-
     public String getMessage() {
         return message;
     }
@@ -49,8 +46,9 @@ public class UserList {
         return form;
     }
 
-    Object onActionFromEdit(Long id) {
-        log.debug("fetching user with id: {}", id);
+    Object onActionFromEdit(User user) {
+        log.debug("fetching user with id: " + user.getId());
+        form.setUser(user);
         return form;
     }
 }
