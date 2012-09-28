@@ -1,15 +1,12 @@
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
-      xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>${message:userForm.title}</title>
-</head>
-<body>
+<html t:type="layout" title="message:userForm.title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
 
 <form t:id="userForm" clientValidation="true">
     <t:errors/>
 
     <div class="t-beaneditor">
-        <t:beaneditor t:id="user" object="user"
+        <t:beaneditor t:id="usereditor" object="user"
                       exclude="id,confirmPassword,passwordHint,phoneNumber,website,version,
                          enabled,accountExpired,accountLocked,credentialsExpired">
         </t:beaneditor>
@@ -21,10 +18,4 @@
         </div>
     </div>
 </form>
-
-<script type="text/javascript">
-    Form.focusFirstElement($("userForm"));
-</script>
-
-</body>
 </html>

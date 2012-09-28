@@ -6,6 +6,7 @@ import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.appfuse.webapp.util.MessageUtil;
 
 /**
@@ -24,11 +25,11 @@ public class NotFound {
     private Messages messages;
 
     @Inject
-    private ComponentResources resources;
+    private PageRenderLinkSource renderLinkSource;
 
     public String getNotFoundMessage() {
         String message = MessageUtil.convert(messages.get("404.message"));
-        String url = resources.createPageLink("Index", false).toURI();
+        String url = renderLinkSource.createPageRenderLink(Index.class).toAbsoluteURI();
         return String.format(message, url);
     }
 }

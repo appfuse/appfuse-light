@@ -1,9 +1,5 @@
 <html t:type="layout" title="message:userList.title"
     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
-<head>
-    <title>${message:userList.title}</title>
-</head>
-<body>
 
 <div>
     <a t:type="eventLink" t:id="add" id="add">
@@ -11,16 +7,15 @@
     </a>
 </div>
 
-<t:grid source="users" row="user" t:id="userList" class="table"
+<t:grid source="users" row="currentUser" id="userList" class="table"
         exclude="username,password,confirmPassword,passwordHint,phoneNumber,website,
              fullName,accountNonExpired,accountNonLocked,credentialsNonExpired,
              version,enabled,accountExpired,accountLocked,credentialsExpired">
     <p:idcell>
-        <a t:type="actionlink" t:id="edit" context="user" id="user${user.id}">
-            ${user.id}
+        <a t:type="actionlink" t:id="edit" context="currentUser" id="user${currentUser.id}">
+            ${currentUser.id}
         </a>
     </p:idcell>
 </t:grid>
 
-</body>
 </html>

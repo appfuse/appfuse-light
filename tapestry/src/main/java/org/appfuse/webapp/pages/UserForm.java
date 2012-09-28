@@ -1,8 +1,13 @@
 package org.appfuse.webapp.pages;
 
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.PageActivationContext;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.corelib.components.Form;
@@ -22,12 +27,14 @@ public class UserForm {
     @Inject
     private UserManager userManager;
 
-    @Persist
+
+    @Inject
+    private AlertManager alertManager;
+
+    @PageActivationContext
+    @Property(write = false)
     private User user;
 
-    public User getUser() {
-        return user;
-    }
 
     @Component(id = "userForm")
     private Form form;
@@ -35,19 +42,14 @@ public class UserForm {
     private boolean cancel;
     private boolean delete;
 
-    /**
-     * Allows setting user object from another class (i.e. UserList)
-     *
-     * @param user an initialized instance
-     */
-    public void setUser(User user) {
-        this.user = user;
-    }
-    
-    @InjectPage
-    private UserList userList;
 
-    void onValidateForm() {
+    void onPrepare() {
+        if (user == null) {
+            user = new User();
+        }
+    }
+
+    void onValidateFromUserForm() {
         if (!delete && !cancel) {
             // manually validate required fields since we don't have access
             // to annotate the user object
@@ -63,11 +65,7 @@ public class UserForm {
         }
     }
 
-    void onActivate(String id) {
-        if (id != null) {
-            user = userManager.getUser(id);
-        }
-    }
+
 
     Object onSuccess() throws UserExistsException {
         if (delete) return onDelete();
@@ -77,11 +75,10 @@ public class UserForm {
         
         userManager.saveUser(user);
 
-        String msg = MessageUtil.convert(messages.get("user.saved"));
-        String message = String.format(msg, user.getFullName());
+        String message = messages.format("user.saved", user.getFullName());
+        alertManager.alert(Duration.TRANSIENT, Severity.INFO, message);
 
-        userList.setMessage(message);
-        return userList;
+        return UserList.class;
     }
 
     void onSelectedFromDelete() {
@@ -95,15 +92,15 @@ public class UserForm {
     }
 
     Object onDelete() {
-        String msg = MessageUtil.convert(messages.get("user.deleted"));
-        String message = String.format(msg, user.getFullName());
+        String message = messages.format("user.deleted", user.getFullName());
 
         userManager.removeUser(user.getId().toString());
-        userList.setMessage(message);
-        return userList;
+        alertManager.alert(Duration.TRANSIENT, Severity.INFO, message);
+
+        return UserList.class;
     }
 
     Object onCancel() {
-        return userList;
+        return UserList.class;
     }
 }
