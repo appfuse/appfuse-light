@@ -2,6 +2,7 @@ package org.appfuse.webapp.components;
 
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.RenderSupport;
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -16,6 +17,7 @@ import org.appfuse.Constants;
  * @author Serge Eby
  * @version $Id: Layout.java 5 2008-08-30 09:59:21Z serge.eby $
  */
+@Import(stylesheet = {"context:styles/t5-override.css"})
 public class Layout {
 
     @Inject
@@ -24,8 +26,6 @@ public class Layout {
     @Inject
     private Context context;
 
-    @Inject
-    private RenderSupport renderSupport;
 
     @Property
     @Parameter(required = true)

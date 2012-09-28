@@ -11,6 +11,7 @@
 </head>
 
 <body id="${bodyId}">
+    <t:alerts/>
     <t:body/>
 </body>
 </html>

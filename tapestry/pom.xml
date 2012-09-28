@@ -337,6 +337,19 @@
             <version>2.5.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Tapestry Testify -->
+        <dependency>
+            <groupId>net.sourceforge.tapestrytestify</groupId>
+            <artifactId>tapestry-testify</artifactId>
+            <version>1.0.4</version>
+            <scope>test</scope>
+        </dependency>
         <!-- Upgrade junit-dep used by jmock -->
         <dependency>
             <groupId>junit</groupId>
@@ -511,7 +524,8 @@
         <junit.version>4.8.2</junit.version>
         <jwebunit.version>2.5</jwebunit.version>
         <spring.version>3.1.0.RELEASE</spring.version>
-        <tapestry.version>5.3.4</tapestry.version>
+        <tapestry.version>5.3.5</tapestry.version>
+        <mockito.version>1.9.0</mockito.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>
