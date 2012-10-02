@@ -483,14 +483,14 @@
                                     <cargo.hostname>${cargo.host}</cargo.hostname>
                                     <cargo.servlet.port>${cargo.port}</cargo.servlet.port>
                                 </properties>
-                                <deployables>
-                                    <deployable>
-                                        <properties>
-                                            <context>ROOT</context>
-                                        </properties>
-                                    </deployable>
-                                </deployables>
                             </configuration>
+                            <deployables>
+                                <deployable>
+                                    <properties>
+                                        <context>ROOT</context>
+                                    </properties>
+                                </deployable>
+                            </deployables>
                         </configuration>
                         <executions>
                             <execution>
@@ -524,10 +524,10 @@
 
         <!-- Framework dependency versions -->
         <appfuse.version>2.1.1-SNAPSHOT</appfuse.version>
-        <cargo.version>1.2.1</cargo.version>
+        <cargo.version>1.2.4</cargo.version>
         <jetty.version>8.1.3.v20120416</jetty.version>
         <jmock.version>2.5.1</jmock.version>
-        <junit.version>4.8.2</junit.version>
+        <junit.version>4.10</junit.version>
         <jwebunit.version>2.5</jwebunit.version>
         <spring.version>3.1.0.RELEASE</spring.version>
         <tapestry.version>5.3.5</tapestry.version>
@@ -549,7 +549,7 @@
         <cargo.container>tomcat7x</cargo.container>
         <cargo.container.home>${env.CATALINA_HOME}</cargo.container.home>
         <cargo.container.url>
-            http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.29/bin/apache-tomcat-7.0.29.zip
+            http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.30/bin/apache-tomcat-7.0.30.zip
         </cargo.container.url>
         <cargo.host>localhost</cargo.host>
         <cargo.port>25888</cargo.port>
