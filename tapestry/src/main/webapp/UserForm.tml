@@ -13,7 +13,9 @@
 
         <div class="t-beaneditor-row" style="text-align: center">
             <input type="submit" id="save" value="Save"/>
-            <input t:type="submit" t:id="delete" id="delete" value="Delete"/>
+            <t:if test="user?.id">
+                <input t:type="submit" t:id="delete" id="delete" value="Delete"/>
+            </t:if>
             <input t:type="submit" t:id="cancel" id="cancel" value="Cancel"/>
         </div>
     </div>

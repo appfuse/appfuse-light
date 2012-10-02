@@ -349,6 +349,12 @@
             <artifactId>tapestry-testify</artifactId>
             <version>1.0.4</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- Upgrade junit-dep used by jmock -->
         <dependency>
