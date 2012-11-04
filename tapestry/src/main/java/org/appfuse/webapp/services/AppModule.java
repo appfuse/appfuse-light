@@ -30,6 +30,9 @@ public class AppModule {
 
     public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration) {
         configuration.add(SymbolConstants.GZIP_COMPRESSION_ENABLED, "false");
+
+        // HHAC recommended for better security as of Tapestry 5.3.6
+        configuration.add(SymbolConstants.HMAC_PASSPHRASE, "AppFuse Tapestry Light is Cool");
     }
 
     /**
