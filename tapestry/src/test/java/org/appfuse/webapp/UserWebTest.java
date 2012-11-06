@@ -49,7 +49,7 @@ public class UserWebTest extends WebTestCase {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
         clickLinkWithText(getInsertedUserId());
-        assertTextFieldEquals("firstName", "Tapestry");
+        assertTextFieldEquals("firstName", "Matt");
         clickButtonWithText("Save");
         assertTitleKeyMatches("userList.title");
     }
@@ -66,7 +66,7 @@ public class UserWebTest extends WebTestCase {
     public void testCancel() {
         beginAt("/userform");
         assertTitleKeyMatches("userForm.title");
-        submit("cancel");
+        submit("cancel_0");
         assertTitleKeyMatches("userList.title");
     }
 
