@@ -487,7 +487,7 @@
         <junit.version>4.10</junit.version>
         <jwebunit.version>2.5</jwebunit.version>
         <slf4j.version>1.6.1</slf4j.version>
-        <spring.version>3.1.0.RELEASE</spring.version>
+        <spring.version>3.1.3.RELEASE</spring.version>
         <wicket.version>1.4.15</wicket.version>
         <mockito.version>1.8.5</mockito.version>
 
