@@ -49,7 +49,7 @@ public class UserWebTest extends WebTestCase {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
         clickLinkWithText(getInsertedUserId());
-        assertTextFieldEquals("firstName", "Matt");
+        assertTextFieldEquals("firstName", "Tapestry");
         clickButtonWithText("Save");
         assertTitleKeyMatches("userList.title");
     }
