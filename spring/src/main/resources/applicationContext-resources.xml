@@ -5,7 +5,7 @@
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
             http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
-    <context:property-placeholder location="classpath:jdbc.properties,classpath:mail.properties"/>
+    <context:property-placeholder location="classpath:hibernate.properties,classpath:jdbc.properties,classpath:mail.properties"/>
 
     <!-- http://java.dzone.com/articles/spring-3-makes-use-embedded-easy -->
     <!--jdbc:embedded-database id="dataSource" type="H2"/-->
