@@ -48,7 +48,7 @@ public class UserWebTest extends WebTestCase {
     public void testEditUser() {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
-        clickLinkWithText(getInsertedUserId());
+        clickLinkWithExactText(getInsertedUserId());
         assertTextFieldEquals("firstName", "Tapestry");
         clickButtonWithText("Save");
         assertTitleKeyMatches("userList.title");
@@ -57,7 +57,7 @@ public class UserWebTest extends WebTestCase {
     public void testDeleteUser() {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
-        clickLinkWithText(getInsertedUserId());
+        clickLinkWithExactText(getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
         submit("delete");
         assertTitleKeyMatches("userList.title");
@@ -92,8 +92,6 @@ public class UserWebTest extends WebTestCase {
         }
         return "";
     }
-
-
 
     protected void assertTitleKeyMatches(String title) {
         assertTitleEquals(messages.getString(title) + " | " + messages.getString("webapp.name"));
