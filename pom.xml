@@ -162,7 +162,7 @@
                                 <configuration>
                                     <tasks if="web.framework">
                                         <ant antfile="../build.xml" dir="." target="test">
-                                            <property name="archetype" value="${pom.artifactId}-archetype" />
+                                            <property name="archetype" value="${project.artifactId}-archetype" />
                                         </ant>
                                     </tasks>
                                 </configuration>
