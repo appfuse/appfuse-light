@@ -1,6 +1,7 @@
 <%-- Error Messages --%>
 <c:if test="${not empty errors}">
-    <div class="error" id="errorMessages">
+    <div class="alert alert-error fade in">
+        <a href="#" data-dismiss="alert" class="close">&times;</a>
         <c:forEach var="error" items="${errors}">
             <c:out value="${error}"/><br />
         </c:forEach>
@@ -9,11 +10,12 @@
 </c:if>
 
 <%-- Success Messages --%>
-<c:if test="${not empty messages}">
-    <div class="message" id="successMessages">
-        <c:forEach var="msg" items="${messages}">
+<c:if test="${not empty message}">
+    <div class="alert alert-success fade in">
+        <a href="#" data-dismiss="alert" class="close">&times;</a>
+        <c:forEach var="msg" items="${message}">
             <c:out value="${msg}"/><br />
         </c:forEach>
     </div>
-    <c:remove var="messages" scope="session"/>
+    <c:remove var="message" scope="session"/>
 </c:if>

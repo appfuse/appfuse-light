@@ -10,12 +10,12 @@
     </p>
     <p>
         The basic AppFuse Light application shows how to do simple
-        <acronym title="Create, Retrieve, Update and Delete">CRUD</acronym> on a database table.
+        <abbr title="Create, Retrieve, Update and Delete">CRUD</abbr> on a database table.
         To see this feature, click on the button below. <a href="?" onclick="readMore(); return false">Click here</a>
         to learn more about AppFuse Light.
     </p>
     <p>
-        <button class="button" onclick="location.href='users'">View Demonstration</button>
+        <button class="btn btn-primary" onclick="location.href='users'">View Demonstration</button>
     </p>
 </div>
 <div id="readmore" style="display:none">
@@ -24,8 +24,7 @@
         AppFuse Light is designed to show Java Web Developers how to start
         a bare-bones webapp using a <a href="http://www.springframework.org">
         Spring</a>-managed middle-tier backend and <a href="http://www.hibernate.org">
-        Hibernate</a> for persistence. In addition to Hibernate, you can also use JPA
-        or <a href="http://ibatis.apache.org">iBATIS</a>.
+        Hibernate</a> for persistence. In addition to Hibernate, you can also use JPA.
     </p>
     <p>
         You can use many different web frameworks for your UI, including:
@@ -50,16 +49,16 @@
     </p>
     <p>
         Since no server configuration is required, this application should
-        this application should work with any Servlet 2.4 servlet engine.
+        this application should work with any Servlet 3.0 servlet engine.
     </p>
     <p>
-        <button class="button" onclick="readMore();">&laquo; Back</button>
+        <button class="btn" onclick="readMore();">&laquo; Back</button>
     </p>
 </div>
 <content tag="underground">
 <h3>Assumptions</h3>
 <ul>
-    <li>It's 2011, you should be thinking about HTML5 and SOFEA.</li>
+    <li>It's 2013, you should be thinking about HTML5, Mobile and REST.</li>
     <li>JRebel should be used to allow quick reloading of classes.</li>
     <li>Conventions are more important than configurability.</li>
 </ul>

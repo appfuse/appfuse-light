@@ -1,8 +1,10 @@
 <title>${rc.getMessage("userList.title")}</title>
+<h2>${rc.getMessage("userList.title")}</h2>
 
-<button onclick="location.href='userform'" style="float: right; margin-top: -30px; width: 100px">Add User</button>
+<button class="btn btn-primary" onclick="location.href='userform'" style="float: right; margin-top: -30px">
+    <i class="icon-plus icon-white"></i> Add User</button>
 
-<table class="table" id="userList">
+<table class="table table-condensed table-striped table-hover" id="userList">
 <thead>
 <tr>
     <th>${rc.getMessage("user.id")}</th>
@@ -24,5 +26,3 @@
 </#list>
 </tbody>
 </table>
-
-<script type="text/javascript">highlightTableRows("userList");</script>

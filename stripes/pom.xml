@@ -278,8 +278,8 @@
         <!-- Stripes Web Dependencies -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -297,6 +297,13 @@
             <groupId>net.sourceforge.stripes</groupId>
             <artifactId>stripes</artifactId>
             <version>${stripes.version}</version>
+        </dependency>
+
+        <!-- UI Dependencies -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>2.2.1</version>
         </dependency>
 
         <!-- Testing Dependencies -->
@@ -324,17 +331,12 @@
             <artifactId>junit-dep</artifactId>
             <version>4.5</version>
             <scope>test</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -475,8 +477,8 @@
         <junit.version>4.10</junit.version>
         <jwebunit.version>2.5</jwebunit.version>
         <spring.version>3.2.0.RELEASE</spring.version>
-        <stripes.version>1.5.6</stripes.version>
-        
+        <stripes.version>1.5.7</stripes.version>
+
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>
         <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>

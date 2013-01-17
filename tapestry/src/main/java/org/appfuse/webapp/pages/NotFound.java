@@ -16,10 +16,6 @@ import org.appfuse.webapp.util.MessageUtil;
  * @version $Id: NotFound.java 5 2008-08-30 09:59:21Z serge.eby $
  */
 public class NotFound {
-    @Property
-    @Inject
-    @Path("context:images/404.jpg")
-    private Asset notFoundImage;
 
     @Inject
     private Messages messages;

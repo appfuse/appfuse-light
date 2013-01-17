@@ -1,8 +1,8 @@
 package org.appfuse.webapp;
 
-import net.sourceforge.jwebunit.html.Table;
-import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Cell;
+import net.sourceforge.jwebunit.html.Row;
+import net.sourceforge.jwebunit.html.Table;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import java.util.ResourceBundle;
@@ -30,7 +30,7 @@ public class UserWebTest extends WebTestCase {
         setTextField("user.firstName", "Abbie");
         setTextField("user.lastName", "Raible");
         setTextField("user.email", "kiddo@appfuse.org");
-        submit("save");
+        clickButton("save");
         assertTitleKeyMatches("userList.title");
     }
 
@@ -47,20 +47,21 @@ public class UserWebTest extends WebTestCase {
     public void testEditUser() {
         beginAt("/editUser?id=" + getInsertedUserId());
         assertTextFieldEquals("user.firstName", "Abbie");
-        submit("save");
+        clickButton("save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
         beginAt("/editUser?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
-        submit("delete");
+        clickButton("delete");
         assertTitleKeyMatches("userList.title");
     }
 
     /**
      * Convenience method to get the id of the inserted user
      * Assumes last inserted user is "Abbie User"
+     *
      * @return last id in the table
      */
     protected String getInsertedUserId() {
@@ -76,7 +77,7 @@ public class UserWebTest extends WebTestCase {
                 if (cell.getValue().contains("Abbie")) {
                     return ((Cell) row.getCells().get(0)).getValue();
                 }
-            };
+            }
         }
         return "";
     }

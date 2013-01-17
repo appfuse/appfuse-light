@@ -8,7 +8,8 @@
     <http pattern="/images/**" security="none"/>
     <http pattern="/styles/**" security="none"/>
     <http pattern="/scripts/**" security="none"/>
-              
+    <http pattern="/webjars/**" security="none"/>
+
     <http auto-config="false">
         <intercept-url pattern="/app/**" access="ROLE_ADMIN,ROLE_USER"/>
         <form-login login-page="/login" authentication-failure-url="/login?error=true"

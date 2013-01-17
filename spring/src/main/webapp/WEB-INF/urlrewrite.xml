@@ -49,6 +49,10 @@
         <from>/login*</from>
         <to>/login.jsp</to>
     </rule>
+    <rule>
+        <from>/webjars/**</from>
+        <to>/webjars/$1</to>
+    </rule>
 
     <!-- Spring MVC -->
     <rule>

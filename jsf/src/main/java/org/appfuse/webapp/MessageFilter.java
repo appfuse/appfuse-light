@@ -34,10 +34,7 @@ public class MessageFilter implements Filter {
             request.setAttribute("errors", errors);
             request.getSession().removeAttribute("errors");
         }
-        
-        // set the requestURL as a request attribute for templates
-        // particularly freemarker, which doesn't allow request.getRequestURL()
-        request.setAttribute("requestURL", request.getRequestURL());
+
         chain.doFilter(req, res);
     }
 

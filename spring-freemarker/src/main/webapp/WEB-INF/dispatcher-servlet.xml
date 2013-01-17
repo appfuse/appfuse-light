@@ -62,6 +62,7 @@
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="exposeRequestAttributes" value="true" />
         <property name="requestContextAttribute" value="rc"/>
         <property name="prefix" value="/"/>
         <property name="suffix" value=".ftl"/>

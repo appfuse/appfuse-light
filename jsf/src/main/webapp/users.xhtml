@@ -7,18 +7,16 @@
 
 <head>
     <title>#{text['userList.title']}</title>
-    <style type="text/css">
-        @import url(#{facesContext.externalContext.requestContextPath}/styles/myfaces.css);
-    </style>
 </head>
 
+<h2>#{text['userList.title']}</h2>
 <h:form id="editUser">
-<h:commandButton value="Add User" action="add" id="add" immediate="true" styleClass="button"/>
+<h:commandButton value="Add User" action="add" id="add" immediate="true" styleClass="btn btn-primary" style="float: right; margin-top: -30px"/>
 
 <!-- Error from this table is caused by http://issues.apache.org/jira/browse/TOMAHAWK-466 -->
 <t:dataTable id="users" var="user" style="margin-top: 10px"
     value="#{userList.users}" rows="25" sortColumn="#{userList.sortColumn}"
-    sortAscending="#{userList.ascending}" styleClass="scrollerTable table"
+    sortAscending="#{userList.ascending}" styleClass="table table-condensed table-striped table-hover"
     headerClass="standardTable_Header" rowClasses="standardTable_Row1,standardTable_Row2"
     columnClasses="standardTable_Column,standardTable_Column,standardTable_Column,standardTable_Column,standardTable_ColumnCentered">
     <t:column>
@@ -61,9 +59,6 @@
     <ui:param name="tableName" value="users"/>
 </ui:include>
 
-<script type="text/javascript">
-    highlightTableRows("editUser:users");
-</script>
 </h:form>
 
 </f:view>

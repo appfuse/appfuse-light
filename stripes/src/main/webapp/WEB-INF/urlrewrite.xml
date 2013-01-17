@@ -4,7 +4,7 @@
 
 <urlrewrite default-match-type="wildcard">
 
-    <!-- Add rules here for anything that shouldn't be served up by Struts. -->
+    <!-- Add rules here for anything that shouldn't be served up by Stripes. -->
     <rule>
         <from>/dwr/**</from>
         <to>/dwr/$1</to>
@@ -24,6 +24,14 @@
     <rule>
         <from>/styles/**</from>
         <to>/styles/$1</to>
+    </rule>
+    <rule>
+        <from>/favicon.ico</from>
+        <to>/favicon.ico</to>
+    </rule>
+    <rule>
+        <from>/webjars/**</from>
+        <to>/webjars/$1</to>
     </rule>
 
     <!-- Struts -->

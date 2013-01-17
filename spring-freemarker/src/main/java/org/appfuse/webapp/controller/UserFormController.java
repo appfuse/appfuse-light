@@ -60,11 +60,11 @@ public class UserFormController {
     @RequestMapping(method = RequestMethod.POST)
     public String onSubmit(User user, BindingResult result, HttpServletRequest request) throws Exception {
 
-        if (request.getParameter("cancel") != null)
+        if (request.getParameter("cancel") != null) {
             return "redirect:users";
+        }
 
-
-        if (validator != null) { // validator is null during testing
+        if (validator != null && request.getParameter("delete") == null) { // validator is null during testing
             validator.validate(user, result);
 
             if (result.hasErrors()) {

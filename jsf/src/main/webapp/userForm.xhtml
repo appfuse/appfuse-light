@@ -7,60 +7,71 @@
 
     <head>
         <title>#{text['userForm.title']}</title>
-        <!-- <style type="text/css">
-            .jscalendar-DB-div-style {
-                position: absolute;
-                margin-top: -69px;
-                margin-left: -408px;
-            }
-        </style>-->
     </head>
 
-    <h:messages errorClass="error" layout="table" style="width: 100%"/>
+    <h:messages errorClass="alert alert-error fade in" layout="table" style="width: 100%"/>
 
     <p>Please fill in user's information below:</p>
 
-    <h:form id="userForm">
+    <h:form id="userForm" styleClass="form-horizontal well">
         <h:inputHidden value="#{userForm.user.id}">
             <f:convertNumber/>
         </h:inputHidden>
-        <h:panelGrid columns="3" styleClass="detail" columnClasses="label">
 
-            <h:outputLabel for="username" value="#{text['user.username']}"/>
-            <h:inputText value="#{userForm.user.username}" id="username"/>
-            <h:message for="username" styleClass="errorMessage"/>
+        <div class="control-group">
+            <h:outputLabel for="username" value="#{text['user.username']}" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputText value="#{userForm.user.username}" id="username" required="true"/>
+                <h:message for="username" styleClass="help-inline"/>
+            </div>
+        </div>
 
-            <h:outputLabel for="password" value="#{text['user.password']}"/>
-            <h:inputText value="#{userForm.user.password}" id="password"/>
-            <h:message for="password" styleClass="errorMessage"/>
+        <div class="control-group">
+            <h:outputLabel for="password" value="#{text['user.password']}" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputSecret value="#{userForm.user.password}" id="password" redisplay="true"/>
+                <h:message for="password" styleClass="help-inline"/>
+            </div>
+        </div>
 
-            <h:outputLabel for="firstName" value="#{text['user.firstName']}"/>
-            <h:inputText value="#{userForm.user.firstName}" id="firstName"/>
-            <h:message for="firstName" styleClass="errorMessage"/>
+        <div class="control-group">
+            <h:outputLabel for="firstName" value="#{text['user.firstName']}" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputText value="#{userForm.user.firstName}" id="firstName"/>
+                <h:message for="firstName" styleClass="help-inline"/>
+            </div>
+        </div>
 
-            <h:outputLabel for="lastName" value="#{text['user.lastName']}"/>
-            <h:inputText value="#{userForm.user.lastName}" id="lastName" required="true"/>
-            <h:message for="lastName" styleClass="errorMessage"/>
+        <div class="control-group">
+            <h:outputLabel for="lastName" value="#{text['user.lastName']}" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputText value="#{userForm.user.lastName}" id="lastName" required="true"/>
+                <h:message for="lastName" styleClass="help-inline"/>
+            </div>
+        </div>
 
-            <h:outputLabel for="email" value="#{text['user.email']}"/>
-            <h:inputText value="#{userForm.user.email}" id="email" required="true"/>
-            <h:message for="email" styleClass="errorMessage"/>
+        <div class="control-group">
+            <h:outputLabel for="email" value="#{text['user.email']}" styleClass="control-label"/>
+            <div class="controls">
+                <h:inputText value="#{userForm.user.email}" id="email" required="true"/>
+                <h:message for="email" styleClass="help-inline"/>
+            </div>
+        </div>
 
-            <h:inputHidden value=""/>
+        <div class="form-actions">
+            <h:commandButton value="Save" action="#{userForm.save}" id="save" styleClass="btn btn-primary"/>
+            <c:if test="${not empty userForm.id}">
+                <h:commandButton value="Delete" action="#{userForm.delete}" id="delete" styleClass="btn"/>
+            </c:if>
+            <h:commandButton value="Cancel" action="cancel" immediate="true" id="cancel" styleClass="btn"/>
+        </div>
 
-            <h:panelGroup>
-                <h:commandButton value="Save" action="#{userForm.save}" id="save" styleClass="button"/>
-                <c:if test="${not empty userForm.id}">
-                    <h:commandButton value="Delete" action="#{userForm.delete}" id="delete" styleClass="button"/>
-                </c:if>
-                <h:commandButton value="Cancel" action="cancel" immediate="true" id="cancel" styleClass="button"/>
-            </h:panelGroup>
-            <h:inputHidden value=""/>
-        </h:panelGrid>
     </h:form>
 
     <script type="text/javascript">
-        Form.focusFirstElement(document.forms['userForm']);
+        $(document).ready(function() {
+            $("input[type='text']:visible:enabled:first", document.forms['userForm']).focus();
+        });
     </script>
 
 </f:view>

@@ -8,7 +8,6 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Environment;
-import org.appfuse.Constants;
 
 
 /**
@@ -17,6 +16,7 @@ import org.appfuse.Constants;
  * @author Serge Eby
  * @version $Id: Layout.java 5 2008-08-30 09:59:21Z serge.eby $
  */
+
 @Import(stylesheet = {"context:styles/t5-override.css"})
 public class Layout {
 
@@ -42,9 +42,4 @@ public class Layout {
     @Property
     @Parameter(required = false, defaultPrefix = BindingConstants.LITERAL)
     private String bodyId;
-
-    public String getCssTheme() {
-        return context.getInitParameter(Constants.CSS_THEME);
-    }
-
 }

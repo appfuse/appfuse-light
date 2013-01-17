@@ -1,8 +1,8 @@
 package org.appfuse.webapp;
 
-import net.sourceforge.jwebunit.html.Table;
-import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Cell;
+import net.sourceforge.jwebunit.html.Row;
+import net.sourceforge.jwebunit.html.Table;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import java.util.ResourceBundle;
@@ -42,7 +42,7 @@ public class UserWebTest extends WebTestCase {
         assertTablePresent("userList");
 
         // check that a set of strings are present somewhere in table
-        assertTextInTable("userList", new String[] {"Tapestry", "User"});
+        assertTextInTable("userList", new String[]{"Tapestry", "User"});
     }
 
     public void testEditUser() {
@@ -73,6 +73,7 @@ public class UserWebTest extends WebTestCase {
     /**
      * Convenience method to get the id of the inserted user
      * Assumes last inserted user is "Spring User"
+     *
      * @return last id in the table
      */
     public String getInsertedUserId() {
@@ -88,7 +89,7 @@ public class UserWebTest extends WebTestCase {
                 if (cell.getValue().contains("Tapestry")) {
                     return ((Cell) row.getCells().get(0)).getValue();
                 }
-            };
+            }
         }
         return "";
     }

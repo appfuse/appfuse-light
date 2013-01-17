@@ -1,18 +1,12 @@
-<%-- Error Messages --%>
-<s:if test="hasFieldErrors()">
-    <div class="error">	
-      <s:iterator value="fieldErrors">
-          <s:iterator value="value">
-             <s:property/><br/>
-          </s:iterator>
-      </s:iterator>
-    </div>
-</s:if>
+<s:actionerror theme="bootstrap"/>
+<s:actionmessage theme="bootstrap"/>
+<s:fielderror theme="bootstrap"/>
 
 <%-- Success Messages --%>
-<c:if test="${not empty messages}">
-    <div class="message" id="successMessages">
-        <c:forEach var="msg" items="${messages}">
+<c:if test="${not empty message}">
+    <div class="alert alert-success fade in">
+        <a href="#" data-dismiss="alert" class="close">&times;</a>
+        <c:forEach var="msg" items="${message}">
             <c:out value="${msg}"/><br />
         </c:forEach>
     </div>

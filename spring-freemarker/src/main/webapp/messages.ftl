@@ -1,4 +1,8 @@
 <#-- Success Messages -->
-<#if message?exists>
-    <div class="message">${message?html}</div>
+<#if message??>
+    <div class="alert alert-success fade in">
+        <a href="#" data-dismiss="alert" class="close">&times;</a>
+        ${message?html}
+    </div>
 </#if>
+

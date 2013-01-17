@@ -278,8 +278,8 @@
         <!-- Spring Web Dependencies -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -311,6 +311,13 @@
             </exclusions>
         </dependency>
 
+        <!-- UI Dependencies -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
         <!-- Testing Dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -336,6 +343,7 @@
             <artifactId>junit-dep</artifactId>
             <version>4.5</version>
             <scope>test</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.jwebunit</groupId>

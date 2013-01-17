@@ -26,6 +26,14 @@
         <to>/styles/$1</to>
     </rule>
     <rule>
+        <from>/favicon.ico</from>
+        <to>/favicon.ico</to>
+    </rule>
+    <rule>
+        <from>/webjars/**</from>
+        <to>/webjars/$1</to>
+    </rule>
+    <rule>
         <from>/login*</from>
         <to>/login.jsp</to>
     </rule>

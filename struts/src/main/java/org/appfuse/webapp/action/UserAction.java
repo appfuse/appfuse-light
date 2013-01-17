@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class UserAction extends ActionSupport {
     private final Log log = LogFactory.getLog(UserAction.class);
     private UserManager userManager;
-    private List users; 
+    private List<User> users;
     private User user;
     private String id;
     private String cancel;
@@ -33,7 +33,7 @@ public class UserAction extends ActionSupport {
         this.userManager = userManager;
     }
     
-    public List getUsers() { 
+    public List<User> getUsers() {
         return users; 
     }
     
@@ -53,9 +53,10 @@ public class UserAction extends ActionSupport {
     
         userManager.removeUser(user.getId().toString());
         
-        List args = new ArrayList();
+        List<String> args = new ArrayList<String>();
         args.add(user.getFullName());
-        ActionContext.getContext().getSession().put("message", 
+
+        ActionContext.getContext().getSession().put("message",
                 getText("user.deleted", args));
                 
         return "delete";
@@ -90,10 +91,10 @@ public class UserAction extends ActionSupport {
         
         userManager.saveUser(user);
         
-        List args = new ArrayList();
+        List<String> args = new ArrayList<String>();
         args.add(user.getFullName());
-        
-        ActionContext.getContext().getSession().put("message", 
+
+        ActionContext.getContext().getSession().put("message",
                 getText("user.saved", args));
                 
         return SUCCESS;

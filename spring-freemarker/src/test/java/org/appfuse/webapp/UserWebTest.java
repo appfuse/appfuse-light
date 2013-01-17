@@ -30,7 +30,7 @@ public class UserWebTest extends WebTestCase {
         setTextField("firstName", "Spring");
         setTextField("lastName", "User");
         setTextField("email", "springuser@appfuse.org");
-        submit("save");
+        clickButton("save");
         assertTitleKeyMatches("userList.title");
     }
 
@@ -47,14 +47,14 @@ public class UserWebTest extends WebTestCase {
     public void testEditUser() {
         beginAt("/userform?id=" + getInsertedUserId());
         assertTextFieldEquals("firstName", "Spring");
-        submit("save");
+        clickButton("save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
         beginAt("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
-        submit("delete");
+        clickButton("delete");
         assertTitleKeyMatches("userList.title");
     }
 

@@ -1,13 +1,15 @@
 <html t:type="layout" title="message:userList.title"
     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 
+<h2>${message:userList.title}</h2>
+
 <div>
     <a t:type="eventLink" t:id="add" id="add">
-        <input type="button" class="button" value="Add User" style="float: right; margin-top: -30px; width: 100px"/>
+        <input type="button" class="btn btn-primary" value="Add User" style="float: right; margin-top: -30px"/>
     </a>
 </div>
 
-<t:grid source="users" row="currentUser" id="userList" class="table"
+<t:grid source="users" row="currentUser" id="userList" class="table table-condensed table-striped table-hover"
         exclude="username,password,confirmPassword,passwordHint,phoneNumber,website,
              fullName,accountNonExpired,accountNonLocked,credentialsNonExpired,
              version,enabled,accountExpired,accountLocked,credentialsExpired">

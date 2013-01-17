@@ -28,7 +28,7 @@ public class UserWebTest extends WebTestCase {
         setTextField("firstName", "Spring");
         setTextField("lastName", "User");
         setTextField("email", "suser@appfuse.org");
-        submit("save");
+        clickButtonWithText("Save");
         assertTitleKeyMatches("userList.title");
     }
 
@@ -48,7 +48,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
         clickLinkWithText("Spring");
         assertTextFieldEquals("firstName", "Spring");
-        submit("save");
+        clickButtonWithText("Save");
         assertTitleKeyMatches("userList.title");
     }
 
@@ -57,7 +57,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
         clickLinkWithText("Spring");
         assertTitleKeyMatches("userForm.title");
-        submit("delete");
+        clickButtonWithText("Delete");
         assertTitleKeyMatches("userList.title");
     }
 

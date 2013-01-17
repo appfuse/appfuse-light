@@ -6,8 +6,14 @@
 <form-validation>
     <formset>
         <form name="user">
-            <field property="lastName" depends="required">
-                <arg key="user.lastName"/>
+            <field property="username" depends="required">
+                <arg key="user.username"/>
+            </field>
+            <field property="password" depends="required">
+                <arg key="user.password"/>
+            </field>
+            <field property="email" depends="required">
+                <arg key="user.email"/>
             </field>
         </form>
     </formset>

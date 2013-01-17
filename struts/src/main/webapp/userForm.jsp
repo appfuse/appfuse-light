@@ -2,35 +2,39 @@
 
 <head>
     <title><fmt:message key="userForm.title"/></title>
-    <%-- Calendar Setup - put in decorator if needed in multiple pages --%>
-    <link href="${ctx}/styles/calendar.css" type="text/css" rel="stylesheet"/>
-    <script type="text/javascript" src="${ctx}/scripts/calendar.js"></script>
-    <script type="text/javascript" src="${ctx}/scripts/calendar-setup.js"></script>
-    <script type="text/javascript" src="${ctx}/scripts/lang/calendar-en.js"></script>
 </head>
 
 <p>Please fill in user's information below:</p>
 
-<s:form name="userForm" action="saveUser" method="post" validate="true">
+<s:form name="userForm" action="saveUser" theme="bootstrap" method="post"
+        cssClass="form-horizontal well" validate="true">
     <s:hidden name="user.id" value="%{user.id}"/>
     <s:hidden name="user.version" value="%{user.version}"/>
-    <s:textfield key="user.username"/>
-    <s:password key="user.password" showPassword="true"/>
+    <s:textfield key="user.username" required="true"/>
+    <s:password key="user.password" showPassword="true" required="true"/>
     <s:textfield key="user.firstName"/>
     <s:textfield key="user.lastName"/>
-    <s:textfield key="user.email"/>
-    <tr>
-        <td></td>
-        <td>
-            <input type="submit" class="button" name="save" value="Save" onclick="this.blur()"/>
-            <c:if test="${not empty param.id}">
-                <input type="submit" class="button" name="delete" value="Delete" onclick="form.onsubmit=null"/>
-            </c:if>
-            <input type="submit" class="button" name="cancel" value="Cancel" onclick="form.onsubmit=null"/>
-        </td>
-    </tr>
+    <s:textfield key="user.email" required="true"/>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary" name="save" id="save">
+            <i class="icon-ok icon-white"></i> <fmt:message key="button.save"/>
+        </button>
+
+        <c:if test="${not empty param.id}">
+            <button type="submit" class="btn" name="delete" id="delete">
+                <i class="icon-trash"></i> <fmt:message key="button.delete"/>
+            </button>
+        </c:if>
+
+        <a href="${ctx}/users" class="btn" id="cancel">
+            <i class="icon-remove"></i> <fmt:message key="button.cancel"/>
+        </a>
+    </div>
 </s:form>
 
 <script type="text/javascript">
-    Form.focusFirstElement(document.forms["userForm"]);
+    $(document).ready(function() {
+        $("input[type='text']:visible:enabled:first", document.forms['userForm']).focus();
+        $('a[href="${ctx}/users"]').parent().addClass('active');
+    });
 </script>

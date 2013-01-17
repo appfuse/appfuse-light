@@ -66,21 +66,6 @@ public class BaseAction extends ActionSupport {
   }
 
   /**
-   * Save the message in the session, appending if messages already exist
-   *
-   * @param msg the message to put in the session
-   */
-  @SuppressWarnings("unchecked")
-  protected void saveMessage(String msg) {
-    List messages = (List) getRequest().getSession().getAttribute("messages");
-    if (messages == null) {
-      messages = new ArrayList();
-    }
-    messages.add(msg);
-    getRequest().getSession().setAttribute("messages", messages);
-  }
-
-  /**
    * Convenience method to get the Configuration HashMap
    * from the servlet context.
    *

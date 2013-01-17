@@ -17,7 +17,7 @@ public class UserWebTest extends WebTestCase {
         getTestContext().setBaseUrl("http://localhost:25888");
         getTestContext().setResourceBundleName("messages");
         messages = ResourceBundle.getBundle("messages");
-        
+
         beginAt("/users");
         assertTitleEquals("Login | AppFuse Light");
         setTextField("j_username", "admin");
@@ -27,11 +27,11 @@ public class UserWebTest extends WebTestCase {
 
     @Override
     protected void tearDown() {
-       gotoPage("/logout");
+        gotoPage("/logout");
     }
 
     public void testLogin() {
-       assertTitleKeyMatches("userList.title");
+        assertTitleKeyMatches("userList.title");
     }
 
     public void testLogout() {
@@ -52,39 +52,40 @@ public class UserWebTest extends WebTestCase {
         setTextField("firstName", "Spring");
         setTextField("lastName", "User");
         setTextField("email", "springuser@appfuse.org");
-        submit("save");
+        clickButton("save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testListUsers() {
         gotoPage("/users");
         assertTitleKeyMatches("userList.title");
-        
+
         // check that table is present
         assertTablePresent("userList");
 
         //check that a set of strings are present somewhere in table
-        assertTextInTable("userList", new String[] {"Spring", "User"});
+        assertTextInTable("userList", new String[]{"Spring", "User"});
     }
 
     public void testEditUser() {
         gotoPage("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
         assertTextFieldEquals("firstName", "Spring");
-        submit("save");
+        clickButton("save");
         assertTitleKeyMatches("userList.title");
     }
 
     public void testDeleteUser() {
         gotoPage("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
-        submit("delete");
+        clickButton("delete");
         assertTitleKeyMatches("userList.title");
     }
 
     /**
      * Convenience method to get the id of the inserted user
      * Assumes last inserted user is "Spring User"
+     *
      * @return last id in the table
      */
     protected String getInsertedUserId() {
@@ -100,7 +101,7 @@ public class UserWebTest extends WebTestCase {
                 if (cell.getValue().contains("Spring")) {
                     return ((Cell) row.getCells().get(0)).getValue();
                 }
-            };
+            }
         }
         return "";
     }

@@ -2,16 +2,18 @@
     <title><wicket:message key="userList.title"/></title>
 </head>
 
-<span wicket:id="feedback" class="message"></span>
+<div wicket:id="feedback" class="alert alert-success fade in"></div>
+
+<h2><wicket:message key="userList.title"/></h2>
 
 <form wicket:id="form">
     <input wicket:id="add-user" type="submit" value="Add User" 
-        class="button" style="float: right; margin-top: -10px; width: 100px"/>
+        class="btn btn-primary" style="float: right; margin-top: -10px"/>
 </form>
 
 <span wicket:id="navigator"/>
 
-<table class="table" id="userList">
+<table class="table table-condensed table-striped table-hover" id="userList">
     <thead>
         <tr>
             <th wicket:id="orderByFirstName"><wicket:message key="user.firstName">[first name]</wicket:message></th>
@@ -27,5 +29,3 @@
         </tr>
     </tbody>
 </table>
-
-<script type="text/javascript">highlightTableRows("userList");</script>

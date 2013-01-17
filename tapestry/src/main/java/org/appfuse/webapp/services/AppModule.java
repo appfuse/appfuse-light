@@ -1,23 +1,18 @@
 package org.appfuse.webapp.services;
 
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.ioc.annotations.Contribute;
-import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.services.ComponentSource;
-import org.apache.tapestry5.services.ExceptionReporter;
-import org.apache.tapestry5.services.RequestExceptionHandler;
-import org.apache.tapestry5.services.ResponseRenderer;
-import org.apache.tapestry5.services.ValueEncoderSource;
-import org.apache.tapestry5.services.ValueEncoderFactory;
 import org.apache.tapestry5.ValueEncoder;
-import org.slf4j.Logger;
-
-import java.io.IOException;
+import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.services.*;
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
 import org.appfuse.webapp.services.impl.UserEncoder;
+import org.slf4j.Logger;
 
+import java.io.IOException;
 
 
 /**
@@ -33,6 +28,16 @@ public class AppModule {
 
         // HHAC recommended for better security as of Tapestry 5.3.6
         configuration.add(SymbolConstants.HMAC_PASSPHRASE, "AppFuse Tapestry Light is Cool");
+
+        // Settings to allow template reloading with jetty:run
+        configuration.add(SymbolConstants.FILE_CHECK_INTERVAL, "1 s");
+        configuration.add(SymbolConstants.PRODUCTION_MODE, "false");
+        configuration.add(SymbolConstants.EXECUTION_MODE, "DevelopmentMode");
+    }
+
+    @Contribute(MarkupRenderer.class)
+    public static void deactiveDefaultCSS(OrderedConfiguration<MarkupRendererFilter> configuration) {
+        configuration.override("InjectDefaultStylesheet", null);
     }
 
     /**
@@ -55,7 +60,7 @@ public class AppModule {
         if (!productionMode) {
             return null;
         }
-   
+
         return new RequestExceptionHandler() {
             public void handleRequestException(Throwable exception)
                     throws IOException {
@@ -66,7 +71,6 @@ public class AppModule {
             }
         };
     }
-
 
 
     @Contribute(ValueEncoderSource.class)
