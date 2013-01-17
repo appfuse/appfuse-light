@@ -97,6 +97,10 @@ th.sorted a, th.sortable a {
 
 /* FORMS */
 
+.alert p {
+    margin: 0;
+}
+
 .well.form-horizontal .form-actions {
     margin-bottom: 0;
 }

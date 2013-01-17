@@ -88,8 +88,13 @@ public class UserAction extends ActionSupport {
         if (log.isDebugEnabled()) {
             log.debug("entering 'save' method");
         }
-        
-        userManager.saveUser(user);
+
+        try {
+            userManager.saveUser(user);
+        } catch (UserExistsException uex) {
+            addActionError(getText("user.exists"));
+            return INPUT;
+        }
         
         List<String> args = new ArrayList<String>();
         args.add(user.getFullName());

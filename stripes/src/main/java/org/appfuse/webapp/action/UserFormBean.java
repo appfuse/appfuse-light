@@ -2,6 +2,7 @@ package org.appfuse.webapp.action;
 
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 
@@ -47,12 +48,18 @@ public class UserFormBean extends BaseActionBean {
         } else {
             user = new User();
         }
-        return new ForwardResolution("/userForm.jsp");
+        return showForm();
     }
 
     @HandlesEvent("save")
-    public Resolution save() throws UserExistsException {
-        userManager.saveUser(user);
+    public Resolution save() {
+        try {
+            userManager.saveUser(user);
+        } catch (UserExistsException uex) {
+            getContext().getValidationErrors().addGlobalError(new LocalizableError("user.exists"));
+            return showForm();
+        }
+
         getContext().getMessages().add(new LocalizableMessage("user.saved", user.getFullName()));
         return showList();
     }
@@ -73,5 +80,9 @@ public class UserFormBean extends BaseActionBean {
 
     private Resolution showList() {
         return new RedirectResolution("/users").flash(this);
+    }
+
+    private Resolution showForm() {
+        return new ForwardResolution("/userForm.jsp");
     }
 }

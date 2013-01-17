@@ -6,8 +6,9 @@
 
 <p>Please fill in user's information below:</p>
 
+<stripes:errors globalErrorsOnly="true"/>
+
 <stripes:form action="/userform.action" id="userForm" class="well form-horizontal">
-    <stripes:errors globalErrorsOnly="true"/>
     <stripes:hidden name="user.id"/>
     <stripes:hidden name="user.version"/>
 

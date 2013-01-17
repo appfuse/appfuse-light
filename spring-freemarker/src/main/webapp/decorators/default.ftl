@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <title>[#if title != '']${title}[#else]Welcome[/#if] | ${rc.getMessage("webapp.name")}</title>
-    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Cache-Control" content="no-cache"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>

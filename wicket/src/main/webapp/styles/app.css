@@ -97,6 +97,11 @@ th.sorted a, th.sortable a {
 
 /* FORMS */
 
+.alert .feedbackPanel {
+    list-style: none;
+    margin: 0;
+}
+
 .well.form-horizontal .form-actions {
     margin-bottom: 0;
 }

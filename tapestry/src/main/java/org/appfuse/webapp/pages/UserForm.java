@@ -1,5 +1,6 @@
 package org.appfuse.webapp.pages;
 
+import org.apache.tapestry5.ValidationException;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
 import org.apache.tapestry5.alerts.Severity;
@@ -27,21 +28,18 @@ public class UserForm {
     @Inject
     private UserManager userManager;
 
-
     @Inject
     private AlertManager alertManager;
 
     @PageActivationContext
-    @Property(write = false)
+    @Property
     private User user;
-
 
     @Component(id = "userForm")
     private Form form;
 
     private boolean cancel;
     private boolean delete;
-
 
     void onPrepare() {
         if (user == null) {
@@ -65,15 +63,19 @@ public class UserForm {
         }
     }
 
-
-
-    Object onSuccess() throws UserExistsException {
+    Object onSuccess() {
         if (delete) return onDelete();
         if (cancel) return onCancel();
 
         log.debug("Saving user...");
         
-        userManager.saveUser(user);
+        try {
+            userManager.saveUser(user);
+        } catch (UserExistsException uex) {
+            alertManager.error(messages.format("user.exists"));
+            // TODO: Figure out how to repopulate the form with entered values
+            return null;
+        }
 
         String message = messages.format("user.saved", user.getFullName());
         alertManager.alert(Duration.TRANSIENT, Severity.INFO, message);

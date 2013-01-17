@@ -7,6 +7,7 @@ import org.appfuse.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.ObjectError;
 
 @Component("userForm")
 @Scope("request")
@@ -50,13 +51,19 @@ public class UserForm extends BasePage {
         return "success";
     }
 
-    public String save() throws UserExistsException {
+    public String save() {
         // For some reason, WebTest + Tomcat causes version to be 0. Works fine on Jetty.
         if (user.getId() != null && user.getId() == 0) {
             user.setId(null);
         }
 
-        userManager.saveUser(user);
+        try {
+            userManager.saveUser(user);
+        } catch (UserExistsException uex) {
+            addError("user.exists");
+            return "error";
+        }
+
         addMessage("user.saved", user.getFullName());
 
         return "success";

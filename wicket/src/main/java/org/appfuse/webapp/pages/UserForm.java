@@ -4,13 +4,11 @@ import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.ComponentFeedbackPanel;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
-import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.model.*;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.collections.MicroMap;
 import org.apache.wicket.util.string.interpolator.MapVariableInterpolator;
+import org.apache.wicket.validation.ValidationError;
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
 import org.appfuse.service.UserExistsException;
@@ -38,6 +36,11 @@ public class UserForm extends BasePage {
     public UserForm(final Page responsePage, User user) {
         this.responsePage = responsePage;
 
+        // Add feedback panel for error messages
+        FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
+        add(feedbackPanel);
+        feedbackPanel.setVisible(false);
+
         // Create and add the form
         EditForm form = new EditForm("user-form", user) {
             protected void onSave(User user) {
@@ -61,11 +64,20 @@ public class UserForm extends BasePage {
      * @param user user bean
      */
     protected void onSaveUser(User user) {
+        if (user.getVersion() != null && user.getVersion() == 0) {
+            user.setVersion(null);
+        }
+
+        String unencryptedPassword = user.getPassword();
+
         try {
             userManager.saveUser(user);
         } catch (UserExistsException uee) {
-            uee.printStackTrace();
-            // TODO: show error message on form
+            user.setPassword(unencryptedPassword);
+            error(new StringResourceModel("user.exists", this, null).getString());
+            FeedbackPanel feedbackPanel = (FeedbackPanel) this.get("feedback");
+            feedbackPanel.setVisible(true);
+            return;
         }
 
         String message = MapVariableInterpolator.interpolate(getLocalizer().getString("user.saved", this),
