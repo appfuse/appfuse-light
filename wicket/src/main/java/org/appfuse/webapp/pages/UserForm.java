@@ -64,7 +64,7 @@ public class UserForm extends BasePage {
      * @param user user bean
      */
     protected void onSaveUser(User user) {
-        if (user.getVersion() != null && user.getVersion() == 0) {
+        if (user.getId() == null) {
             user.setVersion(null);
         }
 
