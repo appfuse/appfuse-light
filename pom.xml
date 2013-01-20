@@ -22,7 +22,11 @@
     <artifactId>appfuse-light</artifactId>
     <packaging>pom</packaging>
     <name>AppFuse Light Modules</name>
+<<<<<<< HEAD
     <version>2.2.2-SNAPSHOT</version>
+=======
+    <version>2.2-SNAPSHOT</version>
+>>>>>>> Try this again.
 
     <description>
         AppFuse Light Web Frameworks: JSF, Spring MVC, Stripes, Struts 2, Tapestry, Wicket.

@@ -21,13 +21,21 @@
     <parent>
         <groupId>org.appfuse</groupId>
         <artifactId>appfuse-light</artifactId>
+<<<<<<< HEAD
         <version>2.2.2-SNAPSHOT</version>
+=======
+        <version>2.2-SNAPSHOT</version>
+>>>>>>> Try this again.
     </parent>
 
     <groupId>org.appfuse</groupId>
     <artifactId>appfuse-light-spring-security</artifactId>
     <packaging>war</packaging>
+<<<<<<< HEAD
     <version>2.2.2-SNAPSHOT</version>
+=======
+    <version>2.2-SNAPSHOT</version>
+>>>>>>> Try this again.
     <name>AppFuse Light Spring MVC/Security Module</name>
 
     <build>
@@ -321,7 +329,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>2.2.1</version>
+            <version>2.2-SNAPSHOT</version>
         </dependency>
 
         <!-- Testing Dependencies -->
