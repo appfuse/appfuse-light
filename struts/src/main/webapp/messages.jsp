@@ -3,7 +3,7 @@
 <s:fielderror theme="bootstrap"/>
 
 <%-- Success Messages --%>
-<c:if test="${not empty message}">
+<c:if test="${not empty messages}">
     <div class="alert alert-success fade in">
         <a href="#" data-dismiss="alert" class="close">&times;</a>
         <c:forEach var="msg" items="${messages}">
