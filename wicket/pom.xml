@@ -21,13 +21,13 @@
     <parent>
         <groupId>org.appfuse</groupId>
         <artifactId>appfuse-light</artifactId>
-        <version>2.2.1</version>
+        <version>2.2-SNAPSHOT</version>
     </parent>
 
     <groupId>org.appfuse</groupId>
     <artifactId>appfuse-light-wicket</artifactId>
     <packaging>war</packaging>
-    <version>2.2.1</version>
+    <version>2.2-SNAPSHOT</version>
     <name>AppFuse Light Wicket Module</name>
 
     <build>
