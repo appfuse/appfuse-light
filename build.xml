@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="archetypes" basedir=".">
 
-    <property name="version" value="2.2.1"/>
+    <property name="version" value="2.2-SNAPSHOT"/>
     <property name="archetype" value="${archetype}"/>
     <property name="test.dir" value="${basedir}/target"/>
 
@@ -191,7 +191,7 @@
             <move file="${web.root}/src/test/java" tofile="${web.root}/src/test/java/webapp"/>
 
             <!-- Add jdbc.password back in since archetype plugin strips it out -->
-            <replace file="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml">
+            <replace file="${web.root}/pom.xml">
                 <replacetoken><![CDATA[<jdbc.username>sa</jdbc.username>]]></replacetoken>
                 <replacevalue><![CDATA[<jdbc.username>sa</jdbc.username>
         <jdbc.password></jdbc.password>]]></replacevalue>
@@ -205,6 +205,9 @@
                     <include name="**/archetype-metadata.xml"/>
                 </fileset>
             </replaceregexp>
+
+            <!-- Don't replace Bootstrap version with project version -->
+            <replace file="${web.root}/src/main/webapp/decorators/default.jsp" token="bootstrap/${version}" value="bootstrap/2.2.1"/>
 
             <mvn command="install" dir="@{dir}/target/generated-sources/archetype"/>
         </sequential>
