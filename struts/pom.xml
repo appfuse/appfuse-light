@@ -179,6 +179,16 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <excludes>
+                    <exclude>applicationContext-resources.xml</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>applicationContext-resources.xml</include>
+                </includes>
             </resource>
             <resource>
                 <directory>src/main/java</directory>

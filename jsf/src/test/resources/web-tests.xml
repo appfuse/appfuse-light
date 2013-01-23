@@ -2,8 +2,10 @@
     <!ENTITY config SYSTEM "config.xml">
 ]>
 <project basedir="." default="run-all-tests">
+    <taskdef resource="webtestTaskdefs.properties" />
+
     <!-- Include messages.properties so we can test against keys, rather than values -->
-    <property file="${resources.dir}/messages.properties"/>
+    <property file="../../../target/classes/messages.properties"/>
     <property name="host" value="localhost"/>
     <property name="port" value="25888"/>
 

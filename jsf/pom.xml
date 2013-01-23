@@ -170,6 +170,16 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <excludes>
+                    <exclude>applicationContext-resources.xml</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>applicationContext-resources.xml</include>
+                </includes>
             </resource>
             <resource>
                 <directory>src/main/java</directory>
@@ -446,43 +456,43 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.3</version>
-                        <configuration>
-                            <tasks>
-                                <taskdef resource="webtest_base_relaxed.taskdef">
-                                    <classpath refid="maven.test.classpath" />
-                                </taskdef>
-                                <mkdir dir="target/webtest-data" />
-                                <!-- Delete old results file if it exists -->
-                                <delete file="target/webtest-data/web-tests-result.xml" />
-                                <!-- This is so the default will be used if no test case is specified -->
-                                <property name="test" value="run-all-tests" />
-                                <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'
-                                </echo>
-                                <ant antfile="src/test/resources/web-tests.xml" target="${test}">
-                                    <property name="resources.dir" value="src/main/resources" />
-                                    <property name="webapp.name" value="${project.build.finalName}" />
-                                    <property name="host" value="${cargo.host}" />
-                                    <property name="port" value="${cargo.port}" />
-                                </ant>
-                            </tasks>
-                        </configuration>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>webtest-maven-plugin</artifactId>
+                        <version>1.0.0</version>
                         <executions>
                             <execution>
+                                <id>webtest-test</id>
                                 <phase>integration-test</phase>
                                 <goals>
-                                    <goal>run</goal>
+                                    <goal>test</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>webtest-verify</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>verify-result</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>webtest-report-html</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>report</goal>
                                 </goals>
                             </execution>
                         </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.canoo.webtest</groupId>
-                                <artifactId>webtest</artifactId>
-                                <version>${webtest.version}</version>
-                            </dependency>
-                        </dependencies>
+                        <configuration>
+                            <host>${cargo.host}</host>
+                            <port>${cargo.port}</port>
+                            <sourcedirectory>src/test/resources</sourcedirectory>
+                            <sourcefile>web-tests.xml</sourcefile>
+                            <target>run-all-tests</target>
+                            <resultpath>target/webtest/webtest-results</resultpath>
+                            <haltonfailure>false</haltonfailure>
+                            <haltonerror>false</haltonerror>
+                            <loglevel>fatal</loglevel>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -532,4 +542,14 @@
         <!-- Search index settings -->
         <search.index.basedir>${project.build.testOutputDirectory}</search.index.basedir>
     </properties>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>webtest-maven-plugin</artifactId>
+                <version>1.0.0</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

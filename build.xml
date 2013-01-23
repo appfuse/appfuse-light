@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="archetypes" basedir=".">
 
-    <property name="version" value="2.2.1"/>
+    <property name="version" value="2.2-SNAPSHOT"/>
     <property name="archetype" value="${archetype}"/>
     <property name="test.dir" value="${basedir}/target"/>
 
@@ -77,8 +77,8 @@
 
             <!-- Move packages resources to the root -->
             <property name="resources.root" value="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/src/main/resources"/>
-            <move file="${resources.root}/org/appfuse/webapp" tofile="${resources.root}/webapp"/>
-            <delete dir="${resources.root}/src/main/resources/org"/>
+            <move file="${resources.root}/org/appfuse/webapp" tofile="${resources.root}/webapp" failonerror="false"/>
+            <delete dir="${resources.root}/src/main/resources/org" failonerror="false"/>
 
             <!-- Change the version number of the generated archetype -->
             <replace file="@{dir}/target/generated-sources/archetype/pom.xml" value="${version}">
