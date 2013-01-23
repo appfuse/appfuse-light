@@ -13,10 +13,9 @@
 
     <p>Please fill in user's information below:</p>
 
-    <h:form id="userForm" styleClass="form-horizontal well">
-        <h:inputHidden value="#{userForm.user.id}">
-            <f:convertNumber/>
-        </h:inputHidden>
+    <h:form id="userForm" styleClass="form-horizontal well" autocomplete="off">
+        <h:inputHidden value="#{userForm.user.id}" id="id"/>
+        <h:inputHidden value="#{userForm.user.version}" id="version"/>
 
         <div class="control-group">
             <h:outputLabel for="username" value="#{text['user.username']}" styleClass="control-label"/>
