@@ -566,7 +566,7 @@
         <!-- Search index settings -->
         <search.index.basedir>${project.build.testOutputDirectory}</search.index.basedir>
 
-        <!-- Temporary fix for AMP with AppFuse Maven Plugin 2.2.1 -->
+        <!-- Uncomment the following to get appfuse:gen to work -->
         <copyright.year>2013</copyright.year>
     </properties>
 </project>
