@@ -24,103 +24,118 @@ import java.util.Map;
  * @author <a href="mailto:matt@raibledesigns.com">Matt Raible</a>
  */
 public class BaseAction extends ActionSupport {
-  private static final long serialVersionUID = 3525445612504421307L;
+    private static final long serialVersionUID = 3525445612504421307L;
 
-  /**
-   * Constant for cancel result String
-   */
-  public static final String CANCEL = "cancel";
+    /**
+     * Constant for cancel result String
+     */
+    public static final String CANCEL = "cancel";
 
-  /**
-   * Transient log to prevent session synchronization issues - children can use instance for logging.
-   */
-  protected final transient Log log = LogFactory.getLog(getClass());
+    /**
+     * Transient log to prevent session synchronization issues - children can use instance for logging.
+     */
+    protected final transient Log log = LogFactory.getLog(getClass());
 
-  /**
-   * Indicator if the user clicked cancel
-   */
-  protected String cancel;
+    /**
+     * Indicator if the user clicked cancel
+     */
+    protected String cancel;
 
-  /**
-   * Indicator for the page the user came from.
-   */
-  protected String from;
+    /**
+     * Indicator for the page the user came from.
+     */
+    protected String from;
 
-  /**
-   * Set to "delete" when a "delete" request parameter is passed in
-   */
-  protected String delete;
+    /**
+     * Set to "delete" when a "delete" request parameter is passed in
+     */
+    protected String delete;
 
-  /**
-   * Set to "save" when a "save" request parameter is passed in
-   */
-  protected String save;
+    /**
+     * Set to "save" when a "save" request parameter is passed in
+     */
+    protected String save;
 
-  /**
-   * Simple method that returns "cancel" result
-   *
-   * @return "cancel"
-   */
-  public String cancel() {
-    return CANCEL;
-  }
-
-  /**
-   * Convenience method to get the Configuration HashMap
-   * from the servlet context.
-   *
-   * @return the user's populated form from the session
-   */
-  protected Map getConfiguration() {
-    Map config = (HashMap) getSession().getServletContext().getAttribute(Constants.CONFIG);
-    // so unit tests don't puke when nothing's been set
-    if (config == null) {
-      return new HashMap();
+    /**
+     * Simple method that returns "cancel" result
+     *
+     * @return "cancel"
+     */
+    public String cancel() {
+        return CANCEL;
     }
-    return config;
-  }
 
-  /**
-   * Convenience method to get the request
-   *
-   * @return current request
-   */
-  protected HttpServletRequest getRequest() {
-    return ServletActionContext.getRequest();
-  }
+    /**
+     * Save the message in the session, appending if messages already exist
+     *
+     * @param msg the message to put in the session
+     */
+    @SuppressWarnings("unchecked")
+    protected void saveMessage(String msg) {
+        List messages = (List) getRequest().getSession().getAttribute("messages");
+        if (messages == null) {
+            messages = new ArrayList();
+        }
+        messages.add(msg);
+        getRequest().getSession().setAttribute("messages", messages);
+    }
 
-  /**
-   * Convenience method to get the response
-   *
-   * @return current response
-   */
-  protected HttpServletResponse getResponse() {
-    return ServletActionContext.getResponse();
-  }
+    /**
+     * Convenience method to get the Configuration HashMap
+     * from the servlet context.
+     *
+     * @return the user's populated form from the session
+     */
+    protected Map getConfiguration() {
+        Map config = (HashMap) getSession().getServletContext().getAttribute(Constants.CONFIG);
+        // so unit tests don't puke when nothing's been set
+        if (config == null) {
+            return new HashMap();
+        }
+        return config;
+    }
 
-  /**
-   * Convenience method to get the session. This will create a session if one doesn't exist.
-   *
-   * @return the session from the request (request.getSession()).
-   */
-  protected HttpSession getSession() {
-    return getRequest().getSession();
-  }
+    /**
+     * Convenience method to get the request
+     *
+     * @return current request
+     */
+    protected HttpServletRequest getRequest() {
+        return ServletActionContext.getRequest();
+    }
 
-  /**
-   * Convenience method for setting a "from" parameter to indicate the previous page.
-   *
-   * @param from indicator for the originating page
-   */
-  public void setFrom(String from) {
-    this.from = from;
-  }
+    /**
+     * Convenience method to get the response
+     *
+     * @return current response
+     */
+    protected HttpServletResponse getResponse() {
+        return ServletActionContext.getResponse();
+    }
 
-  public void setDelete(String delete) {
-    this.delete = delete;
-  }
+    /**
+     * Convenience method to get the session. This will create a session if one doesn't exist.
+     *
+     * @return the session from the request (request.getSession()).
+     */
+    protected HttpSession getSession() {
+        return getRequest().getSession();
+    }
 
-  public void setSave(String save) {
-    this.save = save;
-  }
+    /**
+     * Convenience method for setting a "from" parameter to indicate the previous page.
+     *
+     * @param from indicator for the originating page
+     */
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public void setDelete(String delete) {
+        this.delete = delete;
+    }
+
+    public void setSave(String save) {
+        this.save = save;
+    }
 }

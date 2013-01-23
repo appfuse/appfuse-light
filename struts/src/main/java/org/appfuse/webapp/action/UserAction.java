@@ -56,7 +56,7 @@ public class UserAction extends ActionSupport {
         List<String> args = new ArrayList<String>();
         args.add(user.getFullName());
 
-        ActionContext.getContext().getSession().put("message",
+        ActionContext.getContext().getSession().put("messages",
                 getText("user.deleted", args));
                 
         return "delete";
@@ -99,7 +99,7 @@ public class UserAction extends ActionSupport {
         List<String> args = new ArrayList<String>();
         args.add(user.getFullName());
 
-        ActionContext.getContext().getSession().put("message",
+        ActionContext.getContext().getSession().put("messages",
                 getText("user.saved", args));
                 
         return SUCCESS;
