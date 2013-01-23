@@ -57,6 +57,10 @@ public class UserForm extends BasePage {
             user.setId(null);
         }
 
+        if (user.getId() == null) {
+            user.setVersion(null);
+        }
+
         try {
             userManager.saveUser(user);
         } catch (UserExistsException uex) {
