@@ -2,7 +2,7 @@ body {
     padding-top: 50px;
 }
 
-body > .navbar .brand {
+body .navbar .brand {
     color: #000000;
     font-weight: bold;
     margin-left: 0;

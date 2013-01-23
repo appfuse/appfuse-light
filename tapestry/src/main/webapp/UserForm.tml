@@ -1,4 +1,5 @@
-<html t:type="layout" title="message:userForm.title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+<html t:type="layout" title="message:userForm.title" menu="Users"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
       xmlns:p="tapestry:parameter">
 
 <p>Please fill in user's information below:</p>

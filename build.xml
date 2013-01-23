@@ -75,6 +75,11 @@
 
             <mvn dir="@{dir}" command="archetype:create-from-project -DpackageName=org.appfuse.webapp -Darchetype.keepParent=false"/>
 
+            <!-- Move packages resources to the root -->
+            <property name="resources.root" value="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/src/main/resources"/>
+            <move file="${resources.root}/org/appfuse/webapp" tofile="${resources.root}/webapp"/>
+            <delete dir="${resources.root}/src/main/resources/org"/>
+
             <!-- Change the version number of the generated archetype -->
             <replace file="@{dir}/target/generated-sources/archetype/pom.xml" value="${version}">
                 <replacetoken><![CDATA[<version>1.0-SNAPSHOT</version>]]></replacetoken>
@@ -185,19 +190,21 @@
             <!-- tests -->
             <move file="${web.root}/src/test/java" tofile="${web.root}/src/test/java/webapp"/>
 
-            <!-- Fix CompassPostProcessor -->
-            <replace dir="@{dir}/target/generated-sources/archetype">
-                <include name="**/CompassConfigurationPostProcessor.java"/>
-                <replacetoken>!rootPackage.equals("${groupId}")</replacetoken>
-                <replacevalue>!rootPackage.equals("org.appfuse")</replacevalue>
-            </replace>
-
             <!-- Add jdbc.password back in since archetype plugin strips it out -->
             <replace file="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml">
                 <replacetoken><![CDATA[<jdbc.username>sa</jdbc.username>]]></replacetoken>
                 <replacevalue><![CDATA[<jdbc.username>sa</jdbc.username>
         <jdbc.password></jdbc.password>]]></replacevalue>
             </replace>
+
+            <!-- Fix filtering of Tapestry components -->
+            <replaceregexp byline="false" flags="gim">
+                <regexp pattern="&lt;fileSet encoding=&quot;UTF-8&quot;&gt;(\s+)&lt;directory&gt;src/main/resources&lt;/directory&gt;(\s+)&lt;includes&gt;(\s+)&lt;include&gt;\*\*/\*.tml&lt;/include&gt;(\s+)&lt;/includes&gt;(\s+)&lt;/fileSet&gt;"/>
+                <substitution expression="&lt;fileSet packaged=&quot;true&quot; encoding=&quot;UTF-8&quot;&gt;${line.separator}      &lt;directory&gt;src/main/resources&lt;/directory&gt;${line.separator}      &lt;includes&gt;${line.separator}        &lt;include&gt;**/*.tml&lt;/include&gt;${line.separator}     &lt;/includes&gt;${line.separator}    &lt;/fileSet&gt;"/>
+                <fileset dir="@{dir}/target/generated-sources/archetype">
+                    <include name="**/archetype-metadata.xml"/>
+                </fileset>
+            </replaceregexp>
 
             <mvn command="install" dir="@{dir}/target/generated-sources/archetype"/>
         </sequential>

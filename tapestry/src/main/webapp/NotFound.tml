@@ -1,9 +1,5 @@
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+<html t:type="layout" title="literal:Page Not Found" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
       xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Page Not Found</title>
-</head>
-<body>
 
 <p>
     The page you requested was not found.  You might try returning to the
@@ -16,5 +12,5 @@
       <img src="http://farm8.staticflickr.com/7035/6716288117_5d84ab851d_z.jpg" width="640" height="426"
       alt="Lake McDonald" style="margin: 20px; border: 1px solid black"/></a>
 </p>
-</body>
+
 </html>

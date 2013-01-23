@@ -1,8 +1,5 @@
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+<html t:type="layout" title="literal:Doh!" title="literal:Doh!"xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
       xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Doh!</title>
-</head>
 <body>
     <p>An Error has occurred in this application.</p>
     

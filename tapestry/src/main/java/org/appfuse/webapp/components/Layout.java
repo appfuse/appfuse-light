@@ -36,10 +36,14 @@ public class Layout {
     private String heading;
 
     @Property
-    @Parameter(required = false, defaultPrefix = BindingConstants.MESSAGE)
+    @Parameter(required = false, defaultPrefix = BindingConstants.LITERAL)
     private String menu;
 
     @Property
     @Parameter(required = false, defaultPrefix = BindingConstants.LITERAL)
     private String bodyId;
+
+    @Property
+    @Parameter(required = false, defaultPrefix = BindingConstants.LITERAL)
+    private String bodyClass;
 }

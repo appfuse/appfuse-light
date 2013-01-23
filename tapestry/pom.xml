@@ -206,8 +206,6 @@
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.properties</include>
-                    <include>**/*.tml</include>
-                    <include>**/*.xml</include>
                 </includes>
             </resource>
         </resources>
@@ -567,5 +565,8 @@
 
         <!-- Search index settings -->
         <search.index.basedir>${project.build.testOutputDirectory}</search.index.basedir>
+
+        <!-- Temporary fix for AMP with AppFuse Maven Plugin 2.2.1 -->
+        <copyright.year>2013</copyright.year>
     </properties>
 </project>

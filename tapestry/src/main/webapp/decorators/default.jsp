@@ -20,31 +20,6 @@
 <body<decorator:getProperty property="body.id" writeEntireProperty="true"/><decorator:getProperty property="body.class" writeEntireProperty="true"/>>
 <a name="top"></a>
 
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <%-- For smartphones and smaller screens --%>
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="<c:url value='/'/>">AppFuse Light</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li><a href="${ctx}/" title="Home">Home</a></li>
-                        <li><a href="${ctx}/userlist" title="View Users">Users</a></li>
-                        <!-- Add new menu items here -->
-                    </ul>
-                </div>
-                <%-- Doesn't work b/c Prototype is included
-                <script type="text/javascript">
-                    $('a[href="${pageContext.request.requestURI}"]').parent().addClass('active');
-                </script>--%>
-            </div>
-        </div>
-    </div>
-
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span7">

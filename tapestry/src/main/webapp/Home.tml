@@ -1,6 +1,7 @@
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
-      xmlns="http://www.w3.org/1999/xhtml">
-<body>
+<html t:type="layout" title="message:index.title" menu="Home"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
 <div id="intro">
     <h2>Welcome to AppFuse Light!</h2>
     <p>
@@ -80,5 +81,4 @@ function readMore() {
     }
 }
 </script>
-</body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+<head>
+    <title>${title}</title>
+    <t:if test="heading">
+        <meta name="heading" content="${heading}"/>
+    </t:if>
+    <t:if test="menu">
+        <meta name="menu" content="${menu}"/>
+    </t:if>
+</head>
+
+<body id="${bodyId}" class="${bodyClass}">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <!-- For smartphones and smaller screens -->
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="./">AppFuse Light</a>
+                <div class="nav-collapse collapse">
+                    <t:menu class="nav" active="${menu}">
+                        <t:menuitem name="Home" title="literal:Home" page="home"/>
+                        <t:menuitem name="Users" title="literal:View Users" page="userlist"/>
+                        <!-- Add new menu items here -->
+                    </t:menu>
+                </div>
+                <!-- Doesn't work b/c Prototype is included
+                <script type="text/javascript">
+                    $('a[href="${pageContext.request.requestURI}"]').parent().addClass('active');
+                </script>-->
+            </div>
+        </div>
+    </div>
+
+    <t:alerts/>
+    <t:body/>
+</body>
+</html>

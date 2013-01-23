@@ -14,7 +14,8 @@
     limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -155,15 +156,23 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.6.5</version>
+                            </dependency>
+                        </dependencies>
                         <executions>
                             <execution>
                                 <id>build-archetype</id>
                                 <phase>package</phase>
                                 <configuration>
                                     <tasks if="web.framework">
-                                        <delete dir="target/archetype" />
+                                        <delete dir="target/archetype"/>
                                         <ant antfile="../build.xml" dir="." target="build-archetype">
-                                            <property name="module" value="${web.framework}" />
+                                            <property name="module" value="${web.framework}"/>
                                         </ant>
                                     </tasks>
                                 </configuration>
@@ -177,7 +186,7 @@
                                 <configuration>
                                     <tasks if="web.framework">
                                         <ant antfile="../build.xml" dir="." target="test">
-                                            <property name="archetype" value="${project.artifactId}-archetype" />
+                                            <property name="archetype" value="${project.artifactId}-archetype"/>
                                         </ant>
                                     </tasks>
                                 </configuration>
@@ -191,7 +200,7 @@
                                 <configuration>
                                     <tasks if="web.framework">
                                         <ant antfile="../build.xml" dir="." target="deploy">
-                                            <property name="module" value="${web.framework}" />
+                                            <property name="module" value="${web.framework}"/>
                                         </ant>
                                     </tasks>
                                 </configuration>
