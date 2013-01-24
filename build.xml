@@ -207,7 +207,7 @@
             </replaceregexp>
 
             <!-- Don't replace Bootstrap version with project version -->
-            <replace file="${web.root}/src/main/webapp/decorators/default.jsp" token="bootstrap/${version}" value="bootstrap/2.2.1"/>
+            <replace dir="${web.root}/src/main/webapp/decorators" token="bootstrap/${version}" value="bootstrap/2.2.1"/>
 
             <mvn command="install" dir="@{dir}/target/generated-sources/archetype"/>
         </sequential>
