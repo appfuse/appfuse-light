@@ -541,7 +541,7 @@
         <amp.fullSource>false</amp.fullSource>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.2.1</appfuse.version>
+        <appfuse.version>2.2.2-SNAPSHOT</appfuse.version>
         <cargo.version>1.2.4</cargo.version>
         <jetty.version>8.1.3.v20120416</jetty.version>
         <jmock.version>2.5.1</jmock.version>
@@ -575,8 +575,5 @@
 
         <!-- Search index settings -->
         <search.index.basedir>${project.build.testOutputDirectory}</search.index.basedir>
-
-        <!-- Uncomment the following to get appfuse:gen to work -->
-        <copyright.year>2013</copyright.year>
     </properties>
 </project>
