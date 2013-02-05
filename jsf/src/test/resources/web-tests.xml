@@ -39,7 +39,7 @@
                 <!-- Delete first user in table -->
                 <invoke url="/users"/>
 
-                <clicklink xpath="//table[@id='editUser:users']/tbody/tr[1]/td/a"/>
+                <clicklink xpath="//div[@id='editUser:users']/table/tbody/tr[1]/td/div/a"/>
                 <verifytitle description="view user form" text="${userForm.title}.*" regex="true"/>
                 <clickbutton label="Delete"/>
                 <verifytitle description="view user list" text="${userList.title}.*" regex="true"/>

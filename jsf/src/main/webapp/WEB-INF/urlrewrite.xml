@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN"
-    "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
+        "http://www.tuckey.org/res/dtds/urlrewrite3.0.dtd">
 
-<urlrewrite default-match-type="wildcard">
+<urlrewrite default-match-type="wildcard" use-query-string="true">
 
     <!-- Add rules here for anything that shouldn't be served up by JSF. -->
     <rule>
@@ -40,15 +40,16 @@
 
     <!-- JSF -->
     <rule>
-        <from>/mainMenu.jsf</from>
+        <from>/mainMenu.xhtml</from>
         <to type="redirect">/</to>
     </rule>
     <rule match-type="regex">
         <from>^([^?]*)/([^?/\.]+)(\?.*)?$</from>
-        <to last="true">$1/$2.jsf</to>
+        <to last="true">$1/$2.xhtml</to>
     </rule>
     <outbound-rule match-type="regex">
-        <from>^(.*)\.jsf(\?.*)?$</from>
+        <condition type="query-string" operator="equal">ln=primefaces</condition>
+        <from>^(.*)\.xhtml(\?.*)?$</from>
         <to last="false">$1$2</to>
     </outbound-rule>
     <!-- Remove JSESSIONID from URLs when cookies disabled -->
