@@ -24,11 +24,14 @@
         <version>2.2.2-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.appfuse</groupId>
     <artifactId>appfuse-light-spring-freemarker</artifactId>
     <packaging>war</packaging>
     <version>2.2.2-SNAPSHOT</version>
     <name>AppFuse Light Spring MVC/FreeMarker Module</name>
+
+    <prerequisites>
+        <maven>3.1.0</maven>
+    </prerequisites>
 
     <build>
         <defaultGoal>install</defaultGoal>
@@ -135,7 +138,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.7.2</version>
+                <version>2.16</version>
                 <configuration>
                     <excludes>
                         <exclude>**/*WebTest.java</exclude>
@@ -144,10 +147,10 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>

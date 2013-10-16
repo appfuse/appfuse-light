@@ -32,8 +32,11 @@
         <connection>scm:git:git@github.com:appfuse/appfuse-light.git</connection>
         <developerConnection>scm:git:git@github.com:appfuse/appfuse-light.git</developerConnection>
         <url>http://source.appfuse.org/browse/appfuse-light</url>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
+
+    <prerequisites>
+        <maven>3.1.0</maven>
+    </prerequisites>
 
     <issueManagement>
         <system>jira</system>
@@ -51,7 +54,7 @@
                 <sendOnSuccess>false</sendOnSuccess>
                 <sendOnWarning>false</sendOnWarning>
                 <configuration>
-                    <address>mraible@appfuse.dev.java.net</address>
+                    <address>mraible@appfuse.java.net</address>
                 </configuration>
             </notifier>
             <notifier>
@@ -77,7 +80,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.3</version>
                 <dependencies>
                     <!-- add support for ssh/scp -->
                     <dependency>
@@ -229,7 +232,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.0-alpha-4</version>
+                        <version>1.4</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
