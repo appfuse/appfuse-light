@@ -1,37 +1,36 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jstl/core"
-      xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
-<f:view>
-    <f:loadBundle var="text" basename="messages"/>
+<ui:composition template="/layouts/default.xhtml">
+    <ui:define name="title">#{text['userList.title']}</ui:define>
+    <ui:define name="body">
 
-    <h:head>
-        <title>#{text['userList.title']}</title>
-    </h:head>
+        <h2>#{text['userList.title']}</h2>
 
-    <h2>#{text['userList.title']}</h2>
+        <h:form id="editUser">
+            <h:commandButton value="Add User" action="add" id="add" immediate="true" styleClass="btn btn-primary"
+                             style="float: right; margin-top: -30px"/>
 
-    <h:form id="editUser">
-        <h:commandButton value="Add User" action="add" id="add" immediate="true" styleClass="btn btn-primary"
-                         style="float: right; margin-top: -30px"/>
-
-        <p:dataTable id="users" var="user" value="#{userList.users}" sortBy="#{userList.sortColumn}" paginator="true" rows="25"
-                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-            <p:column sortBy="#{user.id}" headerText="#{text['user.id']}">
-                <h:commandLink action="#{userForm.edit}" value="#{user.id}">
-                    <f:param name="id" value="#{user.id}"/>
-                </h:commandLink>
-            </p:column>
-            <p:column sortBy="#{user.firstName}" headerText="#{text['user.firstName']}">
-                <h:outputText value="#{user.firstName}"/>
-            </p:column>
-            <p:column sortBy="#{user.lastName}" headerText="#{text['user.lastName']}">
-                <h:outputText value="#{user.lastName}"/>
-            </p:column>
-            <p:column sortBy="#{user.email}" headerText="#{text['user.email']}">
-                <h:outputText value="#{user.email}"/>
-            </p:column>
-        </p:dataTable>
-    </h:form>
-</f:view>
+            <p:dataTable id="users" var="user" value="#{userList.users}" sortBy="#{userList.sortColumn}"
+                         paginator="true" rows="25"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                <p:column sortBy="#{user.id}" headerText="#{text['user.id']}">
+                    <h:commandLink action="#{userForm.edit}" value="#{user.id}">
+                        <f:param name="id" value="#{user.id}"/>
+                    </h:commandLink>
+                </p:column>
+                <p:column sortBy="#{user.firstName}" headerText="#{text['user.firstName']}">
+                    <h:outputText value="#{user.firstName}"/>
+                </p:column>
+                <p:column sortBy="#{user.lastName}" headerText="#{text['user.lastName']}">
+                    <h:outputText value="#{user.lastName}"/>
+                </p:column>
+                <p:column sortBy="#{user.email}" headerText="#{text['user.email']}">
+                    <h:outputText value="#{user.email}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
 </html>

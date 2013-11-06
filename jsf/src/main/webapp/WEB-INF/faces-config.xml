@@ -13,6 +13,10 @@
             <supported-locale>es</supported-locale>
         </locale-config>
         <message-bundle>messages</message-bundle>
+        <resource-bundle>
+            <base-name>messages</base-name>
+            <var>text</var>
+        </resource-bundle>
     </application>
     
     <navigation-rule>
