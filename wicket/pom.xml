@@ -507,7 +507,7 @@
         <jwebunit.version>2.5</jwebunit.version>
         <mockito.version>1.9.5</mockito.version>
         <slf4j.version>1.6.1</slf4j.version>
-        <spring.version>3.1.3.RELEASE</spring.version>
+        <spring.version>3.2.5.RELEASE</spring.version>
         <wicket.version>1.4.15</wicket.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
