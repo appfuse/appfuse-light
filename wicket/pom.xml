@@ -21,12 +21,12 @@
     <parent>
         <groupId>org.appfuse</groupId>
         <artifactId>appfuse-light</artifactId>
-        <version>2.2.2-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>appfuse-light-wicket</artifactId>
     <packaging>war</packaging>
-    <version>2.2.2-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>AppFuse Light Wicket Module</name>
 
     <prerequisites>
@@ -497,7 +497,7 @@
         <amp.fullSource>false</amp.fullSource>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.2.2-SNAPSHOT</appfuse.version>
+        <appfuse.version>3.0.0</appfuse.version>
         <cargo.version>1.2.4</cargo.version>
         <commons.collections.version>3.2.1</commons.collections.version>
         <jetty.version>8.1.8.v20121106</jetty.version>
@@ -507,7 +507,7 @@
         <jwebunit.version>2.5</jwebunit.version>
         <mockito.version>1.9.5</mockito.version>
         <slf4j.version>1.6.1</slf4j.version>
-        <spring.version>3.2.5.RELEASE</spring.version>
+        <spring.version>4.0.2.RELEASE</spring.version>
         <wicket.version>1.4.15</wicket.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->

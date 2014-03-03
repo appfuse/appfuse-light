@@ -22,7 +22,7 @@
     <div class="control-group${empty(actionBean.context.validationErrors['user.password']) ? '' : ' error'}">
         <label for="password" class="control-label">* <fmt:message key="user.password"/>:</label>
         <div class="controls">
-            <stripes:password name="user.password" id="password" class="text medium" repopulate="true"/>
+            <stripes:password name="user.password" id="password" class="text medium" repopulate="false"/>
             <stripes:errors field="user.password"/>
         </div>
     </div>

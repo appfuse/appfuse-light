@@ -46,6 +46,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
         clickLinkWithText("Spring");
         assertTextFieldEquals("user.firstName", "Spring");
+        setTextField("user.password", "stripespass");
         clickButton("save");
         assertTitleKeyMatches("userList.title");
     }
