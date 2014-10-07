@@ -21,12 +21,12 @@
     <parent>
         <groupId>org.appfuse</groupId>
         <artifactId>appfuse-light</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>appfuse-light-spring-security</artifactId>
     <packaging>war</packaging>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.1-SNAPSHOT</version>
     <name>AppFuse Light Spring MVC/Security Module</name>
 
     <prerequisites>
@@ -497,7 +497,7 @@
         <amp.fullSource>false</amp.fullSource>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>3.0.0</appfuse.version>
+        <appfuse.version>3.0.1</appfuse.version>
         <cargo.version>1.2.4</cargo.version>
         <jetty.version>8.1.8.v20121106</jetty.version>
         <jmock.version>2.5.1</jmock.version>
