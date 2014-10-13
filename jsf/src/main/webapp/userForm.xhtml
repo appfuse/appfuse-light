@@ -5,58 +5,49 @@
     <ui:define name="title">#{text['userForm.title']}</ui:define>
     <ui:define name="body">
 
-        <p:messages id="messages" styleClass="alert alert-error fade in" autoUpdate="true" closable="true"/>
+        <h2>#{text['userForm.title']}</h2>
+
 
         <p>Please fill in user's information below:</p>
 
-        <h:form id="userForm" styleClass="form-horizontal well" autocomplete="off">
+        <h:form id="userForm" styleClass="well" autocomplete="off">
             <h:inputHidden value="#{userForm.user.id}" id="id"/>
             <h:inputHidden value="#{userForm.user.version}" id="version"/>
 
-            <div class="control-group">
+            <div class="form-group">
                 <h:outputLabel for="username" value="#{text['user.username']}" styleClass="control-label"/>
-                <div class="controls">
-                    <p:inputText value="#{userForm.user.username}" id="username" required="true"/>
-                    <p:message for="username"/>
-                </div>
+                <p:inputText styleClass="form-control" value="#{userForm.user.username}" id="username" required="true"/>
+                <p:message for="username"/>
             </div>
 
-            <div class="control-group">
+            <div class="form-group">
                 <h:outputLabel for="password" value="#{text['user.password']}" styleClass="control-label"/>
-                <div class="controls">
-                    <h:inputSecret value="#{userForm.user.password}" id="password" redisplay="true"/>
-                    <p:message for="password"/>
-                </div>
+                <h:inputSecret styleClass="form-control" value="#{userForm.user.password}" id="password" redisplay="true"/>
+                <p:message for="password"/>
             </div>
 
-            <div class="control-group">
+            <div class="form-group">
                 <h:outputLabel for="firstName" value="#{text['user.firstName']}" styleClass="control-label"/>
-                <div class="controls">
-                    <h:inputText value="#{userForm.user.firstName}" id="firstName"/>
-                    <p:message for="firstName"/>
-                </div>
+                <h:inputText styleClass="form-control" value="#{userForm.user.firstName}" id="firstName"/>
+                <p:message for="firstName"/>
             </div>
 
-            <div class="control-group">
+            <div class="form-group">
                 <h:outputLabel for="lastName" value="#{text['user.lastName']}" styleClass="control-label"/>
-                <div class="controls">
-                    <h:inputText value="#{userForm.user.lastName}" id="lastName" required="true"/>
-                    <p:message for="lastName"/>
-                </div>
+                <h:inputText styleClass="form-control" value="#{userForm.user.lastName}" id="lastName" required="true"/>
+                <p:message for="lastName"/>
             </div>
 
-            <div class="control-group">
+            <div class="form-group">
                 <h:outputLabel for="email" value="#{text['user.email']}" styleClass="control-label"/>
-                <div class="controls">
-                    <h:inputText value="#{userForm.user.email}" id="email" required="true"/>
-                    <p:message for="email"/>
-                </div>
+                <h:inputText styleClass="form-control" value="#{userForm.user.email}" id="email" required="true"/>
+                <p:message for="email"/>
             </div>
 
-            <div class="form-actions">
+            <div class="form-group form-actions">
                 <h:commandButton value="Save" action="#{userForm.save}" id="save" styleClass="btn btn-primary"/>
-                <h:commandButton value="Delete" action="#{userForm.delete}" id="delete" styleClass="btn"/>
-                <h:commandButton value="Cancel" action="cancel" immediate="true" id="cancel" styleClass="btn"/>
+                <h:commandButton value="Delete" action="#{userForm.delete}" id="delete" styleClass="btn btn-default"/>
+                <h:commandButton value="Cancel" action="cancel" immediate="true" id="cancel" styleClass="btn btn-default"/>
             </div>
 
         </h:form>

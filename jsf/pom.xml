@@ -257,6 +257,28 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>bootstrap</artifactId>
+                <version>${bootstrap.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <!-- AppFuse Dependencies -->
         <dependency>
@@ -335,13 +357,6 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>2.3.2</version>
-        </dependency>
-        <!-- Downgrade jQuery so it works with HtmlUnit -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>1.8.3</version>
         </dependency>
 
         <!-- Testing Dependencies -->
@@ -481,6 +496,24 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>webtest-maven-plugin</artifactId>
                         <version>1.0.0</version>
+                        <dependencies>
+                            <!-- Upgrade HtmlUnit to support jQuery 1.9 -->
+                            <dependency>
+                                <groupId>net.sourceforge.htmlunit</groupId>
+                                <artifactId>htmlunit</artifactId>
+                                <version>2.12</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>xml-apis</groupId>
+                                <artifactId>xml-apis</artifactId>
+                                <version>1.4.01</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>commons-lang</groupId>
+                                <artifactId>commons-lang</artifactId>
+                                <version>2.6</version>
+                            </dependency>
+                        </dependencies>
                         <executions>
                             <execution>
                                 <id>webtest-test</id>
@@ -531,6 +564,7 @@
 
         <!-- Framework dependency versions -->
         <appfuse.version>3.0.1-SNAPSHOT</appfuse.version>
+        <bootstrap.version>3.0.2</bootstrap.version>
         <cargo.version>1.2.4</cargo.version>
         <commons.fileupload.version>1.3.1</commons.fileupload.version>
         <jetty.version>8.1.8.v20121106</jetty.version>
@@ -539,7 +573,7 @@
         <junit.version>4.11</junit.version>
         <mockito.version>1.9.5</mockito.version>
         <omnifaces.version>1.8.1</omnifaces.version>
-        <primefaces.version>4.0</primefaces.version>
+        <primefaces.version>5.1</primefaces.version>
         <spring.version>4.0.7.RELEASE</spring.version>
         <webtest.version>3.0</webtest.version>
 
@@ -575,6 +609,14 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>webtest-maven-plugin</artifactId>
                 <version>1.0.0</version>
+            </plugin>
+            <!-- Speed up dependency report by skipping check to see if resources are in specified repos -->
+            <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>

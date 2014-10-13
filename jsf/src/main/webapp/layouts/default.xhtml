@@ -10,48 +10,45 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="icon" href="#{request.contextPath}/images/favicon.ico"/>
         <title><ui:insert name="title">Welcome</ui:insert> | #{text['webapp.name']}</title>
-        <link rel="stylesheet" href="#{request.contextPath}/webjars/bootstrap/2.3.2/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="#{request.contextPath}/webjars/bootstrap/2.3.2/css/bootstrap-responsive.min.css"/>
+        <link rel="stylesheet" href="#{request.contextPath}/webjars/bootstrap/3.0.2/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="#{request.contextPath}/styles/app.css"/>
-        <script type="text/javascript" src="#{request.contextPath}/webjars/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="#{request.contextPath}/webjars/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/webjars/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/webjars/bootstrap/3.0.2/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="#{request.contextPath}/scripts/app.js"></script>
     </h:head>
 
     <body id="#{bodyId}">
 
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="#{request.contextPath}">AppFuse Light</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li><a href="#{request.contextPath}/" title="Home">Home</a></li>
-                        <li><a href="#{request.contextPath}/users" title="View Users">Users</a></li>
-                        <!-- Add new menu items here -->
-                    </ul>
-                </div>
-                <script type="text/javascript">
-                    $('a[href="#{request.requestURI}"]').parent().addClass('active');
-                </script>
-            </div>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#{request.contextPath}">AppFuse Light</a>
         </div>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#{request.contextPath}/" title="Home">Home</a></li>
+                <li><a href="#{request.contextPath}/users" title="View Users">Users</a></li>
+                <!-- Add new menu items here -->
+            </ul>
+        </div>
+        <script type="text/javascript">
+            $('a[href="#{request.requestURI}"]').parent().addClass('active');
+        </script>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
         <o:resourceInclude path="/messages.jsp"/>
-        <div class="row-fluid">
-            <div class="span7">
+        <div class="row">
+            <div class="col-sm-7">
                 <ui:insert name="body"/>
                 <ui:insert name="underground"/>
 
             </div>
-            <div class="span2">
+            <div class="col-sm-2">
                 <div id="branding">
                     <a href="http://appfuse.org" title="AppFuse - eliminating project startup time">
                         <img src="#{request.contextPath}/images/powered-by-appfuse.gif" width="203" height="75" alt="AppFuse"/></a>
@@ -71,7 +68,7 @@
         </div>
     </div>
 
-    <div id="footer">
+    <div id="footer" class="container">
         <p>
             Created by <a href="http://appfuse.org">AppFuse</a>.
         </p>
