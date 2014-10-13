@@ -28,7 +28,7 @@ public class UserWebTest extends WebTestCase {
         setTextField("firstName", "Spring");
         setTextField("lastName", "User");
         setTextField("email", "suser@appfuse.org");
-        clickButtonWithText("Save");
+        clickElementByXPath("//button[@name=\"save\"]");
         assertTitleKeyMatches("userList.title");
     }
 
@@ -48,7 +48,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
         clickLinkWithText("Spring");
         assertTextFieldEquals("firstName", "Spring");
-        clickButtonWithText("Save");
+        clickElementByXPath("//button[@name=\"save\"]");
         assertTitleKeyMatches("userList.title");
     }
 
@@ -57,7 +57,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
         clickLinkWithText("Spring");
         assertTitleKeyMatches("userForm.title");
-        clickButtonWithText("Delete");
+        clickElementByXPath("//button[@name=\"delete\"]");
         assertTitleKeyMatches("userList.title");
     }
 

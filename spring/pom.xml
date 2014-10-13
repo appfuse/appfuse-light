@@ -14,7 +14,8 @@
     limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -302,7 +303,7 @@
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
-                    <artifactId>jcl104-over-slf4j</artifactId>
+                    <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -375,17 +376,17 @@
             <artifactId>jwebunit-htmlunit-plugin</artifactId>
             <version>${jwebunit.version}</version>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
             <scope>test</scope>
         </dependency>
 
@@ -399,6 +400,10 @@
                 <exclusion>
                     <groupId>org.apache.ant</groupId>
                     <artifactId>ant</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -502,9 +507,9 @@
         <jetty.version>8.1.8.v20121106</jetty.version>
         <jmock.version>2.5.1</jmock.version>
         <junit.version>4.10</junit.version>
+        <jwebunit.version>3.2</jwebunit.version>
         <mockito.version>1.9.5</mockito.version>
         <spring.version>4.0.7.RELEASE</spring.version>
-        <jwebunit.version>2.5</jwebunit.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>

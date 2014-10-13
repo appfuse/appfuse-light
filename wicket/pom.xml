@@ -14,7 +14,8 @@
     limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -323,12 +324,6 @@
             <artifactId>commons-collections</artifactId>
             <version>${commons.collections.version}</version>
         </dependency>
-        <!-- Force newer version of slf4j-log4j12 for JWebUnit -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
 
         <!-- UI Dependencies -->
         <dependency>
@@ -388,6 +383,12 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- This dependency is used by Ant (build.xml). You can remove if you're only using Maven. -->
         <dependency>
@@ -399,6 +400,10 @@
                 <exclusion>
                     <groupId>org.apache.ant</groupId>
                     <artifactId>ant</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -503,8 +508,7 @@
         <jetty.version>8.1.8.v20121106</jetty.version>
         <jmock.version>2.5.1</jmock.version>
         <junit.version>4.10</junit.version>
-        <mockito.version>1.9.5</mockito.version>
-        <jwebunit.version>2.5</jwebunit.version>
+        <jwebunit.version>3.2</jwebunit.version>
         <mockito.version>1.9.5</mockito.version>
         <slf4j.version>1.6.1</slf4j.version>
         <spring.version>4.0.7.RELEASE</spring.version>

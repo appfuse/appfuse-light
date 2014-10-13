@@ -48,9 +48,9 @@
         <echo message=""/>
         <echo message="compile      --> Compile all Java files"/>
         <echo message="test         --> Runs JUnit tests"/>
-        <echo message="test-web     --> Runs jWebUnit tests in a running container"/>
-        <echo message="test-tomcat  --> Starts Tomcat to run jWebUnit tests"/>
-        <echo message="test-all     --> Runs all JUnit and jWebUnit tests"/>
+        <echo message="test-web     --> Runs Canoo tests in a running container"/>
+        <echo message="test-tomcat  --> Starts Tomcat to run Canoo tests"/>
+        <echo message="test-all     --> Runs all JUnit and Canoo tests"/>
         <echo message=""/>
         <echo message="war          --> Package as WAR file"/>
         <echo message="deploy       --> Deploy application as directory"/>
@@ -139,7 +139,7 @@
         <taskdef resource="webtest_base_relaxed.taskdef">
             <classpath>
                 <path refid="test.classpath"/>
-                <!-- for log4j.xml -->
+                <!-- for log4j2.xml -->
                 <path location="${resources.dir}"/>
             </classpath>
         </taskdef>
@@ -154,7 +154,7 @@
     </target>
 
     <target name="test-tomcat" depends="war"
-        description="Starts Tomcat, runs jWebUnit tests, stops Tomcat">
+        description="Starts Tomcat, runs Canoo tests, stops Tomcat">
         <property name="cargo.port" value="25888"/>
         <property name="cargo.wait" value="false"/>
         <taskdef resource="cargo.tasks" classpathref="test.classpath"/>
@@ -176,7 +176,7 @@
 
     <!-- <target name="test-all" depends="clear,test,test-tomcat", clear not needed with H2 -->
     <target name="test-all" depends="test,test-tomcat"
-        description="Runs JUnit tests and starts Tomcat to run jWebUnit tests"/>
+        description="Runs JUnit tests and starts Tomcat to run Canoo tests"/>
         
     <target name="test-reports" description="Generate test reports">
         <mkdir dir="${test.dir}/reports"/>

@@ -14,7 +14,8 @@
     limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -321,6 +322,16 @@
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-core</artifactId>
             <version>${tapestry.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.tapestry</groupId>
@@ -441,6 +452,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
 
         <!-- This dependency is used by Ant (build.xml). You can remove if you're only using Maven. -->
         <dependency>
@@ -555,9 +571,8 @@
         <jetty.version>8.1.8.v20121106</jetty.version>
         <jmock.version>2.5.1</jmock.version>
         <junit.version>4.10</junit.version>
+        <jwebunit.version>3.2</jwebunit.version>
         <mockito.version>1.9.5</mockito.version>
-        <jwebunit.version>2.5</jwebunit.version>
-        <mockito.version>1.9.0</mockito.version>
         <spring.version>4.0.7.RELEASE</spring.version>
         <tapestry.version>5.3.6</tapestry.version>
 
