@@ -1,5 +1,7 @@
 ## AppFuse Light
-[AppFuse][] is a full-stack framework for building web applications on the JVM. It uses some of the most popular frameworks today, including Spring, Hibernate, Maven, jQuery and Twitter Bootstrap. AppFuse Light archetypes don't contain any features.
+[AppFuse][] is a full-stack framework for building web applications on the JVM. It uses some of the most popular 
+frameworks today, including Spring, Hibernate, Maven, jQuery and Twitter Bootstrap. AppFuse Light archetypes 
+don't contain any features beyond simple CRUD.
 
 To create a new application with AppFuse, see the [QuickStart Guide][].
 
