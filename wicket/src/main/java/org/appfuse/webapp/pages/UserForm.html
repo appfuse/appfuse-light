@@ -1,3 +1,4 @@
+<html xmlns:wicket="http://wicket.apache.org">
 <head>
     <title><wicket:message key="userForm.title"/></title>
 </head>
@@ -56,7 +57,7 @@
             <i class="icon-trash"></i> Delete
         </button>
 
-        <a href="${ctx}/users" class="btn" wicket:id="cancel">
+        <a href="users" class="btn" wicket:id="cancel">
             <i class="icon-remove"></i> Cancel
         </a>
     </div>
@@ -67,3 +68,4 @@
         $("input[type='text']:visible:enabled:first", document.forms['userForm']).focus();
     });
 </script>
+</html>

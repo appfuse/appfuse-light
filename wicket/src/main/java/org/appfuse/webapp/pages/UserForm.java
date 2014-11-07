@@ -1,6 +1,7 @@
 package org.appfuse.webapp.pages;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.ComponentFeedbackPanel;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -8,10 +9,9 @@ import org.apache.wicket.model.*;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.collections.MicroMap;
 import org.apache.wicket.util.string.interpolator.MapVariableInterpolator;
-import org.apache.wicket.validation.ValidationError;
 import org.appfuse.model.User;
-import org.appfuse.service.UserManager;
 import org.appfuse.service.UserExistsException;
+import org.appfuse.service.UserManager;
 
 public class UserForm extends BasePage {
     @SpringBean
@@ -31,7 +31,7 @@ public class UserForm extends BasePage {
      * Constructor used to edit an user
      *
      * @param responsePage page to navigate to after this page completes its work
-     * @param user     user to edit
+     * @param user         user to edit
      */
     public UserForm(final Page responsePage, User user) {
         this.responsePage = responsePage;
@@ -81,14 +81,12 @@ public class UserForm extends BasePage {
         }
 
         String message = MapVariableInterpolator.interpolate(getLocalizer().getString("user.saved", this),
-                new MicroMap<String, String>("name", user.getFullName()));
+            new MicroMap<>("name", user.getFullName()));
         getSession().info(message);
         FeedbackPanel feedback = (FeedbackPanel) responsePage.get("feedback");
         feedback.setVisible(true);
         feedback.setEscapeModelStrings(true);
-
-        setRedirect(true);
-        setResponsePage(responsePage);
+        throw new RestartResponseAtInterceptPageException(responsePage);
     }
 
     /**
@@ -100,12 +98,12 @@ public class UserForm extends BasePage {
         userManager.removeUser(user.getId().toString());
 
         String message = MapVariableInterpolator.interpolate(getLocalizer().getString("user.deleted", this),
-                new MicroMap<String, String>("name", user.getFullName()));
+            new MicroMap<>("name", user.getFullName()));
         getSession().info(message);
 
         responsePage.get("feedback").setVisible(true);
-        setRedirect(true);
-        setResponsePage(responsePage);
+        // how to redirect in Wicket 6: http://stackoverflow.com/a/23960578/65681
+        throw new RestartResponseAtInterceptPageException(responsePage);
     }
 
     /**
@@ -128,7 +126,7 @@ public class UserForm extends BasePage {
          * @param label IModel containing the string used in ${label} variable of
          *              validation messages
          */
-        private void add(FormComponent fc, IModel<String> label) {
+        private void add(FormComponent<String> fc, IModel<String> label) {
             // Add the component to the form
             super.add(fc);
             // Set its label model
@@ -149,14 +147,14 @@ public class UserForm extends BasePage {
              * us to easily connect form components to the bean properties
              * (component id is used as the property expression)
              */
-            super(id, new CompoundPropertyModel<User>(user));
+            super(id, new CompoundPropertyModel<>(user));
             final PasswordTextField passwordField = new PasswordTextField("password");
             passwordField.setResetPassword(false);
-            add(new RequiredTextField("username"), new ResourceModel("user.username"));
+            add(new RequiredTextField<String>("username"), new ResourceModel("user.username"));
             add(passwordField, new ResourceModel("user.password"));
-            add(new TextField("firstName"), new ResourceModel("user.firstName"));
-            add(new TextField("lastName"), new ResourceModel("user.lastName"));
-            add(new RequiredTextField("email"), new ResourceModel("user.email"));
+            add(new TextField<String>("firstName"), new ResourceModel("user.firstName"));
+            add(new TextField<String>("lastName"), new ResourceModel("user.lastName"));
+            add(new RequiredTextField<String>("email"), new ResourceModel("user.email"));
 
             add(new Button("save", new Model<String>("Save")) {
                 public void onSubmit() {

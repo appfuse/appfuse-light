@@ -17,7 +17,7 @@ import org.appfuse.service.UserManager;
 
 /**
  * Page to manage and display users.
- * 
+ *
  * @author mraible
  */
 public class UserList extends BasePage {
@@ -30,7 +30,7 @@ public class UserList extends BasePage {
         add(feedbackPanel);
         feedbackPanel.setVisible(false); // other pages will set this to visible
         feedbackPanel.setEscapeModelStrings(false);
-        
+
         // Form and button for routing user to add a new user
         Form form = new Form("form");
         Button button = new Button("add-user") {
@@ -59,7 +59,7 @@ public class UserList extends BasePage {
                 item.add(new Label("user.lastName", user.getLastName()));
                 item.add(new Label("user.email", user.getEmail()));
 
-                item.add(new AttributeModifier("class", true, new LoadableDetachableModel() {
+                item.add(new AttributeModifier("class", new LoadableDetachableModel() {
                     protected Object load() {
                         return (item.getIndex() % 2 == 1) ? "even" : "odd";
                     }
@@ -68,16 +68,16 @@ public class UserList extends BasePage {
         };
 
         dataView.setItemsPerPage(10);
-        add(new OrderByBorder("orderByFirstName", "firstName", dp));
-        add(new OrderByBorder("orderByLastName", "lastName", dp));
-        add(new OrderByBorder("orderByEmail", "email", dp));
+        add(new OrderByBorder<>("orderByFirstName", "firstName", dp));
+        add(new OrderByBorder<>("orderByLastName", "lastName", dp));
+        add(new OrderByBorder<>("orderByEmail", "email", dp));
         add(dataView);
         add(new PagingNavigator("navigator", dataView));
     }
-    
+
     /**
      * Listener for the edit action
-     * 
+     *
      * @param user
      *            user to be edited
      */
