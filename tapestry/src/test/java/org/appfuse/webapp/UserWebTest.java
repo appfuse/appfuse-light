@@ -1,15 +1,19 @@
 package org.appfuse.webapp;
 
-import net.sourceforge.jwebunit.html.Cell;
-import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Table;
-import net.sourceforge.jwebunit.junit.WebTestCase;
+import net.sourceforge.jwebunit.html.Row;
+import net.sourceforge.jwebunit.html.Cell;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ResourceBundle;
 
-public class UserWebTest extends WebTestCase {
+import static net.sourceforge.jwebunit.junit.JWebUnit.*;
+
+public class UserWebTest {
     private ResourceBundle messages;
 
+    @Before
     public void setUp() {
         setScriptingEnabled(false);
         getTestContext().setBaseUrl("http://localhost:25888");
@@ -17,11 +21,13 @@ public class UserWebTest extends WebTestCase {
         messages = ResourceBundle.getBundle("messages");
     }
 
+    @Test
     public void testWelcomePage() {
         beginAt("/");
         assertTitleKeyMatches("index.title");
     }
 
+    @Test
     public void testAddUser() {
         beginAt("/userform");
         assertTitleKeyMatches("userForm.title");
@@ -34,6 +40,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
     }
 
+    @Test
     public void testListUsers() {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
@@ -45,6 +52,7 @@ public class UserWebTest extends WebTestCase {
         assertTextInTable("userList", new String[]{"Tapestry", "User"});
     }
 
+    @Test
     public void testEditUser() {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
@@ -54,6 +62,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
     }
 
+    @Test
     public void testDeleteUser() {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
@@ -63,6 +72,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
     }
 
+    @Test
     public void testCancel() {
         beginAt("/userform");
         assertTitleKeyMatches("userForm.title");

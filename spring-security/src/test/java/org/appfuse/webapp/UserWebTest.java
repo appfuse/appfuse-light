@@ -1,17 +1,21 @@
 package org.appfuse.webapp;
 
-import net.sourceforge.jwebunit.html.Table;
-import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Cell;
-import net.sourceforge.jwebunit.junit.WebTestCase;
+import net.sourceforge.jwebunit.html.Row;
+import net.sourceforge.jwebunit.html.Table;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ResourceBundle;
 
-public class UserWebTest extends WebTestCase {
+import static net.sourceforge.jwebunit.junit.JWebUnit.*;
+
+public class UserWebTest {
     private ResourceBundle messages;
 
-    @Override
-    protected void setUp() {
+    @Before
+    public void setUp() {
         // to get around Obsolete content type encountered: 'text/javascript'.
         setScriptingEnabled(false);
         getTestContext().setBaseUrl("http://localhost:25888");
@@ -25,25 +29,29 @@ public class UserWebTest extends WebTestCase {
         submit("login");
     }
 
-    @Override
-    protected void tearDown() {
+    @After
+    public void tearDown() {
         gotoPage("/logout");
     }
 
+    @Test
     public void testLogin() {
         assertTitleKeyMatches("userList.title");
     }
 
+    @Test
     public void testLogout() {
         clickLinkWithText("Logout");
         assertTitleKeyMatches("index.title");
     }
 
+    @Test
     public void testWelcomePage() {
         beginAt("/");
         assertTitleKeyMatches("index.title");
     }
 
+    @Test
     public void testAddUser() {
         gotoPage("/userform");
         assertTitleKeyMatches("userForm.title");
@@ -56,6 +64,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
     }
 
+    @Test
     public void testListUsers() {
         gotoPage("/users");
         assertTitleKeyMatches("userList.title");
@@ -67,6 +76,7 @@ public class UserWebTest extends WebTestCase {
         assertTextInTable("userList", new String[]{"Spring", "User"});
     }
 
+    @Test
     public void testEditUser() {
         gotoPage("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
@@ -75,6 +85,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
     }
 
+    @Test
     public void testDeleteUser() {
         gotoPage("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");

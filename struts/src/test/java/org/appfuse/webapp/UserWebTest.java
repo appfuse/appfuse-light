@@ -1,15 +1,19 @@
 package org.appfuse.webapp;
 
-import net.sourceforge.jwebunit.html.Cell;
-import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Table;
-import net.sourceforge.jwebunit.junit.WebTestCase;
+import net.sourceforge.jwebunit.html.Row;
+import net.sourceforge.jwebunit.html.Cell;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ResourceBundle;
 
-public class UserWebTest extends WebTestCase {
+import static net.sourceforge.jwebunit.junit.JWebUnit.*;
+
+public class UserWebTest {
     private ResourceBundle messages;
 
+    @Before
     public void setUp() {
         setScriptingEnabled(false);
         getTestContext().setBaseUrl("http://localhost:25888");
@@ -17,11 +21,13 @@ public class UserWebTest extends WebTestCase {
         messages = ResourceBundle.getBundle("messages");
     }
 
+    @Test
     public void testWelcomePage() {
         beginAt("/");
         assertTitleKeyMatches("index.title");
     }
 
+    @Test
     public void testAddUser() {
         beginAt("/editUser");
         assertTitleKeyMatches("userForm.title");
@@ -34,6 +40,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
     }
 
+    @Test
     public void testListUsers() {
         beginAt("/users");
 
@@ -44,6 +51,7 @@ public class UserWebTest extends WebTestCase {
         assertTextInTable("userList", new String[]{"Abbie", "Raible"});
     }
 
+    @Test
     public void testEditUser() {
         beginAt("/editUser?id=" + getInsertedUserId());
         assertTextFieldEquals("user.firstName", "Abbie");
@@ -51,6 +59,7 @@ public class UserWebTest extends WebTestCase {
         assertTitleKeyMatches("userList.title");
     }
 
+    @Test
     public void testDeleteUser() {
         beginAt("/editUser?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
