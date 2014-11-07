@@ -369,26 +369,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jmock</groupId>
-            <artifactId>jmock</artifactId>
-            <version>${jmock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jmock</groupId>
-            <artifactId>jmock-junit4</artifactId>
-            <version>${jmock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Upgrade junit-dep used by jmock -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit-dep</artifactId>
-            <version>4.5</version>
-            <scope>test</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.0</version>
