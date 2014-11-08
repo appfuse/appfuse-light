@@ -35,11 +35,6 @@ public class AppModule {
         configuration.add(SymbolConstants.EXECUTION_MODE, "DevelopmentMode");
     }
 
-    @Contribute(MarkupRenderer.class)
-    public static void deactiveDefaultCSS(OrderedConfiguration<MarkupRendererFilter> configuration) {
-        configuration.override("InjectDefaultStylesheet", null);
-    }
-
     /**
      * Decorate Error page
      *

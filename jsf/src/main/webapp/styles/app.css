@@ -1,5 +1,5 @@
 body {
-    padding-top: 60px;
+    padding-top: 80px;
 }
 
 .navbar-brand {
@@ -126,7 +126,7 @@ th.sorted a, th.sortable a {
     margin-bottom: 10px;
 }
 
-.btn-group .btn, .form-actions .btn {
+.btn-group .btn, .form-group .btn  {
     margin-left: 5px;
 }
 

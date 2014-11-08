@@ -12,7 +12,7 @@
 <form method="post" id="loginForm" action="<c:url value='/j_security_check'/>" class="form-signin" autocomplete="off">
     <h2 class="form-signin-heading">Sign In</h2>
 <c:if test="${param.error != null}">
-    <div class="alert alert-error fade in">
+    <div class="alert alert-error alert-dismissable">
         ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}
     </div>
 </c:if>
@@ -26,7 +26,7 @@
         Remember Me
     </label>
 
-    <input type="submit" class="btn btn-large btn-primary" name="login" id="login" tabindex="4" value="Login">
+    <input type="submit" class="btn btn-large btn-success" name="login" id="login" tabindex="4" value="Login">
 </form>
 
 <script type="text/javascript">

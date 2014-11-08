@@ -4,6 +4,7 @@
     <title><fmt:message key="userForm.title"/></title>
 </head>
 
+<h2><fmt:message key="userForm.title"/></h2>
 <p>Please fill in user's information below:</p>
 
 <spring:bind path="user.*">
@@ -18,69 +19,59 @@
 </spring:bind>
 
 <form:form commandName="user" method="post" action="userform" autocomplete="off"
-           onsubmit="return validateUser(this)" id="userForm" cssClass="well form-horizontal">
+           onsubmit="return validateUser(this)" id="userForm" cssClass="well">
 <form:hidden path="id"/>
 <form:hidden path="version"/>
 
     <spring:bind path="user.username">
-    <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+    <div class="form-group${(not empty status.errorMessage) ? ' has-error' : ''}">
     </spring:bind>
         <label for="username" class="control-label">* <fmt:message key="user.username"/>:</label>
-        <div class="controls">
-            <form:input path="username" id="username" required="true"/>
-            <form:errors path="username" cssClass="help-inline"/>
-        </div>
+        <form:input path="username" id="username" required="true" cssClass="form-control"/>
+        <form:errors path="username" cssClass="help-block"/>
     </div>
     <spring:bind path="user.password">
-    <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+    <div class="form-group${(not empty status.errorMessage) ? ' has-error' : ''}">
     </spring:bind>
         <label for="password" class="control-label">* <fmt:message key="user.password"/>:</label>
-        <div class="controls">
-            <form:password path="password" id="password" showPassword="true" required="true"/>
-            <form:errors path="password" cssClass="help-inline"/>
-        </div>
+        <form:password path="password" id="password" showPassword="true" required="true" cssClass="form-control"/>
+        <form:errors path="password" cssClass="help-block"/>
     </div>
     <spring:bind path="user.firstName">
-    <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+    <div class="form-group${(not empty status.errorMessage) ? ' has-error' : ''}">
     </spring:bind>
         <label for="firstName" class="control-label"><fmt:message key="user.firstName"/>:</label>
-        <div class="controls">
-            <form:input path="firstName" id="firstName"/>
-            <form:errors path="firstName" cssClass="help-inline"/>
-        </div>
+        <form:input path="firstName" id="firstName" cssClass="form-control"/>
+        <form:errors path="firstName" cssClass="help-block"/>
     </div>
     <spring:bind path="user.lastName">
-    <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+    <div class="form-group${(not empty status.errorMessage) ? ' has-error' : ''}">
     </spring:bind>
         <label for="lastName" class="control-label"><fmt:message key="user.lastName"/>:</label>
-        <div class="controls">
-            <form:input path="lastName" id="lastName"/>
-            <form:errors path="lastName" cssClass="help-inline"/>
-        </div>
+        <form:input path="lastName" id="lastName" cssClass="form-control"/>
+        <form:errors path="lastName" cssClass="help-block"/>
     </div>
     <spring:bind path="user.email">
-    <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+    <div class="form-group${(not empty status.errorMessage) ? ' has-error' : ''}">
     </spring:bind>
         <label for="email" class="control-label">* <fmt:message key="user.email"/>:</label>
-        <div class="controls">
-            <form:input path="email" id="email" required="true"/>
-            <form:errors path="email" cssClass="help-inline"/>
-        </div>
+        <form:input path="email" id="email" required="true" cssClass="form-control"/>
+        <form:errors path="email" cssClass="help-block"/>
     </div>
-    <div class="form-actions">
+    <div class="form-group">
         <button type="submit" class="btn btn-primary" name="save" id="save">
             <i class="icon-ok icon-white"></i> <fmt:message key="button.save"/>
         </button>
 
         <c:if test="${not empty param.id}">
           <security:authorize ifAllGranted="ROLE_ADMIN">
-            <button type="submit" class="btn" name="delete" id="delete">
+            <button type="submit" class="btn btn-danger" name="delete" id="delete">
                 <i class="icon-trash"></i> <fmt:message key="button.delete"/>
             </button>
           </security:authorize>
         </c:if>
 
-        <a href="${ctx}/users" class="btn" id="cancel">
+        <a href="${ctx}/users" class="btn btn-default" id="cancel">
             <i class="icon-remove"></i> <fmt:message key="button.cancel"/>
         </a>
     </div>

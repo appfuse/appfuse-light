@@ -37,7 +37,7 @@
     <!-- Saves a locale change using a cookie -->
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/>
 
-    <!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
+    <!-- Resolves view names to .jsp resources within the / directory -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/"/>

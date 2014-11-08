@@ -5,6 +5,7 @@
     <title><@spring.message "userForm.title"/></title>
 </head>
 
+<h2><@spring.message "userForm.title"/></h2>
 <p>Please fill in user's information below:</p>
 
 <@spring.bind "user.*"/>
@@ -17,58 +18,48 @@
 </div>
 </#if>
 
-<form method="post" action="<@spring.url '/userform'/>" id="userForm" class="well form-horizontal" autocomplete="off">
+<form method="post" action="<@spring.url '/userform'/>" id="userForm" class="well" autocomplete="off">
 <@spring.formHiddenInput "user.id"/>
 <@spring.formHiddenInput "user.version"/>
     <@spring.bind "user.username"/>
-    <div class="control-group<#if spring.status.error> error</#if>">
+    <div class="form-group<#if spring.status.error> has-error</#if>">
         <label for="username" class="control-label"><@spring.message "user.username"/>:</label>
-        <div class="controls">
-            <@spring.formInput "user.username", 'id="username" required'/>
-            <@spring.showErrors "<br/>", "help-inline"/>
-        </div>
+        <@spring.formInput "user.username", 'id="username" required class="form-control"'/>
+        <@spring.showErrors "<br/>", "help-block"/>
     </div>
     <@spring.bind "user.password"/>
-    <div class="control-group<#if spring.status.error> error</#if>">
+    <div class="form-group<#if spring.status.error> has-error</#if>">
         <label for="password" class="control-label"><@spring.message "user.password"/>:</label>
-        <div class="controls">
-            <input type="password" id="password" name="password" value="${spring.stringStatusValue}" required>
-            <@spring.showErrors "<br/>", "help-inline"/>
-        </div>
+        <input type="password" id="password" name="password" value="${spring.stringStatusValue}" required class="form-control">
+        <@spring.showErrors "<br/>", "help-block"/>
     </div>
     <@spring.bind "user.firstName"/>
-    <div class="control-group<#if spring.status.error> error</#if>">
+    <div class="form-group<#if spring.status.error> has-error</#if>">
         <label for="firstName" class="control-label"><@spring.message "user.firstName"/>:</label>
-        <div class="controls">
-            <@spring.formInput "user.firstName", 'id="firstName"'/>
-            <@spring.showErrors "<br/>", "help-inline"/>
-        </div>
+        <@spring.formInput "user.firstName", 'id="firstName" class="form-control"'/>
+        <@spring.showErrors "<br/>", "help-block"/>
     </div>
     <@spring.bind "user.lastName"/>
-    <div class="control-group<#if spring.status.error> error</#if>">
+    <div class="form-group<#if spring.status.error> has-error</#if>">
         <label for="lastName" class="control-label"><@spring.message "user.lastName"/>:</label>
-        <div class="controls">
-            <@spring.formInput "user.lastName", 'id="lastName"'/>
-            <@spring.showErrors "<br/>", "help-inline"/>
-        </div>
+        <@spring.formInput "user.lastName", 'id="lastName" class="form-control"'/>
+        <@spring.showErrors "<br/>", "help-block"/>
     </div>
     <@spring.bind "user.email"/>
-    <div class="control-group<#if spring.status.error> error</#if>">
+    <div class="form-group<#if spring.status.error> has-error</#if>">
         <label for="email" class="control-label"><@spring.message "user.email"/>:</label>
-        <div class="controls">
-            <@spring.formInput "user.email", 'id="email" required'/>
-            <@spring.showErrors "<br/>", "help-inline"/>
-        </div>
+        <@spring.formInput "user.email", 'id="email" required class="form-control"'/>
+        <@spring.showErrors "<br/>", "help-block"/>
     </div>
-    <div class="form-actions">
+    <div class="form-group">
         <button type="submit" class="btn btn-primary" name="save" id="save">
-            <i class="icon-ok icon-white"></i> Save</button>
+            <i class="icon-ok icon-white"></i> <@spring.message "button.save"/></button>
         <#if user.id?exists>
-            <button type="submit" class="btn" name="delete" id="delete">
-                <i class="icon-trash"></i> Delete</button>
+            <button type="submit" class="btn btn-danger" name="delete" id="delete">
+                <i class="icon-trash"></i> <@spring.message "button.delete"/></button>
         </#if>
-        <a href="${rc.contextPath}/users" class="btn">
-            <i class="icon-remove"></i> Cancel</a>
+        <a href="${rc.contextPath}/users" class="btn btn-default">
+            <i class="icon-remove"></i> <@spring.message "button.cancel"/></a>
     </div>
 </form>
 

@@ -15,8 +15,8 @@
 </thead>
 <tbody>
 <#list userList as user>
-<#if user_index % 2 == 0> <tr class="odd"> 
-<#else> <tr class="even"> 
+<#if user_index % 2 == 0> <tr class="odd">
+<#else> <tr class="even">
 </#if>
     <td><a href="userform?id=${user.id}">${user.id}</a></td>
     <td>${user.firstName?html}</td>

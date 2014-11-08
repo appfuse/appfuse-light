@@ -1,15 +1,32 @@
 body {
-    padding-top: 50px;
+    padding-top: 80px;
 }
 
-body > .navbar .brand {
+.navbar-brand {
     color: #000000;
     font-weight: bold;
     margin-left: 0;
     margin-right: 20px;
-    padding-left: 0;
     padding-right: 0;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
+}
+
+.nav-stacked .nav-header {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+#branding {
+    margin-top: 10px;
+}
+
+.navbar .brand:hover {
+    color: #0099ff;
+}
+
+/* added to fix non clickable dropdown nested menus on mobile browsers APF-1384 */
+.navbar .dropdown-backdrop {
+    position: static;
 }
 
 #footer {
@@ -97,6 +114,10 @@ th.sorted a, th.sortable a {
 
 /* FORMS */
 
+.controls.readonly {
+    padding-top: 5px;
+}
+
 .well.form-horizontal .form-actions {
     margin-bottom: 0;
 }
@@ -105,12 +126,12 @@ th.sorted a, th.sortable a {
     margin-bottom: 10px;
 }
 
-.btn-group .btn, .form-actions .btn {
+.btn-group .btn, .form-group .btn  {
     margin-left: 5px;
 }
 
 .form-signin {
-    max-width: 300px;
+    max-width: 400px;
     padding: 19px 29px 29px;
     margin: 20px 10px;
     background-color: #fff;
@@ -128,7 +149,9 @@ th.sorted a, th.sortable a {
 }
 
 .form-signin .checkbox {
+    margin-top: 0;
     margin-bottom: 10px;
+    margin-left: 20px;
 }
 
 .form-signin input[type="text"],
@@ -157,31 +180,18 @@ th.sorted a, th.sortable a {
 /* Tablet to desktop
 ------------------------- */
 @media (min-width: 768px) and (max-width: 980px) {
-    /* Remove any padding from the body */
-    body {
-        padding-top: 0;
-    }
+
 }
 
 /* Tablet
 ------------------------- */
 @media (max-width: 767px) {
-    /* Remove any padding from the body */
-    body {
-        padding-top: 0;
-    }
+
 }
 
 /* Landscape phones
 ------------------------- */
 @media (max-width: 480px) {
-    body {
-        padding-top: 0;
-    }
-
-    body > .navbar .brand {
-        margin-left: 10px;
-    }
 
     #search {
         float: none;

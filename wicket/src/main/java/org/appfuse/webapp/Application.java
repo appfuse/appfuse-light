@@ -21,9 +21,6 @@ public class Application extends WebApplication implements ApplicationContextAwa
         getComponentInstantiationListeners().add(new SpringComponentInjector(this, ctx, true));
         configure();
 
-        // Fixed SiteMesh: http://spatula.net/blog/2006/10/wicket-sitemesh-feces-nocturnus.html
-        //getRequestCycleSettings().setRenderStrategy(IRequestCycleSettings.ONE_PASS_RENDER);
-
         // remove <wicket:> tags in generated markup
         getMarkupSettings().setStripWicketTags(true);
 

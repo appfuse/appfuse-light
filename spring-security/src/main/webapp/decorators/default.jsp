@@ -1,63 +1,57 @@
-<%@ include file="/taglibs.jsp" %>
-
 <!DOCTYPE html>
-
+<%@ include file="/taglibs.jsp" %>
 <html lang="en">
 <head>
     <title><decorator:title default="Welcome"/> | <fmt:message key="webapp.name"/></title>
-    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta http-equiv="Cache-Control" content="no-store"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="${ctx}/images/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="${ctx}/webjars/bootstrap/2.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${ctx}/webjars/bootstrap/2.3.2/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="${ctx}/webjars/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="${ctx}/styles/app.css">
-    <script type="text/javascript" src="${ctx}/webjars/jquery/1.9.0/jquery.min.js"></script>
-    <script type="text/javascript" src="${ctx}/webjars/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${ctx}/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="${ctx}/webjars/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${ctx}/scripts/app.js"></script>
     <decorator:head/>
 </head>
 <body<decorator:getProperty property="body.id" writeEntireProperty="true"/><decorator:getProperty property="body.class" writeEntireProperty="true"/>>
 <a name="top"></a>
 
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <%-- For smartphones and smaller screens --%>
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="<c:url value='/'/>">AppFuse Light</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li><a href="${ctx}/" title="Home">Home</a></li>
-                        <li><a href="${ctx}/users" title="View Users">Users</a></li>
-                        <!-- Add new menu items here -->
-                        <security:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
-                            <li class="logout"><a href="${ctx}/logout">Logout</a></li>
-                        </security:authorize>
-                    </ul>
-                </div>
-                <script type="text/javascript">
-                    $('a[href="${pageContext.request.requestURI}"]').parent().addClass('active');
-                </script>
-            </div>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="<c:url value='/'/>">AppFuse Light</a>
         </div>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="${ctx}/" title="Home">Home</a></li>
+                <li><a href="${ctx}/users" title="View Users">Users</a></li>
+                <!-- Add new menu items here -->
+                <security:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+                    <li class="logout"><a href="${ctx}/logout">Logout</a></li>
+                </security:authorize>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            $('a[href="${pageContext.request.requestURI}"]').parent().addClass('active');
+        </script>
     </div>
 
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span7">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7">
                 <%@ include file="/messages.jsp"%>
                 <decorator:body/>
 
                 <decorator:getProperty property="page.underground"/>
             </div>
-            <div class="span2">
+            <div class="col-sm-2">
                 <div id="branding">
                     <a href="http://appfuse.org" title="AppFuse - eliminating project startup time">
                         <img src="${ctx}/images/powered-by-appfuse.gif" width="203" height="75" alt="AppFuse"/></a>
@@ -69,7 +63,7 @@
                 <ul class="glassList">
                     <li><a href="http://docs.spring.io/spring/docs/4.0.x/spring-framework-reference/html/">Spring 4.0 Docs</a></li>
                     <li><a href="http://docs.spring.io/spring/docs/4.0.x/javadoc-api/">Spring 4.0 API</a></li>
-                    <li><a href="http://www.amazon.com/s/ref=nb_ss?url=search-alias%3Daps&field-keywords=spring+framework">Spring Books</a></li>
+                    <li><a href="http://www.amazon.com/s/ref=nb_ss?url=search-alias%3Daps&amp;field-keywords=spring+framework">Spring Books</a></li>
                     <li><a href="http://forum.spring.io/">Spring Forums</a></li>
                 </ul>
 
@@ -77,7 +71,7 @@
         </div>
     </div>
 
-    <div id="footer">
+    <div id="footer" class="container">
         <p>
             Created by <a href="http://appfuse.org">AppFuse</a>.
         </p>

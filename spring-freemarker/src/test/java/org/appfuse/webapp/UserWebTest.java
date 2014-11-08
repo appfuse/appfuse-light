@@ -87,7 +87,6 @@ public class UserWebTest {
                     return ((Cell) row.getCells().get(0)).getValue();
                 }
             }
-            ;
         }
         return "";
     }

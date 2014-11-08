@@ -505,7 +505,7 @@
 
         <!-- Framework dependency versions -->
         <appfuse.version>3.0.1-SNAPSHOT</appfuse.version>
-        <bootstrap.version>2.3.2</bootstrap.version>
+        <bootstrap.version>3.3.0</bootstrap.version>
         <cargo.version>1.2.4</cargo.version>
         <freemarker.version>2.3.21</freemarker.version>
         <jetty.version>8.1.8.v20121106</jetty.version>

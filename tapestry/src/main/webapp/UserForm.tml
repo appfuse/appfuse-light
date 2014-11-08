@@ -1,10 +1,11 @@
 <html t:type="layout" title="message:userForm.title" menu="Users"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
+<h2>${message:userForm.title}</h2>
 <p>Please fill in user's information below:</p>
 
-<form t:id="userForm" clientValidation="true" class="form-horizontal well">
+<t:form t:id="userForm" clientValidation="submit" class="well" validate="user">
     <t:errors/>
 
     <div class="t-beaneditor">
@@ -13,15 +14,15 @@
                          enabled,accountExpired,accountLocked,credentialsExpired">
         </t:beaneditor>
 
-        <div class="form-actions">
+        <div class="form-group">
             <button type="submit" class="btn btn-primary" name="save" id="save">
                 <i class="icon-ok icon-white"></i> ${message:button.save}
             </button>
             <t:if test="user?.id">
-                <input class="btn" t:type="submit" t:id="delete" id="delete" value="Delete"/>
+                <input class="btn btn-danger" t:type="submit" t:id="delete" id="delete" value="Delete"/>
             </t:if>
-            <input class="btn" t:type="submit" t:id="cancel" id="cancel" value="Cancel"/>
+            <input class="btn btn-default" t:type="submit" t:id="cancel" id="cancel" value="Cancel"/>
         </div>
     </div>
-</form>
+</t:form>
 </html>

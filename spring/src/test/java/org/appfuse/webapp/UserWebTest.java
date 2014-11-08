@@ -70,6 +70,7 @@ public class UserWebTest {
     /**
      * Convenience method to get the id of the inserted user
      * Assumes last inserted user is "Spring User"
+     *
      * @return last id in the table
      */
     protected String getInsertedUserId() {
@@ -85,7 +86,7 @@ public class UserWebTest {
                 if (cell.getValue().contains("Spring")) {
                     return ((Cell) row.getCells().get(0)).getValue();
                 }
-            };
+            }
         }
         return "";
     }

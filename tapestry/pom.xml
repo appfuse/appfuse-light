@@ -575,7 +575,7 @@
 
         <!-- Framework dependency versions -->
         <appfuse.version>3.0.1-SNAPSHOT</appfuse.version>
-        <bootstrap.version>2.3.2</bootstrap.version>
+        <bootstrap.version>3.3.0</bootstrap.version>
         <cargo.version>1.2.4</cargo.version>
         <jetty.version>8.1.8.v20121106</jetty.version>
         <jmock.version>2.5.1</jmock.version>
@@ -583,7 +583,7 @@
         <jwebunit.version>3.2</jwebunit.version>
         <mockito.version>1.9.5</mockito.version>
         <spring.version>4.0.7.RELEASE</spring.version>
-        <tapestry.version>5.3.6</tapestry.version>
+        <tapestry.version>5.4-beta-22</tapestry.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>

@@ -3,61 +3,52 @@
     <title><wicket:message key="userForm.title"/></title>
 </head>
 
-<div wicket:id="feedback" class="alert alert-error fade in"></div>
+<h2><wicket:message key="userForm.title"/></h2>
+<div wicket:id="feedback" class="alert alert-error alert-dismissable"></div>
 
 <p>Please fill in user's information below:</p>
 
-<form wicket:id="user-form" id="userForm" class="form-horizontal well">
+<form wicket:id="user-form" id="userForm" class="well">
 
-    <div class="control-group">
+    <div class="form-group">
         <label class="control-label"><wicket:message key="user.username">Username</wicket:message>:</label>
-        <div class="controls">
-            <input type="text" wicket:id="username" size="40"/>
-            <div wicket:id="username-feedback" class="help-inline">[username feedback]</div>
-        </div>
+        <input type="text" wicket:id="username" size="40" class="form-control"/>
+        <div wicket:id="username-feedback" class="help-block">[username feedback]</div>
     </div>
 
-    <div class="control-group">
+    <div class="form-group">
         <label class="control-label"><wicket:message key="user.password">Password</wicket:message>:</label>
-        <div class="controls">
-            <input type="password" wicket:id="password" size="40"/>
-            <div wicket:id="password-feedback" class="help-inline">[password feedback]</div>
-        </div>
+        <input type="password" wicket:id="password" size="40" class="form-control"/>
+        <div wicket:id="password-feedback" class="help-block">[password feedback]</div>
     </div>
 
-    <div class="control-group">
+    <div class="form-group">
         <label class="control-label"><wicket:message key="user.firstName">First Name</wicket:message>:</label>
-        <div class="controls">
-            <input type="text" wicket:id="firstName" size="40"/>
-            <div wicket:id="firstName-feedback" class="help-inline">[first name feedback]</div>
-        </div>
+        <input type="text" wicket:id="firstName" size="40" class="form-control"/>
+        <div wicket:id="firstName-feedback" class="help-block">[first name feedback]</div>
     </div>
 
-    <div class="control-group">
+    <div class="form-group">
         <label class="control-label"><wicket:message key="user.lastName">Last Name</wicket:message>:</label>
-        <div class="controls">
-            <input type="text" wicket:id="lastName" size="40"/>
-            <div wicket:id="lastName-feedback" class="help-inline">[last name feedback]</div>
-        </div>
+        <input type="text" wicket:id="lastName" size="40" class="form-control"/>
+        <div wicket:id="lastName-feedback" class="help-block">[last name feedback]</div>
     </div>
 
-    <div class="control-group">
+    <div class="form-group">
         <label class="control-label"><wicket:message key="user.email">E-Mail</wicket:message>:</label>
-        <div class="controls">
-            <input type="text" wicket:id="email" size="40"/>
-            <div wicket:id="email-feedback" class="help-inline">[e-mail feedback]</div>
-        </div>
+        <input type="text" wicket:id="email" size="40" class="form-control"/>
+        <div wicket:id="email-feedback" class="help-block">[e-mail feedback]</div>
     </div>
-    <div class="form-actions">
+    <div class="form-group">
         <button type="submit" class="btn btn-primary" name="save" id="save" wicket:id="save">
             <i class="icon-ok icon-white"></i> Save
         </button>
 
-        <button type="submit" class="btn" name="delete" id="delete" wicket:id="delete">
+        <button type="submit" class="btn btn-danger" name="delete" id="delete" wicket:id="delete">
             <i class="icon-trash"></i> Delete
         </button>
 
-        <a href="users" class="btn" wicket:id="cancel">
+        <a href="users" class="btn btn-default" wicket:id="cancel">
             <i class="icon-remove"></i> Cancel
         </a>
     </div>

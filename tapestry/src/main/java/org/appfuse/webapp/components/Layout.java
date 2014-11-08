@@ -16,7 +16,6 @@ import org.apache.tapestry5.services.Environment;
  * @version $Id: Layout.java 5 2008-08-30 09:59:21Z serge.eby $
  */
 
-@Import(stylesheet = {"context:styles/t5-override.css"})
 public class Layout {
 
     @Inject
@@ -24,7 +23,6 @@ public class Layout {
 
     @Inject
     private Context context;
-
 
     @Property
     @Parameter(required = true)
