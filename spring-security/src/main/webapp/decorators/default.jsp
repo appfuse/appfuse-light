@@ -34,7 +34,7 @@
                 <li><a href="${ctx}/users" title="View Users">Users</a></li>
                 <!-- Add new menu items here -->
                 <security:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
-                    <li class="logout"><a href="${ctx}/logout">Logout</a></li>
+                    <li class="logout"><a id="logout" href="${ctx}/logout">Logout</a></li>
                 </security:authorize>
             </ul>
         </div>

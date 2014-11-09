@@ -16,7 +16,6 @@ public class UserWebTest {
 
     @Before
     public void setUp() {
-        // to get around Obsolete content type encountered: 'text/javascript'.
         setScriptingEnabled(false);
         getTestContext().setBaseUrl("http://localhost:25888");
         getTestContext().setResourceBundleName("messages");
@@ -27,6 +26,7 @@ public class UserWebTest {
         setTextField("j_username", "admin");
         setTextField("j_password", "admin");
         submit("login");
+        assertTitleEquals("User List | AppFuse Light");
     }
 
     @After
@@ -41,7 +41,7 @@ public class UserWebTest {
 
     @Test
     public void testLogout() {
-        clickLinkWithText("Logout");
+        clickLink("logout");
         assertTitleKeyMatches("index.title");
     }
 
