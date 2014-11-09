@@ -2,24 +2,12 @@ package org.appfuse.webapp.action;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.shale.test.mock.MockApplication;
-import org.apache.shale.test.mock.MockExternalContext;
-import org.apache.shale.test.mock.MockFacesContext;
-import org.apache.shale.test.mock.MockFacesContextFactory;
-import org.apache.shale.test.mock.MockHttpServletRequest;
-import org.apache.shale.test.mock.MockHttpServletResponse;
-import org.apache.shale.test.mock.MockHttpSession;
-import org.apache.shale.test.mock.MockLifecycle;
-import org.apache.shale.test.mock.MockLifecycleFactory;
-import org.apache.shale.test.mock.MockRenderKit;
-import org.apache.shale.test.mock.MockServletConfig;
-import org.apache.shale.test.mock.MockServletContext;
-import org.appfuse.Constants;
+import org.apache.shale.test.mock.*;
 import org.junit.After;
 import org.junit.Before;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.faces.FactoryFinder;
 import javax.faces.application.ApplicationFactory;
@@ -65,15 +53,16 @@ import java.util.Locale;
  * except it extends Spring's AbstractTransactionalDataSourceSpringContextTests
  * instead of JUnit's TestCase.</p>
  */
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        locations = {"classpath:/applicationContext-resources.xml",
-                "classpath:/applicationContext-dao.xml",
-                "classpath:/applicationContext-service.xml",
-                "classpath*:/applicationContext.xml",
-                "classpath:**/applicationContext*.xml"})
-public abstract class BasePageTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+    locations = {"classpath:/applicationContext-resources.xml",
+        "classpath:/applicationContext-dao.xml",
+        "classpath:/applicationContext-service.xml",
+        "classpath*:/applicationContext.xml",
+        "classpath:**/applicationContext*.xml"})
+public abstract class BasePageTestCase {
     protected final Log log = LogFactory.getLog(getClass());
-    
+
     protected MockApplication application = null;
     protected MockServletConfig config = null;
     protected MockExternalContext externalContext = null;
@@ -95,15 +84,14 @@ public abstract class BasePageTestCase extends AbstractTransactionalJUnit4Spring
      */
     @Before
     public void onSetUp() {
-        
         // Set up a new thread context class loader
         threadContextClassLoader = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(new URLClassLoader(new URL[0],
-                this.getClass().getClassLoader()));
+            this.getClass().getClassLoader()));
 
         // Set up Servlet API Objects
         servletContext = new MockServletContext();
-        
+
         config = new MockServletConfig(servletContext);
         session = new MockHttpSession();
         session.setServletContext(servletContext);
@@ -115,32 +103,32 @@ public abstract class BasePageTestCase extends AbstractTransactionalJUnit4Spring
         // Set up JSF API Objects
         FactoryFinder.releaseFactories();
         FactoryFinder.setFactory(FactoryFinder.APPLICATION_FACTORY,
-                "org.apache.shale.test.mock.MockApplicationFactory");
+            "org.apache.shale.test.mock.MockApplicationFactory");
         FactoryFinder.setFactory(FactoryFinder.FACES_CONTEXT_FACTORY,
-                "org.apache.shale.test.mock.MockFacesContextFactory");
+            "org.apache.shale.test.mock.MockFacesContextFactory");
         FactoryFinder.setFactory(FactoryFinder.LIFECYCLE_FACTORY,
-                "org.apache.shale.test.mock.MockLifecycleFactory");
+            "org.apache.shale.test.mock.MockLifecycleFactory");
         FactoryFinder.setFactory(FactoryFinder.RENDER_KIT_FACTORY,
-                "org.apache.shale.test.mock.MockRenderKitFactory");
+            "org.apache.shale.test.mock.MockRenderKitFactory");
 
         externalContext = new MockExternalContext(servletContext, request, response);
         lifecycleFactory = (MockLifecycleFactory) FactoryFinder.getFactory(FactoryFinder.LIFECYCLE_FACTORY);
         lifecycle = (MockLifecycle) lifecycleFactory.getLifecycle(LifecycleFactory.DEFAULT_LIFECYCLE);
         facesContextFactory = (MockFacesContextFactory) FactoryFinder.getFactory(FactoryFinder.FACES_CONTEXT_FACTORY);
         facesContext = (MockFacesContext)
-                facesContextFactory.getFacesContext(servletContext, request, response, lifecycle);
-        
+            facesContextFactory.getFacesContext(servletContext, request, response, lifecycle);
+
         externalContext = (MockExternalContext) facesContext.getExternalContext();
         UIViewRoot root = new UIViewRoot();
         root.setViewId("/viewId");
         root.setRenderKitId(RenderKitFactory.HTML_BASIC_RENDER_KIT);
         facesContext.setViewRoot(root);
         ApplicationFactory applicationFactory = (ApplicationFactory)
-                FactoryFinder.getFactory(FactoryFinder.APPLICATION_FACTORY);
+            FactoryFinder.getFactory(FactoryFinder.APPLICATION_FACTORY);
         application = (MockApplication) applicationFactory.getApplication();
         facesContext.setApplication(application);
         RenderKitFactory renderKitFactory = (RenderKitFactory)
-                FactoryFinder.getFactory(FactoryFinder.RENDER_KIT_FACTORY);
+            FactoryFinder.getFactory(FactoryFinder.RENDER_KIT_FACTORY);
         renderKit = new MockRenderKit();
         renderKitFactory.addRenderKit(RenderKitFactory.HTML_BASIC_RENDER_KIT, renderKit);
 

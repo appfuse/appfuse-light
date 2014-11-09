@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Component("userList")
 @Scope("session")
 public class UserList implements Serializable {
-    private UserManager userManager;
+    private transient UserManager userManager;
     private String sortColumn = "id";
     private boolean ascending = true;
 
@@ -53,7 +53,7 @@ public class UserList implements Serializable {
         if (!ascending) {
             comparator = new ReverseComparator(comparator);
         }
-        
+
         sort(users, comparator);
 
         return users;

@@ -14,7 +14,7 @@ import org.springframework.validation.ObjectError;
 public class UserForm extends BasePage {
     private String id;
     public User user = new User();
-    public UserManager userManager;
+    public transient UserManager userManager;
 
     @Autowired
     public void setUserManager(UserManager userManager) {
@@ -42,7 +42,7 @@ public class UserForm extends BasePage {
         if (id == null) {
             id = getParameter("id");
         }
-                
+
         if (id != null) {
             // assuming edit
             setUser(userManager.getUser(id));
