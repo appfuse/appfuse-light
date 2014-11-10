@@ -503,7 +503,7 @@
         <mockito.version>1.9.5</mockito.version>
         <slf4j.version>1.6.1</slf4j.version>
         <spring.version>4.0.7.RELEASE</spring.version>
-        <wicket.version>6.17.0</wicket.version>
+        <wicket.version>6.18.0</wicket.version>
 
         <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
         <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>
