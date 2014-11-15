@@ -73,7 +73,7 @@
             <!-- Fix bug that happens in Bamboo -->
             <delete dir="@{dir}" includes="main/**"/>
 
-            <mvn dir="@{dir}" command="archetype:create-from-project -DpackageName=org.appfuse.webapp -Darchetype.keepParent=false"/>
+            <mvn dir="@{dir}" command="archetype:create-from-project -DpackageName=org.appfuse.webapp -Darchetype.keepParent=true"/>
 
             <!-- Move packages resources to the root -->
             <property name="resources.root" value="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/src/main/resources"/>

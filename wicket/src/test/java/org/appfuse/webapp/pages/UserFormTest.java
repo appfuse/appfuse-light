@@ -36,7 +36,7 @@ public class UserFormTest {
         applicationContextMock.putBean("userManager", userManager);
         tester.getApplication().getComponentInstantiationListeners().add(
             new SpringComponentInjector(tester.getApplication(), applicationContextMock));
-        UserForm userForm = new UserForm(new UserList());
+        UserForm userForm = new UserForm();
         tester.startPage(userForm);
     }
 

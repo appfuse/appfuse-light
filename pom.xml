@@ -18,7 +18,6 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.appfuse</groupId>
     <artifactId>appfuse-light</artifactId>
     <packaging>pom</packaging>
     <name>AppFuse Light Modules</name>
@@ -33,6 +32,12 @@
         <developerConnection>scm:git:git@github.com:appfuse/appfuse-light.git</developerConnection>
         <url>http://source.appfuse.org/browse/appfuse-light</url>
     </scm>
+
+    <parent>
+        <groupId>org.appfuse</groupId>
+        <artifactId>appfuse</artifactId>
+        <version>3.0.1-SNAPSHOT</version>
+    </parent>
 
     <prerequisites>
         <maven>3.1.0</maven>
@@ -122,23 +127,54 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-        <repository>
-            <id>appfuse-releases</id>
-            <name>AppFuse Release Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-        <snapshotRepository>
-            <id>appfuse-snapshots</id>
-            <name>AppFuse Snapshot Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
-        </snapshotRepository>
-        <site>
-            <id>appfuse-light-site</id>
-            <name>AppFuse Light Maven Site</name>
-            <url>scp://static.appfuse.org/var/www/appfuse-site/light</url>
-        </site>
-    </distributionManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.jgeppert.struts2.bootstrap</groupId>
+                <artifactId>struts2-bootstrap-plugin</artifactId>
+                <version>2.0.0</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.velocity</groupId>
+                        <artifactId>velocity</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.jwebunit</groupId>
+                <artifactId>jwebunit-htmlunit-plugin</artifactId>
+                <version>${jwebunit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.stripes</groupId>
+                <artifactId>stripes</artifactId>
+                <version>${stripes.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.tapestrytestify</groupId>
+                <artifactId>tapestry-testify</artifactId>
+                <version>1.0.4</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.testng</groupId>
+                        <artifactId>testng</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket-datetime</artifactId>
+                <version>${wicket.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <modules>
         <module>jsf</module>
@@ -151,34 +187,9 @@
         <module>wicket</module>
     </modules>
 
-    <repositories>
-        <repository>
-            <id>appfuse-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>appfuse-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/appfuse-snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jwebunit.version>3.2</jwebunit.version>
+        <stripes.version>1.5.8</stripes.version>
     </properties>
 
     <profiles>
@@ -194,12 +205,12 @@
                                 <id>build-archetype</id>
                                 <phase>package</phase>
                                 <configuration>
-                                    <tasks if="web.framework">
+                                    <target if="web.framework">
                                         <delete dir="target/archetype" />
                                         <ant antfile="../build.xml" dir="." target="build-archetype">
                                             <property name="module" value="${web.framework}" />
                                         </ant>
-                                    </tasks>
+                                    </target>
                                 </configuration>
                                 <goals>
                                     <goal>run</goal>
@@ -209,11 +220,11 @@
                                 <id>test-archetype</id>
                                 <phase>verify</phase>
                                 <configuration>
-                                    <tasks if="web.framework">
+                                    <target if="web.framework">
                                         <ant antfile="../build.xml" dir="." target="test">
                                             <property name="archetype" value="${project.artifactId}-archetype" />
                                         </ant>
-                                    </tasks>
+                                    </target>
                                 </configuration>
                                 <goals>
                                     <goal>run</goal>
@@ -223,11 +234,11 @@
                                 <id>deploy-archetype</id>
                                 <phase>deploy</phase>
                                 <configuration>
-                                    <tasks if="web.framework">
+                                    <target if="web.framework">
                                         <ant antfile="../build.xml" dir="." target="deploy">
                                             <property name="module" value="${web.framework}" />
                                         </ant>
-                                    </tasks>
+                                    </target>
                                 </configuration>
                                 <goals>
                                     <goal>run</goal>

@@ -1,5 +1,6 @@
 package org.appfuse.webapp;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,13 +20,13 @@ public class UserWebTest {
     }
 
     @Test
-    public void testWelcomePage() {
+    public void welcomePage() {
         beginAt("/");
         assertTitleKeyMatches("index.title");
     }
 
-    @Test
-    public void testAddUser() {
+    @Before
+    public void addUser() {
         beginAt("/userform");
         assertTitleKeyMatches("userForm.title");
         setTextField("user.username", "stripesuser");
@@ -38,8 +39,9 @@ public class UserWebTest {
     }
 
     @Test
-    public void testListUsers() {
+    public void listUsers() {
         beginAt("/users");
+        assertTitleKeyMatches("userList.title");
 
         // check that table is present
         assertTablePresent("userList");
@@ -49,18 +51,19 @@ public class UserWebTest {
     }
 
     @Test
-    public void testEditUser() {
+    public void editUser() {
         beginAt("/users");
         assertTitleKeyMatches("userList.title");
         clickLinkWithText("Spring");
+        assertTitleKeyMatches("userForm.title");
         assertTextFieldEquals("user.firstName", "Spring");
         setTextField("user.password", "stripespass");
         clickButton("save");
         assertTitleKeyMatches("userList.title");
     }
 
-    @Test
-    public void testDeleteUser() {
+    @After
+    public void removeUser() {
         beginAt("/users");
         assertTitleKeyMatches("userList.title");
         clickLinkWithText("Spring");
@@ -69,7 +72,7 @@ public class UserWebTest {
         assertTitleKeyMatches("userList.title");
     }
 
-    protected void assertTitleKeyMatches(String title) {
+    private void assertTitleKeyMatches(String title) {
         assertTitleEquals(messages.getString(title) + " | " + messages.getString("webapp.name"));
     }
 }

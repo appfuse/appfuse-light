@@ -3,7 +3,6 @@ package org.appfuse.webapp;
 import net.sourceforge.jwebunit.html.Cell;
 import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Table;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,43 +28,20 @@ public class UserWebTest {
         assertTitleEquals("User List | AppFuse Light");
     }
 
-    @After
-    public void tearDown() {
-        gotoPage("/logout");
-    }
-
     @Test
-    public void testLogin() {
+    public void login() {
         assertTitleKeyMatches("userList.title");
     }
 
     @Test
-    public void testLogout() {
-        clickLink("logout");
-        assertTitleKeyMatches("index.title");
-    }
-
-    @Test
-    public void testWelcomePage() {
+    public void welcomePage() {
         beginAt("/");
         assertTitleKeyMatches("index.title");
     }
 
     @Test
-    public void testAddUser() {
-        gotoPage("/userform");
-        assertTitleKeyMatches("userForm.title");
-        setTextField("username", "springuser");
-        setTextField("password", "springuser");
-        setTextField("firstName", "Spring");
-        setTextField("lastName", "User");
-        setTextField("email", "springuser@appfuse.org");
-        clickButton("save");
-        assertTitleKeyMatches("userList.title");
-    }
-
-    @Test
-    public void testListUsers() {
+    public void listUsers() {
+        addUser();
         gotoPage("/users");
         assertTitleKeyMatches("userList.title");
 
@@ -74,19 +50,38 @@ public class UserWebTest {
 
         //check that a set of strings are present somewhere in table
         assertTextInTable("userList", new String[]{"Spring", "User"});
+        deleteUser();
     }
 
     @Test
-    public void testEditUser() {
+    public void editUser() {
+        addUser();
         gotoPage("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
         assertTextFieldEquals("firstName", "Spring");
         clickButton("save");
         assertTitleKeyMatches("userList.title");
+        deleteUser();
     }
 
     @Test
-    public void testDeleteUser() {
+    public void logout() {
+        gotoPage("/logout");
+        assertTitleKeyMatches("index.title");
+    }
+
+    private void addUser() {
+        gotoPage("/userform");
+        assertTitleKeyMatches("userForm.title");
+        setTextField("username", "springuser");
+        setTextField("password", "springuser");
+        setTextField("firstName", "Spring");
+        setTextField("lastName", "User");
+        setTextField("email", "springuser@appfuse.org");
+        clickButton("save");
+    }
+
+    private void deleteUser() {
         gotoPage("/userform?id=" + getInsertedUserId());
         assertTitleKeyMatches("userForm.title");
         clickButton("delete");
@@ -110,14 +105,14 @@ public class UserWebTest {
             for (Object c : row.getCells()) {
                 Cell cell = (Cell) c;
                 if (cell.getValue().contains("Spring")) {
-                    return ((Cell) row.getCells().get(0)).getValue();
+                    return (row.getCells().get(0)).getValue();
                 }
             }
         }
         return "";
     }
 
-    protected void assertTitleKeyMatches(String title) {
+    private void assertTitleKeyMatches(String title) {
         assertTitleEquals(messages.getString(title) + " | " + messages.getString("webapp.name"));
     }
 }
