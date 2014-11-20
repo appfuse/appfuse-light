@@ -40,12 +40,6 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>dbunit-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <forkCount>1</forkCount>
-                </configuration>
-            </plugin>
         </plugins>
         <!-- Read the contents of the file below to see how to change databases -->
         <filters>
