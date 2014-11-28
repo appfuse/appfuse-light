@@ -17,7 +17,8 @@ public class UserWebTest {
     @Before
     public void setUp() {
         setScriptingEnabled(false);
-        getTestContext().setBaseUrl("http://localhost:25888");
+        getTestContext().setBaseUrl(
+            "http://" + System.getProperty("cargo.host") + ":" + System.getProperty("cargo.port"));
         getTestContext().setResourceBundleName("messages");
         messages = ResourceBundle.getBundle("messages");
     }

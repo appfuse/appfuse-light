@@ -122,13 +122,6 @@
                 <replacevalue><![CDATA[import ${groupId}.util.MessageUtil]]></replacevalue>
             </replace>
 
-            <!-- Add jdbc.password back in since archetype plugin strips it out -->
-            <!--replace file="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml">
-                <replacetoken><![CDATA[<jdbc.username>sa</jdbc.username>]]></replacetoken>
-                <replacevalue><![CDATA[<jdbc.username>sa</jdbc.username>
-        <jdbc.password></jdbc.password>]]></replacevalue>
-            </replace-->
-
             <!-- Manually add ${package} to *.tld files -->
             <replace dir="@{dir}/target/generated-sources/archetype/src">
                 <include name="**/*.tld"/>
@@ -190,13 +183,6 @@
             <!-- tests -->
             <move file="${web.root}/src/test/java" tofile="${web.root}/src/test/java/webapp"/>
 
-            <!-- Add jdbc.password back in since archetype plugin strips it out -->
-            <replace file="${web.root}/pom.xml">
-                <replacetoken><![CDATA[<jdbc.username>sa</jdbc.username>]]></replacetoken>
-                <replacevalue><![CDATA[<jdbc.username>sa</jdbc.username>
-        <jdbc.password></jdbc.password>]]></replacevalue>
-            </replace>
-
             <!-- Fix filtering of Tapestry components -->
             <replaceregexp byline="false" flags="gim">
                 <regexp pattern="&lt;fileSet encoding=&quot;UTF-8&quot;&gt;(\s+)&lt;directory&gt;src/main/resources&lt;/directory&gt;(\s+)&lt;includes&gt;(\s+)&lt;include&gt;\*\*/\*.tml&lt;/include&gt;(\s+)&lt;/includes&gt;(\s+)&lt;/fileSet&gt;"/>
@@ -205,6 +191,11 @@
                     <include name="**/archetype-metadata.xml"/>
                 </fileset>
             </replaceregexp>
+
+            <!-- Fix location of Tapestry components -->
+            <move file="@{dir}/src/main/resources/org/appfuse/webapp"
+                  tofile="@{dir}/src/main/resources/webapp"/>
+            <delete dir="@{dir}/src/main/resources/org"/>
 
             <mvn command="install" dir="@{dir}/target/generated-sources/archetype"/>
         </sequential>

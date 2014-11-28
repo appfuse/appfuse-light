@@ -46,10 +46,6 @@
                 <artifactId>dbunit-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <!-- Read the contents of the file below to see how to change databases -->
-        <filters>
-            <filter>src/main/resources/jdbc.properties</filter>
-        </filters>
     </build>
 
     <dependencies>
@@ -94,9 +90,10 @@
     </profiles>
 
     <properties>
-        <dao.framework>hibernate</dao.framework>
-        <web.framework>spring-freemarker</web.framework>
         <amp.genericCore>true</amp.genericCore>
         <amp.fullSource>false</amp.fullSource>
+        <dao.framework>hibernate</dao.framework>
+        <db.name>appfuse_light_spring_freemarker</db.name>
+        <web.framework>spring-freemarker</web.framework>
     </properties>
 </project>

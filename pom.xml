@@ -79,6 +79,10 @@
                         <includes>
                             <include>**/*WebTest.java</include>
                         </includes>
+                        <systemPropertyVariables>
+                            <cargo.host>${cargo.host}</cargo.host>
+                            <cargo.port>${cargo.port}</cargo.port>
+                        </systemPropertyVariables>
                     </configuration>
                     <executions>
                         <execution>
@@ -92,8 +96,6 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
-                        <!-- Don't run parallel tests - causes issues with H2 db on filesystem -->
-                        <forkCount>1</forkCount>
                         <excludes>
                             <exclude>**/*WebTest.java</exclude>
                         </excludes>
@@ -164,7 +166,7 @@
     </modules>
 
     <properties>
-        <db.name>appfuse_light</db.name>
+        <db.name>appfuse_light_${web.framework}</db.name>
         <jwebunit.version>3.2</jwebunit.version>
         <stripes.version>1.5.8</stripes.version>
         <skipITs>false</skipITs>
@@ -172,22 +174,8 @@
         <!-- Framework dependency versions -->
         <appfuse.version>3.5.0-SNAPSHOT</appfuse.version>
 
-        <!-- Database settings, also defined in src/main/jdbc.properties for easy IDE testing -->
-        <dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>
-        <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
-        <jdbc.groupId>com.h2database</jdbc.groupId>
-        <jdbc.artifactId>h2</jdbc.artifactId>
-        <jdbc.version>1.4.182</jdbc.version>
-        <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
-        <jdbc.url>jdbc:h2:/tmp/${db.name};MULTI_THREADED=1</jdbc.url>
-        <jdbc.username>sa</jdbc.username>
-        <jdbc.password/>
-
         <!-- Search index settings -->
         <search.index.basedir>${project.build.testOutputDirectory}</search.index.basedir>
-
-        <!-- Cargo settings -->
-        <cargo.port>25888</cargo.port>
     </properties>
 
     <profiles>
@@ -204,7 +192,7 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target if="web.framework">
-                                        <delete dir="target/archetype"/>
+                                        <delete dir="target/${web.framework}archetype"/>
                                         <ant antfile="../build.xml" dir="." target="build-archetype">
                                             <property name="module" value="${web.framework}"/>
                                         </ant>
