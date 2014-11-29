@@ -192,11 +192,6 @@
                 </fileset>
             </replaceregexp>
 
-            <!-- Fix location of Tapestry components -->
-            <move file="@{dir}/src/main/resources/org/appfuse/webapp"
-                  tofile="@{dir}/src/main/resources/webapp"/>
-            <delete dir="@{dir}/src/main/resources/org"/>
-
             <mvn command="install" dir="@{dir}/target/generated-sources/archetype"/>
         </sequential>
     </macrodef>
