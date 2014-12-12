@@ -3,6 +3,7 @@ target
 *.iml
 *.iws
 *.ipr
+tapestry/build
 tapestry/src/main/webapp/WEB-INF/app*.properties
 
 .DS_Store

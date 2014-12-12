@@ -18,13 +18,8 @@ public class UserForm extends BasePage {
     private UserManager userManager;
     private final Page responsePage;
 
-    /**
-     * Constructor user to create a new user
-     *
-     * @param responsePage page to navigate to after this page completes its work
-     */
-    public UserForm(Page responsePage) {
-        this(responsePage, new User());
+    public UserForm() {
+        this(new UserList(), new User());
     }
 
     /**

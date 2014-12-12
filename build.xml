@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="archetypes" basedir=".">
 
-    <property name="version" value="3.0.1-SNAPSHOT"/>
+    <property name="version" value="3.5.0-SNAPSHOT"/>
     <property name="archetype" value="${archetype}"/>
     <property name="test.dir" value="${basedir}/target"/>
 
@@ -33,7 +33,7 @@
         <sequential>
             <delete dir="${test.dir}/@{archetype}"/>
             <maven dir="${test.dir}" archetype="@{archetype}" version="@{version}"/>
-            <mvn dir="${test.dir}/@{archetype}" command="integration-test -Ddao.framework=@{dao.framework} -P!db"/>
+            <mvn dir="${test.dir}/@{archetype}" command="integration-test -Ddao.framework=@{dao.framework}"/>
         </sequential>
     </macrodef>
 
@@ -73,7 +73,7 @@
             <!-- Fix bug that happens in Bamboo -->
             <delete dir="@{dir}" includes="main/**"/>
 
-            <mvn dir="@{dir}" command="archetype:create-from-project -DpackageName=org.appfuse.webapp -Darchetype.keepParent=false"/>
+            <mvn dir="@{dir}" command="archetype:create-from-project -DpackageName=org.appfuse.webapp -Darchetype.keepParent=true"/>
 
             <!-- Move packages resources to the root -->
             <property name="resources.root" value="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/src/main/resources"/>
@@ -121,13 +121,6 @@
                 <replacetoken><![CDATA[import org.appfuse.util.MessageUtil]]></replacetoken>
                 <replacevalue><![CDATA[import ${groupId}.util.MessageUtil]]></replacevalue>
             </replace>
-
-            <!-- Add jdbc.password back in since archetype plugin strips it out -->
-            <!--replace file="@{dir}/target/generated-sources/archetype/src/main/resources/archetype-resources/pom.xml">
-                <replacetoken><![CDATA[<jdbc.username>sa</jdbc.username>]]></replacetoken>
-                <replacevalue><![CDATA[<jdbc.username>sa</jdbc.username>
-        <jdbc.password></jdbc.password>]]></replacevalue>
-            </replace-->
 
             <!-- Manually add ${package} to *.tld files -->
             <replace dir="@{dir}/target/generated-sources/archetype/src">
@@ -189,13 +182,6 @@
             <move file="${web.root}/src/main/java" tofile="${web.root}/src/main/java/webapp"/>
             <!-- tests -->
             <move file="${web.root}/src/test/java" tofile="${web.root}/src/test/java/webapp"/>
-
-            <!-- Add jdbc.password back in since archetype plugin strips it out -->
-            <replace file="${web.root}/pom.xml">
-                <replacetoken><![CDATA[<jdbc.username>sa</jdbc.username>]]></replacetoken>
-                <replacevalue><![CDATA[<jdbc.username>sa</jdbc.username>
-        <jdbc.password></jdbc.password>]]></replacevalue>
-            </replace>
 
             <!-- Fix filtering of Tapestry components -->
             <replaceregexp byline="false" flags="gim">

@@ -4,18 +4,20 @@ import net.sourceforge.stripes.mock.MockRoundtrip;
 import net.sourceforge.stripes.mock.MockServletContext;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.servlet.Filter;
 
 import static org.junit.Assert.assertTrue;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-        locations = {"classpath:/applicationContext-resources.xml",
-                "classpath:/applicationContext-dao.xml",
-                "classpath:/applicationContext-service.xml"})
-public class UserListBeanTest extends AbstractTransactionalJUnit4SpringContextTests {
+    locations = {"classpath:/applicationContext-resources.xml",
+        "classpath:/applicationContext-dao.xml",
+        "classpath:/applicationContext-service.xml"})
+public class UserListBeanTest {
     private MockServletContext servletContext;
 
     @Test

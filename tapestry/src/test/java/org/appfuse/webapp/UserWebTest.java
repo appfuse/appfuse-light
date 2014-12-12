@@ -3,6 +3,7 @@ package org.appfuse.webapp;
 import net.sourceforge.jwebunit.html.Table;
 import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Cell;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,19 +17,20 @@ public class UserWebTest {
     @Before
     public void setUp() {
         setScriptingEnabled(false);
-        getTestContext().setBaseUrl("http://localhost:25888");
+        getTestContext().setBaseUrl(
+            "http://" + System.getProperty("cargo.host") + ":" + System.getProperty("cargo.port"));
         getTestContext().setResourceBundleName("messages");
         messages = ResourceBundle.getBundle("messages");
     }
 
     @Test
-    public void testWelcomePage() {
+    public void welcomePage() {
         beginAt("/");
         assertTitleKeyMatches("index.title");
     }
 
-    @Test
-    public void testAddUser() {
+    @Before
+    public void addUser() {
         beginAt("/userform");
         assertTitleKeyMatches("userForm.title");
         setTextField("username", "tapestry");
@@ -41,7 +43,7 @@ public class UserWebTest {
     }
 
     @Test
-    public void testListUsers() {
+    public void listUsers() {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
 
@@ -53,7 +55,7 @@ public class UserWebTest {
     }
 
     @Test
-    public void testEditUser() {
+    public void editUser() {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
         clickLinkWithExactText(getInsertedUserId());
@@ -62,8 +64,8 @@ public class UserWebTest {
         assertTitleKeyMatches("userList.title");
     }
 
-    @Test
-    public void testDeleteUser() {
+    @After
+    public void removeUser() {
         beginAt("/userlist");
         assertTitleKeyMatches("userList.title");
         clickLinkWithExactText(getInsertedUserId());
@@ -86,7 +88,7 @@ public class UserWebTest {
      *
      * @return last id in the table
      */
-    public String getInsertedUserId() {
+    private String getInsertedUserId() {
         beginAt("/userlist");
         assertTablePresent("userList");
         assertTextInTable("userList", "Tapestry");
@@ -97,14 +99,14 @@ public class UserWebTest {
             for (Object c : row.getCells()) {
                 Cell cell = (Cell) c;
                 if (cell.getValue().contains("Tapestry")) {
-                    return ((Cell) row.getCells().get(0)).getValue();
+                    return (row.getCells().get(0)).getValue();
                 }
             }
         }
         return "";
     }
 
-    protected void assertTitleKeyMatches(String title) {
+    private void assertTitleKeyMatches(String title) {
         assertTitleEquals(messages.getString(title) + " | " + messages.getString("webapp.name"));
     }
 }

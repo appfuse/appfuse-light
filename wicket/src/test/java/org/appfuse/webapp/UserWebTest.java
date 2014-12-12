@@ -3,6 +3,7 @@ package org.appfuse.webapp;
 import net.sourceforge.jwebunit.html.Table;
 import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Cell;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,21 +17,21 @@ public class UserWebTest {
     @Before
     public void setUp() {
         setScriptingEnabled(false);
-        getTestContext().setBaseUrl("http://localhost:25888");
+        getTestContext().setBaseUrl(
+            "http://" + System.getProperty("cargo.host") + ":" + System.getProperty("cargo.port"));
         getTestContext().setResourceBundleName("messages");
         messages = ResourceBundle.getBundle("messages");
     }
 
     @Test
-    public void testWelcomePage() {
+    public void welcomePage() {
         beginAt("/");
         assertTitleKeyMatches("index.title");
     }
 
-    @Test
-    public void testAddUser() {
-        beginAt("/users");
-        submit("add-user");
+    @Before
+    public void addUser() {
+        beginAt("/userform");
         assertTitleKeyMatches("userForm.title");
         setTextField("username", "suser");
         setTextField("password", "spass");
@@ -42,7 +43,7 @@ public class UserWebTest {
     }
 
     @Test
-    public void testListUsers() {
+    public void listUsers() {
         beginAt("/users");
         assertTitleKeyMatches("userList.title");
 
@@ -54,7 +55,7 @@ public class UserWebTest {
     }
 
     @Test
-    public void testEditUser() {
+    public void editUser() {
         beginAt("/users");
         assertTitleKeyMatches("userList.title");
         clickLinkWithText("Spring");
@@ -63,8 +64,8 @@ public class UserWebTest {
         assertTitleKeyMatches("userList.title");
     }
 
-    @Test
-    public void testDeleteUser() {
+    @After
+    public void removeUser() {
         beginAt("/users");
         assertTitleKeyMatches("userList.title");
         clickLinkWithText("Spring");
@@ -73,7 +74,7 @@ public class UserWebTest {
         assertTitleKeyMatches("userList.title");
     }
 
-    protected void assertTitleKeyMatches(String title) {
+    private void assertTitleKeyMatches(String title) {
         assertTitleEquals(messages.getString(title) + " | " + messages.getString("webapp.name"));
     }
 }

@@ -11,10 +11,11 @@ import org.apache.tapestry5.test.PageTester;
 import org.appfuse.webapp.services.AppTestModule;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
@@ -25,11 +26,12 @@ import javax.servlet.ServletContextListener;
 import java.util.HashMap;
 import java.util.Map;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:/applicationContext-resources.xml", "classpath:/applicationContext-dao.xml",
-        "classpath:/applicationContext-service.xml", "classpath*:/applicationContext.xml",
-        "/WEB-INF/applicationContext*.xml"})
-public abstract class BasePageTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+    "classpath:/applicationContext-resources.xml", "classpath:/applicationContext-dao.xml",
+    "classpath:/applicationContext-service.xml", "classpath*:/applicationContext.xml",
+    "/WEB-INF/applicationContext*.xml"})
+public abstract class BasePageTestCase {
     protected PageTester tester;
     protected Document doc;
     protected Map<String, String> fieldValues;
@@ -40,7 +42,7 @@ public abstract class BasePageTestCase extends AbstractTransactionalJUnit4Spring
     private MockServletContext servletContext;
     private ServletContextListener listener;
     protected ApplicationContext applicationContext;
-    
+
     @Before
     public void onSetUp() {
         String appPackage = "org.appfuse.webapp";
@@ -51,7 +53,7 @@ public abstract class BasePageTestCase extends AbstractTransactionalJUnit4Spring
         // mock servlet settings
         servletContext.addInitParameter(SpringConstants.USE_EXTERNAL_SPRING_CONTEXT, "true");
         servletContext.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM,
-                StringUtils.arrayToCommaDelimitedString(locations)
+            StringUtils.arrayToCommaDelimitedString(locations)
         );
 
         // Start context loader w/ mock servlet prior to firing off registry
@@ -66,14 +68,14 @@ public abstract class BasePageTestCase extends AbstractTransactionalJUnit4Spring
         };
 
         applicationContext = (WebApplicationContext)
-                servletContext.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+            servletContext.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 
-        fieldValues = new HashMap<String, String>();
+        fieldValues = new HashMap<>();
     }
-    
+
     private String[] extractLocationFromAnnotation(Class<?> clazz) {
         ContextConfiguration contextConfiguration = InternalUtils.findAnnotation(clazz.getAnnotations(),
-                ContextConfiguration.class);
+            ContextConfiguration.class);
         String[] locations = null;
         if (contextConfiguration != null) {
             locations = contextConfiguration.locations();

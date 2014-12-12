@@ -2,7 +2,6 @@ package org.appfuse.webapp.pages;
 
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.dom.Node;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class UserFormTest extends BasePageTestCase {
-    
+
     @Test
     public void testAddAndEditUser() {
         doc = tester.renderPage("UserForm");
@@ -19,7 +18,7 @@ public class UserFormTest extends BasePageTestCase {
         assertTrue(doc.toString().contains("saved successfully"));
         Element table = doc.getElementById("userList");
         assertTrue(table.toString().contains("tapestry"));
-        
+
         List<Node> rows = table.find("tbody").getChildren();
         String userId = null;
         // loop through the rows until we find "tapestry" user
@@ -38,12 +37,8 @@ public class UserFormTest extends BasePageTestCase {
     }
 
     @Test
-    @Ignore // Disabled due to rollback issues
     public void testRemoveUser() {
-        doc = tester.renderPage("UserForm");
-        populateForm();
-
-        assertTrue(doc.toString().contains("saved successfully"));
+        doc = tester.renderPage("UserList");
         Element table = doc.getElementById("userList");
         assertTrue(table.toString().contains("tapestry"));
 
