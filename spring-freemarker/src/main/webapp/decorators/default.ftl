@@ -11,10 +11,10 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="${base}/images/favicon.ico" type="image/x-icon"/>
-    <link rel="stylesheet" href="${base}/webjars/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${base}/webjars/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="${base}/styles/app.css">
     <script type="text/javascript" src="${base}/webjars/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="${base}/webjars/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${base}/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${base}/scripts/app.js"></script>
     ${head}
 </head>
