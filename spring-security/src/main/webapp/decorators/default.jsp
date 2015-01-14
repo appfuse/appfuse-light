@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ include file="/taglibs.jsp" %>
+<%@ include file="/common/taglibs.jsp" %>
 <html lang="en">
 <head>
     <title><decorator:title default="Welcome"/> | <fmt:message key="webapp.name"/></title>

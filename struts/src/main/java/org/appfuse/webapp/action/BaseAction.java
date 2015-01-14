@@ -1,5 +1,6 @@
 package org.appfuse.webapp.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -87,7 +88,7 @@ public class BaseAction extends ActionSupport {
      * @return the user's populated form from the session
      */
     protected Map getConfiguration() {
-        Map config = (HashMap) getSession().getServletContext().getAttribute(Constants.CONFIG);
+        Map config = (HashMap) getRequest().getServletContext().getAttribute(Constants.CONFIG);
         // so unit tests don't puke when nothing's been set
         if (config == null) {
             return new HashMap();
@@ -105,24 +106,6 @@ public class BaseAction extends ActionSupport {
     }
 
     /**
-     * Convenience method to get the response
-     *
-     * @return current response
-     */
-    protected HttpServletResponse getResponse() {
-        return ServletActionContext.getResponse();
-    }
-
-    /**
-     * Convenience method to get the session. This will create a session if one doesn't exist.
-     *
-     * @return the session from the request (request.getSession()).
-     */
-    protected HttpSession getSession() {
-        return getRequest().getSession();
-    }
-
-    /**
      * Convenience method for setting a "from" parameter to indicate the previous page.
      *
      * @param from indicator for the originating page
@@ -131,6 +114,10 @@ public class BaseAction extends ActionSupport {
         this.from = from;
     }
 
+    public void setCancel(String cancel) {
+        this.cancel = cancel;
+    }
+    
     public void setDelete(String delete) {
         this.delete = delete;
     }

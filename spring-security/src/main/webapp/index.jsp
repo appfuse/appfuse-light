@@ -1,4 +1,4 @@
-<%@ include file="/taglibs.jsp"%>
+<%@ include file="/common/taglibs.jsp"%>
 
 <div id="intro">
     <h2>Welcome to AppFuse Light!</h2>

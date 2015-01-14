@@ -130,6 +130,22 @@ th.sorted a, th.sortable a {
     margin-left: 5px;
 }
 
+/* LISTS */
+
+#search {
+    float: right;
+    margin-top: -40px;
+    width: 250px;
+}
+
+#search input[type="text"] {
+    display: inline-block;
+}
+
+#actions {
+    float: right;
+}
+
 /* Responsive
 -------------------------------------------------- */
 

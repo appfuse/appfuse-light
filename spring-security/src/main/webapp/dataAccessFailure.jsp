@@ -1,4 +1,4 @@
-<%@ include file="/taglibs.jsp" %>
+<%@ include file="/common/taglibs.jsp" %>
 
 <h3>Data Access Failure</h3>
 <p>

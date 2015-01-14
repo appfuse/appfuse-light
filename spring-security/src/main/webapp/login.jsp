@@ -1,4 +1,4 @@
-<%@ include file="/taglibs.jsp"%>
+<%@ include file="/common/taglibs.jsp"%>
 
 <title>Login</title>
 <body id="login">

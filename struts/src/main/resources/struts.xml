@@ -11,7 +11,10 @@
     <constant name="struts.multipart.maxSize" value="2097152"/>
     <constant name="struts.codebehind.pathPrefix" value="/"/>
     <constant name="struts.configuration.xml.reload" value="true"/>
-
+    <constant name="struts.ui.theme" value="css_xhtml"/>
+    <!-- Allow <s:submit> to call method names directly -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    
     <!-- Include Struts defaults -->
     <include file="struts-default.xml"/>
 
@@ -72,5 +75,7 @@
             <result name="input">userForm.jsp</result>
             <result name="success" type="redirectAction">users</result>
         </action>
+
+        <!-- Add additional actions here -->
     </package>
 </struts>

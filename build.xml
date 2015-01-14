@@ -136,9 +136,11 @@
             </replace>
             <replace dir="@{dir}/target/generated-sources/archetype">
                 <include name="**/archetype-metadata.xml"/>
-                <replacetoken><![CDATA[<include>**/*.txt</include>]]></replacetoken>
-                <replacevalue><![CDATA[<include>**/*.txt</include>
-        <include>**/*.tld</include>]]></replacevalue>
+                <replacetoken><![CDATA[<include>**/*.jsp</include>
+        <include>**/*.xml</include>]]></replacetoken>
+                <replacevalue><![CDATA[<include>**/*.jsp</include>
+        <include>**/*.tld</include>
+        <include>**/*.xml</include>]]></replacevalue>
             </replace>
 
             <!-- Fix package for java files -->

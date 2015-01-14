@@ -1,4 +1,4 @@
-<%@ include file="/taglibs.jsp" %>
+<%@ include file="/common/taglibs.jsp" %>
 
 <head>
     <title><fmt:message key="userForm.title"/></title>

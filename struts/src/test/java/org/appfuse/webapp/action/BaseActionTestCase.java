@@ -11,16 +11,14 @@ import com.opensymphony.xwork2.util.ValueStackFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
-import org.appfuse.Constants;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.transaction.Transactional;
@@ -50,7 +48,7 @@ public abstract class BaseActionTestCase {
 
     @Before
     public void onSetUp() {
-
+        log.debug("setting default resource bundle");
         LocalizedTextUtil.addDefaultResourceBundle("messages");
 
         // Initialize ActionContext
@@ -63,14 +61,8 @@ public abstract class BaseActionTestCase {
         stack.getContext().put(ActionContext.CONTAINER, container);
         ActionContext.setContext(new ActionContext(stack.getContext()));
 
-        ActionContext.getContext().setSession(new HashMap<String, Object>());
-
+        MockHttpServletRequest request = new MockHttpServletRequest();
         // populate the request so getRequest().getSession() doesn't fail in BaseAction.java
-        ServletActionContext.setRequest(new MockHttpServletRequest());
-    }
-
-    @After
-    public void onTearDown() {
-        ActionContext.getContext().setSession(null);
+        ServletActionContext.setRequest(request);
     }
 }
