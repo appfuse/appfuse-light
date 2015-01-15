@@ -9,6 +9,7 @@
 <%@ taglib uri="http://www.springmodules.org/tags/commons-validator" prefix="v" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.appfuse.org/tags/spring" prefix="appfuse" %>
 
 <c:set var="datePattern"><fmt:message key="date.format"/></c:set>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>

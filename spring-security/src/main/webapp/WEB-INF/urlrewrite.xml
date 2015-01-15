@@ -62,6 +62,12 @@
         <to>/webjars/$1</to>
     </rule>
 
+    <!-- AMP expects lists to go to "/home". This fixes it. -->
+    <rule>
+        <from>/home</from>
+        <to>/</to>
+    </rule>
+
     <!-- Spring MVC -->
     <rule>
         <from>/**</from>

@@ -1,4 +1,4 @@
-<%@ include file="/common/taglibs.jsp"%>
+<%@ include file="/common/taglibs.jsp" %>
 
 <head>
     <title><fmt:message key="userForm.title"/></title>
@@ -22,8 +22,8 @@
 
     <form:form commandName="user" method="post" action="userform" autocomplete="off"
                onsubmit="return validateUser(this)" id="userForm" cssClass="well">
-    <form:hidden path="id"/>
-    <form:hidden path="version"/>
+        <form:hidden path="id"/>
+        <form:hidden path="version"/>
 
         <spring:bind path="user.username">
         <div class="form-group${(not empty status.errorMessage) ? ' has-error' : ''}">
