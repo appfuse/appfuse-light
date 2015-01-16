@@ -2,27 +2,30 @@
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
       xmlns:p="tapestry:parameter">
 
-<h2>${message:userForm.title}</h2>
-<p>Please fill in user's information below:</p>
+<div class="col-sm-3">
+    <h2>${message:userForm.title}</h2>
+    <p>Please fill in user's information.</p>
+</div>
+<div class="col-sm-6">
+    <t:form t:id="userForm" clientValidation="submit" class="well" validate="user">
+        <t:errors/>
 
-<t:form t:id="userForm" clientValidation="submit" class="well" validate="user">
-    <t:errors/>
+        <div class="t-beaneditor">
+            <t:beaneditor t:id="usereditor" object="user"
+                          exclude="id,confirmPassword,passwordHint,phoneNumber,website,version,
+                             enabled,accountExpired,accountLocked,credentialsExpired">
+            </t:beaneditor>
 
-    <div class="t-beaneditor">
-        <t:beaneditor t:id="usereditor" object="user"
-                      exclude="id,confirmPassword,passwordHint,phoneNumber,website,version,
-                         enabled,accountExpired,accountLocked,credentialsExpired">
-        </t:beaneditor>
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary" name="save" id="save">
-                <i class="icon-ok icon-white"></i> ${message:button.save}
-            </button>
-            <t:if test="user?.id">
-                <input class="btn btn-danger" t:type="submit" t:id="delete" id="delete" value="Delete"/>
-            </t:if>
-            <input class="btn btn-default" t:type="submit" t:id="cancel" id="cancel" value="Cancel"/>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" name="save" id="save">
+                    <i class="icon-ok icon-white"></i> ${message:button.save}
+                </button>
+                <t:if test="user?.id">
+                    <input class="btn btn-danger" t:type="submit" t:id="delete" id="delete" value="Delete"/>
+                </t:if>
+                <input class="btn btn-default" t:type="submit" t:id="cancel" id="cancel" value="Cancel"/>
+            </div>
         </div>
-    </div>
-</t:form>
+    </t:form>
+</div>
 </html>
