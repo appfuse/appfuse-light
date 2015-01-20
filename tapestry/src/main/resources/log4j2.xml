@@ -14,6 +14,7 @@
 		<!--<Logger name="org.hibernate.SQL" level="debug"/>-->
 		<Logger name="org.springframework" level="warn"/>
         <Logger name="com.gargoylesoftware.htmlunit" level="error"/>
+        <Logger name="com.gargoylesoftware.htmlunit.javascript" level="fatal"/>
 		<Logger name="org.appfuse" level="debug"/>
 		<Logger name="org.appfuse.tool" level="info"/>
 
