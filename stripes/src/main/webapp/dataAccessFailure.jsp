@@ -1,4 +1,4 @@
-<%@ include file="/taglibs.jsp" %>
+<%@ include file="/common/taglibs.jsp" %>
 
 <h3>Data Access Failure</h3>
 <p>
@@ -6,9 +6,9 @@
 </p>
 
 <!--
-<% 
+<%
 Exception ex = (Exception) request.getAttribute("exception");
-ex.printStackTrace(new java.io.PrintWriter(out)); 
+ex.printStackTrace(new java.io.PrintWriter(out));
 %>
 -->
 
