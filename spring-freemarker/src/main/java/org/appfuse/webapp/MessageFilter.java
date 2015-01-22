@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 public class MessageFilter implements Filter {
-    
+
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain chain)
     throws IOException, ServletException {
@@ -19,11 +19,11 @@ public class MessageFilter implements Filter {
 
         // grab messages from the session and put them into request
         // this is so they're not lost in a redirect
-        Object message = request.getSession().getAttribute("message");
+        Object message = request.getSession().getAttribute("successMessages");
 
         if (!request.getRequestURI().startsWith("/app") && message != null) {
-            request.setAttribute("message", message);
-            request.getSession().removeAttribute("message");
+            request.setAttribute("successMessages", message);
+            request.getSession().removeAttribute("successMessages");
         }
 
         // set the requestURL as a request attribute for templates

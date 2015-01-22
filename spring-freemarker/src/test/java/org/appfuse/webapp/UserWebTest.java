@@ -1,6 +1,5 @@
 package org.appfuse.webapp;
 
-import net.sourceforge.jwebunit.html.Cell;
 import net.sourceforge.jwebunit.html.Row;
 import net.sourceforge.jwebunit.html.Table;
 import org.junit.After;
@@ -80,14 +79,11 @@ public class UserWebTest {
         assertTablePresent("userList");
         assertTextInTable("userList", "Spring");
         Table table = getTable("userList");
-        // Find row with Spring in it
-        for (Object r : table.getRows()) {
-            Row row = (Row) r;
-            for (Object c : row.getCells()) {
-                Cell cell = (Cell) c;
-                if (cell.getValue().contains("Spring")) {
-                    return (row.getCells().get(0)).getValue();
-                }
+        // Find row with Spring in it, skip header row
+        for (int i = 1; i < table.getRows().size(); i++) {
+            Row row = table.getRows().get(i);
+            if (i == table.getRowCount() - 1) {
+                return row.getCells().get(0).getValue();
             }
         }
         return "";

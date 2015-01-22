@@ -99,7 +99,7 @@ public class UserFormControllerTest {
 
         MvcResult result = update.andReturn();
         MockHttpSession session = (MockHttpSession) result.getRequest().getSession();
-        assertNotNull(session.getAttribute("message"));
+        assertNotNull("success message is null", session.getAttribute(BaseFormController.MESSAGES_KEY));
 
         verify(userManager, times(1)).saveUser(savedUser);
     }
@@ -114,7 +114,7 @@ public class UserFormControllerTest {
 
         MvcResult result = update.andReturn();
         MockHttpSession session = (MockHttpSession) result.getRequest().getSession();
-        assertNotNull(session.getAttribute("message"));
+        assertNotNull("success message is null", session.getAttribute(BaseFormController.MESSAGES_KEY));
 
         verify(userManager, times(1)).removeUser("1");
     }

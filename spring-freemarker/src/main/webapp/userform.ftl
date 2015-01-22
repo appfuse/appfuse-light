@@ -12,7 +12,7 @@
 <div class="col-sm-6">
     <@spring.bind "user.*"/>
     <#if spring.status.error>
-    <div class="alert alert-error fade in">
+    <div class="alert alert-danger alert-dismissable">
         <a href="#" data-dismiss="alert" class="close">&times;</a>
         <#list spring.status.errorMessages as error>
         ${error}<br/>
