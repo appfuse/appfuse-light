@@ -13,13 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StripesTestFixture {
-    private static MockServletContext context;
+    private MockServletContext context;
 
     public void init() {
-        StripesTestFixture.context = new MockServletContext("");
+        context = new MockServletContext("");
         context.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM,
                 "classpath:/applicationContext-resources.xml, classpath:/applicationContext-dao.xml," +
-                "classpath:/applicationContext-service.xml");
+                "classpath:/applicationContext-service.xml, /WEB-INF/applicationContext.xml");
 
         ServletContextListener contextListener = new ContextLoaderListener();
         ServletContextEvent event = new ServletContextEvent(context);
@@ -40,7 +40,7 @@ public class StripesTestFixture {
 
     public MockServletContext getServletContext() {
         init();
-        return StripesTestFixture.context;
+        return context;
     }
 
     public void destroy() {
