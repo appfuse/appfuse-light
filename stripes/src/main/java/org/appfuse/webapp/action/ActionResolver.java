@@ -13,6 +13,6 @@ public class ActionResolver extends NameBasedActionResolver {
         if (name != null) {
             return super.getUrlBinding(name).toLowerCase();
         }
-        return name;
+        return null;
     }
 }
