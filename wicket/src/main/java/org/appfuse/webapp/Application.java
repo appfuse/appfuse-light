@@ -27,6 +27,7 @@ public class Application extends WebApplication implements ApplicationContextAwa
         // make bookmarkable pages for easy linking from Menu/SiteMesh
         mountPage("/users", UserList.class);
         mountPage("/userform", UserForm.class);
+        // add additional pages here
     }
 
     public Class<Index> getHomePage() {
