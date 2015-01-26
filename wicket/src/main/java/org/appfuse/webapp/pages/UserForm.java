@@ -12,8 +12,10 @@ import org.apache.wicket.util.string.interpolator.MapVariableInterpolator;
 import org.appfuse.model.User;
 import org.appfuse.service.UserExistsException;
 import org.appfuse.service.UserManager;
+import org.wicketstuff.annotation.mount.MountPath;
 
-public class UserForm extends BasePage {
+@MountPath("userform")
+public class UserForm extends AbstractWebPage {
     @SpringBean
     private UserManager userManager;
     private final Page responsePage;
@@ -151,13 +153,13 @@ public class UserForm extends BasePage {
             add(new TextField<String>("lastName"), new ResourceModel("user.lastName"));
             add(new RequiredTextField<String>("email"), new ResourceModel("user.email"));
 
-            add(new Button("save", new Model<String>("Save")) {
+            add(new Button("save", new Model<>("Save")) {
                 public void onSubmit() {
                     onSave((User) getForm().getModelObject());
                 }
             });
 
-            Button delete = new Button("delete", new Model<String>("Delete")) {
+            Button delete = new Button("delete", new Model<>("Delete")) {
                 public void onSubmit() {
                     onDelete((User) getForm().getModelObject());
                 }
@@ -174,7 +176,7 @@ public class UserForm extends BasePage {
              * tells wicket that when this button is pressed it should not
              * perform any form processing (ie bind request values to the bean).
              */
-            add(new Button("cancel", new Model<String>("Cancel")) {
+            add(new Button("cancel", new Model<>("Cancel")) {
                 public void onSubmit() {
                     onCancel();
                 }

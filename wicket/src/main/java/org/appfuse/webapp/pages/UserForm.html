@@ -3,12 +3,14 @@
     <title><wicket:message key="userForm.title"/></title>
 </head>
 
-<h2><wicket:message key="userForm.title"/></h2>
-<div wicket:id="feedback" class="alert alert-error alert-dismissable"></div>
+<div class="col-sm-3">
+    <h2><wicket:message key="userForm.title"/></h2>
+    <p>Please fill in user's information.</p>
+</div>
+<div class="col-sm-6">
+    <div wicket:id="feedback" class="alert alert-error alert-dismissable"></div>
 
-<p>Please fill in user's information below:</p>
-
-<form wicket:id="user-form" id="userForm" class="well">
+    <form wicket:id="user-form" id="userForm" class="well">
 
     <div class="form-group">
         <label class="control-label"><wicket:message key="user.username">Username</wicket:message>:</label>
@@ -53,7 +55,7 @@
         </a>
     </div>
 </form>
-
+</div>
 <script type="text/javascript">
     $(document).ready(function() {
         $("input[type='text']:visible:enabled:first", document.forms['userForm']).focus();

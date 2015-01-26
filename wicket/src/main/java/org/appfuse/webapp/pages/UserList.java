@@ -14,13 +14,15 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
+import org.wicketstuff.annotation.mount.MountPath;
 
 /**
  * Page to manage and display users.
  *
  * @author mraible
  */
-public class UserList extends BasePage {
+@MountPath("users")
+public class UserList extends AbstractWebPage {
     private static final long serialVersionUID = -5202104862675278153L;
     @SpringBean
     private UserManager userManager;

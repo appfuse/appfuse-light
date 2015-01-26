@@ -1,25 +1,17 @@
 package org.appfuse.webapp.pages;
 
 import org.apache.wicket.markup.repeater.data.DataView;
-import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
-import org.apache.wicket.spring.test.ApplicationContextMock;
-import org.apache.wicket.util.tester.WicketTester;
 import org.appfuse.service.UserManager;
-import org.junit.Before;
 import org.junit.Test;
+import org.springframework.web.context.support.StaticWebApplicationContext;
 
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
-public class UserListTest {
-    private WicketTester tester;
-
-    @Before
-    public void onSetUp() {
-        tester = new WicketTester();
-        ApplicationContextMock applicationContextMock = new ApplicationContextMock();
-        applicationContextMock.putBean("userManager", mock(UserManager.class));
-        tester.getApplication().getComponentInstantiationListeners().add(
-            new SpringComponentInjector(tester.getApplication(), applicationContextMock));
+public class UserListTest extends BasePageTest {
+    @Override
+    protected void initSpringBeans(StaticWebApplicationContext context) {
+        super.initSpringBeans(context);
+        context.getBeanFactory().registerSingleton("userManager", mock(UserManager.class));
     }
 
     @Test

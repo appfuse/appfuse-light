@@ -1,41 +1,25 @@
 package org.appfuse.webapp.pages;
 
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
-import org.apache.wicket.spring.test.ApplicationContextMock;
 import org.apache.wicket.util.tester.FormTester;
-import org.apache.wicket.util.tester.WicketTester;
 import org.appfuse.model.User;
 import org.appfuse.service.UserExistsException;
 import org.appfuse.service.UserManager;
-import org.appfuse.webapp.Application;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.context.support.StaticWebApplicationContext;
 
-import static junit.framework.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
-public class UserFormTest {
-
-    private WicketTester tester;
+public class UserFormTest extends BasePageTest {
 
     private UserManager userManager;
 
-    @Before
-    public void onSetUp() {
-        tester = new WicketTester();
+    @Override
+    protected void initSpringBeans(StaticWebApplicationContext context) {
+        super.initSpringBeans(context);
         userManager = mock(UserManager.class);
-        ApplicationContextMock applicationContextMock = new ApplicationContextMock();
-        applicationContextMock.putBean("userManager", userManager);
-        tester.getApplication().getComponentInstantiationListeners().add(
-            new SpringComponentInjector(tester.getApplication(), applicationContextMock));
+        context.getBeanFactory().registerSingleton("userManager", userManager);
         UserForm userForm = new UserForm();
         tester.startPage(userForm);
     }
@@ -51,10 +35,9 @@ public class UserFormTest {
         tester.submitForm("user-form");
 
         //then
-        tester.assertErrorMessages(new String[]{
-            "'Username' is required.",
-            "'Password' is required.",
-            "'E-Mail' is required."});
+        tester.assertErrorMessages("'Username' is required.",
+                "'Password' is required.",
+                "'E-Mail' is required.");
     }
 
     @Test
@@ -74,9 +57,8 @@ public class UserFormTest {
         verify(userManager).saveUser(user);
         tester.assertRenderedPage(UserList.class);
         tester.assertNoErrorMessage();
-        tester.assertInfoMessages(new String[]{
-            "User " + user.getFirstName() + " " + user.getLastName() + " has been saved successfully."
-        });
+        tester.assertInfoMessages("User " + user.getFirstName() + " " + user.getLastName() +
+                        " has been saved successfully.");
     }
 
     private User createTestUser() {

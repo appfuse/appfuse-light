@@ -115,6 +115,11 @@ th.sorted a, th.sortable a {
 
 /* FORMS */
 
+ul.feedbackPanel {
+    list-style: none;
+    padding-left: 10px;
+}
+
 .controls.readonly {
     padding-top: 5px;
 }
