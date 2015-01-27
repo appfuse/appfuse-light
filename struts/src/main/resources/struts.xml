@@ -14,7 +14,7 @@
     <constant name="struts.ui.theme" value="css_xhtml"/>
     <!-- Allow <s:submit> to call method names directly -->
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
-    
+
     <!-- Include Struts defaults -->
     <include file="struts-default.xml"/>
 
@@ -53,26 +53,26 @@
 
         <!-- List of Users -->
         <action name="users" class="org.appfuse.webapp.action.UserAction" method="list">
-            <result name="success">userList.jsp</result>
-            <result name="input">userList.jsp</result>
+            <result name="success">/WEB-INF/pages/userList.jsp</result>
+            <result name="input">/WEB-INF/pages/userList.jsp</result>
         </action>
 
         <!-- Edit User -->
         <action name="editUser" class="org.appfuse.webapp.action.UserAction" method="edit">
-            <result name="success">userForm.jsp</result>
-            <result name="input">userList.jsp</result>
+            <result name="success">/WEB-INF/pages/userForm.jsp</result>
+            <result name="input">/WEB-INF/pages/userList.jsp</result>
         </action>
 
         <!-- Save User -->
         <action name="saveUser" class="org.appfuse.webapp.action.UserAction">
             <result name="cancel" type="redirectAction">users</result>
             <result name="delete" type="redirectAction">users</result>
-            <result name="input">userForm.jsp</result>
+            <result name="input">/WEB-INF/pages/userForm.jsp</result>
             <result name="success" type="chain">saveUserWithValidation</result>
         </action>
 
         <action name="saveUserWithValidation" class="org.appfuse.webapp.action.UserAction" method="save">
-            <result name="input">userForm.jsp</result>
+            <result name="input">/WEB-INF/pages/userForm.jsp</result>
             <result name="success" type="redirectAction">users</result>
         </action>
 
