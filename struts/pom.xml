@@ -22,12 +22,12 @@
     <parent>
         <groupId>org.appfuse</groupId>
         <artifactId>appfuse-light</artifactId>
-        <version>3.5.0-SNAPSHOT</version>
+        <version>3.5.0</version>
     </parent>
 
     <artifactId>appfuse-light-struts</artifactId>
     <packaging>war</packaging>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.5.0</version>
     <name>AppFuse Light Struts 2 Module</name>
 
     <build>
