@@ -22,12 +22,12 @@
     <parent>
         <groupId>org.appfuse</groupId>
         <artifactId>appfuse-light</artifactId>
-        <version>3.5.0-SNAPSHOT</version>
+        <version>3.5.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>appfuse-light-tapestry</artifactId>
     <packaging>war</packaging>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.5.1-SNAPSHOT</version>
     <name>AppFuse Light Tapestry 5 Module</name>
 
     <build>
