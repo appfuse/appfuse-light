@@ -105,6 +105,14 @@
         </pluginManagement>
     </build>
 
+    <distributionManagement>
+        <site>
+            <id>appfuse-light-site</id>
+            <name>AppFuse Light Maven Site</name>
+            <url>scp://static.appfuse.org/var/www/appfuse-site/light</url>
+        </site>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
